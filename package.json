@@ -1,0 +1,25 @@
+{
+  "name": "copycat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "background.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.blackglory.me:10022/BlackGlory/copycat.git"
+  },
+  "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.0",
+    "to-markdown": "^3.0.0"
+  },
+  "devDependencies": {
+    "ts-loader": "^0.8.2",
+    "webpack": "^1.13.1"
+  }
+}
