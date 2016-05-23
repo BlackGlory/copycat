@@ -7,24 +7,23 @@ import sanitizeHtml = require('sanitize-html')
 
 let toMarkdown = require('to-markdown')
 
-const TAB_URL_TO_MARKDOWN = 'TAB_URL_TO_MARKDOWN',
-      TAB_URL_TO_HTML = 'TAB_URL_TO_HTML',
-      LINK_TO_MARKDOWN = 'LINK_TO_MARKDOWN',
-      LINK_TO_HTML = 'LINK_TO_HTML',
-      SELECTION_TO_MARKDOWN = 'SELECTION_TO_MARKDOWN',
-      SELECTION_TO_MARKDOWN_WITHOUT_HTML = 'SELECTION_TO_MARKDOWN_WITHOUT_HTML',
-      SELECTION_TO_HTML = 'SELECTION_TO_HTML',
-      SELECTION_TO_HTML_LINK_ONLY = 'SELECTION_TO_HTML_LINK_ONLY',
-      SELECTION_TO_PLAIN = 'SELECTION_TO_PLAIN',
-      IMAGE_TO_MARKDOWN = 'IMAGE_TO_MARKDOWN',
-      IMAGE_TO_HTML = 'IMAGE_TO_HTML',
-      IMAGE_TO_DATA_URI_JPEG = 'IMAGE_TO_DATA_URI_JPEG',
-      IMAGE_TO_DATA_URI_PNG = 'IMAGE_TO_DATA_URI_PNG',
-      AUDIO_TO_HTML = 'AUDIO_TO_HTML',
-      VIDEO_TO_HTML = 'VIDEO_TO_HTML'
+const TAB_URL_TO_MARKDOWN = 'TAB_URL_TO_MARKDOWN'
+const TAB_URL_TO_HTML = 'TAB_URL_TO_HTML'
+const LINK_TO_MARKDOWN = 'LINK_TO_MARKDOWN'
+const LINK_TO_HTML = 'LINK_TO_HTML'
+const SELECTION_TO_MARKDOWN = 'SELECTION_TO_MARKDOWN'
+const SELECTION_TO_MARKDOWN_WITHOUT_HTML = 'SELECTION_TO_MARKDOWN_WITHOUT_HTML'
+const SELECTION_TO_HTML = 'SELECTION_TO_HTML'
+const SELECTION_TO_HTML_LINK_ONLY = 'SELECTION_TO_HTML_LINK_ONLY'
+const SELECTION_TO_PLAIN = 'SELECTION_TO_PLAIN'
+const IMAGE_TO_MARKDOWN = 'IMAGE_TO_MARKDOWN'
+const IMAGE_TO_HTML = 'IMAGE_TO_HTML'
+const IMAGE_TO_DATA_URI_JPEG = 'IMAGE_TO_DATA_URI_JPEG'
+const IMAGE_TO_DATA_URI_PNG = 'IMAGE_TO_DATA_URI_PNG'
+const AUDIO_TO_HTML = 'AUDIO_TO_HTML'
+const VIDEO_TO_HTML = 'VIDEO_TO_HTML'
 
 function setClipboard(text: string) : void {
-  console.log(text)
   let textarea = document.createElement('textarea')
   textarea.textContent = text
   let body = document.querySelector('body')
@@ -50,15 +49,24 @@ function getDataURI(src: string, encoder: string = 'jpeg') : Promise<string> {
 }
 
 function createMenus(...contexts: string[]) : (createPropertiesList: chrome.contextMenus.CreateProperties[]) => void {
-  return createPropertiesList =>
-    createPropertiesList.forEach(createProperties =>
-      chrome.contextMenus.create(Object.assign({}, createProperties, { contexts: contexts })))
+  return createPropertiesList => {
+    for (let createProperties of createPropertiesList) {
+      chrome.contextMenus.create(Object.assign({}, createProperties, { contexts: contexts }))
+    }
+  }
 }
 
 const sendMessage = Promise.promisify<any, number, any>(
   (tabId: number, message: any, responseCallback?: (error: any, response: any) => void) =>
     chrome.tabs.sendMessage(tabId, message, response =>
       responseCallback(null, response)
+    )
+)
+
+const queryTabs = Promise.promisify<any, chrome.tabs.QueryInfo>(
+  (queryInfo: chrome.tabs.QueryInfo, callback?: (error: any, result: chrome.tabs.Tab[]) => void) =>
+    chrome.tabs.query(queryInfo, (result: chrome.tabs.Tab[]) =>
+      callback(null, result)
     )
 )
 
@@ -195,4 +203,11 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       }
     }
   })[info.menuItemId](info)
+})
+
+chrome.runtime.onInstalled.addListener(async (details) => {
+  let tabs = await queryTabs({})
+  for (let { id } of tabs) {
+    chrome.tabs.executeScript(id, { file: 'inject.js' })
+  }
 })
