@@ -5,6 +5,7 @@ import * as Promise from 'bluebird'
 declare function require(name: string) : any
 
 let toMarkdown = require('to-markdown')
+  , striptags = require('striptags')
 
 const SELECTION_TO_MARKDOWN = 'SELECTION_TO_MARKDOWN'
 const SELECTION_TO_MARKDOWN_LINK_ONLY = 'SELECTION_TO_MARKDOWN_LINK_ONLY'
@@ -12,9 +13,11 @@ const SELECTION_TO_MARKDOWN_WITHOUT_HTML = 'SELECTION_TO_MARKDOWN_WITHOUT_HTML'
 const SELECTION_TO_HTML = 'SELECTION_TO_HTML'
 const SELECTION_TO_HTML_LINK_ONLY = 'SELECTION_TO_HTML_LINK_ONLY'
 const SELECTION_TO_PLAIN = 'SELECTION_TO_PLAIN'
-const IMAGE_TO_DATA_URI = 'IMAGE_TO_DATA_URI'
+const IMAGE_TO_DATA_URI_JPEG = 'IMAGE_TO_DATA_URI_JPEG'
+const IMAGE_TO_DATA_URI_PNG = 'IMAGE_TO_DATA_URI_PNG'
 
 function setClipboard(text: string) : void {
+  console.log(text)
   let textarea = document.createElement('textarea')
   textarea.textContent = text
   let body = document.querySelector('body')
@@ -22,6 +25,21 @@ function setClipboard(text: string) : void {
   textarea.select()
   document.execCommand('Copy', false, null)
   body.removeChild(textarea)
+}
+
+function getDataURI(src: string, encoder: string = 'jpeg') : Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    let img = new Image()
+    img.onload = function() {
+      let canvas = document.createElement('canvas')
+      canvas.width = this.naturalWidth
+      canvas.height = this.naturalHeight
+      canvas.getContext('2d').drawImage(this, 0, 0)
+      resolve(canvas.toDataURL(`image/${encoder}`, 1))
+    }
+    img.onerror = reject
+    img.src = src
+  })
 }
 
 const sendMessage = Promise.promisify<any, number, any>(
@@ -49,10 +67,12 @@ chrome.contextMenus.create({
   contexts: ['selection']
 })
 
+/*
 chrome.contextMenus.create({
   type: 'separator',
   contexts: ['selection']
 })
+*/
 
 chrome.contextMenus.create({
   id: SELECTION_TO_HTML,
@@ -66,10 +86,12 @@ chrome.contextMenus.create({
   contexts: ['selection']
 })
 
+/*
 chrome.contextMenus.create({
   type: 'separator',
   contexts: ['selection']
 })
+*/
 
 chrome.contextMenus.create({
   id: SELECTION_TO_PLAIN,
@@ -78,8 +100,14 @@ chrome.contextMenus.create({
 })
 
 chrome.contextMenus.create({
-  id: IMAGE_TO_DATA_URI,
-  title: 'Image to Data URI',
+  id: IMAGE_TO_DATA_URI_JPEG,
+  title: 'Image to Data URI(JPEG)',
+  contexts: ['image']
+})
+
+chrome.contextMenus.create({
+  id: IMAGE_TO_DATA_URI_PNG,
+  title: 'Image to Data URI(PNG)',
   contexts: ['image']
 })
 
@@ -88,11 +116,29 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     case SELECTION_TO_MARKDOWN:
       setClipboard(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })))
       break
+    case SELECTION_TO_MARKDOWN_LINK_ONLY:
+      setClipboard(toMarkdown(striptags(await sendMessage(tab.id, { type: 'selection-html' }), ['a'])))
+      break
+    case SELECTION_TO_MARKDOWN_WITHOUT_HTML:
+      setClipboard(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })).replace(/<\/?[^>]+(>|$)/g, ''))
+      break
     case SELECTION_TO_HTML:
       setClipboard(await sendMessage(tab.id, { type: 'selection-html' }))
       break
+    case SELECTION_TO_HTML_LINK_ONLY:
+      setClipboard(striptags(await sendMessage(tab.id, { type: 'selection-html' }), ['a']))
+      break
     case SELECTION_TO_PLAIN:
       setClipboard(await sendMessage(tab.id, { type: 'selection-text'}))
+      break
+    case IMAGE_TO_DATA_URI_JPEG:
+      if (info.mediaType === 'image') {
+        setClipboard(await getDataURI(info.srcUrl, 'jpeg'))
+      }
+    case IMAGE_TO_DATA_URI_PNG:
+      if (info.mediaType === 'image') {
+        setClipboard(await getDataURI(info.srcUrl, 'png'))
+      }
       break
     default:
   }
