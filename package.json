@@ -16,10 +16,11 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.4.0",
-    "striptags": "^2.1.1",
+    "sanitize-html": "^1.11.4",
     "to-markdown": "^3.0.0"
   },
   "devDependencies": {
+    "json-loader": "^0.5.4",
     "ts-loader": "^0.8.2",
     "webpack": "^1.13.1"
   }

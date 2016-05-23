@@ -1,20 +1,19 @@
 'use strict'
 
-import * as Promise from 'bluebird'
-
 declare function require(name: string) : any
 
-let toMarkdown = require('to-markdown')
-  , striptags = require('striptags')
+import * as Promise from 'bluebird'
+import sanitizeHtml = require('sanitize-html')
 
-const SELECTION_TO_MARKDOWN = 'SELECTION_TO_MARKDOWN'
-const SELECTION_TO_MARKDOWN_LINK_ONLY = 'SELECTION_TO_MARKDOWN_LINK_ONLY'
-const SELECTION_TO_MARKDOWN_WITHOUT_HTML = 'SELECTION_TO_MARKDOWN_WITHOUT_HTML'
-const SELECTION_TO_HTML = 'SELECTION_TO_HTML'
-const SELECTION_TO_HTML_LINK_ONLY = 'SELECTION_TO_HTML_LINK_ONLY'
-const SELECTION_TO_PLAIN = 'SELECTION_TO_PLAIN'
-const IMAGE_TO_DATA_URI_JPEG = 'IMAGE_TO_DATA_URI_JPEG'
-const IMAGE_TO_DATA_URI_PNG = 'IMAGE_TO_DATA_URI_PNG'
+let toMarkdown = require('to-markdown')
+
+const SELECTION_TO_MARKDOWN = 'SELECTION_TO_MARKDOWN',
+      SELECTION_TO_MARKDOWN_WITHOUT_HTML = 'SELECTION_TO_MARKDOWN_WITHOUT_HTML',
+      SELECTION_TO_HTML = 'SELECTION_TO_HTML',
+      SELECTION_TO_HTML_LINK_ONLY = 'SELECTION_TO_HTML_LINK_ONLY',
+      SELECTION_TO_PLAIN = 'SELECTION_TO_PLAIN',
+      IMAGE_TO_DATA_URI_JPEG = 'IMAGE_TO_DATA_URI_JPEG',
+      IMAGE_TO_DATA_URI_PNG = 'IMAGE_TO_DATA_URI_PNG'
 
 function setClipboard(text: string) : void {
   console.log(text)
@@ -56,23 +55,16 @@ chrome.contextMenus.create({
 })
 
 chrome.contextMenus.create({
-  id: SELECTION_TO_MARKDOWN_LINK_ONLY,
-  title: 'Selection to Markdown(link only)',
-  contexts: ['selection']
-})
-
-chrome.contextMenus.create({
   id: SELECTION_TO_MARKDOWN_WITHOUT_HTML,
   title: 'Selection to Markdown(without HTML)',
   contexts: ['selection']
 })
 
-/*
 chrome.contextMenus.create({
+  id: 'separator1',
   type: 'separator',
   contexts: ['selection']
 })
-*/
 
 chrome.contextMenus.create({
   id: SELECTION_TO_HTML,
@@ -86,12 +78,11 @@ chrome.contextMenus.create({
   contexts: ['selection']
 })
 
-/*
 chrome.contextMenus.create({
+  id: 'separator2',
   type: 'separator',
   contexts: ['selection']
 })
-*/
 
 chrome.contextMenus.create({
   id: SELECTION_TO_PLAIN,
@@ -116,9 +107,6 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     case SELECTION_TO_MARKDOWN:
       setClipboard(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })))
       break
-    case SELECTION_TO_MARKDOWN_LINK_ONLY:
-      setClipboard(toMarkdown(striptags(await sendMessage(tab.id, { type: 'selection-html' }), ['a'])))
-      break
     case SELECTION_TO_MARKDOWN_WITHOUT_HTML:
       setClipboard(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })).replace(/<\/?[^>]+(>|$)/g, ''))
       break
@@ -126,7 +114,12 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       setClipboard(await sendMessage(tab.id, { type: 'selection-html' }))
       break
     case SELECTION_TO_HTML_LINK_ONLY:
-      setClipboard(striptags(await sendMessage(tab.id, { type: 'selection-html' }), ['a']))
+      setClipboard(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
+        allowedTags: ['a'],
+        allowedAttributes: {
+          'a': ['href']
+        }
+      }))
       break
     case SELECTION_TO_PLAIN:
       setClipboard(await sendMessage(tab.id, { type: 'selection-text'}))
