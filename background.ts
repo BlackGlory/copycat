@@ -21,7 +21,6 @@ const IMAGE_TO_HTML = 'IMAGE_TO_HTML'
 const IMAGE_TO_DATA_URI_JPEG = 'IMAGE_TO_DATA_URI_JPEG'
 const IMAGE_TO_DATA_URI_PNG = 'IMAGE_TO_DATA_URI_PNG'
 const AUDIO_TO_HTML = 'AUDIO_TO_HTML'
-const VIDEO_TO_HTML = 'VIDEO_TO_HTML'
 
 function setClipboard(text: string) : void {
   let textarea = document.createElement('textarea')
@@ -195,11 +194,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     AUDIO_TO_HTML({ mediaType, srcUrl }) {
       if (mediaType === 'audio') {
         setClipboard(`<audio controls="controls" src="${srcUrl}"></audio>`)
-      }
-    },
-    VIDEO_TO_HTML({ mediaType, srcUrl }) {
-      if (mediaType === 'video') {
-        setClipboard(`<video controls="controls" src="${srcUrl}"></video>`)
       }
     }
   })[info.menuItemId](info)

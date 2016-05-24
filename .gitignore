@@ -31,3 +31,4 @@ node_modules
 # Generated file
 *.js
 !*.config.js
+*.zip
