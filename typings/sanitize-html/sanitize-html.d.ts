@@ -21,6 +21,9 @@ declare module "sanitize-html" {
 			}) => boolean
 		}
 		nonTextTags?: string[]
+		parser?: {
+			decodeEntities?: boolean
+		}
 	}): string
 
 	export = sanitizeHtml

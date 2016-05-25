@@ -6,6 +6,7 @@ import * as Promise from 'bluebird'
 import sanitizeHtml = require('sanitize-html')
 
 let toMarkdown = require('to-markdown')
+  , ent = require('ent')
 
 const TAB_URL_TO_MARKDOWN = 'TAB_URL_TO_MARKDOWN'
 const TAB_URL_TO_HTML = 'TAB_URL_TO_HTML'
@@ -156,34 +157,34 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       setClipboard(`<a href="${linkUrl}">link</a>`)
     },
     async SELECTION_TO_MARKDOWN() {
-      setClipboard(removeExtraLine(toMarkdown(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
+      setClipboard(ent.decode(removeExtraLine(toMarkdown(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
         allowedTags: false,
         allowedAttributes: false,
         nonTextTags: ['style', 'script', 'noscript']
-      }))))
+      })))))
     },
     async SELECTION_TO_MARKDOWN_WITHOUT_HTML() {
-      setClipboard(removeExtraLine(sanitizeHtml(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })), {
+      setClipboard(ent.decode(removeExtraLine(sanitizeHtml(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })), {
         allowedTags: [],
         allowedAttributes: [],
         nonTextTags: ['style', 'script', 'noscript']
-      })))
+      }))))
     },
     async SELECTION_TO_HTML() {
-      setClipboard(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
+      setClipboard(ent.decode(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
         allowedTags: false,
         allowedAttributes: false,
         nonTextTags: ['style', 'script', 'noscript']
-      }))
+      })))
     },
     async SELECTION_TO_HTML_LINK_ONLY() {
-      setClipboard(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
+      setClipboard(ent.decode(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
         allowedTags: ['a'],
         allowedAttributes: {
           'a': ['href']
         },
         nonTextTags: ['style', 'script', 'noscript']
-      }))
+      })))
     },
     async SELECTION_TO_PLAIN() {
       setClipboard(await sendMessage(tab.id, { type: 'selection-text'}))
