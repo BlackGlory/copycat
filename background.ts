@@ -152,20 +152,33 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       setClipboard(`<a href="${linkUrl}">link</a>`)
     },
     async SELECTION_TO_MARKDOWN() {
-      setClipboard(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })))
+      setClipboard(toMarkdown(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
+        allowedTags: false,
+        allowedAttributes: false,
+        nonTextTags: ['style', 'script', 'noscript']
+      })))
     },
     async SELECTION_TO_MARKDOWN_WITHOUT_HTML() {
-      setClipboard(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })).replace(/<\/?[^>]+(>|$)/g, ''))
+      setClipboard(sanitizeHtml(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })), {
+        allowedTags: [],
+        allowedAttributes: [],
+        nonTextTags: ['style', 'script', 'noscript']
+      }))
     },
     async SELECTION_TO_HTML() {
-      setClipboard(await sendMessage(tab.id, { type: 'selection-html' }))
+      setClipboard(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
+        allowedTags: false,
+        allowedAttributes: false,
+        nonTextTags: ['style', 'script', 'noscript']
+      }))
     },
     async SELECTION_TO_HTML_LINK_ONLY() {
       setClipboard(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
         allowedTags: ['a'],
         allowedAttributes: {
           'a': ['href']
-        }
+        },
+        nonTextTags: ['style', 'script', 'noscript']
       }))
     },
     async SELECTION_TO_PLAIN() {
