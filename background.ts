@@ -55,6 +55,10 @@ function createMenus(...contexts: string[]) : (createPropertiesList: chrome.cont
   }
 }
 
+function removeExtraLine(text: string) : string {
+  return text.replace(/^\s+^/mg, '\n').replace(/$\s+$/mg, '\n')
+}
+
 const sendMessage = Promise.promisify<any, number, any>(
   (tabId: number, message: any, responseCallback?: (error: any, response: any) => void) =>
     chrome.tabs.sendMessage(tabId, message, response =>
@@ -152,18 +156,18 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       setClipboard(`<a href="${linkUrl}">link</a>`)
     },
     async SELECTION_TO_MARKDOWN() {
-      setClipboard(toMarkdown(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
+      setClipboard(removeExtraLine(toMarkdown(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
         allowedTags: false,
         allowedAttributes: false,
         nonTextTags: ['style', 'script', 'noscript']
-      })))
+      }))))
     },
     async SELECTION_TO_MARKDOWN_WITHOUT_HTML() {
-      setClipboard(sanitizeHtml(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })), {
+      setClipboard(removeExtraLine(sanitizeHtml(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })), {
         allowedTags: [],
         allowedAttributes: [],
         nonTextTags: ['style', 'script', 'noscript']
-      }))
+      })))
     },
     async SELECTION_TO_HTML() {
       setClipboard(sanitizeHtml(await sendMessage(tab.id, { type: 'selection-html' }), {
