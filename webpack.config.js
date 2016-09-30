@@ -1,9 +1,13 @@
+const path = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+
 module.exports = {
   entry: {
-    background: './background.ts',
-    inject: './inject.ts'
+    background: './src/background.ts',
+    inject: './src/inject.ts'
   },
   output: {
+    path: path.join(__dirname, 'build'),
     filename: '[name].js'
   },
   resolve: {
@@ -16,5 +20,11 @@ module.exports = {
       { test: /\.tsx?$/, loader: 'ts-loader' },
       { test: /\.json$/, loader: 'json' }
     ]
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: './src/assets', to: 'assets' }
+    , { from: './src/manifest.json' }
+    ])
+  ]
 }

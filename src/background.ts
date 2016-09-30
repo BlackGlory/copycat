@@ -2,7 +2,7 @@
 
 declare function require(name: string) : any
 
-import * as Promise from 'bluebird'
+import * as Bluebird from 'bluebird'
 import sanitizeHtml = require('sanitize-html')
 
 let toMarkdown = require('to-markdown')
@@ -17,6 +17,7 @@ const SELECTION_TO_MARKDOWN_WITHOUT_HTML = 'SELECTION_TO_MARKDOWN_WITHOUT_HTML'
 const SELECTION_TO_HTML = 'SELECTION_TO_HTML'
 const SELECTION_TO_HTML_LINK_ONLY = 'SELECTION_TO_HTML_LINK_ONLY'
 const SELECTION_TO_PLAIN = 'SELECTION_TO_PLAIN'
+const SELECTION_TO_RAW_STRING = 'SELECTION_TO_RAW_STRING'
 const IMAGE_TO_MARKDOWN = 'IMAGE_TO_MARKDOWN'
 const IMAGE_TO_HTML = 'IMAGE_TO_HTML'
 const IMAGE_TO_DATA_URI_JPEG = 'IMAGE_TO_DATA_URI_JPEG'
@@ -33,8 +34,8 @@ function setClipboard(text: string) : void {
   body.removeChild(textarea)
 }
 
-function getDataURI(src: string, encoder: string = 'jpeg') : Promise<string> {
-  return new Promise<string>((resolve, reject) => {
+function getDataURI(src: string, encoder: string = 'jpeg') : Bluebird<string> {
+  return new Bluebird<string>((resolve, reject) => {
     let img = new Image()
     img.onload = function() {
       let canvas = document.createElement('canvas')
@@ -60,14 +61,14 @@ function removeExtraLine(text: string) : string {
   return text.replace(/^\s+^/mg, '\n').replace(/$\s+$/mg, '\n')
 }
 
-const sendMessage = Promise.promisify<any, number, any>(
+const sendMessage = Bluebird.promisify<any, number, any>(
   (tabId: number, message: any, responseCallback?: (error: any, response: any) => void) =>
     chrome.tabs.sendMessage(tabId, message, response =>
       responseCallback(null, response)
     )
 )
 
-const queryTabs = Promise.promisify<any, chrome.tabs.QueryInfo>(
+const queryTabs = Bluebird.promisify<any, chrome.tabs.QueryInfo>(
   (queryInfo: chrome.tabs.QueryInfo, callback?: (error: any, result: chrome.tabs.Tab[]) => void) =>
     chrome.tabs.query(queryInfo, (result: chrome.tabs.Tab[]) =>
       callback(null, result)
@@ -116,6 +117,9 @@ createMenus('selection')([
   }, {
     id: SELECTION_TO_PLAIN,
     title: 'Selection to Plain'
+  }, {
+    id: SELECTION_TO_RAW_STRING,
+    title: 'Selection to Raw string'
   }
 ])
 
@@ -166,7 +170,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     async SELECTION_TO_MARKDOWN_WITHOUT_HTML() {
       setClipboard(ent.decode(removeExtraLine(sanitizeHtml(toMarkdown(await sendMessage(tab.id, { type: 'selection-html' })), {
         allowedTags: [],
-        allowedAttributes: [],
+        allowedAttributes: {},
         nonTextTags: ['style', 'script', 'noscript']
       }))))
     },
@@ -187,7 +191,18 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       })))
     },
     async SELECTION_TO_PLAIN() {
-      setClipboard(await sendMessage(tab.id, { type: 'selection-text'}))
+      setClipboard(await sendMessage(tab.id, { type: 'selection-text' }))
+    },
+    async SELECTION_TO_RAW_STRING() {
+      let text = (await sendMessage(tab.id, { type: 'selection-text' }))
+      .replace(/\\/g, '\\\\')
+      .replace(/\r/g, '\\r')
+      .replace(/\t/g, '\\t')
+      .replace(/\f/g, '\\f')
+      .replace(/\n/g, '\\n')
+      .replace(/\'/g, "\\'")
+      .replace(/\"/g, '\\"')
+      setClipboard(text)
     },
     IMAGE_TO_MARKDOWN({ mediaType, srcUrl }) {
       if (mediaType === 'image') {

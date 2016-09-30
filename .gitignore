@@ -32,3 +32,6 @@ node_modules
 *.js
 !*.config.js
 *.zip
+*.js.map
+typings
+build

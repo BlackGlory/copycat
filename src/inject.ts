@@ -5,7 +5,7 @@ function getSelectionHTML() : string {
     , range = userSelection.getRangeAt(0)
     , clonedSelection = range.cloneContents()
     , div = document.createElement ('div')
-  div.appendChild (clonedSelection)
+  div.appendChild(clonedSelection)
   return div.innerHTML.toString()
 }
 
