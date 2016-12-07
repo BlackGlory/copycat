@@ -1,12 +1,9 @@
 'use strict'
 
-declare function require(name: string) : any
-
 import * as Bluebird from 'bluebird'
-import sanitizeHtml = require('sanitize-html')
-
-let toMarkdown = require('to-markdown')
-  , ent = require('ent')
+import sanitizeHtml from 'sanitize-html'
+import toMarkdown from 'to-markdown'
+import ent from 'ent'
 
 const TAB_URL_TO_MARKDOWN = 'TAB_URL_TO_MARKDOWN'
 const TAB_URL_TO_HTML = 'TAB_URL_TO_HTML'
@@ -74,77 +71,6 @@ const queryTabs = Bluebird.promisify<any, chrome.tabs.QueryInfo>(
       callback(null, result)
     )
 )
-
-createMenus('page')([
-  {
-    id: TAB_URL_TO_MARKDOWN,
-    title: 'Tab to Markdown'
-  }, {
-    id: TAB_URL_TO_HTML,
-    title: 'Tab to HTML'
-  }
-])
-
-createMenus('link')([
-  {
-    id: LINK_TO_MARKDOWN,
-    title: 'Link to Markdown'
-  }, {
-    id: LINK_TO_HTML,
-    title: 'Link to HTML'
-  }
-])
-
-createMenus('selection')([
-  {
-    id: SELECTION_TO_MARKDOWN,
-    title: 'Selection to Markdown'
-  }, {
-    id: SELECTION_TO_MARKDOWN_WITHOUT_HTML,
-    title: 'Selection to Markdown(without HTML)'
-  }, {
-    id: 'separator1',
-    type: 'separator'
-  }, {
-    id: SELECTION_TO_HTML,
-    title: 'Selection to HTML'
-  }, {
-    id: SELECTION_TO_HTML_LINK_ONLY,
-    title: 'Selection to HTML(link only)'
-  }, {
-    id: 'separator2',
-    type: 'separator'
-  }, {
-    id: SELECTION_TO_PLAIN,
-    title: 'Selection to Plain'
-  }, {
-    id: SELECTION_TO_RAW_STRING,
-    title: 'Selection to Raw string'
-  }
-])
-
-createMenus('image')([
-  {
-    id: IMAGE_TO_MARKDOWN,
-    title: 'Image to Markdown'
-  }, {
-    id: IMAGE_TO_HTML,
-    title: 'Image to HTML'
-  }, {
-    id: IMAGE_TO_DATA_URI_JPEG,
-    title: 'Image to Data URI(JPEG)'
-  }, {
-    id: IMAGE_TO_DATA_URI_PNG,
-    title: 'Image to Data URI(PNG)'
-  }
-])
-
-createMenus('audio')([
-  {
-    id: AUDIO_TO_HTML,
-    title: 'Audio to HTML'
-  }
-])
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   ({
@@ -233,8 +159,82 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 })
 
 chrome.runtime.onInstalled.addListener(async (details) => {
+  createMenus('page')([
+    {
+      id: TAB_URL_TO_MARKDOWN,
+      title: 'Tab to Markdown'
+    }, {
+      id: TAB_URL_TO_HTML,
+      title: 'Tab to HTML'
+    }
+  ])
+
+  createMenus('link')([
+    {
+      id: LINK_TO_MARKDOWN,
+      title: 'Link to Markdown'
+    }, {
+      id: LINK_TO_HTML,
+      title: 'Link to HTML'
+    }
+  ])
+
+  createMenus('selection')([
+    {
+      id: SELECTION_TO_MARKDOWN,
+      title: 'Selection to Markdown'
+    }, {
+      id: SELECTION_TO_MARKDOWN_WITHOUT_HTML,
+      title: 'Selection to Markdown(without HTML)'
+    }, {
+      id: 'separator1',
+      type: 'separator'
+    }, {
+      id: SELECTION_TO_HTML,
+      title: 'Selection to HTML'
+    }, {
+      id: SELECTION_TO_HTML_LINK_ONLY,
+      title: 'Selection to HTML(link only)'
+    }, {
+      id: 'separator2',
+      type: 'separator'
+    }, {
+      id: SELECTION_TO_PLAIN,
+      title: 'Selection to Plain'
+    }, {
+      id: SELECTION_TO_RAW_STRING,
+      title: 'Selection to Raw string'
+    }
+  ])
+
+  createMenus('image')([
+    {
+      id: IMAGE_TO_MARKDOWN,
+      title: 'Image to Markdown'
+    }, {
+      id: IMAGE_TO_HTML,
+      title: 'Image to HTML'
+    }, {
+      id: IMAGE_TO_DATA_URI_JPEG,
+      title: 'Image to Data URI(JPEG)'
+    }, {
+      id: IMAGE_TO_DATA_URI_PNG,
+      title: 'Image to Data URI(PNG)'
+    }
+  ])
+
+  createMenus('audio')([
+    {
+      id: AUDIO_TO_HTML,
+      title: 'Audio to HTML'
+    }
+  ])
+  
   let tabs = await queryTabs({})
-  for (let { id } of tabs) {
+  for (let { id, url } of tabs) {
+    if (url.startsWith('chrome:') || url.startsWith('view-source:') || url.startsWith('https://chrome.google.com')) {
+      continue
+    }
     chrome.tabs.executeScript(id, { file: 'inject.js' })
   }
 })

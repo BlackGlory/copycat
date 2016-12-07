@@ -1,17 +1,14 @@
 {
   "name": "copycat",
-  "version": "1.1.0",
-  "description": "",
+  "version": "1.1.1",
+  "description": "Copy content from web powerful than ever before.",
   "main": "background.js",
   "scripts": {
     "build": "webpack",
     "dev": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@git.blackglory.me:10022/BlackGlory/copycat.git"
-  },
+  "repository": "git@github.com:BlackGlory/copycat.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "dependencies": {
