@@ -1,9 +1,9 @@
 'use strict'
 
 import * as Bluebird from 'bluebird'
-import sanitizeHtml from 'sanitize-html'
-import toMarkdown from 'to-markdown'
-import ent from 'ent'
+import sanitizeHtml = require('sanitize-html')
+import toMarkdown = require('to-markdown')
+import * as ent from 'ent'
 
 const TAB_URL_TO_MARKDOWN = 'TAB_URL_TO_MARKDOWN'
 const TAB_URL_TO_HTML = 'TAB_URL_TO_HTML'
@@ -229,7 +229,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       title: 'Audio to HTML'
     }
   ])
-  
+
   let tabs = await queryTabs({})
   for (let { id, url } of tabs) {
     if (url.startsWith('chrome:') || url.startsWith('view-source:') || url.startsWith('https://chrome.google.com')) {
