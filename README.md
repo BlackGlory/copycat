@@ -7,33 +7,33 @@ Copy content from web powerful than ever before.
 ## Support browsers
 
 - [x] [Chrome](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg)
-- [ ] Firefox
+- [ ] [Firefox](https://addons.mozilla.org/zh-CN/firefox/addon/extension-copycat/)
 - [ ] Opera
 - [ ] Edge
 
 ## Features
 
-- [x] Copy page link to
+- [x] Copy page link as
   - [x] Markdown
   - [x] HTML
-- [x] Copy link to
+- [x] Copy link as
   - [x] Markdown
   - [x] HTML
-- [x] Copy selection to
+- [x] Copy selection as
   - [x] Plaintext
   - [x] Raw strings
   - [x] HTML
   - [x] HTML only links
   - [x] Markdown
   - [x] Markdown without HTML tags
-- [x] Copy image to
+- [x] Copy image as
   - [x] HTML
   - [x] HTML with DataURI jpeg, png, webp\*)
   - [x] Markdown
   - [x] Markdown with DataURI jpeg, png, webp\*)
   - [x] DataURI(Original image without conversion, slow and huge)
   - [x] DataURI with jpeg, png, webp\*)
-- [x] Browser native audio/video to HTML
+- [x] Copy browser native audio/video as HTML
 
 \* *WebP format is Chromium(Chrome, Opera) only*
 
@@ -41,6 +41,7 @@ Copy content from web powerful than ever before.
 
 - [ ] More clarify Markdown text
 - [ ] More Markdown flavors
+- [ ] Always absolute link
 
 ## Anything else?
 
