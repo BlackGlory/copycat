@@ -34,4 +34,4 @@ node_modules
 *.zip
 *.js.map
 typings
-build
+dist

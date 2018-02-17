@@ -1,0 +1,80 @@
+{
+  "extensionName": {
+    "message": "拷贝猫"
+  }
+, "extensionDescription": {
+    "message": "为网页提供前所未有的强大复制功能."
+  }
+, "PAGE_URL_TO_MARKDOWN": {
+    "message": "页面链接 -> Markdown"
+  }
+, "PAGE_URL_TO_HTML": {
+    "message": "页面链接 -> HTML"
+  }
+, "LINK_TO_MARKDOWN": {
+    "message": "链接 -> Markdown"
+  }
+, "LINK_TO_HTML": {
+    "message": "链接 -> HTML"
+  }
+, "SELECTION_TO_MARKDOWN": {
+    "message": "选中内容 -> Markdown"
+  }
+, "SELECTION_TO_MARKDOWN_WITHOUT_HTML": {
+    "message": "选中内容 -> Markdown(不含HTML标签)"
+  }
+, "SELECTION_TO_HTML": {
+    "message": "选中部分 -> HTML"
+  }
+, "SELECTION_TO_HTML_LINK_ONLY": {
+    "message": "选中部分 -> HTML(仅链接)"
+  }
+, "SELECTION_TO_PLAIN": {
+    "message": "选中部分 -> 纯文本"
+  }
+, "SELECTION_TO_RAW_STRING": {
+    "message": "选中部分 -> 原始字符串"
+  }
+, "IMAGE_TO_MARKDOWN": {
+    "message": "图片 -> Markdown"
+  }
+, "IMAGE_TO_MARKDOWN_DATA_URI_JPEG": {
+    "message": "图片 -> Markdown(DataURI jpeg)"
+  }
+, "IMAGE_TO_MARKDOWN_DATA_URI_PNG": {
+    "message": "图片 -> Markdown(DataURI png)"
+  }
+, "IMAGE_TO_MARKDOWN_DATA_URI_WEBP": {
+    "message": "图片 -> Markdown(DataURI webp)"
+  }
+, "IMAGE_TO_HTML": {
+    "message": "图片 -> HTML"
+  }
+, "IMAGE_TO_HTML_DATA_URI_JPEG": {
+    "message": "图片 -> HTML(DataURI jpeg)"
+  }
+, "IMAGE_TO_HTML_DATA_URI_PNG": {
+    "message": "图片 -> HTML(DataURI png)"
+  }
+, "IMAGE_TO_HTML_DATA_URI_WEBP": {
+    "message": "图片 -> HTML(DataURI webp)"
+  }
+, "IMAGE_TO_DATA_URI_RAW": {
+    "message": "图片 -> DataURI(未经转换的原始图片, 复制过程可能十分缓慢且结果巨大)"
+  }
+, "IMAGE_TO_DATA_URI_JPEG": {
+    "message": "图片 -> DataURI(jpeg)"
+  }
+, "IMAGE_TO_DATA_URI_PNG": {
+    "message": "图片 -> DataURI(png)"
+  }
+, "IMAGE_TO_DATA_URI_WEBP": {
+    "message": "图片 -> DataURI(webp)"
+  }
+, "AUDIO_TO_HTML": {
+    "message": "音频 -> HTML"
+  }
+, "VIDEO_TO_HTML": {
+    "message": "视频 -> HTML"
+  }
+}

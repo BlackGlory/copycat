@@ -1,0 +1,80 @@
+{
+  "extensionName": {
+    "message": "Copycat"
+  }
+, "extensionDescription": {
+    "message": "Copy content from web powerful than ever before."
+  }
+, "PAGE_URL_TO_MARKDOWN": {
+    "message": "Page link -> Markdown"
+  }
+, "PAGE_URL_TO_HTML": {
+    "message": "Page link -> HTML"
+  }
+, "LINK_TO_MARKDOWN": {
+    "message": "Link -> Markdown"
+  }
+, "LINK_TO_HTML": {
+    "message": "Link -> HTML"
+  }
+, "SELECTION_TO_MARKDOWN": {
+    "message": "Selection -> Markdown"
+  }
+, "SELECTION_TO_MARKDOWN_WITHOUT_HTML": {
+    "message": "Selection -> Markdown(without HTML tags)"
+  }
+, "SELECTION_TO_HTML": {
+    "message": "Selection -> HTML"
+  }
+, "SELECTION_TO_HTML_LINK_ONLY": {
+    "message": "Selection -> HTML(only links)"
+  }
+, "SELECTION_TO_PLAIN": {
+    "message": "Selection -> Plaintext"
+  }
+, "SELECTION_TO_RAW_STRING": {
+    "message": "Selection -> Raw strings"
+  }
+, "IMAGE_TO_MARKDOWN": {
+    "message": "Image -> Markdown"
+  }
+, "IMAGE_TO_MARKDOWN_DATA_URI_JPEG": {
+    "message": "Image -> Markdown(DataURI jpeg)"
+  }
+, "IMAGE_TO_MARKDOWN_DATA_URI_PNG": {
+    "message": "Image -> Markdown(DataURI png)"
+  }
+, "IMAGE_TO_MARKDOWN_DATA_URI_WEBP": {
+    "message": "Image -> Markdown(DataURI webp)"
+  }
+, "IMAGE_TO_HTML": {
+    "message": "Image -> HTML"
+  }
+, "IMAGE_TO_HTML_DATA_URI_JPEG": {
+    "message": "Image -> HTML(DataURI jpeg)"
+  }
+, "IMAGE_TO_HTML_DATA_URI_PNG": {
+    "message": "Image -> HTML(DataURI png)"
+  }
+, "IMAGE_TO_HTML_DATA_URI_WEBP": {
+    "message": "Image -> HTML(DataURI webp)"
+  }
+, "IMAGE_TO_DATA_URI_RAW": {
+    "message": "Image -> DataURI(Original image without conversion, slow and huge)"
+  }
+, "IMAGE_TO_DATA_URI_JPEG": {
+    "message": "Image -> DataURI(jpeg)"
+  }
+, "IMAGE_TO_DATA_URI_PNG": {
+    "message": "Image -> DataURI(png)"
+  }
+, "IMAGE_TO_DATA_URI_WEBP": {
+    "message": "Image -> DataURI(webp)"
+  }
+, "AUDIO_TO_HTML": {
+    "message": "Audio -> HTML"
+  }
+, "VIDEO_TO_HTML": {
+    "message": "Video -> HTML"
+  }
+}

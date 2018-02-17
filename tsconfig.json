@@ -1,11 +1,12 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6",
-        "noImplicitAny": false,
-        "sourceMap": true
-    },
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "module": "CommonJS"
+  , "target": "ESNext"
+  , "strict": true
+  , "removeComments": true
+  , "sourceMap": true
+  }
+, "exclude": [
+    "node_modules"
+  ]
 }
