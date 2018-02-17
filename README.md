@@ -1,4 +1,4 @@
-# Copycat [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jdjbiojkklnaeoanimopafmnmhldejbg.svg?maxAge=86400)](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/BlackGlory/copycat/master/LICENSE)
+# Copycat [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jdjbiojkklnaeoanimopafmnmhldejbg.svg?maxAge=86400)](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg) [![Mozilla Add-on](https://img.shields.io/amo/v/extension-copycat.svg?maxAge=864000)](https://addons.mozilla.org/firefox/addon/extension-copycat/) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/BlackGlory/copycat/master/LICENSE)
 
 [![copycat](https://raw.githubusercontent.com/BlackGlory/copycat/master/src/assets/icon-128.png)](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg)
 
@@ -7,9 +7,10 @@ Copy content from web powerful than ever before.
 ## Support browsers
 
 - [x] [Chrome](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg)
-- [ ] [Firefox](https://addons.mozilla.org/zh-CN/firefox/addon/extension-copycat/)
+- [x] [Firefox](https://addons.mozilla.org/firefox/addon/extension-copycat/)
 - [ ] Opera
-- [ ] Edge
+
+Microsoft Edge is not compatible with webextension-polyfill, so I had to give up porting.
 
 ## Features
 
@@ -37,12 +38,12 @@ Copy content from web powerful than ever before.
 
 \* *WebP format is Chromium(Chrome, Opera) only*
 
-## Planning
+## Upcoming features
 
 - [ ] More clarify Markdown text
 - [ ] More Markdown flavors
 - [ ] Always absolute link
 
-## Anything else?
+## Anything else
 
-Open an issue!
+Open a new issue!
