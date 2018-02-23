@@ -33,5 +33,4 @@ node_modules
 !*.config.js
 *.zip
 *.js.map
-typings
 dist

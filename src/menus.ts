@@ -1,6 +1,8 @@
 import {
-  PAGE_URL_TO_MARKDOWN
-, PAGE_URL_TO_HTML
+  TAB_URL_TO_MARKDOWN
+, TAB_URL_TO_HTML
+, FRAME_URL_TO_MARKDOWN
+, FRAME_URL_TO_HTML
 , LINK_TO_MARKDOWN
 , LINK_TO_HTML
 , SELECTION_TO_MARKDOWN
@@ -33,9 +35,13 @@ interface MenuItem {
 }
 
 export default new Map<string[], MenuItem[]>([
-  [['page', 'frame'], [
-    { id: PAGE_URL_TO_MARKDOWN }
-  , { id: PAGE_URL_TO_HTML }
+  [['all'], [
+    { id: TAB_URL_TO_MARKDOWN }
+  , { id: TAB_URL_TO_HTML }
+  ]]
+, [['frame'], [
+    { id: FRAME_URL_TO_MARKDOWN }
+  , { id: FRAME_URL_TO_HTML }
   ]]
 , [['link'], [
     { id: LINK_TO_MARKDOWN }
@@ -44,10 +50,8 @@ export default new Map<string[], MenuItem[]>([
 , [['selection'], [
     { id: SELECTION_TO_MARKDOWN }
   , { id: SELECTION_TO_MARKDOWN_WITHOUT_HTML }
-  , { id: 'selection-separator1', type: 'separator' }
   , { id: SELECTION_TO_HTML }
   , { id: SELECTION_TO_HTML_LINK_ONLY }
-  , { id: 'selection-separator2', type: 'separator' }
   , { id: SELECTION_TO_PLAIN }
   , { id: SELECTION_TO_RAW_STRING }
   ]]

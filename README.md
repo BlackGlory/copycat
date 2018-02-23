@@ -8,13 +8,16 @@ Copy content from web powerful than ever before.
 
 - [x] [Chrome](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg)
 - [x] [Firefox](https://addons.mozilla.org/firefox/addon/extension-copycat/)
-- [ ] Opera
-
-Microsoft Edge is not compatible with webextension-polyfill, so I had to give up porting.
+- [x] Opera: Code review too slow, never publish again, please manually install.
+- [x] [Vivaldi](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg)
+- [ ] Edge: Microsoft Edge is not compatible with [mozilla/webextension-polyfill](https://github.com/mozilla/webextension-polyfill), so I had to give up porting.
 
 ## Features
 
-- [x] Copy page link as
+- [x] Copy tab link as
+  - [x] Markdown
+  - [x] HTML
+- [x] Copy frame link as
   - [x] Markdown
   - [x] HTML
 - [x] Copy link as
@@ -36,7 +39,7 @@ Microsoft Edge is not compatible with webextension-polyfill, so I had to give up
   - [x] DataURI with jpeg, png, webp\*)
 - [x] Copy browser native audio/video as HTML
 
-\* *WebP format is Chromium(Chrome, Opera) only*
+\* *WebP format is Chromium(Chrome, Opera, Vivaldi) only*
 
 ## Upcoming features
 

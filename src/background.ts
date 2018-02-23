@@ -9,10 +9,18 @@ import {
 browser.runtime.onInstalled.addListener(async () => {
   for (const { id } of await queryAllInjectableTabs()) {
     if (id) {
-      browser.tabs.executeScript(id, { file: 'polyfill.js' })
-      .catch(e => console.warn(e.message))
-      browser.tabs.executeScript(id, { file: 'extension-copycat-inject.js' })
-      .catch(e => console.warn(e.message))
+      browser.tabs.executeScript(id, {
+        file: 'browser-polyfill.min.js'
+      , allFrames: true
+      , matchAboutBlank: true
+      , runAt: 'document_end' as browser.extensionTypes.RunAt
+      })
+      browser.tabs.executeScript(id, {
+        file: 'extension-copycat.js'
+      , allFrames: true
+      , matchAboutBlank: true
+      , runAt: 'document_end' as browser.extensionTypes.RunAt
+      })
     }
   }
 })

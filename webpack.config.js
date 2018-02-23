@@ -1,12 +1,13 @@
-const webpack = require('webpack')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   target: 'web'
+, devtool: 'source-map'
 , entry: {
     'background': './src/background.ts'
-  , 'extension-copycat-inject': './src/extension-copycat-inject.ts'
+  , 'extension-copycat': './src/extension-copycat.ts'
   }
 , output: {
     path: path.join(__dirname, 'dist')
@@ -27,10 +28,13 @@ module.exports = {
 , plugins: [
     new CopyWebpackPlugin(
       [
-        { from: './src' }
-      , { from: './node_modules/webextension-polyfill/dist/browser-polyfill.min.js', to: 'polyfill.js' }
+        { from: './src', ignore: ['*.ts'] }
+      , { from: './node_modules/webextension-polyfill/dist/browser-polyfill.min.js' }
+      , { from: './node_modules/webextension-polyfill/dist/browser-polyfill.min.js.map' }
       ]
-    , { ignore: ['*.ts'] }
     )
+  , new UglifyJsPlugin({
+      sourceMap: true
+    })
   ]
 }

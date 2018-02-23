@@ -15,10 +15,8 @@ function getActiveElementContent() : string {
   return document.activeElement.textContent || ''
 }
 
-function getActiveImageDataURI() : string {
-  const img = document.activeElement as HTMLImageElement
-  console.log(img)
-  return ''
+function getDocumentTitle() : string {
+  return document.title
 }
 
 browser.runtime.onMessage.addListener(async message => {
@@ -29,7 +27,7 @@ browser.runtime.onMessage.addListener(async message => {
       return getSelectionText()
     case 'active-element-content':
       return getActiveElementContent()
-    case 'active-image-datauri':
-      return getActiveImageDataURI()
+    case 'document-title':
+      return getDocumentTitle()
   }
 })

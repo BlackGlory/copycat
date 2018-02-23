@@ -1,24 +1,26 @@
 {
   "name": "__MSG_extensionName__"
 , "author": "BlackGlory"
-, "version": "2.0.0"
+, "version": "2.0.1"
 , "manifest_version": 2
 , "default_locale": "en"
 , "description": "__MSG_extensionDescription__"
 , "icons": {
-    "16": "assets/icon-16.png"
-  , "48": "assets/icon-48.png"
-  , "128": "assets/icon-128.png"
+    "16": "assets/images/icon-16.png"
+  , "32": "assets/images/icon-16.png"
+  , "48": "assets/images/icon-48.png"
+  , "64": "assets/images/icon-64.png"
+  , "128": "assets/images/icon-128.png"
   }
 , "content_scripts": [{
     "matches": ["<all_urls>"]
   , "match_about_blank": true
   , "all_frames": true
-  , "js": ["polyfill.js", "extension-copycat-inject.js"]
+  , "js": ["browser-polyfill.min.js", "extension-copycat.js"]
   , "run_at": "document_end"
   }]
 , "background": {
-    "scripts": ["polyfill.js", "background.js"]
+    "scripts": ["browser-polyfill.min.js", "background.js"]
   , "persistent": false
   }
 , "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsJiFjdf0ILsn7ANBdvCrIqYaVFLNo2aQwiXTqgoiYaQgdnXrui7reR1iNopylmI6jKyXHJmL2kijqy5GjyqFyl8AR365a8dbLpR+5QIBemV+3j3/igmqR6w/2tvhvs1STPdAANPO8tB6CqQ6atf59UrL1r4Sl7zbLgsaJqAmyz/fOl6338cA/sYmZpnNZ8ouX481HaA24tbjStsw5Tl+FPGGUaaEXZbczL6YfNQH1Y/UMt5zo9GfyS7Zndp+/mLrTcFat3bKp0YGLMkl8pfJBBdf7UXqfLuXfHiH/a1TQK3SgxBjCDY0XLKjo432l1kz22/bQRo4JbppnY/bYR9ymwIDAQAB",

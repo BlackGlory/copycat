@@ -2,8 +2,10 @@ import toMarkdown = require('to-markdown')
 import sanitizeHtml = require('sanitize-html')
 import * as ent from 'ent'
 import {
-  PAGE_URL_TO_MARKDOWN
-, PAGE_URL_TO_HTML
+  TAB_URL_TO_MARKDOWN
+, TAB_URL_TO_HTML
+, FRAME_URL_TO_MARKDOWN
+, FRAME_URL_TO_HTML
 , LINK_TO_MARKDOWN
 , LINK_TO_HTML
 , SELECTION_TO_MARKDOWN
@@ -31,7 +33,7 @@ import {
   getSelectionHTML
 , getSelectionText
 , getActiveElementContent
-, getActiveImageDataURI
+, getDocumentTitle
 , removeExtraLine
 , getDataURI
 } from './utils'
@@ -45,64 +47,84 @@ interface Handlers {
 }
 
 export default {
-  async [PAGE_URL_TO_MARKDOWN](info, tab) {
-    if (info.frameUrl) {
-      return `[](${ info.frameUrl })`
-    } else if (tab) {
+  async [TAB_URL_TO_MARKDOWN](info, tab) {
+    if (tab) {
       return `[${ tab.title }](${ tab.url })`
     }
   }
-, async [PAGE_URL_TO_HTML](info, tab) {
-    if (info.frameUrl) {
-      return `<a href="${ info.frameUrl }"></a>`
-    } else if (tab) {
+, async [TAB_URL_TO_HTML](info, tab) {
+    if (tab) {
       return `<a href="${ tab.url }">${ tab.title }</a>`
     }
   }
-, async [LINK_TO_MARKDOWN]({ linkUrl }, tab) {
-    if (tab && tab.id) {
-      return `[${ await getActiveElementContent(tab.id) }](${ linkUrl })`
+, async [FRAME_URL_TO_MARKDOWN](info, tab) {
+    if (tab && tab.id){
+      return `[${ await getDocumentTitle(tab.id, info.frameId) }](${ info.frameUrl })`
     } else {
-      return `[](${ linkUrl })`
+      return `[](${ info.frameUrl })`
     }
   }
-, async [LINK_TO_HTML]({ linkUrl }, tab) {
-    if (tab && tab.id) {
-      return `<a href="${ linkUrl }">${ await getActiveElementContent(tab.id) }</a>`
+, async [FRAME_URL_TO_HTML](info, tab) {
+    if (tab && tab.id){
+      return `<a href="${ info.frameUrl }">${ await getDocumentTitle(tab.id, info.frameId) }</a>`
     } else {
-      return `<a href="${ linkUrl }"></a>`
+      return `<a href="${ info.frameUrl }"></a>`
     }
   }
-, async [SELECTION_TO_MARKDOWN](_, tab) {
+, async [LINK_TO_MARKDOWN](info, tab) {
     if (tab && tab.id) {
-      return ent.decode(removeExtraLine(toMarkdown(sanitizeHtml(await getSelectionHTML(tab.id), {
+      const title = ent.decode(removeExtraLine(toMarkdown(sanitizeHtml(await getActiveElementContent(tab.id, info.frameId), {
+        allowedTags: []
+      , allowedAttributes: {}
+      , nonTextTags: ['style', 'script', 'noscript']
+      }))))
+      return `[${ title }](${ info.linkUrl })`
+    } else {
+      return `[](${ info.linkUrl })`
+    }
+  }
+, async [LINK_TO_HTML](info, tab) {
+    if (tab && tab.id) {
+      const title = ent.decode(sanitizeHtml(await getActiveElementContent(tab.id, info.frameId), {
+        allowedTags: false
+      , allowedAttributes: false
+      , nonTextTags: ['style', 'script', 'noscript']
+      }))
+      return `<a href="${ info.linkUrl }">${ title }</a>`
+    } else {
+      return `<a href="${ info.linkUrl }"></a>`
+    }
+  }
+, async [SELECTION_TO_MARKDOWN](info, tab) {
+    if (tab && tab.id) {
+      return ent.decode(removeExtraLine(toMarkdown(sanitizeHtml(await getSelectionHTML(tab.id, info.frameId), {
         allowedTags: false
       , allowedAttributes: false
       , nonTextTags: ['style', 'script', 'noscript']
       }))))
     }
   }
-, async [SELECTION_TO_MARKDOWN_WITHOUT_HTML](_, tab) {
+, async [SELECTION_TO_MARKDOWN_WITHOUT_HTML](info, tab) {
     if (tab && tab.id) {
-      return ent.decode(removeExtraLine(sanitizeHtml(toMarkdown(await getSelectionHTML(tab.id)), {
+      return ent.decode(removeExtraLine(sanitizeHtml(toMarkdown(await getSelectionHTML(tab.id, info.frameId)), {
         allowedTags: []
       , allowedAttributes: {}
       , nonTextTags: ['style', 'script', 'noscript']
       })))
     }
   }
-, async [SELECTION_TO_HTML](_, tab) {
+, async [SELECTION_TO_HTML](info, tab) {
     if (tab && tab.id) {
-      return ent.decode(sanitizeHtml(await getSelectionHTML(tab.id), {
+      return ent.decode(sanitizeHtml(await getSelectionHTML(tab.id, info.frameId), {
         allowedTags: false
       , allowedAttributes: false
       , nonTextTags: ['style', 'script', 'noscript']
       }))
     }
   },
-  async [SELECTION_TO_HTML_LINK_ONLY](_, tab) {
+  async [SELECTION_TO_HTML_LINK_ONLY](info, tab) {
     if (tab && tab.id) {
-      return ent.decode(sanitizeHtml(await getSelectionHTML(tab.id), {
+      return ent.decode(sanitizeHtml(await getSelectionHTML(tab.id, info.frameId), {
         allowedTags: ['a']
       , allowedAttributes: {
           'a': ['href']
@@ -111,14 +133,14 @@ export default {
       }))
     }
   }
-, async [SELECTION_TO_PLAIN](_, tab) {
+, async [SELECTION_TO_PLAIN](info, tab) {
     if (tab && tab.id) {
-      return await getSelectionText(tab.id)
+      return await getSelectionText(tab.id, info.frameId)
     }
   }
-, async [SELECTION_TO_RAW_STRING](_, tab) {
+, async [SELECTION_TO_RAW_STRING](info, tab) {
     if (tab && tab.id) {
-      return (await getSelectionText(tab.id))
+      return (await getSelectionText(tab.id, info.frameId))
         .replace(/\\/g, String.raw`\\`)
         .replace(/\r/g, String.raw`\r`)
         .replace(/\t/g, String.raw`\t`)

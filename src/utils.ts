@@ -7,20 +7,20 @@ export function setClipboard(text: string) {
   document.body.removeChild(textarea)
 }
 
-export async function getSelectionHTML(tabId: number) : Promise<string> {
-  return await browser.tabs.sendMessage(tabId, { type: 'selection-html' })
+export async function getSelectionHTML(tabId: number, frameId: number = 0) : Promise<string> {
+  return await browser.tabs.sendMessage(tabId, { type: 'selection-html' }, { frameId })
 }
 
-export async function getSelectionText(tabId: number) : Promise<string> {
-  return await browser.tabs.sendMessage(tabId, { type: 'selection-text' })
+export async function getSelectionText(tabId: number, frameId: number = 0) : Promise<string> {
+  return await browser.tabs.sendMessage(tabId, { type: 'selection-text' }, { frameId })
 }
 
-export async function getActiveElementContent(tabId: number) : Promise<string> {
-  return await browser.tabs.sendMessage(tabId, { type: 'active-element-content' })
+export async function getActiveElementContent(tabId: number, frameId: number = 0) : Promise<string> {
+  return await browser.tabs.sendMessage(tabId, { type: 'active-element-content' }, { frameId })
 }
 
-export async function getActiveImageDataURI(tabId: number) : Promise<string> {
-  return await browser.tabs.sendMessage(tabId, { type: 'active-image-datauri' })
+export async function getDocumentTitle(tabId: number, frameId: number = 0) : Promise<string> {
+  return await browser.tabs.sendMessage(tabId, { type: 'document-title' }, { frameId })
 }
 
 export function removeExtraLine(text: string) : string {

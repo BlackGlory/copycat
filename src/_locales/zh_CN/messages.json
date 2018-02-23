@@ -5,11 +5,17 @@
 , "extensionDescription": {
     "message": "为网页提供前所未有的强大复制功能."
   }
-, "PAGE_URL_TO_MARKDOWN": {
-    "message": "页面链接 -> Markdown"
+, "TAB_URL_TO_MARKDOWN": {
+    "message": "标签页链接 -> Markdown"
   }
-, "PAGE_URL_TO_HTML": {
-    "message": "页面链接 -> HTML"
+, "TAB_URL_TO_HTML": {
+    "message": "标签页链接 -> HTML"
+  }
+, "FRAME_URL_TO_MARKDOWN": {
+    "message": "框架链接 -> Markdown"
+  }
+, "FRAME_URL_TO_HTML": {
+    "message": "框架链接 -> HTML"
   }
 , "LINK_TO_MARKDOWN": {
     "message": "链接 -> Markdown"

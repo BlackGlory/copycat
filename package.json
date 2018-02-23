@@ -1,6 +1,6 @@
 {
   "name": "Copycat",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Copy content from web powerful than ever before.",
   "scripts": {
     "build": "webpack",
@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "ent": "^2.2.0",
-    "sanitize-html": "^1.17.0",
+    "sanitize-html": "^1.18.2",
     "to-markdown": "^3.1.1",
     "webextension-polyfill": "^0.2.1"
   },
@@ -24,6 +24,7 @@
     "copy-webpack-plugin": "^4.4.1",
     "ts-loader": "^3.5.0",
     "typescript": "^2.7.2",
+    "uglifyjs-webpack-plugin": "^1.2.0",
     "webpack": "^3.11.0"
   }
 }

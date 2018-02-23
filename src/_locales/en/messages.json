@@ -5,11 +5,17 @@
 , "extensionDescription": {
     "message": "Copy content from web powerful than ever before."
   }
-, "PAGE_URL_TO_MARKDOWN": {
-    "message": "Page link -> Markdown"
+, "TAB_URL_TO_MARKDOWN": {
+    "message": "Tab link -> Markdown"
   }
-, "PAGE_URL_TO_HTML": {
-    "message": "Page link -> HTML"
+, "TAB_URL_TO_HTML": {
+    "message": "Tab link -> HTML"
+  }
+, "FRAME_URL_TO_MARKDOWN": {
+    "message": "Frame link -> Markdown"
+  }
+, "FRAME_URL_TO_HTML": {
+    "message": "Frame link -> HTML"
   }
 , "LINK_TO_MARKDOWN": {
     "message": "Link -> Markdown"
