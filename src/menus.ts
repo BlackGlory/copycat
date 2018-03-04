@@ -27,15 +27,15 @@ import {
 , VIDEO_TO_HTML
 } from './symbols'
 
-interface MenuItem {
+interface IMenuItem {
   id?: string
   type?: string
   contexts?: string[]
   title?: string
 }
 
-export default new Map<string[], MenuItem[]>([
-  [['all'], [
+export default new Map<string[], IMenuItem[]>([
+  [['page'], [
     { id: TAB_URL_TO_MARKDOWN }
   , { id: TAB_URL_TO_HTML }
   ]]

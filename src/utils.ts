@@ -7,35 +7,35 @@ export function setClipboard(text: string) {
   document.body.removeChild(textarea)
 }
 
-export async function getSelectionHTML(tabId: number, frameId: number = 0) : Promise<string> {
+export async function getSelectionHTML(tabId: number, frameId: number = 0): Promise<string> {
   return await browser.tabs.sendMessage(tabId, { type: 'selection-html' }, { frameId })
 }
 
-export async function getSelectionText(tabId: number, frameId: number = 0) : Promise<string> {
+export async function getSelectionText(tabId: number, frameId: number = 0): Promise<string> {
   return await browser.tabs.sendMessage(tabId, { type: 'selection-text' }, { frameId })
 }
 
-export async function getActiveElementContent(tabId: number, frameId: number = 0) : Promise<string> {
+export async function getActiveElementContent(tabId: number, frameId: number = 0): Promise<string> {
   return await browser.tabs.sendMessage(tabId, { type: 'active-element-content' }, { frameId })
 }
 
-export async function getDocumentTitle(tabId: number, frameId: number = 0) : Promise<string> {
+export async function getDocumentTitle(tabId: number, frameId: number = 0): Promise<string> {
   return await browser.tabs.sendMessage(tabId, { type: 'document-title' }, { frameId })
 }
 
-export function removeExtraLine(text: string) : string {
+export function removeExtraLine(text: string): string {
   return text.replace(/^\s+^/mg, '\n').replace(/$\s+$/mg, '\n')
 }
 
-export function getDataURI(src: string, encoder?: string, quality?: number) : Promise<string> {
+export function getDataURI(src: string, encoder?: string, quality?: number): Promise<string> {
   if (encoder) {
     return new Promise<string>((resolve, reject) => {
       const img = new Image()
       img.onload = () => {
-        let canvas = document.createElement('canvas')
+        const canvas = document.createElement('canvas')
         canvas.width = img.naturalWidth
         canvas.height = img.naturalHeight
-        ;(canvas.getContext('2d') as CanvasRenderingContext2D).drawImage(img, 0, 0)
+        canvas.getContext('2d')!.drawImage(img, 0, 0)
         resolve(canvas.toDataURL(`image/${ encoder }`, quality))
       }
       img.onerror = reject
@@ -52,14 +52,14 @@ export function getDataURI(src: string, encoder?: string, quality?: number) : Pr
   }
 }
 
-export async function queryAllInjectableTabs() : Promise<browser.tabs.Tab[]> {
+export async function queryAllInjectableTabs(): Promise<browser.tabs.Tab[]> {
   const invalidList = [
-    "about:"
-  , "browser:"
-  , "view-source:"
-  , "chrome:"
-  , "chrome-error:"
-  , "https://chrome.google.com/"
+    'about:'
+  , 'browser:'
+  , 'view-source:'
+  , 'chrome:'
+  , 'chrome-error:'
+  , 'https://chrome.google.com/'
   ]
   const tabs = await browser.tabs.query({})
   return tabs.filter(({ url = '' }) => {

@@ -30,7 +30,7 @@ node_modules
 
 # Generated file
 *.js
-!*.config.js
+!webpack.*.js
 *.zip
 *.js.map
 dist

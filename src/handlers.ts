@@ -38,11 +38,10 @@ import {
 , getDataURI
 } from './utils'
 
-interface Handler {
-  (info: browser.contextMenus.OnClickData, tab?: browser.tabs.Tab): string|void|Promise<string|void>
-}
+type Handler = (info: browser.contextMenus.OnClickData, tab?: browser.tabs.Tab) =>
+  string|void|Promise<string|void>
 
-interface Handlers {
+interface IHandlers {
   [menuItemId: string]: Handler
 }
 
@@ -58,14 +57,14 @@ export default {
     }
   }
 , async [FRAME_URL_TO_MARKDOWN](info, tab) {
-    if (tab && tab.id){
+    if (tab && tab.id) {
       return `[${ await getDocumentTitle(tab.id, info.frameId) }](${ info.frameUrl })`
     } else {
       return `[](${ info.frameUrl })`
     }
   }
 , async [FRAME_URL_TO_HTML](info, tab) {
-    if (tab && tab.id){
+    if (tab && tab.id) {
       return `<a href="${ info.frameUrl }">${ await getDocumentTitle(tab.id, info.frameId) }</a>`
     } else {
       return `<a href="${ info.frameUrl }"></a>`
@@ -73,11 +72,17 @@ export default {
   }
 , async [LINK_TO_MARKDOWN](info, tab) {
     if (tab && tab.id) {
-      const title = ent.decode(removeExtraLine(toMarkdown(sanitizeHtml(await getActiveElementContent(tab.id, info.frameId), {
-        allowedTags: []
-      , allowedAttributes: {}
-      , nonTextTags: ['style', 'script', 'noscript']
-      }))))
+      const title = ent.decode(
+        removeExtraLine(
+          toMarkdown(
+            sanitizeHtml(await getActiveElementContent(tab.id, info.frameId), {
+              allowedTags: []
+            , allowedAttributes: {}
+            , nonTextTags: ['style', 'script', 'noscript']
+            })
+          )
+        )
+      )
       return `[${ title }](${ info.linkUrl })`
     } else {
       return `[](${ info.linkUrl })`
@@ -85,11 +90,13 @@ export default {
   }
 , async [LINK_TO_HTML](info, tab) {
     if (tab && tab.id) {
-      const title = ent.decode(sanitizeHtml(await getActiveElementContent(tab.id, info.frameId), {
-        allowedTags: false
-      , allowedAttributes: false
-      , nonTextTags: ['style', 'script', 'noscript']
-      }))
+      const title = ent.decode(
+        sanitizeHtml(await getActiveElementContent(tab.id, info.frameId), {
+          allowedTags: false
+        , allowedAttributes: false
+        , nonTextTags: ['style', 'script', 'noscript']
+        })
+      )
       return `<a href="${ info.linkUrl }">${ title }</a>`
     } else {
       return `<a href="${ info.linkUrl }"></a>`
@@ -127,7 +134,7 @@ export default {
       return ent.decode(sanitizeHtml(await getSelectionHTML(tab.id, info.frameId), {
         allowedTags: ['a']
       , allowedAttributes: {
-          'a': ['href']
+          a: ['href']
         }
       , nonTextTags: ['style', 'script', 'noscript']
       }))
@@ -220,4 +227,4 @@ export default {
       return `<video controls src="${ srcUrl }"></video>`
     }
   }
-} as Handlers
+} as IHandlers

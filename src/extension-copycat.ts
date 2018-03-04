@@ -1,4 +1,4 @@
-function getSelectionHTML() : string {
+function getSelectionHTML(): string {
   const userSelection = window.getSelection()
   const range = userSelection.getRangeAt(0)
   const clonedSelection = range.cloneContents()
@@ -7,20 +7,20 @@ function getSelectionHTML() : string {
   return div.innerHTML.toString()
 }
 
-function getSelectionText() : string {
+function getSelectionText(): string {
   return window.getSelection().toString()
 }
 
-function getActiveElementContent() : string {
+function getActiveElementContent(): string {
   return document.activeElement.textContent || ''
 }
 
-function getDocumentTitle() : string {
+function getDocumentTitle(): string {
   return document.title
 }
 
 browser.runtime.onMessage.addListener(async message => {
-  switch(message.type) {
+  switch (message.type) {
     case 'selection-html':
       return getSelectionHTML()
     case 'selection-text':

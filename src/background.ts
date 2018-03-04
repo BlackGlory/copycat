@@ -33,7 +33,8 @@ browser.contextMenus.onClicked.addListener(async (info, tab) => {
   }
 })
 
-;(async () => {
+;
+(async () => {
   // Register menus
   await browser.contextMenus.removeAll()
   for (const [contexts, items] of menus.entries()) {

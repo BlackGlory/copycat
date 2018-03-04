@@ -1,10 +1,12 @@
 {
   "name": "Copycat",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Copy content from web powerful than ever before.",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack -w",
+    "precommit": "yarn lint",
+    "lint": "tslint -t codeFrame 'src/**/*.ts'",
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack -w --config webpack.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "git@github.com:BlackGlory/copycat.git",
@@ -21,10 +23,13 @@
     "@types/firefox-webext-browser": "^58.0.1",
     "@types/sanitize-html": "^1.14.0",
     "@types/to-markdown": "^3.0.0",
-    "copy-webpack-plugin": "^4.4.1",
-    "ts-loader": "^3.5.0",
+    "copy-webpack-plugin": "^4.5.0",
+    "husky": "^0.14.3",
+    "ts-loader": "^4.0.1",
+    "tslint": "^5.9.1",
     "typescript": "^2.7.2",
-    "uglifyjs-webpack-plugin": "^1.2.0",
-    "webpack": "^3.11.0"
+    "uglifyjs-webpack-plugin": "^1.2.2",
+    "webpack": "^4.0.1",
+    "webpack-merge": "^4.1.2"
   }
 }
