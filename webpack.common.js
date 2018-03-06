@@ -6,13 +6,14 @@ module.exports = {
 , entry: {
     'background': './src/background.ts'
   , 'extension-copycat': './src/extension-copycat.ts'
+  , 'options': './src/options.tsx'
   }
 , output: {
     path: path.join(__dirname, 'dist')
   , filename: '[name].js'
   }
 , resolve: {
-    extensions: ['.ts', '.js', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.json']
   }
 , module: {
     rules: [

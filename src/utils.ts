@@ -66,3 +66,30 @@ export async function queryAllInjectableTabs(): Promise<browser.tabs.Tab[]> {
     return invalidList.every(invalid => !url.startsWith(invalid))
   })
 }
+
+export type UrlFormat = 'original'|'absolute'
+export type MarkdownFlavor = 'commonmark'|'gfm'|'ghost'
+
+export interface IConfig {
+  urlFormat: UrlFormat
+  markdownFlavor: MarkdownFlavor
+}
+
+function createDefaultConfig(): IConfig {
+  return {
+    urlFormat: 'absolute'
+  , markdownFlavor: 'gfm'
+  }
+}
+
+export function loadConfigure(): IConfig {
+  const config = localStorage.getItem('config')
+  if (config) {
+    return JSON.parse(config)
+  }
+  return createDefaultConfig()
+}
+
+export function saveConfigure(config: IConfig) {
+  localStorage.setItem('config', JSON.stringify(config))
+}

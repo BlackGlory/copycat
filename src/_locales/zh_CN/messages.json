@@ -5,6 +5,21 @@
 , "extensionDescription": {
     "message": "为网页提供前所未有的强大复制功能."
   }
+, "extensionBrowserActionTitle": {
+    "message": "选项"
+  }
+, "Options_UrlFormat": {
+    "message": "URL 格式"
+  }
+, "Options_AbsoluteURL": {
+    "message": "总是使用绝对 URL"
+  }
+, "Options_OriginalURL": {
+    "message": "原始 URL"
+  }
+, "Options_MarkdownFlavor": {
+    "message": "Markdown 风格"
+  }
 , "TAB_URL_TO_MARKDOWN": {
     "message": "标签页链接 -> Markdown"
   }

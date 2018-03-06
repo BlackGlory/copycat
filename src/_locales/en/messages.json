@@ -5,6 +5,30 @@
 , "extensionDescription": {
     "message": "Copy content from web powerful than ever before."
   }
+, "extensionBrowserActionTitle": {
+    "message": "Options"
+  }
+, "Options_UrlFormat": {
+    "message": "URL Format"
+  }
+, "Options_AbsoluteURL": {
+    "message": "Always absolute URL"
+  }
+, "Options_OriginalURL": {
+    "message": "Original URL"
+  }
+, "Options_MarkdownFlavor": {
+    "message": "Markdown Flavor"
+  }
+, "Options_GitHubFlavoredMarkdown": {
+    "message": "GitHub Flavored Markdown"
+  }
+, "Options_CommonMark": {
+    "message": "CommonMark"
+  }
+, "Options_Ghost": {
+    "message": "Ghost"
+  }
 , "TAB_URL_TO_MARKDOWN": {
     "message": "Tab link -> Markdown"
   }

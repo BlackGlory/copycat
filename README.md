@@ -41,12 +41,8 @@ Copy content from web powerful than ever before.
 
 \* *WebP format is Chromium(Chrome, Opera, Vivaldi) only*
 
-## Upcoming features
+## Support Markdown flavors
 
-- [ ] More clarify Markdown text
-- [ ] More Markdown flavors
-- [ ] Always absolute link
-
-## Anything else
-
-Open a new issue!
+- [x] [GitHub Flavored Markdown](https://github.github.com/gfm/)
+- [x] [CommonMark](http://commonmark.org/)
+- [x] [Ghost's Markdown](https://help.ghost.org/article/4-markdown-guide)

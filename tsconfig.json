@@ -5,8 +5,10 @@
   , "strict": true
   , "removeComments": true
   , "sourceMap": true
+  , "jsx": "react"
   }
 , "exclude": [
-    "node_modules"
+    "dist"
+  , "node_modules"
   ]
 }

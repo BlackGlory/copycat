@@ -1,5 +1,4 @@
-import toMarkdown = require('to-markdown')
-import sanitizeHtml = require('sanitize-html')
+import xss = require('xss')
 import * as ent from 'ent'
 import {
   TAB_URL_TO_MARKDOWN
@@ -36,7 +35,52 @@ import {
 , getDocumentTitle
 , removeExtraLine
 , getDataURI
+, loadConfigure
+, MarkdownFlavor
 } from './utils'
+import { toMarkdown as toGfm, toMarkdownWithHtmlTags as toGfmHtml } from './to-markdown/gfm'
+import { toMarkdown as toCommonmark, toMarkdownWithHtmlTags as toCommonmarkHtml } from './to-markdown/commonmark'
+import { toMarkdown as toGhost, toMarkdownWithHtmlTags as toGhostHtml } from './to-markdown/ghost'
+
+const toMarkdown: { [K in MarkdownFlavor]: (html: string) => string } = {
+  gfm: toGfm
+, commonmark: toCommonmark
+, ghost: toGhost
+}
+
+const toMarkdownWithHtmlTags: { [K in MarkdownFlavor]: (html: string) => string } = {
+  gfm: toGfmHtml
+, commonmark: toCommonmarkHtml
+, ghost: toGhostHtml
+}
+
+function tryAbsoluteUrl(base: string, relative: string) {
+  try {
+    return new URL(relative, base).href
+  } catch (e) {
+    return relative
+  }
+}
+
+function isAbsoluteUrl(url: string) {
+  try {
+    const instance = new URL(url)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+function getOnLinkAttr(base: string): XSS.OnTagAttrHandler {
+  return (tag: string, name: string, value: string) => {
+    const { urlFormat } = loadConfigure()
+    if (urlFormat === 'absolute'
+    && ['href', 'src'].includes(name)
+    && !isAbsoluteUrl(value)) {
+      return `${ name }=${ tryAbsoluteUrl(base, value) }`
+    }
+  }
+}
 
 type Handler = (info: browser.contextMenus.OnClickData, tab?: browser.tabs.Tab) =>
   string|void|Promise<string|void>
@@ -74,12 +118,8 @@ export default {
     if (tab && tab.id) {
       const title = ent.decode(
         removeExtraLine(
-          toMarkdown(
-            sanitizeHtml(await getActiveElementContent(tab.id, info.frameId), {
-              allowedTags: []
-            , allowedAttributes: {}
-            , nonTextTags: ['style', 'script', 'noscript']
-            })
+          toMarkdown[loadConfigure().markdownFlavor](
+            await getActiveElementContent(tab.id, info.frameId)
           )
         )
       )
@@ -91,10 +131,8 @@ export default {
 , async [LINK_TO_HTML](info, tab) {
     if (tab && tab.id) {
       const title = ent.decode(
-        sanitizeHtml(await getActiveElementContent(tab.id, info.frameId), {
-          allowedTags: false
-        , allowedAttributes: false
-        , nonTextTags: ['style', 'script', 'noscript']
+        xss(await getActiveElementContent(tab.id, info.frameId), {
+          stripIgnoreTagBody: true
         })
       )
       return `<a href="${ info.linkUrl }">${ title }</a>`
@@ -104,39 +142,50 @@ export default {
   }
 , async [SELECTION_TO_MARKDOWN](info, tab) {
     if (tab && tab.id) {
-      return ent.decode(removeExtraLine(toMarkdown(sanitizeHtml(await getSelectionHTML(tab.id, info.frameId), {
-        allowedTags: false
-      , allowedAttributes: false
-      , nonTextTags: ['style', 'script', 'noscript']
-      }))))
+      return ent.decode(
+        removeExtraLine(
+          toMarkdownWithHtmlTags[loadConfigure().markdownFlavor](
+            xss(await getSelectionHTML(tab.id, info.frameId), {
+              stripIgnoreTagBody: ['script']
+            , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl) as string)
+            })
+          )
+        )
+      )
     }
   }
 , async [SELECTION_TO_MARKDOWN_WITHOUT_HTML](info, tab) {
     if (tab && tab.id) {
-      return ent.decode(removeExtraLine(sanitizeHtml(toMarkdown(await getSelectionHTML(tab.id, info.frameId)), {
-        allowedTags: []
-      , allowedAttributes: {}
-      , nonTextTags: ['style', 'script', 'noscript']
-      })))
+      // TODO
+      return ent.decode(
+        removeExtraLine(
+          toMarkdown[loadConfigure().markdownFlavor](
+            xss(await getSelectionHTML(tab.id, info.frameId), {
+              stripIgnoreTag: true
+            , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl) as string)
+            })
+          )
+        )
+      )
     }
   }
 , async [SELECTION_TO_HTML](info, tab) {
     if (tab && tab.id) {
-      return ent.decode(sanitizeHtml(await getSelectionHTML(tab.id, info.frameId), {
-        allowedTags: false
-      , allowedAttributes: false
-      , nonTextTags: ['style', 'script', 'noscript']
+      return ent.decode(xss(await getSelectionHTML(tab.id, info.frameId), {
+        stripIgnoreTagBody: ['script']
+      , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl) as string)
       }))
     }
   },
   async [SELECTION_TO_HTML_LINK_ONLY](info, tab) {
     if (tab && tab.id) {
-      return ent.decode(sanitizeHtml(await getSelectionHTML(tab.id, info.frameId), {
-        allowedTags: ['a']
-      , allowedAttributes: {
-          a: ['href']
+      // TODO
+      return ent.decode(xss(await getSelectionHTML(tab.id, info.frameId), {
+        whiteList: {
+          a: ['href', 'title', 'target']
         }
-      , nonTextTags: ['style', 'script', 'noscript']
+      , stripIgnoreTag: true
+      , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl) as string)
       }))
     }
   }
