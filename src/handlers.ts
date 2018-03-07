@@ -196,7 +196,7 @@ export default {
         ent.decode(
           xss(await getSelectionHTML(tab.id, info.frameId), {
             stripIgnoreTagBody: ['script']
-          , onIgnoreTagAttr: (tag: string, name: string, value: string) => {}
+          , onIgnoreTagAttr: (tag: string, name: string, value: string) => void(0)
           })
         )
       )
