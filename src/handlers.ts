@@ -11,6 +11,7 @@ import {
 , SELECTION_TO_MARKDOWN_WITHOUT_HTML
 , SELECTION_TO_HTML
 , SELECTION_TO_HTML_LINK_ONLY
+, SELECTION_TO_HTML_CLEAN_ATTR
 , SELECTION_TO_PLAIN
 , SELECTION_TO_RAW_STRING
 , IMAGE_TO_MARKDOWN
@@ -37,6 +38,7 @@ import {
 , getDataURI
 , loadConfigure
 , MarkdownFlavor
+, beautifyHTML
 } from './utils'
 import { toMarkdown as toGfm, toMarkdownWithHtmlTags as toGfmHtml } from './to-markdown/gfm'
 import { toMarkdown as toCommonmark, toMarkdownWithHtmlTags as toCommonmarkHtml } from './to-markdown/commonmark'
@@ -156,7 +158,6 @@ export default {
   }
 , async [SELECTION_TO_MARKDOWN_WITHOUT_HTML](info, tab) {
     if (tab && tab.id) {
-      // TODO
       return ent.decode(
         removeExtraLine(
           toMarkdown[loadConfigure().markdownFlavor](
@@ -171,22 +172,34 @@ export default {
   }
 , async [SELECTION_TO_HTML](info, tab) {
     if (tab && tab.id) {
-      return ent.decode(xss(await getSelectionHTML(tab.id, info.frameId), {
-        stripIgnoreTagBody: ['script']
-      , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl) as string)
-      }))
+      return beautifyHTML(await getSelectionHTML(tab.id, info.frameId))
     }
-  },
-  async [SELECTION_TO_HTML_LINK_ONLY](info, tab) {
+  }
+, async [SELECTION_TO_HTML_LINK_ONLY](info, tab) {
     if (tab && tab.id) {
-      // TODO
-      return ent.decode(xss(await getSelectionHTML(tab.id, info.frameId), {
-        whiteList: {
-          a: ['href', 'title', 'target']
-        }
-      , stripIgnoreTag: true
-      , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl) as string)
-      }))
+      return beautifyHTML(
+        ent.decode(
+          xss(await getSelectionHTML(tab.id, info.frameId), {
+            whiteList: {
+              a: ['href', 'title', 'target']
+            }
+          , stripIgnoreTag: true
+          , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl) as string)
+          })
+        )
+      )
+    }
+  }
+, async [SELECTION_TO_HTML_CLEAN_ATTR](info, tab) {
+    if (tab && tab.id) {
+      return beautifyHTML(
+        ent.decode(
+          xss(await getSelectionHTML(tab.id, info.frameId), {
+            stripIgnoreTagBody: ['script']
+          , onIgnoreTagAttr: (tag: string, name: string, value: string) => {}
+          })
+        )
+      )
     }
   }
 , async [SELECTION_TO_PLAIN](info, tab) {

@@ -1,3 +1,9 @@
+import beautify = require('js-beautify')
+
+export function beautifyHTML(html: string): string {
+  return beautify.html(html)
+}
+
 export function setClipboard(text: string) {
   const textarea = document.createElement('textarea')
   textarea.textContent = text

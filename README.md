@@ -28,6 +28,7 @@ Copy content from web powerful than ever before.
   - [x] Raw strings
   - [x] HTML
   - [x] HTML only links
+  - [x] HTML with clean attributes
   - [x] Markdown
   - [x] Markdown without HTML tags
 - [x] Copy image as

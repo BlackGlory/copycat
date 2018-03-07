@@ -51,13 +51,16 @@
     "message": "Selection -> Markdown"
   }
 , "SELECTION_TO_MARKDOWN_WITHOUT_HTML": {
-    "message": "Selection -> Markdown(without HTML tags)"
+    "message": "Selection -> Markdown(no HTML tags)"
   }
 , "SELECTION_TO_HTML": {
     "message": "Selection -> HTML"
   }
 , "SELECTION_TO_HTML_LINK_ONLY": {
     "message": "Selection -> HTML(only links)"
+  }
+, "SELECTION_TO_HTML_CLEAN_ATTR": {
+    "message": "Selection -> HTML(clean attributes)"
   }
 , "SELECTION_TO_PLAIN": {
     "message": "Selection -> Plaintext"
@@ -90,7 +93,7 @@
     "message": "Image -> HTML(DataURI webp)"
   }
 , "IMAGE_TO_DATA_URI_RAW": {
-    "message": "Image -> DataURI(Original image without conversion, slow and huge)"
+    "message": "Image -> DataURI(no conversion, maybe slow and huge)"
   }
 , "IMAGE_TO_DATA_URI_JPEG": {
     "message": "Image -> DataURI(jpeg)"

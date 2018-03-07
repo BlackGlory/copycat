@@ -50,6 +50,9 @@
 , "SELECTION_TO_HTML_LINK_ONLY": {
     "message": "选中部分 -> HTML(仅链接)"
   }
+, "SELECTION_TO_HTML_CLEAN_ATTR": {
+    "message": "选中部分 -> HTML(干净的属性)"
+  }
 , "SELECTION_TO_PLAIN": {
     "message": "选中部分 -> 纯文本"
   }
@@ -81,7 +84,7 @@
     "message": "图片 -> HTML(DataURI webp)"
   }
 , "IMAGE_TO_DATA_URI_RAW": {
-    "message": "图片 -> DataURI(未经转换的原始图片, 复制过程可能十分缓慢且结果巨大)"
+    "message": "图片 -> DataURI(图片未经转换, 可能效率不高且结果十分巨大)"
   }
 , "IMAGE_TO_DATA_URI_JPEG": {
     "message": "图片 -> DataURI(jpeg)"

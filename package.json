@@ -1,6 +1,6 @@
 {
   "name": "Copycat",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Copy content from web powerful than ever before.",
   "scripts": {
     "precommit": "yarn lint",
@@ -15,6 +15,7 @@
   "dependencies": {
     "ent": "^2.2.0",
     "immer": "^1.1.1",
+    "js-beautify": "^1.7.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "styled-components": "^3.1.6",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@types/ent": "^2.2.1",
     "@types/firefox-webext-browser": "^58.0.1",
+    "@types/js-beautify": "^0.0.31",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
     "clean-webpack-plugin": "^0.1.18",

@@ -4,6 +4,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   target: 'web'
+, node: {
+    fs: 'empty'
+  , module: 'empty'
+  }
 , entry: {
     'background': './src/background.ts'
   , 'extension-copycat': './src/extension-copycat.ts'
