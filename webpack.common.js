@@ -1,4 +1,5 @@
 const path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
@@ -25,7 +26,8 @@ module.exports = {
     ]
   }
 , plugins: [
-    new CopyWebpackPlugin(
+    new CleanWebpackPlugin(['dist'])
+  , new CopyWebpackPlugin(
       [
         { from: './src', ignore: ['*.ts'] }
       , { from: './node_modules/webextension-polyfill/dist/browser-polyfill.min.js' }
