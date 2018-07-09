@@ -15,6 +15,7 @@
   , "object-literal-sort-keys": false
   , "no-console": false
   , "ordered-imports": false
+  , "interface-name": false
   }
 , "rulesDirectory": []
 }

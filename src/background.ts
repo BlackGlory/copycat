@@ -1,8 +1,8 @@
-import handlers from './handlers'
+import handlers, { ContextMenusClickHandler, CommandComplicateHandler } from './handlers'
 import menus from './menus'
 import {
   queryAllInjectableTabs
-, setClipboard
+, writeTextToClipboard
 } from './utils'
 
 // Inject after installed / available
@@ -25,11 +25,20 @@ browser.runtime.onInstalled.addListener(async () => {
   }
 })
 
-// Register handlers
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
-  const text = await handlers[info.menuItemId](info, tab)
+  const text = await (handlers[info.menuItemId] as ContextMenusClickHandler)(info, tab)
   if (text) {
-    setClipboard(text)
+    await writeTextToClipboard(text)
+  }
+})
+
+browser.commands.onCommand.addListener(async command => {
+  const tabs = await browser.tabs.query({ currentWindow: true, active: true })
+  if (tabs.length) {
+    const text = await (handlers[command] as CommandComplicateHandler)({}, tabs[0])
+    if (text) {
+      await writeTextToClipboard(text)
+    }
   }
 })
 

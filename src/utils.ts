@@ -4,13 +4,17 @@ export function beautifyHTML(html: string): string {
   return beautify.html(html)
 }
 
-export function setClipboard(text: string) {
-  const textarea = document.createElement('textarea')
-  textarea.textContent = text
-  document.body.appendChild(textarea)
-  textarea.select()
-  document.execCommand('Copy', false, null)
-  document.body.removeChild(textarea)
+export async function writeTextToClipboard(text: string) {
+  try {
+    return await navigator.clipboard.writeText(text)
+  } catch (e) {
+    const textarea = document.createElement('textarea')
+    textarea.textContent = text
+    document.body.appendChild(textarea)
+    textarea.select()
+    document.execCommand('Copy', false, null)
+    document.body.removeChild(textarea)
+  }
 }
 
 export async function getSelectionHTML(tabId: number, frameId: number = 0): Promise<string> {
@@ -76,19 +80,19 @@ export async function queryAllInjectableTabs(): Promise<browser.tabs.Tab[]> {
 export type UrlFormat = 'original'|'absolute'
 export type MarkdownFlavor = 'commonmark'|'gfm'|'ghost'
 
-export interface IConfig {
+export interface Config {
   urlFormat: UrlFormat
   markdownFlavor: MarkdownFlavor
 }
 
-function createDefaultConfig(): IConfig {
+function createDefaultConfig(): Config {
   return {
     urlFormat: 'absolute'
   , markdownFlavor: 'gfm'
   }
 }
 
-export function loadConfigure(): IConfig {
+export function loadConfigure(): Config {
   const config = localStorage.getItem('config')
   if (config) {
     return JSON.parse(config)
@@ -96,6 +100,6 @@ export function loadConfigure(): IConfig {
   return createDefaultConfig()
 }
 
-export function saveConfigure(config: IConfig) {
+export function saveConfigure(config: Config) {
   localStorage.setItem('config', JSON.stringify(config))
 }

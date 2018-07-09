@@ -29,11 +29,17 @@
 , "Options_Ghost": {
     "message": "Ghost"
   }
+, "TAB_URL_TO_PLAIN": {
+    "message": "Tab link -> Plaintext"
+  }
 , "TAB_URL_TO_MARKDOWN": {
     "message": "Tab link -> Markdown"
   }
 , "TAB_URL_TO_HTML": {
     "message": "Tab link -> HTML"
+  }
+, "FRAME_URL_TO_PLAIN": {
+    "message": "Frame link -> Plaintext"
   }
 , "FRAME_URL_TO_MARKDOWN": {
     "message": "Frame link -> Markdown"

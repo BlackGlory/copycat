@@ -10,14 +10,16 @@ Copy content from web powerful than ever before.
 - [x] [Firefox](https://addons.mozilla.org/firefox/addon/extension-copycat/)
 - [x] Opera: Code review too slow, never publish again, please manually install.
 - [x] [Vivaldi](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg)
-- [ ] Edge: Microsoft Edge is not compatible with [mozilla/webextension-polyfill](https://github.com/mozilla/webextension-polyfill), so I had to give up porting.
+- [ ] Edge: Microsoft Edge is not compatible with [mozilla/webextension-polyfill](https://github.com/mozilla/webextension-polyfill) because of [Issue #3](https://github.com/mozilla/webextension-polyfill/issues/3), so I had to give up porting.
 
 ## Features
 
 - [x] Copy tab link as
+  - [x] Plaintext
   - [x] Markdown
   - [x] HTML
 - [x] Copy frame link as
+  - [x] Plaintext
   - [x] Markdown
   - [x] HTML
 - [x] Copy link as
@@ -47,3 +49,11 @@ Copy content from web powerful than ever before.
 - [x] [GitHub Flavored Markdown](https://github.github.com/gfm/)
 - [x] [CommonMark](http://commonmark.org/)
 - [x] [Ghost's Markdown](https://help.ghost.org/article/4-markdown-guide)
+
+## Keyboard shortcuts
+
+Copy tab link and selection can be set as keyboard shortcuts.
+
+Chrome shortcuts page: `chrome://extensions/shortcuts`
+
+Unfortunately, I couldn't find the official shortcut key customization page in Firefox. Maybe users can use other extensions to implement shortcut key binding. Copycat will not provide related UI for the time being.

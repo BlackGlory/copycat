@@ -35,3 +35,9 @@ declare namespace browser.contextMenus {
     modifiers: _OnClickDataModifiers[]
   }
 }
+
+declare interface Navigator {
+  clipboard: {
+    writeText(text: string): Promise<void>
+  }
+}

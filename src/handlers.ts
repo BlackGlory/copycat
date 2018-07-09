@@ -1,8 +1,10 @@
 import xss = require('xss')
 import * as ent from 'ent'
 import {
-  TAB_URL_TO_MARKDOWN
+  TAB_URL_TO_PLAIN
+, TAB_URL_TO_MARKDOWN
 , TAB_URL_TO_HTML
+, FRAME_URL_TO_PLAIN
 , FRAME_URL_TO_MARKDOWN
 , FRAME_URL_TO_HTML
 , LINK_TO_MARKDOWN
@@ -84,39 +86,54 @@ function getOnLinkAttr(base: string): XSS.OnTagAttrHandler {
   }
 }
 
-type Handler = (info: browser.contextMenus.OnClickData, tab?: browser.tabs.Tab) =>
-  string|void|Promise<string|void>
+export type ContextMenusClickHandler = (info: browser.contextMenus.OnClickData, tab?: browser.tabs.Tab) =>
+  string | void | Promise<string | void>
 
-interface IHandlers {
-  [menuItemId: string]: Handler
+export type CommandComplicateHandler = (info: { [index: string]: any }, tab?: browser.tabs.Tab) =>
+  string | void | Promise<string | void>
+
+interface UniversalHandlers {
+  [menuItemId: string]: ContextMenusClickHandler | CommandComplicateHandler
 }
 
 export default {
-  async [TAB_URL_TO_MARKDOWN](info, tab) {
+  [TAB_URL_TO_PLAIN]: ((info, tab) => {
+    if (tab) {
+      return `${ tab.title }\n${ tab.url }`
+    }
+  }) as CommandComplicateHandler
+, [TAB_URL_TO_MARKDOWN]: ((info, tab) => {
     if (tab) {
       return `[${ tab.title }](${ tab.url })`
     }
-  }
-, async [TAB_URL_TO_HTML](info, tab) {
+  }) as CommandComplicateHandler
+, [TAB_URL_TO_HTML]: ((info, tab) => {
     if (tab) {
       return `<a href="${ tab.url }">${ tab.title }</a>`
     }
-  }
-, async [FRAME_URL_TO_MARKDOWN](info, tab) {
+  }) as CommandComplicateHandler
+, [FRAME_URL_TO_PLAIN]: (async (info, tab) => {
+    if (tab && tab.id) {
+      return `${ await getDocumentTitle(tab.id, info.frameId) }\n${ info.frameUrl }`
+    } else {
+      return `${ info.frameUrl }`
+    }
+  }) as ContextMenusClickHandler
+, [FRAME_URL_TO_MARKDOWN]: (async (info, tab) => {
     if (tab && tab.id) {
       return `[${ await getDocumentTitle(tab.id, info.frameId) }](${ info.frameUrl })`
     } else {
       return `[](${ info.frameUrl })`
     }
-  }
-, async [FRAME_URL_TO_HTML](info, tab) {
+  }) as ContextMenusClickHandler
+, [FRAME_URL_TO_HTML]: (async (info, tab) => {
     if (tab && tab.id) {
       return `<a href="${ info.frameUrl }">${ await getDocumentTitle(tab.id, info.frameId) }</a>`
     } else {
       return `<a href="${ info.frameUrl }"></a>`
     }
-  }
-, async [LINK_TO_MARKDOWN](info, tab) {
+  }) as ContextMenusClickHandler
+, [LINK_TO_MARKDOWN]: (async (info, tab) => {
     if (tab && tab.id) {
       const title = ent.decode(
         removeExtraLine(
@@ -129,8 +146,8 @@ export default {
     } else {
       return `[](${ info.linkUrl })`
     }
-  }
-, async [LINK_TO_HTML](info, tab) {
+  }) as ContextMenusClickHandler
+, [LINK_TO_HTML]: (async (info, tab) => {
     if (tab && tab.id) {
       const title = ent.decode(
         xss(await getActiveElementContent(tab.id, info.frameId), {
@@ -141,41 +158,41 @@ export default {
     } else {
       return `<a href="${ info.linkUrl }"></a>`
     }
-  }
-, async [SELECTION_TO_MARKDOWN](info, tab) {
+  }) as ContextMenusClickHandler
+, [SELECTION_TO_MARKDOWN]: (async (info, tab) => {
     if (tab && tab.id) {
       return ent.decode(
         removeExtraLine(
           toMarkdownWithHtmlTags[loadConfigure().markdownFlavor](
             xss(await getSelectionHTML(tab.id, info.frameId), {
               stripIgnoreTagBody: ['script']
-            , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl) as string)
+            , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl || tab.url) as string)
             })
           )
         )
       )
     }
-  }
-, async [SELECTION_TO_MARKDOWN_WITHOUT_HTML](info, tab) {
+  }) as CommandComplicateHandler
+, [SELECTION_TO_MARKDOWN_WITHOUT_HTML]: (async (info, tab) => {
     if (tab && tab.id) {
       return ent.decode(
         removeExtraLine(
           toMarkdown[loadConfigure().markdownFlavor](
             xss(await getSelectionHTML(tab.id, info.frameId), {
               stripIgnoreTag: true
-            , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl) as string)
+            , onTagAttr: getOnLinkAttr((info.frameUrl || info!.pageUrl || tab.url) as string)
             })
           )
         )
       )
     }
-  }
-, async [SELECTION_TO_HTML](info, tab) {
+  }) as CommandComplicateHandler
+, [SELECTION_TO_HTML]: (async (info, tab) => {
     if (tab && tab.id) {
       return beautifyHTML(await getSelectionHTML(tab.id, info.frameId))
     }
-  }
-, async [SELECTION_TO_HTML_LINK_ONLY](info, tab) {
+  }) as CommandComplicateHandler
+, [SELECTION_TO_HTML_LINK_ONLY]: (async (info, tab) => {
     if (tab && tab.id) {
       return beautifyHTML(
         ent.decode(
@@ -184,13 +201,13 @@ export default {
               a: ['href', 'title', 'target']
             }
           , stripIgnoreTag: true
-          , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl) as string)
+          , onTagAttr: getOnLinkAttr((info.frameUrl || info.pageUrl || tab.url) as string)
           })
         )
       )
     }
-  }
-, async [SELECTION_TO_HTML_CLEAN_ATTR](info, tab) {
+  }) as CommandComplicateHandler
+, [SELECTION_TO_HTML_CLEAN_ATTR]: (async (info, tab) => {
     if (tab && tab.id) {
       return beautifyHTML(
         ent.decode(
@@ -201,13 +218,13 @@ export default {
         )
       )
     }
-  }
-, async [SELECTION_TO_PLAIN](info, tab) {
+  }) as CommandComplicateHandler
+, [SELECTION_TO_PLAIN]: (async (info, tab) => {
     if (tab && tab.id) {
       return await getSelectionText(tab.id, info.frameId)
     }
-  }
-, async [SELECTION_TO_RAW_STRING](info, tab) {
+  }) as CommandComplicateHandler
+, [SELECTION_TO_RAW_STRING]: (async (info, tab) => {
     if (tab && tab.id) {
       return (await getSelectionText(tab.id, info.frameId))
         .replace(/\\/g, String.raw`\\`)
@@ -218,75 +235,75 @@ export default {
         .replace(/\'/g, String.raw`\'`)
         .replace(/\"/g, String.raw`\"`)
     }
-  }
-, [IMAGE_TO_MARKDOWN]({ mediaType, srcUrl }) {
+  }) as CommandComplicateHandler
+, [IMAGE_TO_MARKDOWN]: (({ mediaType, srcUrl }) => {
     if (mediaType === 'image') {
       return `![](${ srcUrl })`
     }
-  }
-, async [IMAGE_TO_MARKDOWN_DATA_URI_JPEG]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [IMAGE_TO_MARKDOWN_DATA_URI_JPEG]: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return `![](${ await getDataURI(srcUrl, 'jpeg') })`
     }
-  }
-, async [IMAGE_TO_MARKDOWN_DATA_URI_PNG]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [IMAGE_TO_MARKDOWN_DATA_URI_PNG]: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return `![](${ await getDataURI(srcUrl, 'png') })`
     }
-  }
-, async [IMAGE_TO_MARKDOWN_DATA_URI_WEBP]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [IMAGE_TO_MARKDOWN_DATA_URI_WEBP]: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return `![](${ await getDataURI(srcUrl, 'webp') })`
     }
-  }
-, [IMAGE_TO_HTML]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [IMAGE_TO_HTML]: (({ mediaType, srcUrl }) => {
     if (mediaType === 'image') {
       return `<img src="${ srcUrl }" />`
     }
-  }
-, async [IMAGE_TO_HTML_DATA_URI_JPEG]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [IMAGE_TO_HTML_DATA_URI_JPEG]: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return `<img src="${ await getDataURI(srcUrl, 'jpeg') }" />`
     }
-  }
-, async [IMAGE_TO_HTML_DATA_URI_PNG]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [IMAGE_TO_HTML_DATA_URI_PNG]: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return `<img src="${ await getDataURI(srcUrl, 'png') }" />`
     }
-  }
-, async [IMAGE_TO_HTML_DATA_URI_WEBP]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [IMAGE_TO_HTML_DATA_URI_WEBP]: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return `<img src="${ await getDataURI(srcUrl, 'webp') }" />`
     }
-  }
-, async [IMAGE_TO_DATA_URI_RAW]({ mediaType, srcUrl }, tab) {
+  }) as ContextMenusClickHandler
+, [IMAGE_TO_DATA_URI_RAW]: (async ({ mediaType, srcUrl }, tab) => {
     if (mediaType === 'image' && srcUrl) {
       return await getDataURI(srcUrl)
     }
-  }
-, async [IMAGE_TO_DATA_URI_JPEG]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [IMAGE_TO_DATA_URI_JPEG]: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return await getDataURI(srcUrl, 'jpeg')
     }
-  }
-, async [IMAGE_TO_DATA_URI_PNG]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [IMAGE_TO_DATA_URI_PNG]: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return await getDataURI(srcUrl, 'png')
     }
-  }
-, async [IMAGE_TO_DATA_URI_WEBP]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [IMAGE_TO_DATA_URI_WEBP]: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return await getDataURI(srcUrl, 'webp')
     }
-  }
-, [AUDIO_TO_HTML]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [AUDIO_TO_HTML]: (({ mediaType, srcUrl }) => {
     if (mediaType === 'audio') {
       return `<audio controls src="${ srcUrl }"></audio>`
     }
-  }
-, [VIDEO_TO_HTML]({ mediaType, srcUrl }) {
+  }) as ContextMenusClickHandler
+, [VIDEO_TO_HTML]: (({ mediaType, srcUrl }) => {
     if (mediaType === 'video') {
       return `<video controls src="${ srcUrl }"></video>`
     }
-  }
-} as IHandlers
+  }) as ContextMenusClickHandler
+} as UniversalHandlers

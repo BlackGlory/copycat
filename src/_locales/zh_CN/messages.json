@@ -20,11 +20,17 @@
 , "Options_MarkdownFlavor": {
     "message": "Markdown 风格"
   }
+, "TAB_URL_TO_PLAIN": {
+    "message": "标签页链接 -> 纯文本"
+  }
 , "TAB_URL_TO_MARKDOWN": {
     "message": "标签页链接 -> Markdown"
   }
 , "TAB_URL_TO_HTML": {
     "message": "标签页链接 -> HTML"
+  }
+, "FRAME_URL_TO_PLAIN": {
+    "message": "框架链接 -> 纯文本"
   }
 , "FRAME_URL_TO_MARKDOWN": {
     "message": "框架链接 -> Markdown"

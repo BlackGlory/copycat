@@ -1,5 +1,4 @@
 import { createTurndownService as createCommonmarkTurndownService, defaultReplacement } from './commonmark'
-import TurndownService from 'turndown'
 import { gfm } from 'turndown-plugin-gfm'
 
 export function createTurndownService(options: Turndown.TurndownServiceOptions = {}) {

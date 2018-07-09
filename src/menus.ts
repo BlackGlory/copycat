@@ -1,6 +1,8 @@
 import {
-  TAB_URL_TO_MARKDOWN
+  TAB_URL_TO_PLAIN
+, TAB_URL_TO_MARKDOWN
 , TAB_URL_TO_HTML
+, FRAME_URL_TO_PLAIN
 , FRAME_URL_TO_MARKDOWN
 , FRAME_URL_TO_HTML
 , LINK_TO_MARKDOWN
@@ -37,11 +39,13 @@ interface IMenuItem {
 
 export default new Map<string[], IMenuItem[]>([
   [['page'], [
-    { id: TAB_URL_TO_MARKDOWN }
+    { id: TAB_URL_TO_PLAIN }
+  , { id: TAB_URL_TO_MARKDOWN }
   , { id: TAB_URL_TO_HTML }
   ]]
 , [['frame'], [
-    { id: FRAME_URL_TO_MARKDOWN }
+    { id: FRAME_URL_TO_PLAIN }
+  , { id: FRAME_URL_TO_MARKDOWN }
   , { id: FRAME_URL_TO_HTML }
   ]]
 , [['link'], [
