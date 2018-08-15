@@ -9,9 +9,9 @@ module.exports = {
   , module: 'empty'
   }
 , entry: {
-    'background': './src/background.ts'
-  , 'extension-copycat': './src/extension-copycat.ts'
-  , 'options': './src/options.tsx'
+    'background': './src/background/index.ts'
+  , 'copycat': './src/content-script/index.ts'
+  , 'options': './src/options/index.tsx'
   }
 , output: {
     path: path.join(__dirname, 'dist')
@@ -33,7 +33,8 @@ module.exports = {
     new CleanWebpackPlugin(['dist'])
   , new CopyWebpackPlugin(
       [
-        { from: './src', ignore: ['*.ts'] }
+        { from: './src', ignore: ['*.ts', '*.tsx', '*.html'] }
+      , { from: './src/options/index.html', to: 'options.html' }
       , { from: './node_modules/webextension-polyfill/dist/browser-polyfill.min.js' }
       , { from: './node_modules/webextension-polyfill/dist/browser-polyfill.min.js.map' }
       ]

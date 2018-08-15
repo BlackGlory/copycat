@@ -1,5 +1,5 @@
-declare module 'turndown' {
-  export default Turndown.TurndownService
+declare module 'turndown/lib/turndown.cjs' {
+  export = Turndown.TurndownService
 }
 
 declare namespace Turndown {

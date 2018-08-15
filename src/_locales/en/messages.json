@@ -14,6 +14,12 @@
 , "Options_AbsoluteURL": {
     "message": "Always absolute URL"
   }
+, "Options_RelativeURL": {
+    "message": "Always relative URL(if possible)"
+  }
+, "Options_RootRelativeURL": {
+    "message": "Always root-relative URL(if possible)"
+  }
 , "Options_OriginalURL": {
     "message": "Original URL"
   }
@@ -30,90 +36,105 @@
     "message": "Ghost"
   }
 , "TAB_URL_TO_PLAIN": {
-    "message": "Tab link -> Plaintext"
+    "message": "Tab link → Plaintext"
   }
 , "TAB_URL_TO_MARKDOWN": {
-    "message": "Tab link -> Markdown"
+    "message": "Tab link → Markdown"
   }
 , "TAB_URL_TO_HTML": {
-    "message": "Tab link -> HTML"
+    "message": "Tab link → HTML"
+  }
+, "TAB_URL_TO_BBCODE": {
+    "message": "Tab link → BBCode"
   }
 , "FRAME_URL_TO_PLAIN": {
-    "message": "Frame link -> Plaintext"
+    "message": "Frame link → Plaintext"
   }
 , "FRAME_URL_TO_MARKDOWN": {
-    "message": "Frame link -> Markdown"
+    "message": "Frame link → Markdown"
   }
 , "FRAME_URL_TO_HTML": {
-    "message": "Frame link -> HTML"
+    "message": "Frame link → HTML"
+  }
+, "FRAME_URL_TO_BBCODE": {
+    "message": "Frame link → BBCode"
   }
 , "LINK_TO_MARKDOWN": {
-    "message": "Link -> Markdown"
+    "message": "Link → Markdown"
   }
 , "LINK_TO_HTML": {
-    "message": "Link -> HTML"
+    "message": "Link → HTML"
+  }
+, "LINK_TO_BBCODE": {
+    "message": "Link → BBCode"
   }
 , "SELECTION_TO_MARKDOWN": {
-    "message": "Selection -> Markdown"
-  }
-, "SELECTION_TO_MARKDOWN_WITHOUT_HTML": {
-    "message": "Selection -> Markdown(no HTML tags)"
+    "message": "Selection → Markdown"
   }
 , "SELECTION_TO_HTML": {
-    "message": "Selection -> HTML"
+    "message": "Selection → HTML"
   }
-, "SELECTION_TO_HTML_LINK_ONLY": {
-    "message": "Selection -> HTML(only links)"
+, "SELECTION_TO_HTML_ONLY_A_TAG": {
+    "message": "Selection → HTML(only <a> tag)"
   }
-, "SELECTION_TO_HTML_CLEAN_ATTR": {
-    "message": "Selection -> HTML(clean attributes)"
+, "SELECTION_TO_HTML_NO_ATTR": {
+    "message": "Selection → HTML(no attributes)"
+  }
+, "SELECTION_TO_BBCODE": {
+    "message": "Selection → BBCode"
   }
 , "SELECTION_TO_PLAIN": {
-    "message": "Selection -> Plaintext"
+    "message": "Selection → Plaintext"
+  }
+, "SELECTION_TO_PLAIN_TRIMMED": {
+    "message": "Selection → Plaintext(trimmed)"
   }
 , "SELECTION_TO_RAW_STRING": {
-    "message": "Selection -> Raw strings"
+    "message": "Selection → Raw strings"
   }
 , "IMAGE_TO_MARKDOWN": {
-    "message": "Image -> Markdown"
+    "message": "Image → Markdown"
   }
 , "IMAGE_TO_MARKDOWN_DATA_URI_JPEG": {
-    "message": "Image -> Markdown(DataURI jpeg)"
+    "message": "Image → Markdown(DataURI jpeg)"
   }
 , "IMAGE_TO_MARKDOWN_DATA_URI_PNG": {
-    "message": "Image -> Markdown(DataURI png)"
+    "message": "Image → Markdown(DataURI png)"
   }
 , "IMAGE_TO_MARKDOWN_DATA_URI_WEBP": {
-    "message": "Image -> Markdown(DataURI webp)"
+    "message": "Image → Markdown(DataURI webp)"
   }
 , "IMAGE_TO_HTML": {
-    "message": "Image -> HTML"
+    "message": "Image → HTML"
   }
 , "IMAGE_TO_HTML_DATA_URI_JPEG": {
-    "message": "Image -> HTML(DataURI jpeg)"
+    "message": "Image → HTML(DataURI jpeg)"
   }
 , "IMAGE_TO_HTML_DATA_URI_PNG": {
-    "message": "Image -> HTML(DataURI png)"
+    "message": "Image → HTML(DataURI png)"
   }
 , "IMAGE_TO_HTML_DATA_URI_WEBP": {
-    "message": "Image -> HTML(DataURI webp)"
+    "message": "Image → HTML(DataURI webp)"
+  }
+, "IMAGE_TO_BBCODE": {
+    "message": "Image → BBCode"
   }
 , "IMAGE_TO_DATA_URI_RAW": {
-    "message": "Image -> DataURI(no conversion, maybe slow and huge)"
+    "message": "Image → DataURI(original format)"
   }
 , "IMAGE_TO_DATA_URI_JPEG": {
-    "message": "Image -> DataURI(jpeg)"
+    "message": "Image → DataURI(jpeg)"
   }
 , "IMAGE_TO_DATA_URI_PNG": {
-    "message": "Image -> DataURI(png)"
+    "message": "Image → DataURI(png)"
   }
 , "IMAGE_TO_DATA_URI_WEBP": {
-    "message": "Image -> DataURI(webp)"
+    "message": "Image → DataURI(webp)"
   }
 , "AUDIO_TO_HTML": {
-    "message": "Audio -> HTML"
+    "message": "Audio → HTML"
   }
 , "VIDEO_TO_HTML": {
-    "message": "Video -> HTML"
+    "message": "Video → HTML"
   }
 }

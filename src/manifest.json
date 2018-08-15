@@ -1,7 +1,7 @@
 {
   "name": "__MSG_extensionName__"
 , "author": "BlackGlory"
-, "version": "2.3.0"
+, "version": "2.4.0"
 , "manifest_version": 2
 , "default_locale": "en"
 , "description": "__MSG_extensionDescription__"
@@ -14,7 +14,7 @@
   }
 , "commands": {
     "TAB_URL_TO_PLAIN": {
-      "description": "__MSG_TAB_URL_TO_PLAIN__"      
+      "description": "__MSG_TAB_URL_TO_PLAIN__"
     }
   , "TAB_URL_TO_MARKDOWN": {
       "description": "__MSG_TAB_URL_TO_MARKDOWN__"
@@ -22,23 +22,29 @@
   , "TAB_URL_TO_HTML": {
       "description": "__MSG_TAB_URL_TO_HTML__"
     }
+  , "TAB_URL_TO_BBCODE": {
+      "description": "__MSG_TAB_URL_TO_BBCODE__"
+    }
   , "SELECTION_TO_MARKDOWN": {
       "description": "__MSG_SELECTION_TO_MARKDOWN__"
-    }
-  , "SELECTION_TO_MARKDOWN_WITHOUT_HTML": {
-      "description": "__MSG_SELECTION_TO_MARKDOWN_WITHOUT_HTML__"
     }
   , "SELECTION_TO_HTML": {
       "description": "__MSG_SELECTION_TO_HTML__"
     }
-  , "SELECTION_TO_HTML_LINK_ONLY": {
-      "description": "__MSG_SELECTION_TO_HTML_LINK_ONLY__"
+  , "SELECTION_TO_HTML_ONLY_A_TAG": {
+      "description": "__MSG_SELECTION_TO_HTML_ONLY_A_TAG__"
     }
-  , "SELECTION_TO_HTML_CLEAN_ATTR": {
-      "description": "__MSG_SELECTION_TO_HTML_CLEAN_ATTR__"
+  , "SELECTION_TO_HTML_NO_ATTR": {
+      "description": "__MSG_SELECTION_TO_HTML_NO_ATTR__"
+    }
+  , "SELECTION_TO_BBCODE": {
+      "description": "__MSG_SELECTION_TO_BBCODE__"
     }
   , "SELECTION_TO_PLAIN": {
       "description": "__MSG_SELECTION_TO_PLAIN__"
+    }
+  , "SELECTION_TO_PLAIN_TRIMMED": {
+      "description": "__MSG_SELECTION_TO_PLAIN_TRIMMED__"
     }
   , "SELECTION_TO_RAW_STRING": {
       "description": "__MSG_SELECTION_TO_RAW_STRING__"
@@ -48,7 +54,7 @@
     "matches": ["<all_urls>"]
   , "match_about_blank": true
   , "all_frames": true
-  , "js": ["browser-polyfill.min.js", "extension-copycat.js"]
+  , "js": ["browser-polyfill.min.js", "copycat.js"]
   , "run_at": "document_end"
   }]
 , "background": {

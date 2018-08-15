@@ -17,29 +17,33 @@ Copy content from web powerful than ever before.
 - [x] Copy tab link as
   - [x] Plaintext
   - [x] Markdown
+  - [x] BBCode
   - [x] HTML
 - [x] Copy frame link as
   - [x] Plaintext
   - [x] Markdown
+  - [x] BBCode
   - [x] HTML
 - [x] Copy link as
   - [x] Markdown
+  - [x] BBCode
   - [x] HTML
 - [x] Copy selection as
   - [x] Plaintext
   - [x] Raw strings
-  - [x] HTML
-  - [x] HTML only links
-  - [x] HTML with clean attributes
   - [x] Markdown
-  - [x] Markdown without HTML tags
-- [x] Copy image as
+  - [x] BBCode
   - [x] HTML
-  - [x] HTML with DataURI jpeg, png, webp\*)
+  - [x] HTML only \<a\> tag
+  - [x] HTML no attributes
+- [x] Copy image as
   - [x] Markdown
   - [x] Markdown with DataURI jpeg, png, webp\*)
+  - [x] HTML
+  - [x] HTML with DataURI jpeg, png, webp\*)
   - [x] DataURI(Original image without conversion, slow and huge)
   - [x] DataURI with jpeg, png, webp\*)
+  - [x] BBCode
 - [x] Copy browser native audio/video as HTML
 
 \* *WebP format is Chromium(Chrome, Opera, Vivaldi) only*

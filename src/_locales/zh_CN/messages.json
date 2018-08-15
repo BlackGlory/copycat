@@ -14,6 +14,12 @@
 , "Options_AbsoluteURL": {
     "message": "总是使用绝对 URL"
   }
+, "Options_RelativeURL": {
+    "message": "总是使用相对 URL(如果可能的话)"
+  }
+, "Options_RootRelativeURL": {
+    "message": "总是使用相对根目录的 URL(如果可能的话)"
+  }
 , "Options_OriginalURL": {
     "message": "原始 URL"
   }
@@ -21,90 +27,105 @@
     "message": "Markdown 风格"
   }
 , "TAB_URL_TO_PLAIN": {
-    "message": "标签页链接 -> 纯文本"
+    "message": "标签页链接 → 纯文本"
   }
 , "TAB_URL_TO_MARKDOWN": {
-    "message": "标签页链接 -> Markdown"
+    "message": "标签页链接 → Markdown"
   }
 , "TAB_URL_TO_HTML": {
-    "message": "标签页链接 -> HTML"
+    "message": "标签页链接 → HTML"
+  }
+, "TAB_URL_TO_BBCODE": {
+    "message": "标签页链接 → BBCode"
   }
 , "FRAME_URL_TO_PLAIN": {
-    "message": "框架链接 -> 纯文本"
+    "message": "框架链接 → 纯文本"
   }
 , "FRAME_URL_TO_MARKDOWN": {
-    "message": "框架链接 -> Markdown"
+    "message": "框架链接 → Markdown"
   }
 , "FRAME_URL_TO_HTML": {
-    "message": "框架链接 -> HTML"
+    "message": "框架链接 → HTML"
+  }
+, "FRAME_URL_TO_BBCODE": {
+    "message": "框架链接 → BBCode"
   }
 , "LINK_TO_MARKDOWN": {
-    "message": "链接 -> Markdown"
+    "message": "链接 → Markdown"
   }
 , "LINK_TO_HTML": {
-    "message": "链接 -> HTML"
+    "message": "链接 → HTML"
+  }
+, "LINK_TO_BBCODE": {
+    "message": "链接 → BBCode"
   }
 , "SELECTION_TO_MARKDOWN": {
-    "message": "选中内容 -> Markdown"
-  }
-, "SELECTION_TO_MARKDOWN_WITHOUT_HTML": {
-    "message": "选中内容 -> Markdown(不含HTML标签)"
+    "message": "选中内容 → Markdown"
   }
 , "SELECTION_TO_HTML": {
-    "message": "选中部分 -> HTML"
+    "message": "选中内容 → HTML"
   }
-, "SELECTION_TO_HTML_LINK_ONLY": {
-    "message": "选中部分 -> HTML(仅链接)"
+, "SELECTION_TO_HTML_ONLY_A_TAG": {
+    "message": "选中内容 → HTML(仅<a>标签)"
   }
-, "SELECTION_TO_HTML_CLEAN_ATTR": {
-    "message": "选中部分 -> HTML(干净的属性)"
+, "SELECTION_TO_HTML_NO_ATTR": {
+    "message": "选中内容 → HTML(去除标签属性)"
+  }
+, "SELECTION_TO_BBCODE": {
+    "message": "选中内容 → BBCode"
   }
 , "SELECTION_TO_PLAIN": {
-    "message": "选中部分 -> 纯文本"
+    "message": "选中内容 → 纯文本"
+  }
+, "SELECTION_TO_PLAIN_TRIMMED": {
+    "message": "选中内容 → 纯文本(修剪前后)"
   }
 , "SELECTION_TO_RAW_STRING": {
-    "message": "选中部分 -> 原始字符串"
+    "message": "选中内容 → 原始字符串"
   }
 , "IMAGE_TO_MARKDOWN": {
-    "message": "图片 -> Markdown"
+    "message": "图片 → Markdown"
   }
 , "IMAGE_TO_MARKDOWN_DATA_URI_JPEG": {
-    "message": "图片 -> Markdown(DataURI jpeg)"
+    "message": "图片 → Markdown(DataURI jpeg)"
   }
 , "IMAGE_TO_MARKDOWN_DATA_URI_PNG": {
-    "message": "图片 -> Markdown(DataURI png)"
+    "message": "图片 → Markdown(DataURI png)"
   }
 , "IMAGE_TO_MARKDOWN_DATA_URI_WEBP": {
-    "message": "图片 -> Markdown(DataURI webp)"
+    "message": "图片 → Markdown(DataURI webp)"
   }
 , "IMAGE_TO_HTML": {
-    "message": "图片 -> HTML"
+    "message": "图片 → HTML"
   }
 , "IMAGE_TO_HTML_DATA_URI_JPEG": {
-    "message": "图片 -> HTML(DataURI jpeg)"
+    "message": "图片 → HTML(DataURI jpeg)"
   }
 , "IMAGE_TO_HTML_DATA_URI_PNG": {
-    "message": "图片 -> HTML(DataURI png)"
+    "message": "图片 → HTML(DataURI png)"
   }
 , "IMAGE_TO_HTML_DATA_URI_WEBP": {
-    "message": "图片 -> HTML(DataURI webp)"
+    "message": "图片 → HTML(DataURI webp)"
+  }
+, "IMAGE_TO_BBCODE": {
+    "message": "图片 → BBCode"
   }
 , "IMAGE_TO_DATA_URI_RAW": {
-    "message": "图片 -> DataURI(图片未经转换, 可能效率不高且结果十分巨大)"
+    "message": "图片 → DataURI(原始格式)"
   }
 , "IMAGE_TO_DATA_URI_JPEG": {
-    "message": "图片 -> DataURI(jpeg)"
+    "message": "图片 → DataURI(jpeg)"
   }
 , "IMAGE_TO_DATA_URI_PNG": {
-    "message": "图片 -> DataURI(png)"
+    "message": "图片 → DataURI(png)"
   }
 , "IMAGE_TO_DATA_URI_WEBP": {
-    "message": "图片 -> DataURI(webp)"
+    "message": "图片 → DataURI(webp)"
   }
 , "AUDIO_TO_HTML": {
-    "message": "音频 -> HTML"
+    "message": "音频 → HTML"
   }
 , "VIDEO_TO_HTML": {
-    "message": "视频 -> HTML"
+    "message": "视频 → HTML"
   }
 }

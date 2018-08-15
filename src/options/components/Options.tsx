@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import produce from 'immer'
-import { loadConfigure, saveConfigure, Config } from '../utils'
+import { loadConfigure, saveConfigure, Config } from '../../configure'
 
 interface OptionsState {
   selector: Config
@@ -27,14 +27,14 @@ export default class Options extends React.Component<{}, OptionsState> {
   }
 
   componentDidMount() {
-    this.setState(produce((draft: OptionsState) => {
+    this.setState(produce<OptionsState>(draft => {
       draft.selector = loadConfigure()
     }))
   }
 
   selectChangeHandler = (field: keyof Config) => (e: any) => {
     const selected = e.target.value
-    this.setState(produce((draft: OptionsState) => {
+    this.setState(produce<OptionsState>(draft => {
       draft.selector[field] = selected
     }), () => saveConfigure(this.state.selector))
   }
@@ -50,12 +50,14 @@ export default class Options extends React.Component<{}, OptionsState> {
             <td>
               <Select value={ selector.urlFormat } onChange={ this.selectChangeHandler('urlFormat') }>
                 <option value='absolute'>{ browser.i18n.getMessage('Options_AbsoluteURL') }</option>
+                <option value='relative'>{ browser.i18n.getMessage('Options_RelativeURL') }</option>
+                <option value='root-relative'>{ browser.i18n.getMessage('Options_RootRelativeURL') }</option>
                 <option value='original'>{ browser.i18n.getMessage('Options_OriginalURL') }</option>
               </Select>
             </td>
           </tr>
           <tr>
-            <td><Label>{ browser.i18n.getMessage("Options_MarkdownFlavor") }</Label></td>
+            <td><Label>{ browser.i18n.getMessage('Options_MarkdownFlavor') }</Label></td>
             <td>
               <Select value={ selector.markdownFlavor } onChange={ this.selectChangeHandler('markdownFlavor') }>
                 <option value='gfm'>{ browser.i18n.getMessage('Options_GitHubFlavoredMarkdown') }</option>
