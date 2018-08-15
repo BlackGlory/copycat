@@ -34,15 +34,15 @@ Copy content from web powerful than ever before.
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
-  - [x] HTML only \<a\> tag
-  - [x] HTML no attributes
+  - [x] HTML(only \<a\> tag)
+  - [x] HTML(no attributes)
 - [x] Copy image as
   - [x] Markdown
-  - [x] Markdown with DataURI jpeg, png, webp\*)
+  - [x] Markdown(DataURI jpeg, png, webp\*)
   - [x] HTML
-  - [x] HTML with DataURI jpeg, png, webp\*)
-  - [x] DataURI(Original image without conversion, slow and huge)
-  - [x] DataURI with jpeg, png, webp\*)
+  - [x] HTML(DataURI jpeg, png, webp\*)
+  - [x] DataURI(original format)
+  - [x] DataURI(jpeg, png, webp\*)
   - [x] BBCode
 - [x] Copy browser native audio/video as HTML
 
