@@ -6,7 +6,6 @@
   , "strict": true
   , "removeComments": true
   , "sourceMap": true
-  , "alwaysStrict": true
   , "jsx": "react"
   }
 , "exclude": [
