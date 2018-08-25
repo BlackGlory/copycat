@@ -155,9 +155,7 @@ export default {
         convertMarkdownToBeautifyMarkdown(
           convertHtmlToMarkdown(
             convertHtmlToBeautifyHTML(
-              convertTextToDecodeEntitiesText(
-                convertHtmlToSafeHTML(html)
-              )
+              convertHtmlToSafeHTML(html)
             )
           )
         )
@@ -174,9 +172,7 @@ export default {
         const html = await getActiveElementContent(tab.id, info.frameId)
         const title =
         convertHtmlToBeautifyHTML(
-          convertTextToDecodeEntitiesText(
-            convertHtmlToSafeHTML(html)
-          )
+          convertHtmlToSafeHTML(html)
         )
         return convertUrlToLinkHTML(url, title || info.linkText)
       } else {
@@ -192,10 +188,8 @@ export default {
         const title =
         convertHtmlToBBCode(
           convertHtmlToBeautifyHTML(
-            convertTextToDecodeEntitiesText(
-              convertHtmlToSafeHTML(
-                html
-              )
+            convertHtmlToSafeHTML(
+              html
             )
           )
         )
@@ -325,11 +319,9 @@ export default {
         convertMarkdownToBeautifyMarkdown(
           convertHtmlToMarkdown(
             convertHtmlToBeautifyHTML(
-              convertTextToDecodeEntitiesText(
-                convertHtmlToFormattedLinkHTML(
-                  convertHtmlToSafeHTML(html)
-                , baseUrl
-                )
+              convertHtmlToFormattedLinkHTML(
+                convertHtmlToSafeHTML(html)
+              , baseUrl
               )
             )
           )
@@ -343,11 +335,9 @@ export default {
       const baseUrl = info.frameUrl || info.pageUrl || tab.url
       return (
         convertHtmlToBeautifyHTML(
-          convertTextToDecodeEntitiesText(
-            convertHtmlToFormattedLinkHTML(
-              convertHtmlToSafeHTML(html)
-            , baseUrl
-            )
+          convertHtmlToFormattedLinkHTML(
+            convertHtmlToSafeHTML(html)
+          , baseUrl
           )
         )
       )
@@ -359,12 +349,10 @@ export default {
       const baseUrl = info.frameUrl || info.pageUrl || tab.url
       return (
         convertHtmlToBeautifyHTML(
-          convertTextToDecodeEntitiesText(
-            convertHtmlToOnlyATagHTML(
-              convertHtmlToFormattedLinkHTML(
-                convertHtmlToSafeHTML(html)
-              , baseUrl
-              )
+          convertHtmlToOnlyATagHTML(
+            convertHtmlToFormattedLinkHTML(
+              convertHtmlToSafeHTML(html)
+            , baseUrl
             )
           )
         )
@@ -376,10 +364,8 @@ export default {
       const html = await getSelectionHTML(tab.id, info.frameId)
       return (
         convertHtmlToBeautifyHTML(
-          convertTextToDecodeEntitiesText(
-            convertHtmlToNoAttrHTML(
-              convertHtmlToSafeHTML(html)
-            )
+          convertHtmlToNoAttrHTML(
+            convertHtmlToSafeHTML(html)
           )
         )
       )
@@ -392,11 +378,9 @@ export default {
       return (
         convertHtmlToBBCode(
           convertHtmlToBeautifyHTML(
-            convertTextToDecodeEntitiesText(
-              convertHtmlToFormattedLinkHTML(
-                convertHtmlToSafeHTML(html)
-              , baseUrl
-              )
+            convertHtmlToFormattedLinkHTML(
+              convertHtmlToSafeHTML(html)
+            , baseUrl
             )
           )
         )
