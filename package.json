@@ -15,7 +15,7 @@
   "dependencies": {
     "ent": "^2.2.0",
     "html2bbcode": "^1.2.6",
-    "immer": "^1.5.0",
+    "immer": "^8.0.1",
     "js-beautify": "^1.7.5",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
