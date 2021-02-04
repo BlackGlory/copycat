@@ -14,20 +14,25 @@ Copy content from web powerful than ever before.
 
 ## Features
 
+- [ ] 累加式剪贴板(开启, 关闭)
+- [ ] 将多行缩为一行复制(在IETF的文档和电子邮件格式里, 会出现这种将一句话拆分成多行的文本形式)
 - [x] Copy tab link as
   - [x] Plaintext
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
+  - [ ] Org-mode
 - [x] Copy frame link as
   - [x] Plaintext
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
+  - [ ] Org-Mode
 - [x] Copy link as
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
+  - [ ] Org-mode
 - [x] Copy selection as
   - [x] Plaintext
   - [x] Raw strings
@@ -36,6 +41,7 @@ Copy content from web powerful than ever before.
   - [x] HTML
   - [x] HTML(only \<a\> tag)
   - [x] HTML(no attributes)
+  - [ ] JSON string
 - [x] Copy image as
   - [x] Markdown
   - [x] Markdown(DataURI jpeg, png, webp\*)
@@ -54,10 +60,9 @@ Copy content from web powerful than ever before.
 - [x] [CommonMark](http://commonmark.org/)
 - [x] [Ghost's Markdown](https://help.ghost.org/article/4-markdown-guide)
 
-## Keyboard shortcuts
+## Extension shortcuts
 
-Copy tab link and selection can be set as keyboard shortcuts.
+Copy tab link and selection can be set as extension shortcuts.
 
-Chrome shortcuts page: `chrome://extensions/shortcuts`
-
-Unfortunately, I couldn't find the official shortcut key customization page in Firefox. Maybe users can use other extensions to implement shortcut key binding. Copycat will not provide related UI for the time being.
+Manage Chrome shortcuts: `chrome://extensions/shortcuts`
+Manage Firefox shortcuts: `about:addons` -> Extensions -> Settings -> Manage Extension Shortcuts
