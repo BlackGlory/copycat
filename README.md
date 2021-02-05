@@ -8,14 +8,10 @@ Copy content from web powerful than ever before.
 
 - [x] [Chrome](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg)
 - [x] [Firefox](https://addons.mozilla.org/firefox/addon/extension-copycat/)
-- [x] Opera: Code review too slow, never publish again, please manually install.
-- [x] [Vivaldi](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg)
-- [ ] Edge: Microsoft Edge is not compatible with [mozilla/webextension-polyfill](https://github.com/mozilla/webextension-polyfill) because of [Issue #3](https://github.com/mozilla/webextension-polyfill/issues/3), so I had to give up porting.
+- [ ] Edge
 
 ## Features
 
-- [ ] 累加式剪贴板(开启, 关闭)
-- [ ] 将多行缩为一行复制(在IETF的文档和电子邮件格式里, 会出现这种将一句话拆分成多行的文本形式)
 - [x] Copy tab link as
   - [x] Plaintext
   - [x] Markdown
