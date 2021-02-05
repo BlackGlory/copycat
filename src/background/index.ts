@@ -9,7 +9,7 @@ async function writeTextToClipboard(text: string) {
     textarea.textContent = text
     document.body.appendChild(textarea)
     textarea.select()
-    document.execCommand('Copy', false, null)
+    document.execCommand('Copy', false)
     document.body.removeChild(textarea)
   }
 }

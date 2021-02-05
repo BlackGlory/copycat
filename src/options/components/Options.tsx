@@ -35,6 +35,7 @@ export default class Options extends React.Component<{}, OptionsState> {
   selectChangeHandler = (field: keyof Config) => (e: any) => {
     const selected = e.target.value
     this.setState(produce<OptionsState>(draft => {
+      // @ts-ignore
       draft.selector[field] = selected
     }), () => saveConfigure(this.state.selector))
   }
