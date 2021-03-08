@@ -1,3 +1,4 @@
+import { go } from '@blackglory/go'
 import handlers, { ContextMenusClickHandler, CommandComplicateHandler } from './handlers'
 import menus from './menus'
 
@@ -63,8 +64,7 @@ browser.commands.onCommand.addListener(async command => {
   }
 })
 
-;
-(async () => {
+go(async () => {
   // Register menus
   await browser.contextMenus.removeAll()
   for (const [contexts, items] of menus.entries()) {
@@ -77,4 +77,4 @@ browser.commands.onCommand.addListener(async command => {
       browser.contextMenus.create(item as any)
     }
   }
-})()
+})

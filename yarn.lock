@@ -23,6 +23,11 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
+"@blackglory/go@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@blackglory/go/-/go-0.1.0.tgz#a145a98d17593549a91ed79766230f5c7719e1de"
+  integrity sha512-p6kO5ThjCLRg3giGiaYhYcMZeA2akHAcCzjW7D5zz2YTJQ2JDKNzSk4WkKEFSpSiFcMzeNABN+tz1tasn4D2tg==
+
 "@types/ent@^2.2.1":
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/@types/ent/-/ent-2.2.3.tgz#fdf88ec7d0b6d441bd523eb670d5900b1eff2075"

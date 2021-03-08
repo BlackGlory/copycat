@@ -13,6 +13,7 @@
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "dependencies": {
+    "@blackglory/go": "^0.1.0",
     "ent": "^2.2.0",
     "html2bbcode": "^1.2.6",
     "immer": "^1.5.0",
