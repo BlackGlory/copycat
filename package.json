@@ -1,6 +1,5 @@
 {
   "name": "copycat",
-  "version": "2.4.4",
   "description": "Copy content from web powerful than ever before.",
   "scripts": {
     "precommit": "yarn lint && yarn test",
