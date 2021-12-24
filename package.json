@@ -30,7 +30,7 @@
     "@types/jest": "^23.3.1",
     "@types/js-beautify": "^0.0.31",
     "@types/jsdom": "^11.0.6",
-    "@types/react": "^16.4.11",
+    "@types/react": "^17.0.38",
     "@types/react-dom": "^16.0.7",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
