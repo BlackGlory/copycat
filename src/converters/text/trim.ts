@@ -3,5 +3,3 @@ export function convertTextToTrimmedText(text: string): string {
     .replace(/^\s+/, '')
     .replace(/\s+$/, '')
 }
-
-export default convertTextToTrimmedText

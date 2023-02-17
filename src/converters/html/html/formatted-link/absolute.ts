@@ -1,13 +1,4 @@
-import { convertUrlToAbsoluteURL } from '../../../url/formatted/absolute'
-
-function isRelativeUrl(url: string) {
-  try {
-    const obj = new URL(url)
-    return false
-  } catch (e) {
-    return true
-  }
-}
+import { convertUrlToAbsoluteURL } from '@converters/url/formatted/absolute'
 
 export function convertHtmlToAbsoluteLinkHTML(html: string, baseUrl: string): string {
   const template = document.createElement('template')
@@ -30,4 +21,11 @@ export function convertHtmlToAbsoluteLinkHTML(html: string, baseUrl: string): st
   return template.innerHTML
 }
 
-export default convertHtmlToAbsoluteLinkHTML
+function isRelativeUrl(url: string) {
+  try {
+    const obj = new URL(url)
+    return false
+  } catch (e) {
+    return true
+  }
+}

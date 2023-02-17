@@ -1,9 +1,12 @@
-import { loadConfigure } from '../../../../configure'
+import { loadConfigure } from '@src/configure'
 import { convertHtmlToAbsoluteLinkHTML } from './absolute'
 import { convertHtmlToRelativeLinkHTML } from './relative'
 import { convertHtmlToRootRelativeLinkHTML } from './root-relative'
 
-export function convertHtmlToFormattedLinkHTML(html: string, baseUrl: string): string {
+export function convertHtmlToFormattedLinkHTML(
+  html: string
+, baseUrl: string
+): string {
   const { urlFormat } = loadConfigure()
   switch (urlFormat) {
     case 'absolute':
@@ -16,7 +19,3 @@ export function convertHtmlToFormattedLinkHTML(html: string, baseUrl: string): s
       return html
   }
 }
-
-export * from './absolute'
-export * from './relative'
-export * from './root-relative'

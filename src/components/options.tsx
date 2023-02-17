@@ -1,7 +1,8 @@
-import * as React from 'react'
+import React from 'react'
+import browser from 'webextension-polyfill'
 import styled from 'styled-components'
 import produce from 'immer'
-import { loadConfigure, saveConfigure, Config } from '../../configure'
+import { loadConfigure, saveConfigure, Config } from '@src/configure'
 
 interface OptionsState {
   selector: Config
@@ -21,7 +22,7 @@ const Select = styled.select`
   width: 100%;
 `
 
-export default class Options extends React.Component<{}, OptionsState> {
+export class Options extends React.Component<Record<string, never>, OptionsState> {
   state: OptionsState = {
     selector: loadConfigure()
   }

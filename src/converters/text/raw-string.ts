@@ -4,8 +4,6 @@ export function convertTextToRawString(text: string): string {
     .replace(/\t/g, String.raw`\t`)
     .replace(/\f/g, String.raw`\f`)
     .replace(/\n/g, String.raw`\n`)
-    .replace(/\'/g, String.raw`\'`)
-    .replace(/\"/g, String.raw`\"`)
+    .replace(/'/g, String.raw`'`)
+    .replace(/"/g, String.raw`"`)
 }
-
-export default convertTextToRawString

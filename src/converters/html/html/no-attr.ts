@@ -10,5 +10,3 @@ export function convertHtmlToNoAttrHTML(html: string): string {
     })
   return template.innerHTML
 }
-
-export default convertHtmlToNoAttrHTML

@@ -1,6 +1,6 @@
-import TurndownService = require('turndown/lib/turndown.cjs')
+import TurndownService, { Options } from 'turndown'
 
-function createTurndownService(options: Turndown.TurndownServiceOptions = {}) {
+function createTurndownService(options: Options = {}) {
   return new TurndownService({
     headingStyle: 'atx'
   , hr: '---'
@@ -14,6 +14,7 @@ function createTurndownService(options: Turndown.TurndownServiceOptions = {}) {
       return content
     }
   }).addRule('strikethrough', {
+    // @ts-ignore
     filter: ['del', 's', 'strike'],
     replacement(content) {
       return '~~' + content + '~~'

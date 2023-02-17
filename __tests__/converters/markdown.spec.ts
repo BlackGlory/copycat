@@ -1,4 +1,4 @@
-import { convertMarkdownToBeautifyMarkdown } from '../../src/converters/markdown'
+import { convertMarkdownToBeautifyMarkdown } from '@converters/markdown/beautify'
 
 test('convertTextToBeautifyText', () => {
   expect(convertMarkdownToBeautifyMarkdown(

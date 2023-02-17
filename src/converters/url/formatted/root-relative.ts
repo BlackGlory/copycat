@@ -1,4 +1,7 @@
-export function convertUrlToRootRelativeURL(url: string, baseUrl: string): string {
+export function convertUrlToRootRelativeURL(
+  url: string
+, baseUrl: string
+): string {
   try {
     const urlObj = new URL(url, baseUrl)
     const baseUrlObj = new URL(baseUrl)
@@ -11,5 +14,3 @@ export function convertUrlToRootRelativeURL(url: string, baseUrl: string): strin
     return url
   }
 }
-
-export default convertUrlToRootRelativeURL

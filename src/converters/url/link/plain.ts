@@ -4,5 +4,3 @@ export function convertUrlToLinkPlain(url: string, text?: string): string {
   }
   return `${ url }`
 }
-
-export default convertUrlToLinkPlain

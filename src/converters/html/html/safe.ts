@@ -6,5 +6,3 @@ export function convertHtmlToSafeHTML(html: string): string {
     .forEach(ele => ele.remove())
   return template.innerHTML
 }
-
-export default convertHtmlToSafeHTML

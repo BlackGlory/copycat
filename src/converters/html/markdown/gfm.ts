@@ -1,7 +1,7 @@
-import TurndownService = require('turndown/lib/turndown.cjs')
+import TurndownService, { Options } from 'turndown'
 import { gfm } from 'turndown-plugin-gfm'
 
-function createTurndownService(options: Turndown.TurndownServiceOptions = {}) {
+function createTurndownService(options: Options = {}) {
   return new TurndownService({
     headingStyle: 'atx'
   , hr: '---'

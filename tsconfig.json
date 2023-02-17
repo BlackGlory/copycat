@@ -1,15 +1,26 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node"
-  , "module": "commonjs"
-  , "target": "esnext"
+    "target": "ES2018"
+  , "module": "ES2015"
+  , "moduleResolution": "Node"
+  , "jsx": "react-jsx"
+  , "allowSyntheticDefaultImports": true
+  , "esModuleInterop": true
   , "strict": true
   , "removeComments": true
-  , "sourceMap": true
-  , "jsx": "react"
+  , "noUnusedLocals": false
+  , "noUnusedParameters": false
+  , "baseUrl": "."
+  , "paths": {
+      "@src/*": ["src/*"]
+    , "@components/*": ["src/components/*"]
+    , "@converters/*": ["src/converters/*"]
+    , "@hooks/*": ["src/hooks/*"]
+    , "@utils/*": ["src/utils/*"]
+    }
   }
-, "exclude": [
-    "dist"
-  , "node_modules"
+, "include": [
+    "src"
+  , "__tests__"
   ]
 }

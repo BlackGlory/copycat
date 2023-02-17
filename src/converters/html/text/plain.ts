@@ -4,5 +4,3 @@ export function convertHtmlToPlainText(html: string): string {
   const fragment = template.content
   return fragment.textContent!
 }
-
-export default convertHtmlToPlainText

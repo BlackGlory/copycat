@@ -1,7 +1,12 @@
-import TurndownService = require('turndown/lib/turndown.cjs')
+import TurndownService, { Options } from 'turndown'
 import { tables, highlightedCodeBlock } from 'turndown-plugin-gfm'
 
-function createTurndownService(options: Turndown.TurndownServiceOptions = {}) {
+export function convertHtmlToGhostMarkdown(html: string): string {
+  const turndownService = createTurndownService()
+  return turndownService.turndown(html)
+}
+
+function createTurndownService(options: Options = {}) {
   return new TurndownService({
     headingStyle: 'atx'
   , hr: '---'
@@ -17,14 +22,10 @@ function createTurndownService(options: Turndown.TurndownServiceOptions = {}) {
   }).use(tables)
     .use(highlightedCodeBlock)
     .addRule('strikethrough', {
+      // @ts-ignore
       filter: ['del', 's', 'strike'],
       replacement(content) {
         return '~~' + content + '~~'
       }
     })
-}
-
-export function convertHtmlToGhostMarkdown(html: string): string {
-  const turndownService = createTurndownService()
-  return turndownService.turndown(html)
 }

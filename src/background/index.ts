@@ -1,4 +1,5 @@
 import { go } from '@blackglory/go'
+import browser from 'webextension-polyfill'
 import handlers, { ContextMenusClickHandler, CommandComplicateHandler } from './handlers'
 import menus from './menus'
 
@@ -15,7 +16,7 @@ async function writeTextToClipboard(text: string) {
   }
 }
 
-async function queryAllInjectableTabs(): Promise<browser.tabs.Tab[]> {
+async function queryAllInjectableTabs(): Promise<browser.Tabs.Tab[]> {
   const invalidList = [
     'about:'
   , 'browser:'
@@ -40,7 +41,7 @@ browser.runtime.onInstalled.addListener(async () => {
           file
         , allFrames: true
         , matchAboutBlank: true
-        , runAt: 'document_end' as browser.extensionTypes.RunAt
+        , runAt: 'document_end' as browser.ExtensionTypes.RunAt
         })
       }
     }

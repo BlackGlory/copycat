@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill'
+
 export type UrlFormat = 'original'|'absolute'|'relative'|'root-relative'
 export type MarkdownFlavor = 'commonmark'|'gfm'|'ghost'
 

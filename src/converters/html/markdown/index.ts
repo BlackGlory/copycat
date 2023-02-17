@@ -1,4 +1,4 @@
-import { loadConfigure } from '../../../configure'
+import { loadConfigure } from '@src/configure'
 import { convertHtmlToCommonmarkMarkdown } from './commonmark'
 import { convertHtmlToGfmMarkdown } from './gfm'
 import { convertHtmlToGhostMarkdown } from './ghost'
@@ -14,7 +14,3 @@ export function convertHtmlToMarkdown(html: string): string {
       return convertHtmlToGhostMarkdown(html)
   }
 }
-
-export * from './commonmark'
-export * from './gfm'
-export * from './ghost'

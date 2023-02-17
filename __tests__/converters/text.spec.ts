@@ -1,8 +1,6 @@
-import {
-  convertTextToRawString
-, convertTextToTrimmedText
-, convertTextToDecodeEntitiesText
-} from '../../src/converters/text'
+import { convertTextToDecodeEntitiesText } from '@converters/text/decode-entities'
+import { convertTextToRawString } from '@converters/text/raw-string'
+import { convertTextToTrimmedText } from '@converters/text/trim'
 
 test('convertTextToRawString', () => {
   expect(convertTextToRawString('\nHello World\n'))

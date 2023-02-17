@@ -1,34 +1,39 @@
-# Copycat [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jdjbiojkklnaeoanimopafmnmhldejbg.svg?maxAge=86400)](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg) [![Mozilla Add-on](https://img.shields.io/amo/v/extension-copycat.svg?maxAge=864000)](https://addons.mozilla.org/firefox/addon/extension-copycat/) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/BlackGlory/copycat/master/LICENSE)
-
-[![Copycat](https://github.com/BlackGlory/copycat/blob/master/src/assets/images/icon-128.png?raw=true)](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg)
+# Copycat
+![copycat-logo]
 
 Copy content from web powerful than ever before.
 
-## Support browsers
+[copycat-logo]: src/assets/images/icon-128.png
 
-- [x] [Chrome](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg)
-- [x] [Firefox](https://addons.mozilla.org/firefox/addon/extension-copycat/)
+## Supported browsers and platforms
+- [x] [Chrome]
+- [x] [Firefox]
 - [ ] Edge
 
-## Features
+[Chrome]: https://chrome.google.com/webstore/detail/jdjbiojkklnaeoanimopafmnmhldejbg)
+[Firefox]: https://addons.mozilla.org/firefox/addon/extension-copycat/
 
+## Features
 - [x] Copy tab link as
   - [x] Plaintext
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
   - [ ] Org-mode
+  - [ ] AsciiDoc
 - [x] Copy frame link as
   - [x] Plaintext
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
   - [ ] Org-Mode
+  - [ ] AsciiDoc
 - [x] Copy link as
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
   - [ ] Org-mode
+  - [ ] AsciiDoc
 - [x] Copy selection as
   - [x] Plaintext
   - [x] Raw strings
@@ -48,17 +53,20 @@ Copy content from web powerful than ever before.
   - [x] BBCode
 - [x] Copy browser native audio/video as HTML
 
-\* *WebP format is Chromium(Chrome, Opera, Vivaldi) only*
+## Supported Markdown flavors
+- [x] [GitHub Flavored Markdown]
+- [x] [CommonMark]
+- [x] [Ghost's Markdown]
 
-## Support Markdown flavors
-
-- [x] [GitHub Flavored Markdown](https://github.github.com/gfm/)
-- [x] [CommonMark](http://commonmark.org/)
-- [x] [Ghost's Markdown](https://help.ghost.org/article/4-markdown-guide)
+[GitHub Flavored Markdown]: https://github.github.com/gfm/
+[CommonMark]: http://commonmark.org/
+[Ghost's Markdown]: https://help.ghost.org/article/4-markdown-guide
 
 ## Extension shortcuts
-
 Copy tab link and selection can be set as extension shortcuts.
 
-Manage Chrome shortcuts: `chrome://extensions/shortcuts`
-Manage Firefox shortcuts: `about:addons` -> Extensions -> Settings -> Manage Extension Shortcuts
+Manage Chrome shortcuts:
+`chrome://extensions/shortcuts`
+
+Manage Firefox shortcuts:
+`about:addons` -> Extensions -> Settings -> Manage Extension Shortcuts

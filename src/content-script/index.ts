@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill'
+
 function getSelectionHTML(): string {
   const userSelection = window.getSelection()
   const range = userSelection!.getRangeAt(0)

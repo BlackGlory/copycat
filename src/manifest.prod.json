@@ -1,0 +1,84 @@
+{
+  "name": "__MSG_extensionName__"
+, "author": "BlackGlory"
+, "version": "2.4.5"
+, "manifest_version": 2
+, "default_locale": "en"
+, "description": "__MSG_extensionDescription__"
+, "icons": {
+    "16": "assets/images/icon-16.png"
+  , "32": "assets/images/icon-32.png"
+  , "48": "assets/images/icon-48.png"
+  , "64": "assets/images/icon-64.png"
+  , "128": "assets/images/icon-128.png"
+  }
+, "commands": {
+    "TAB_URL_TO_PLAIN": {
+      "description": "__MSG_TAB_URL_TO_PLAIN__"
+    }
+  , "TAB_URL_TO_MARKDOWN": {
+      "description": "__MSG_TAB_URL_TO_MARKDOWN__"
+    }
+  , "TAB_URL_TO_HTML": {
+      "description": "__MSG_TAB_URL_TO_HTML__"
+    }
+  , "TAB_URL_TO_BBCODE": {
+      "description": "__MSG_TAB_URL_TO_BBCODE__"
+    }
+  , "SELECTION_TO_MARKDOWN": {
+      "description": "__MSG_SELECTION_TO_MARKDOWN__"
+    }
+  , "SELECTION_TO_HTML": {
+      "description": "__MSG_SELECTION_TO_HTML__"
+    }
+  , "SELECTION_TO_HTML_ONLY_A_TAG": {
+      "description": "__MSG_SELECTION_TO_HTML_ONLY_A_TAG__"
+    }
+  , "SELECTION_TO_HTML_NO_ATTR": {
+      "description": "__MSG_SELECTION_TO_HTML_NO_ATTR__"
+    }
+  , "SELECTION_TO_BBCODE": {
+      "description": "__MSG_SELECTION_TO_BBCODE__"
+    }
+  , "SELECTION_TO_PLAIN": {
+      "description": "__MSG_SELECTION_TO_PLAIN__"
+    }
+  , "SELECTION_TO_PLAIN_TRIMMED": {
+      "description": "__MSG_SELECTION_TO_PLAIN_TRIMMED__"
+    }
+  , "SELECTION_TO_RAW_STRING": {
+      "description": "__MSG_SELECTION_TO_RAW_STRING__"
+    }
+  }
+, "content_scripts": [{
+    "matches": ["<all_urls>"]
+  , "match_about_blank": true
+  , "all_frames": true
+  , "js": ["browser-polyfill.min.js", "copycat.js"]
+  , "run_at": "document_end"
+  }]
+, "background": {
+    "scripts": ["browser-polyfill.min.js", "background.js"]
+  , "persistent": false
+  }
+, "browser_action": {
+    "default_title": "__MSG_extensionBrowserActionTitle__"
+  , "default_popup": "options.html"
+  , "default_icon": {
+      "16": "assets/images/icon-16.png"
+    , "32": "assets/images/icon-32.png"
+    , "48": "assets/images/icon-48.png"
+    , "64": "assets/images/icon-64.png"
+    , "128": "assets/images/icon-128.png"
+    }
+  }
+, "options_ui": {
+    "page": "options.html"
+  , "chrome_style": true
+  }
+, "permissions": [
+    "contextMenus"
+  , "clipboardWrite"
+  , "<all_urls>"
+  ]
+}

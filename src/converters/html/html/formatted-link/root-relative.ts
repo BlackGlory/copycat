@@ -1,4 +1,4 @@
-import { convertUrlToRootRelativeURL } from '../../../url/formatted/root-relative'
+import { convertUrlToRootRelativeURL } from '@converters/url/formatted/root-relative'
 
 export function convertHtmlToRootRelativeLinkHTML(html: string, baseUrl: string): string {
   const template = document.createElement('template')

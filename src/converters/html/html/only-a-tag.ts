@@ -15,5 +15,3 @@ export function convertHtmlToOnlyATagHTML(html: string): string {
   }
   return container.innerHTML
 }
-
-export default convertHtmlToOnlyATagHTML

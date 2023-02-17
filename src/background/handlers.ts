@@ -1,34 +1,10 @@
+import browser from 'webextension-polyfill'
 import {
   getSelectionHTML
 , getSelectionText
 , getActiveElementContent
 , getDocumentTitle
 } from '../content-script/api'
-import {
-  convertUrlToVideoHTML
-, convertUrlToAudioHTML
-, convertUrlToLinkHTML
-, convertUrlToLinkMarkdown
-, convertUrlToLinkBBCode
-, convertUrlToLinkPlain
-, convertUrlToImageHTML
-, convertUrlToImageMarkdown
-, convertUrlToImageBBCode
-, convertUrlToImageDataURI
-, convertUrlToFormattedURL
-, convertHtmlToBeautifyHTML
-, convertHtmlToBBCode
-, convertHtmlToSafeHTML
-, convertHtmlToFormattedLinkHTML
-, convertHtmlToMarkdown
-, convertHtmlToOnlyATagHTML
-, convertHtmlToNoAttrHTML
-, convertHtmlToPlainText
-, convertMarkdownToBeautifyMarkdown
-, convertTextToRawString
-, convertTextToTrimmedText
-, convertTextToDecodeEntitiesText
-} from '../converters'
 import {
   TAB_URL_TO_PLAIN
 , TAB_URL_TO_MARKDOWN
@@ -65,16 +41,39 @@ import {
 , AUDIO_TO_HTML
 , VIDEO_TO_HTML
 } from './symbols'
+import { convertHtmlToBBCode } from '@converters/html/bbcode'
+import { convertUrlToLinkPlain } from '@converters/url/link/plain'
+import { convertUrlToLinkMarkdown } from '@converters/url/link/markdown'
+import { convertUrlToLinkHTML } from '@converters/url/link/html'
+import { convertUrlToLinkBBCode } from '@converters/url/link/bbcode'
+import { convertUrlToFormattedURL } from '@converters/url/formatted'
+import { convertMarkdownToBeautifyMarkdown } from '@converters/markdown/beautify'
+import { convertHtmlToMarkdown } from '@converters/html/markdown'
+import { convertHtmlToBeautifyHTML } from '@converters/html/html/beautify'
+import { convertHtmlToSafeHTML } from '@converters/html/html/safe'
+import { convertUrlToImageMarkdown } from '@converters/url/image/markdown'
+import { convertUrlToImageDataURI } from '@converters/url/image/data-uri'
+import { convertUrlToImageHTML } from '@converters/url/image/html'
+import { convertUrlToImageBBCode } from '@converters/url/image/bbcode'
+import { convertUrlToAudioHTML } from '@converters/url/audio/html'
+import { convertUrlToVideoHTML } from '@converters/url/video/html'
+import { convertHtmlToFormattedLinkHTML } from '@converters/html/html/formatted-link'
+import { convertHtmlToOnlyATagHTML } from '@converters/html/html/only-a-tag'
+import { convertHtmlToNoAttrHTML } from '@converters/html/html/no-attr'
+import { convertTextToTrimmedText } from '@converters/text/trim'
+import { convertTextToRawString } from '@converters/text/raw-string'
 
 function log<T>(v: T) {
   console.log(v)
   return v
 }
 
-export type ContextMenusClickHandler = (info: browser.contextMenus.OnClickData, tab?: browser.tabs.Tab) =>
-  string | void | Promise<string | void>
+export type ContextMenusClickHandler = (
+  info: browser.Menus.OnClickData
+, tab?: browser.Tabs.Tab
+) => string | void | Promise<string | void>
 
-export type CommandComplicateHandler = (info: { [index: string]: any }, tab?: browser.tabs.Tab) =>
+export type CommandComplicateHandler = (info: { [index: string]: any }, tab?: browser.Tabs.Tab) =>
   string | void | Promise<string | void>
 
 interface UniversalHandlers {

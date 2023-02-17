@@ -1,6 +1,9 @@
 type ImageFormat = 'jpeg' | 'webp' | 'png'
 
-export function convertUrlToImageDataURI(url: string, format?: ImageFormat): Promise<string> {
+export function convertUrlToImageDataURI(
+  url: string
+, format?: ImageFormat
+): Promise<string> {
   if (format) {
     return new Promise<string>((resolve, reject) => {
       const img = new Image()
@@ -24,5 +27,3 @@ export function convertUrlToImageDataURI(url: string, format?: ImageFormat): Pro
     })
   }
 }
-
-export default convertUrlToImageDataURI

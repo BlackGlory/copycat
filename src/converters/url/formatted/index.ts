@@ -1,4 +1,4 @@
-import { loadConfigure } from '../../../configure'
+import { loadConfigure } from '@src/configure'
 import { convertUrlToAbsoluteURL } from './absolute'
 import { convertUrlToRelativeURL } from './relative'
 import { convertUrlToRootRelativeURL } from './root-relative'
@@ -16,7 +16,3 @@ export function convertUrlToFormattedURL(url: string, baseUrl: string): string {
       return url
   }
 }
-
-export * from './absolute'
-export * from './relative'
-export * from './root-relative'
