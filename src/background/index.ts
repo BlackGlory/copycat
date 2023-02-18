@@ -1,4 +1,4 @@
-import { go } from '@blackglory/go'
+import { go } from '@blackglory/prelude'
 import browser from 'webextension-polyfill'
 import handlers, { ContextMenusClickHandler, CommandComplicateHandler } from './handlers'
 import menus from './menus'

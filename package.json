@@ -46,7 +46,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@blackglory/go": "^1.1.2",
+    "@blackglory/prelude": "^0.3.1",
     "ent": "^2.2.0",
     "html2bbcode": "^1.2.6",
     "immer": "^9.0.19",
