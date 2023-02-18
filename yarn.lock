@@ -2625,6 +2625,18 @@ extra-rand@^0.1.1:
   resolved "https://registry.yarnpkg.com/extra-rand/-/extra-rand-0.1.1.tgz#e75e71ec96eb2f9b47d2a3c6513b3fb042f05a45"
   integrity sha512-sDpJWzuKa1bTrVVG3dkCiNMt93NanphQIWhW4tUS9PDiA0KTZ+fzyS4Idw+7/lH5ZzxtOiHEJEnBWSN4gi8gyA==
 
+extra-react-hooks@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/extra-react-hooks/-/extra-react-hooks-0.4.3.tgz#95ba50fd47f5727af74f68a90b04181d2c20da02"
+  integrity sha512-QUOxAE5Ws1nIAs2t/Nw81n7uZ+SWdvwUFpwHmut2maHf5j96Vf0UfZUDCkJ3FMPHH+3WeWJnTR4iyRgfN48O5w==
+  dependencies:
+    "@blackglory/errors" "^2.4.3"
+    extra-fsm "^0.1.1"
+    extra-utils "^5.0.1"
+    iterable-operator "^2.5.0"
+    justypes "^4.1.0"
+    rxjs "^7.8.0"
+
 extra-timers@^0.2.5:
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/extra-timers/-/extra-timers-0.2.5.tgz#5b0bac06b111cfa1afbc1b991e1362dfe2db4617"
@@ -4809,7 +4821,7 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-rxjs@^7.5.5:
+rxjs@^7.5.5, rxjs@^7.8.0:
   version "7.8.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.0.tgz#90a938862a82888ff4c7359811a595e14e1e09a4"
   integrity sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==
@@ -5466,6 +5478,11 @@ url-parse@^1.5.3:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
+
+use-immer@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/use-immer/-/use-immer-0.8.1.tgz#db7442bdd64ecf826ce274a91aa8cf821945cf0f"
+  integrity sha512-OfTFf1pL+ICjjcLPn9+ZnaJO/Yg4MBzYZtACEe2mZ/W2A5col28PNUnwowOAaBuOogACOK/37TU17KgsIhUpOw==
 
 util-deprecate@^1.0.1:
   version "1.0.2"

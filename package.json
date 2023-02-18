@@ -48,6 +48,7 @@
   "dependencies": {
     "@blackglory/prelude": "^0.3.1",
     "ent": "^2.2.0",
+    "extra-react-hooks": "^0.4.3",
     "html2bbcode": "^1.2.6",
     "immer": "^9.0.19",
     "js-beautify": "^1.14.7",
@@ -57,6 +58,7 @@
     "styled-components": "^5.3.6",
     "turndown": "^7.1.1",
     "turndown-plugin-gfm": "^1.0.2",
+    "use-immer": "^0.8.1",
     "webextension-polyfill": "^0.10.0"
   }
 }

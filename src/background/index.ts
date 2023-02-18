@@ -3,10 +3,10 @@ import browser from 'webextension-polyfill'
 import handlers, { ContextMenusClickHandler, CommandComplicateHandler } from './handlers'
 import menus from './menus'
 
-async function writeTextToClipboard(text: string) {
+async function writeTextToClipboard(text: string): Promise<void> {
   try {
     return await navigator.clipboard.writeText(text)
-  } catch (e) {
+  } catch {
     const textarea = document.createElement('textarea')
     textarea.textContent = text
     document.body.appendChild(textarea)

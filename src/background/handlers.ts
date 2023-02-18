@@ -63,11 +63,6 @@ import { convertHtmlToNoAttrHTML } from '@converters/html/html/no-attr'
 import { convertTextToTrimmedText } from '@converters/text/trim'
 import { convertTextToRawString } from '@converters/text/raw-string'
 
-function log<T>(v: T) {
-  console.log(v)
-  return v
-}
-
 export type ContextMenusClickHandler = (
   info: browser.Menus.OnClickData
 , tab?: browser.Tabs.Tab

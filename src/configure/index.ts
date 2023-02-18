@@ -1,7 +1,15 @@
 import browser from 'webextension-polyfill'
 
-export type UrlFormat = 'original'|'absolute'|'relative'|'root-relative'
-export type MarkdownFlavor = 'commonmark'|'gfm'|'ghost'
+export type UrlFormat =
+| 'original'
+| 'absolute'
+| 'relative'
+| 'root-relative'
+
+export type MarkdownFlavor =
+| 'commonmark'
+| 'gfm'
+| 'ghost'
 
 export interface Config {
   version: string
