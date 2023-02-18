@@ -10,7 +10,7 @@ Copy content from web powerful than ever before.
 - [x] [Firefox]
 - [ ] Edge
 
-[Chrome]: https://chrome.google.com/webstore/detail/jdjbiojkklnaeoanimopafmnmhldejbg)
+[Chrome]: https://chrome.google.com/webstore/detail/jdjbiojkklnaeoanimopafmnmhldejbg
 [Firefox]: https://addons.mozilla.org/firefox/addon/extension-copycat/
 
 ## Features
