@@ -34,32 +34,32 @@ export type CommandComplicateHandler = (
 , tab?: browser.Tabs.Tab
 ) => Awaitable<string | void>
 
-interface UniversalHandlers {
+interface Handlers {
   [menuItemId: string]: ContextMenusClickHandler | CommandComplicateHandler
 }
 
-export const handlers: UniversalHandlers = {
-  ['TAB_URL_TO_PLAIN']: ((info, tab) => {
+export const handlers: Handlers = {
+  ['TAB_URL_TO_PLAIN']: createCommandComplicateHandler((info, tab) => {
     if (tab && tab.url) {
       return convertUrlToLinkPlain(tab.url, tab.title)
     }
-  }) as CommandComplicateHandler
-, ['TAB_URL_TO_MARKDOWN']: ((info, tab) => {
+  })
+, ['TAB_URL_TO_MARKDOWN']: createCommandComplicateHandler((info, tab) => {
     if (tab && tab.url) {
       return convertUrlToLinkMarkdown(tab.url, tab.title)
     }
-  }) as CommandComplicateHandler
-, ['TAB_URL_TO_HTML']: ((info, tab) => {
+  })
+, ['TAB_URL_TO_HTML']: createCommandComplicateHandler((info, tab) => {
     if (tab && tab.url) {
       return convertUrlToLinkHTML(tab.url, tab.title)
     }
-  }) as CommandComplicateHandler
-, ['TAB_URL_TO_BBCODE']: ((info, tab) => {
+  })
+, ['TAB_URL_TO_BBCODE']: createCommandComplicateHandler((info, tab) => {
     if (tab && tab.url) {
       return convertUrlToLinkBBCode(tab.url, tab.title)
     }
-  }) as CommandComplicateHandler
-, ['FRAME_URL_TO_PLAIN']: (async (info, tab) => {
+  })
+, ['FRAME_URL_TO_PLAIN']: createContextMenusClickHandler(async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
         const client = createTabClient<IFrameAPI>({
@@ -74,8 +74,8 @@ export const handlers: UniversalHandlers = {
         return convertUrlToLinkPlain(info.frameUrl)
       }
     }
-  }) as ContextMenusClickHandler
-, ['FRAME_URL_TO_MARKDOWN']: (async (info, tab) => {
+  })
+, ['FRAME_URL_TO_MARKDOWN']: createContextMenusClickHandler(async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
         const client = createTabClient<IFrameAPI>({
@@ -90,8 +90,8 @@ export const handlers: UniversalHandlers = {
         return convertUrlToLinkMarkdown(info.frameUrl)
       }
     }
-  }) as ContextMenusClickHandler
-, ['FRAME_URL_TO_HTML']: (async (info, tab) => {
+  })
+, ['FRAME_URL_TO_HTML']: createContextMenusClickHandler(async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
         const client = createTabClient<IFrameAPI>({
@@ -106,8 +106,8 @@ export const handlers: UniversalHandlers = {
         return convertUrlToLinkHTML(info.frameUrl)
       }
     }
-  }) as ContextMenusClickHandler
-, ['FRAME_URL_TO_BBCODE']: (async (info, tab) => {
+  })
+, ['FRAME_URL_TO_BBCODE']: createContextMenusClickHandler(async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
         const client = createTabClient<IFrameAPI>({
@@ -122,8 +122,8 @@ export const handlers: UniversalHandlers = {
         return convertUrlToLinkBBCode(info.frameUrl)
       }
     }
-  }) as ContextMenusClickHandler
-, ['LINK_TO_MARKDOWN']: (async (info, tab) => {
+  })
+, ['LINK_TO_MARKDOWN']: createContextMenusClickHandler(async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
         const client = createTabClient<IFrameAPI>({
@@ -146,8 +146,8 @@ export const handlers: UniversalHandlers = {
         return convertUrlToLinkMarkdown(info.linkUrl, info.linkText)
       }
     }
-  }) as ContextMenusClickHandler
-, ['LINK_TO_HTML']: (async (info, tab) => {
+  })
+, ['LINK_TO_HTML']: createContextMenusClickHandler(async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
         const client = createTabClient<IFrameAPI>({
@@ -166,8 +166,8 @@ export const handlers: UniversalHandlers = {
         return convertUrlToLinkHTML(info.linkUrl, info.linkText)
       }
     }
-  }) as ContextMenusClickHandler
-, ['LINK_TO_BBCODE']: (async (info, tab) => {
+  })
+, ['LINK_TO_BBCODE']: createContextMenusClickHandler(async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
         const client = createTabClient<IFrameAPI>({
@@ -190,8 +190,8 @@ export const handlers: UniversalHandlers = {
         return convertUrlToLinkBBCode(info.linkUrl, info.linkText)
       }
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_MARKDOWN']: ((info, tab) => {
+  })
+, ['IMAGE_TO_MARKDOWN']: createContextMenusClickHandler((info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
         const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
@@ -200,29 +200,38 @@ export const handlers: UniversalHandlers = {
         return convertUrlToImageMarkdown(info.srcUrl)
       }
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_MARKDOWN_DATA_URI_JPEG']: (async ({ mediaType, srcUrl }) => {
+  })
+, ['IMAGE_TO_MARKDOWN_DATA_URI_JPEG']: createContextMenusClickHandler(async ({
+    mediaType
+  , srcUrl
+  }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageMarkdown(
         await convertUrlToImageDataURI(srcUrl, 'jpeg')
       )
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_MARKDOWN_DATA_URI_PNG']: (async ({ mediaType, srcUrl }) => {
+  })
+, ['IMAGE_TO_MARKDOWN_DATA_URI_PNG']: createContextMenusClickHandler(async ({
+    mediaType
+  , srcUrl
+  }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageMarkdown(
         await convertUrlToImageDataURI(srcUrl, 'png')
       )
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_MARKDOWN_DATA_URI_WEBP']: (async ({ mediaType, srcUrl }) => {
+  })
+, ['IMAGE_TO_MARKDOWN_DATA_URI_WEBP']: createContextMenusClickHandler(async ({
+    mediaType
+  , srcUrl
+  }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageMarkdown(
         await convertUrlToImageDataURI(srcUrl, 'webp')
       )
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_HTML']: ((info, tab) => {
+  })
+, ['IMAGE_TO_HTML']: createContextMenusClickHandler((info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
         const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
@@ -231,29 +240,38 @@ export const handlers: UniversalHandlers = {
         return convertUrlToImageHTML(info.srcUrl)
       }
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_HTML_DATA_URI_JPEG']: (async ({ mediaType, srcUrl }) => {
+  })
+, ['IMAGE_TO_HTML_DATA_URI_JPEG']: createContextMenusClickHandler(async ({
+    mediaType
+  , srcUrl
+  }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageHTML(
         await convertUrlToImageDataURI(srcUrl, 'jpeg')
       )
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_HTML_DATA_URI_PNG']: (async ({ mediaType, srcUrl }) => {
+  })
+, ['IMAGE_TO_HTML_DATA_URI_PNG']: createContextMenusClickHandler(async ({
+    mediaType
+  , srcUrl
+  }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageHTML(
         await convertUrlToImageDataURI(srcUrl, 'png')
       )
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_HTML_DATA_URI_WEBP']: (async ({ mediaType, srcUrl }) => {
+  })
+, ['IMAGE_TO_HTML_DATA_URI_WEBP']: createContextMenusClickHandler(async ({
+    mediaType
+  , srcUrl
+  }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageHTML(
         await convertUrlToImageDataURI(srcUrl, 'webp')
       )
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_BBCODE']: (async (info, tab) => {
+  })
+, ['IMAGE_TO_BBCODE']: createContextMenusClickHandler(async (info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
         const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
@@ -262,28 +280,40 @@ export const handlers: UniversalHandlers = {
         return convertUrlToImageBBCode(info.srcUrl)
       }
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_DATA_URI_RAW']: (async ({ mediaType, srcUrl }, tab) => {
+  })
+, ['IMAGE_TO_DATA_URI_RAW']: createContextMenusClickHandler(async (
+    { mediaType, srcUrl }
+  , tab
+  ) => {
     if (mediaType === 'image' && srcUrl) {
       return await convertUrlToImageDataURI(srcUrl)
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_DATA_URI_JPEG']: (async ({ mediaType, srcUrl }) => {
+  })
+, ['IMAGE_TO_DATA_URI_JPEG']: createContextMenusClickHandler(async ({
+    mediaType
+  , srcUrl
+  }) => {
     if (mediaType === 'image' && srcUrl) {
       return await convertUrlToImageDataURI(srcUrl, 'jpeg')
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_DATA_URI_PNG']: (async ({ mediaType, srcUrl }) => {
+  })
+, ['IMAGE_TO_DATA_URI_PNG']: createContextMenusClickHandler(async ({
+    mediaType
+  , srcUrl
+  }) => {
     if (mediaType === 'image' && srcUrl) {
       return await convertUrlToImageDataURI(srcUrl, 'png')
     }
-  }) as ContextMenusClickHandler
-, ['IMAGE_TO_DATA_URI_WEBP']: (async ({ mediaType, srcUrl }) => {
+  })
+, ['IMAGE_TO_DATA_URI_WEBP']: createContextMenusClickHandler(async ({
+    mediaType
+  , srcUrl
+  }) => {
     if (mediaType === 'image' && srcUrl) {
       return await convertUrlToImageDataURI(srcUrl, 'webp')
     }
-  }) as ContextMenusClickHandler
-, ['AUDIO_TO_HTML']: ((info, tab) => {
+  })
+, ['AUDIO_TO_HTML']: createContextMenusClickHandler((info, tab) => {
     if (info.mediaType === 'audio' && info.srcUrl) {
       if (tab && tab.url) {
         const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
@@ -292,8 +322,8 @@ export const handlers: UniversalHandlers = {
         return convertUrlToAudioHTML(info.srcUrl)
       }
     }
-  }) as ContextMenusClickHandler
-, ['VIDEO_TO_HTML']: ((info, tab) => {
+  })
+, ['VIDEO_TO_HTML']: createContextMenusClickHandler((info, tab) => {
     if (info.mediaType === 'video' && info.srcUrl) {
       if (tab && tab.url) {
         const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
@@ -302,8 +332,8 @@ export const handlers: UniversalHandlers = {
         return convertUrlToVideoHTML(info.srcUrl)
       }
     }
-  }) as ContextMenusClickHandler
-, ['SELECTION_TO_MARKDOWN']: (async (info, tab) => {
+  })
+, ['SELECTION_TO_MARKDOWN']: createCommandComplicateHandler(async (info, tab) => {
     if (tab && tab.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -325,8 +355,8 @@ export const handlers: UniversalHandlers = {
         )
       )
     }
-  }) as CommandComplicateHandler
-, ['SELECTION_TO_HTML']: (async (info, tab) => {
+  })
+, ['SELECTION_TO_HTML']: createCommandComplicateHandler(async (info, tab) => {
     if (tab && tab.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -344,8 +374,11 @@ export const handlers: UniversalHandlers = {
         )
       )
     }
-  }) as CommandComplicateHandler
-, ['SELECTION_TO_HTML_ONLY_A_TAG']: (async (info, tab) => {
+  })
+, ['SELECTION_TO_HTML_ONLY_A_TAG']: createCommandComplicateHandler(async (
+    info
+  , tab
+  ) => {
     if (tab && tab.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -365,8 +398,8 @@ export const handlers: UniversalHandlers = {
         )
       )
     }
-  }) as CommandComplicateHandler
-, ['SELECTION_TO_HTML_NO_ATTR']: (async (info, tab) => {
+  })
+, ['SELECTION_TO_HTML_NO_ATTR']: createCommandComplicateHandler(async (info, tab) => {
     if (tab && tab.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -382,8 +415,8 @@ export const handlers: UniversalHandlers = {
         )
       )
     }
-  }) as CommandComplicateHandler
-, ['SELECTION_TO_BBCODE']: (async (info, tab) => {
+  })
+, ['SELECTION_TO_BBCODE']: createCommandComplicateHandler(async (info, tab) => {
     if (tab && tab.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -403,8 +436,8 @@ export const handlers: UniversalHandlers = {
         )
       )
     }
-  }) as CommandComplicateHandler
-, ['SELECTION_TO_PLAIN']: (async (info, tab) => {
+  })
+, ['SELECTION_TO_PLAIN']: createCommandComplicateHandler(async (info, tab) => {
     if (tab && tab.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -413,8 +446,8 @@ export const handlers: UniversalHandlers = {
 
       return await client.getSelectionText()
     }
-  }) as CommandComplicateHandler
-, ['SELECTION_TO_PLAIN_TRIMMED']: (async (info, tab) => {
+  })
+, ['SELECTION_TO_PLAIN_TRIMMED']: createCommandComplicateHandler(async (info, tab) => {
     if (tab && tab.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -424,8 +457,8 @@ export const handlers: UniversalHandlers = {
       const text = await client.getSelectionText()
       return convertTextToTrimmedText(text)
     }
-  }) as CommandComplicateHandler
-, ['SELECTION_TO_RAW_STRING']: (async (info, tab) => {
+  })
+, ['SELECTION_TO_RAW_STRING']: createCommandComplicateHandler(async (info, tab) => {
     if (tab && tab.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -435,5 +468,17 @@ export const handlers: UniversalHandlers = {
       const text = await client.getSelectionText()
       return convertTextToRawString(text)
     }
-  }) as CommandComplicateHandler
+  })
+}
+
+function createContextMenusClickHandler(
+  handler: ContextMenusClickHandler
+): ContextMenusClickHandler {
+  return handler
+}
+
+function createCommandComplicateHandler(
+  handler: CommandComplicateHandler
+): CommandComplicateHandler {
+  return handler
 }
