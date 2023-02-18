@@ -1,7 +1,7 @@
 import { convertHtmlToBeautifyHTML } from '@converters/html/html/beautify'
 import { convertHtmlToAbsoluteLinkHTML } from '@converters/html/html/formatted-link/absolute'
 import { convertHtmlToRelativeLinkHTML } from '@converters/html/html/formatted-link/relative'
-import convertHtmlToRootRelativeLinkHTML from '@converters/html/html/formatted-link/root-relative'
+import { convertHtmlToRootRelativeLinkHTML } from '@converters/html/html/formatted-link/root-relative'
 import { convertHtmlToNoAttrHTML } from '@converters/html/html/no-attr'
 import { convertHtmlToOnlyATagHTML } from '@converters/html/html/only-a-tag'
 import { convertHtmlToSafeHTML } from '@converters/html/html/safe'

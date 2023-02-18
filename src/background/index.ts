@@ -5,35 +5,7 @@ import {
 , ContextMenusClickHandler
 , CommandComplicateHandler
 } from './handlers'
-import menus from './menus'
-
-async function writeTextToClipboard(text: string): Promise<void> {
-  try {
-    return await navigator.clipboard.writeText(text)
-  } catch {
-    const textarea = document.createElement('textarea')
-    textarea.textContent = text
-    document.body.appendChild(textarea)
-    textarea.select()
-    document.execCommand('Copy', false)
-    document.body.removeChild(textarea)
-  }
-}
-
-async function queryAllInjectableTabs(): Promise<browser.Tabs.Tab[]> {
-  const invalidList = [
-    'about:'
-  , 'browser:'
-  , 'view-source:'
-  , 'chrome:'
-  , 'chrome-error:'
-  , 'https://chrome.google.com/'
-  ]
-  const tabs = await browser.tabs.query({})
-  return tabs.filter(({ url = '' }) => {
-    return invalidList.every(invalid => !url.startsWith(invalid))
-  })
-}
+import { menus } from './menus'
 
 // Inject after installed / available
 browser.runtime.onInstalled.addListener(async () => {
@@ -87,3 +59,31 @@ go(async () => {
     }
   }
 })
+
+async function writeTextToClipboard(text: string): Promise<void> {
+  try {
+    return await navigator.clipboard.writeText(text)
+  } catch {
+    const textarea = document.createElement('textarea')
+    textarea.textContent = text
+    document.body.appendChild(textarea)
+    textarea.select()
+    document.execCommand('Copy', false)
+    document.body.removeChild(textarea)
+  }
+}
+
+async function queryAllInjectableTabs(): Promise<browser.Tabs.Tab[]> {
+  const invalidList = [
+    'about:'
+  , 'browser:'
+  , 'view-source:'
+  , 'chrome:'
+  , 'chrome-error:'
+  , 'https://chrome.google.com/'
+  ]
+  const tabs = await browser.tabs.query({})
+  return tabs.filter(({ url = '' }) => {
+    return invalidList.every(invalid => !url.startsWith(invalid))
+  })
+}

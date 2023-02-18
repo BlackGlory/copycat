@@ -5,7 +5,7 @@ interface IMenuItem {
   title?: string
 }
 
-export default new Map<string[], IMenuItem[]>([
+export const menus = new Map<string[], IMenuItem[]>([
   [['page'], [
     { id: 'TAB_URL_TO_PLAIN' }
   , { id: 'TAB_URL_TO_MARKDOWN' }

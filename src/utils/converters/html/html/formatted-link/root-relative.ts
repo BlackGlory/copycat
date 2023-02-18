@@ -16,5 +16,3 @@ export function convertHtmlToRootRelativeLinkHTML(html: string, baseUrl: string)
     })
   return template.innerHTML
 }
-
-export default convertHtmlToRootRelativeLinkHTML
