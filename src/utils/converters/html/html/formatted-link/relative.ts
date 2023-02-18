@@ -6,14 +6,14 @@ export function convertHtmlToRelativeLinkHTML(html: string, baseUrl: string): st
   const fragment = template.content
   fragment.querySelectorAll('[href]')
     .forEach(ele => {
-      const url = ele.getAttribute('href') as string
+      const url = ele.getAttribute('href')!
       if (isAbsoluteURL(url)) {
         ele.setAttribute('href', convertUrlToRelativeURL(url, baseUrl))
       }
     })
   fragment.querySelectorAll('[src]')
     .forEach(ele => {
-      const url = ele.getAttribute('src') as string
+      const url = ele.getAttribute('src')!
       if (isAbsoluteURL(url)) {
         ele.setAttribute('src', convertUrlToRelativeURL(url, baseUrl))
       }
@@ -23,7 +23,7 @@ export function convertHtmlToRelativeLinkHTML(html: string, baseUrl: string): st
 
 function isAbsoluteURL(url: string) {
   try {
-    const obj = new URL(url)
+    new URL(url)
     return true
   } catch (e) {
     return false

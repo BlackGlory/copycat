@@ -17,7 +17,7 @@ browser.runtime.onInstalled.addListener(async () => {
           file
         , allFrames: true
         , matchAboutBlank: true
-        , runAt: 'document_end' as browser.ExtensionTypes.RunAt
+        , runAt: 'document_end'
         })
       }
     }
@@ -55,7 +55,7 @@ go(async () => {
         item.title = browser.i18n.getMessage(item.id)
       }
       item.contexts = contexts
-      browser.contextMenus.create(item as any)
+      browser.contextMenus.create(item as browser.Menus.CreateCreatePropertiesType)
     }
   }
 })

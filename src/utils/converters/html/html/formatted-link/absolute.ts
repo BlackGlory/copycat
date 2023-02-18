@@ -6,14 +6,14 @@ export function convertHtmlToAbsoluteLinkHTML(html: string, baseUrl: string): st
   const fragment = template.content
   fragment.querySelectorAll('[href]')
     .forEach(ele => {
-      const url = ele.getAttribute('href') as string
+      const url = ele.getAttribute('href')!
       if (isRelativeUrl(url)) {
         ele.setAttribute('href', convertUrlToAbsoluteURL(url, baseUrl))
       }
     })
   fragment.querySelectorAll('[src]')
     .forEach(ele => {
-      const url = ele.getAttribute('src') as string
+      const url = ele.getAttribute('src')!
       if (isRelativeUrl(url)) {
         ele.setAttribute('src', convertUrlToAbsoluteURL(url, baseUrl))
       }
@@ -23,7 +23,7 @@ export function convertHtmlToAbsoluteLinkHTML(html: string, baseUrl: string): st
 
 function isRelativeUrl(url: string) {
   try {
-    const obj = new URL(url)
+    new URL(url)
     return false
   } catch (e) {
     return true
