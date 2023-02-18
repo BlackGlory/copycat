@@ -47,6 +47,8 @@
   },
   "dependencies": {
     "@blackglory/prelude": "^0.3.1",
+    "@delight-rpc/webextension": "^0.1.0",
+    "delight-rpc": "^5.0.4",
     "ent": "^2.2.0",
     "extra-react-hooks": "^0.4.3",
     "html2bbcode": "^1.2.6",

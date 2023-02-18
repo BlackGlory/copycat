@@ -6,7 +6,7 @@ module.exports = {
   target: 'web'
 , entry: {
     'background': './src/background/index.ts'
-  , 'copycat': './src/content-script/index.ts'
+  , 'copycat': './src/content-script.ts'
   , 'options': './src/options/index.tsx'
   }
 , output: {

@@ -1,4 +1,12 @@
-import browser from 'webextension-polyfill'
+import { createServer } from '@delight-rpc/webextension'
+import { ITabAPI } from '@src/contract'
+
+createServer<ITabAPI>({
+  getActiveElementContent
+, getDocumentTitle
+, getSelectionHTML
+, getSelectionText
+})
 
 function getSelectionHTML(): string {
   const userSelection = window.getSelection()
@@ -20,16 +28,3 @@ function getActiveElementContent(): string {
 function getDocumentTitle(): string {
   return document.title
 }
-
-browser.runtime.onMessage.addListener(async message => {
-  switch (message.type) {
-    case 'selection-html':
-      return getSelectionHTML()
-    case 'selection-text':
-      return getSelectionText()
-    case 'active-element-content':
-      return getActiveElementContent()
-    case 'document-title':
-      return getDocumentTitle()
-  }
-})

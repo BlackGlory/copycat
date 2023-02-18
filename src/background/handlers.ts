@@ -1,10 +1,6 @@
 import browser from 'webextension-polyfill'
-import {
-  getSelectionHTML
-, getSelectionText
-, getActiveElementContent
-, getDocumentTitle
-} from '../content-script/api'
+import { createTabClient } from '@delight-rpc/webextension'
+import { ITabAPI } from '@src/contract'
 import {
   TAB_URL_TO_PLAIN
 , TAB_URL_TO_MARKDOWN
@@ -99,8 +95,13 @@ export default {
 , [FRAME_URL_TO_PLAIN]: (async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
+        const client = createTabClient<ITabAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
         const url = convertUrlToFormattedURL(info.frameUrl, tab.url)
-        const title = await getDocumentTitle(tab.id, info.frameId)
+        const title = await client.getDocumentTitle()
         return convertUrlToLinkPlain(url, title)
       } else {
         return convertUrlToLinkPlain(info.frameUrl)
@@ -110,8 +111,13 @@ export default {
 , [FRAME_URL_TO_MARKDOWN]: (async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
+        const client = createTabClient<ITabAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
         const url = convertUrlToFormattedURL(info.frameUrl, tab.url)
-        const title = await getDocumentTitle(tab.id, info.frameId)
+        const title = await client.getDocumentTitle()
         return convertUrlToLinkMarkdown(url, title)
       } else {
         return convertUrlToLinkMarkdown(info.frameUrl)
@@ -121,8 +127,13 @@ export default {
 , [FRAME_URL_TO_HTML]: (async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
+        const client = createTabClient<ITabAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
         const url = convertUrlToFormattedURL(info.frameUrl, tab.url)
-        const title = await getDocumentTitle(tab.id, info.frameId)
+        const title = await client.getDocumentTitle()
         return convertUrlToLinkHTML(url, title)
       } else {
         return convertUrlToLinkHTML(info.frameUrl)
@@ -132,8 +143,13 @@ export default {
 , [FRAME_URL_TO_BBCODE]: (async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
+        const client = createTabClient<ITabAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
         const url = convertUrlToFormattedURL(info.frameUrl, tab.url)
-        const title = await getDocumentTitle(tab.id, info.frameId)
+        const title = await client.getDocumentTitle()
         return convertUrlToLinkBBCode(url, title)
       } else {
         return convertUrlToLinkBBCode(info.frameUrl)
@@ -143,8 +159,13 @@ export default {
 , [LINK_TO_MARKDOWN]: (async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
+        const client = createTabClient<ITabAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
         const url = convertUrlToFormattedURL(info.linkUrl, info.frameUrl || tab.url)
-        const html = await getActiveElementContent(tab.id, info.frameId)
+        const html = await client.getActiveElementContent()
         const title =
         convertMarkdownToBeautifyMarkdown(
           convertHtmlToMarkdown(
@@ -162,8 +183,13 @@ export default {
 , [LINK_TO_HTML]: (async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
+        const client = createTabClient<ITabAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
         const url = convertUrlToFormattedURL(info.linkUrl, info.frameUrl || tab.url)
-        const html = await getActiveElementContent(tab.id, info.frameId)
+        const html = await client.getActiveElementContent()
         const title =
         convertHtmlToBeautifyHTML(
           convertHtmlToSafeHTML(html)
@@ -177,8 +203,13 @@ export default {
 , [LINK_TO_BBCODE]: (async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
+        const client = createTabClient<ITabAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
         const url = convertUrlToFormattedURL(info.linkUrl, info.frameUrl || tab.url)
-        const html = await getActiveElementContent(tab.id, info.frameId)
+        const html = await client.getActiveElementContent()
         const title =
         convertHtmlToBBCode(
           convertHtmlToBeautifyHTML(
@@ -307,7 +338,12 @@ export default {
   }) as ContextMenusClickHandler
 , [SELECTION_TO_MARKDOWN]: (async (info, tab) => {
     if (tab && tab.id) {
-      const html = await getSelectionHTML(tab.id, info.frameId)
+      const client = createTabClient<ITabAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      const html = await client.getSelectionHTML()
       const baseUrl = info.frameUrl || info.pageUrl || tab.url
       return (
         convertMarkdownToBeautifyMarkdown(
@@ -325,7 +361,12 @@ export default {
   }) as CommandComplicateHandler
 , [SELECTION_TO_HTML]: (async (info, tab) => {
     if (tab && tab.id) {
-      const html = await getSelectionHTML(tab.id, info.frameId)
+      const client = createTabClient<ITabAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      const html = await client.getSelectionHTML()
       const baseUrl = info.frameUrl || info.pageUrl || tab.url
       return (
         convertHtmlToBeautifyHTML(
@@ -339,7 +380,12 @@ export default {
   }) as CommandComplicateHandler
 , [SELECTION_TO_HTML_ONLY_A_TAG]: (async (info, tab) => {
     if (tab && tab.id) {
-      const html = await getSelectionHTML(tab.id, info.frameId)
+      const client = createTabClient<ITabAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      const html = await client.getSelectionHTML()
       const baseUrl = info.frameUrl || info.pageUrl || tab.url
       return (
         convertHtmlToBeautifyHTML(
@@ -355,7 +401,12 @@ export default {
   }) as CommandComplicateHandler
 , [SELECTION_TO_HTML_NO_ATTR]: (async (info, tab) => {
     if (tab && tab.id) {
-      const html = await getSelectionHTML(tab.id, info.frameId)
+      const client = createTabClient<ITabAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      const html = await client.getSelectionHTML()
       return (
         convertHtmlToBeautifyHTML(
           convertHtmlToNoAttrHTML(
@@ -367,7 +418,12 @@ export default {
   }) as CommandComplicateHandler
 , [SELECTION_TO_BBCODE]: (async (info, tab) => {
     if (tab && tab.id) {
-      const html = await getSelectionHTML(tab.id, info.frameId)
+      const client = createTabClient<ITabAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      const html = await client.getSelectionHTML()
       const baseUrl = info.frameUrl || info.pageUrl || tab.url
       return (
         convertHtmlToBBCode(
@@ -383,18 +439,33 @@ export default {
   }) as CommandComplicateHandler
 , [SELECTION_TO_PLAIN]: (async (info, tab) => {
     if (tab && tab.id) {
-      return await getSelectionText(tab.id, info.frameId)
+      const client = createTabClient<ITabAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      return await client.getSelectionText()
     }
   }) as CommandComplicateHandler
 , [SELECTION_TO_PLAIN_TRIMMED]: (async (info, tab) => {
     if (tab && tab.id) {
-      const text = await getSelectionText(tab.id, info.frameId)
+      const client = createTabClient<ITabAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      const text = await client.getSelectionText()
       return convertTextToTrimmedText(text)
     }
   }) as CommandComplicateHandler
 , [SELECTION_TO_RAW_STRING]: (async (info, tab) => {
     if (tab && tab.id) {
-      const text = await getSelectionText(tab.id, info.frameId)
+      const client = createTabClient<ITabAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      const text = await client.getSelectionText()
       return convertTextToRawString(text)
     }
   }) as CommandComplicateHandler
