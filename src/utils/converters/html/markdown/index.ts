@@ -1,4 +1,4 @@
-import { loadConfigure, MarkdownFlavor } from '@src/configure'
+import { loadConfigure, MarkdownFlavor } from '@src/config'
 import { convertHtmlToCommonmarkMarkdown } from './commonmark'
 import { convertHtmlToGfmMarkdown } from './gfm'
 import { convertHtmlToGhostMarkdown } from './ghost'

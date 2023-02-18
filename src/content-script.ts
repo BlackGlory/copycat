@@ -1,7 +1,7 @@
 import { createServer } from '@delight-rpc/webextension'
-import { ITabAPI } from '@src/contract'
+import { IFrameAPI } from '@src/contract'
 
-createServer<ITabAPI>({
+createServer<IFrameAPI>({
   getActiveElementContent
 , getDocumentTitle
 , getSelectionHTML

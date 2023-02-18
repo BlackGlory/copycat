@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useImmer } from 'use-immer'
-import { loadConfigure, saveConfigure, Config, URLFormat, MarkdownFlavor } from '@src/configure'
+import { loadConfigure, saveConfigure, Config, URLFormat, MarkdownFlavor } from '@src/config'
 import { i18n } from '@utils/i18n'
 
 const Window = styled.div`

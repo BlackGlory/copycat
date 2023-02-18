@@ -1,4 +1,4 @@
-export interface ITabAPI {
+export interface IFrameAPI {
   getSelectionHTML(): string
   getSelectionText(): string
   getActiveElementContent(): string

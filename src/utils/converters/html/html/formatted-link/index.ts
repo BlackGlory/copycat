@@ -1,4 +1,4 @@
-import { loadConfigure, URLFormat } from '@src/configure'
+import { loadConfigure, URLFormat } from '@src/config'
 import { convertHtmlToAbsoluteLinkHTML } from './absolute'
 import { convertHtmlToRelativeLinkHTML } from './relative'
 import { convertHtmlToRootRelativeLinkHTML } from './root-relative'

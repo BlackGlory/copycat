@@ -1,42 +1,6 @@
 import browser from 'webextension-polyfill'
 import { createTabClient } from '@delight-rpc/webextension'
-import { ITabAPI } from '@src/contract'
-import {
-  TAB_URL_TO_PLAIN
-, TAB_URL_TO_MARKDOWN
-, TAB_URL_TO_HTML
-, TAB_URL_TO_BBCODE
-, FRAME_URL_TO_PLAIN
-, FRAME_URL_TO_MARKDOWN
-, FRAME_URL_TO_HTML
-, FRAME_URL_TO_BBCODE
-, LINK_TO_MARKDOWN
-, LINK_TO_HTML
-, LINK_TO_BBCODE
-, SELECTION_TO_MARKDOWN
-, SELECTION_TO_HTML
-, SELECTION_TO_HTML_ONLY_A_TAG
-, SELECTION_TO_HTML_NO_ATTR
-, SELECTION_TO_BBCODE
-, SELECTION_TO_PLAIN
-, SELECTION_TO_PLAIN_TRIMMED
-, SELECTION_TO_RAW_STRING
-, IMAGE_TO_MARKDOWN
-, IMAGE_TO_MARKDOWN_DATA_URI_JPEG
-, IMAGE_TO_MARKDOWN_DATA_URI_PNG
-, IMAGE_TO_MARKDOWN_DATA_URI_WEBP
-, IMAGE_TO_HTML
-, IMAGE_TO_HTML_DATA_URI_JPEG
-, IMAGE_TO_HTML_DATA_URI_PNG
-, IMAGE_TO_HTML_DATA_URI_WEBP
-, IMAGE_TO_BBCODE
-, IMAGE_TO_DATA_URI_RAW
-, IMAGE_TO_DATA_URI_JPEG
-, IMAGE_TO_DATA_URI_PNG
-, IMAGE_TO_DATA_URI_WEBP
-, AUDIO_TO_HTML
-, VIDEO_TO_HTML
-} from './symbols'
+import { IFrameAPI } from '@src/contract'
 import { convertHtmlToBBCode } from '@converters/html/bbcode'
 import { convertUrlToLinkPlain } from '@converters/url/link/plain'
 import { convertUrlToLinkMarkdown } from '@converters/url/link/markdown'
@@ -75,30 +39,30 @@ interface UniversalHandlers {
 }
 
 export const handlers: UniversalHandlers = {
-  [TAB_URL_TO_PLAIN]: ((info, tab) => {
+  ['TAB_URL_TO_PLAIN']: ((info, tab) => {
     if (tab && tab.url) {
       return convertUrlToLinkPlain(tab.url, tab.title)
     }
   }) as CommandComplicateHandler
-, [TAB_URL_TO_MARKDOWN]: ((info, tab) => {
+, ['TAB_URL_TO_MARKDOWN']: ((info, tab) => {
     if (tab && tab.url) {
       return convertUrlToLinkMarkdown(tab.url, tab.title)
     }
   }) as CommandComplicateHandler
-, [TAB_URL_TO_HTML]: ((info, tab) => {
+, ['TAB_URL_TO_HTML']: ((info, tab) => {
     if (tab && tab.url) {
       return convertUrlToLinkHTML(tab.url, tab.title)
     }
   }) as CommandComplicateHandler
-, [TAB_URL_TO_BBCODE]: ((info, tab) => {
+, ['TAB_URL_TO_BBCODE']: ((info, tab) => {
     if (tab && tab.url) {
       return convertUrlToLinkBBCode(tab.url, tab.title)
     }
   }) as CommandComplicateHandler
-, [FRAME_URL_TO_PLAIN]: (async (info, tab) => {
+, ['FRAME_URL_TO_PLAIN']: (async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
-        const client = createTabClient<ITabAPI>({
+        const client = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
@@ -111,10 +75,10 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [FRAME_URL_TO_MARKDOWN]: (async (info, tab) => {
+, ['FRAME_URL_TO_MARKDOWN']: (async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
-        const client = createTabClient<ITabAPI>({
+        const client = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
@@ -127,10 +91,10 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [FRAME_URL_TO_HTML]: (async (info, tab) => {
+, ['FRAME_URL_TO_HTML']: (async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
-        const client = createTabClient<ITabAPI>({
+        const client = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
@@ -143,10 +107,10 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [FRAME_URL_TO_BBCODE]: (async (info, tab) => {
+, ['FRAME_URL_TO_BBCODE']: (async (info, tab) => {
     if (info.frameUrl) {
       if (tab && tab.id && tab.url) {
-        const client = createTabClient<ITabAPI>({
+        const client = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
@@ -159,10 +123,10 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [LINK_TO_MARKDOWN]: (async (info, tab) => {
+, ['LINK_TO_MARKDOWN']: (async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
-        const client = createTabClient<ITabAPI>({
+        const client = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
@@ -183,10 +147,10 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [LINK_TO_HTML]: (async (info, tab) => {
+, ['LINK_TO_HTML']: (async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
-        const client = createTabClient<ITabAPI>({
+        const client = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
@@ -203,10 +167,10 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [LINK_TO_BBCODE]: (async (info, tab) => {
+, ['LINK_TO_BBCODE']: (async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
-        const client = createTabClient<ITabAPI>({
+        const client = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
@@ -227,7 +191,7 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_MARKDOWN]: ((info, tab) => {
+, ['IMAGE_TO_MARKDOWN']: ((info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
         const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
@@ -237,28 +201,28 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_MARKDOWN_DATA_URI_JPEG]: (async ({ mediaType, srcUrl }) => {
+, ['IMAGE_TO_MARKDOWN_DATA_URI_JPEG']: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageMarkdown(
         await convertUrlToImageDataURI(srcUrl, 'jpeg')
       )
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_MARKDOWN_DATA_URI_PNG]: (async ({ mediaType, srcUrl }) => {
+, ['IMAGE_TO_MARKDOWN_DATA_URI_PNG']: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageMarkdown(
         await convertUrlToImageDataURI(srcUrl, 'png')
       )
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_MARKDOWN_DATA_URI_WEBP]: (async ({ mediaType, srcUrl }) => {
+, ['IMAGE_TO_MARKDOWN_DATA_URI_WEBP']: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageMarkdown(
         await convertUrlToImageDataURI(srcUrl, 'webp')
       )
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_HTML]: ((info, tab) => {
+, ['IMAGE_TO_HTML']: ((info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
         const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
@@ -268,28 +232,28 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_HTML_DATA_URI_JPEG]: (async ({ mediaType, srcUrl }) => {
+, ['IMAGE_TO_HTML_DATA_URI_JPEG']: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageHTML(
         await convertUrlToImageDataURI(srcUrl, 'jpeg')
       )
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_HTML_DATA_URI_PNG]: (async ({ mediaType, srcUrl }) => {
+, ['IMAGE_TO_HTML_DATA_URI_PNG']: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageHTML(
         await convertUrlToImageDataURI(srcUrl, 'png')
       )
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_HTML_DATA_URI_WEBP]: (async ({ mediaType, srcUrl }) => {
+, ['IMAGE_TO_HTML_DATA_URI_WEBP']: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return convertUrlToImageHTML(
         await convertUrlToImageDataURI(srcUrl, 'webp')
       )
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_BBCODE]: (async (info, tab) => {
+, ['IMAGE_TO_BBCODE']: (async (info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
         const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
@@ -299,27 +263,27 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_DATA_URI_RAW]: (async ({ mediaType, srcUrl }, tab) => {
+, ['IMAGE_TO_DATA_URI_RAW']: (async ({ mediaType, srcUrl }, tab) => {
     if (mediaType === 'image' && srcUrl) {
       return await convertUrlToImageDataURI(srcUrl)
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_DATA_URI_JPEG]: (async ({ mediaType, srcUrl }) => {
+, ['IMAGE_TO_DATA_URI_JPEG']: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return await convertUrlToImageDataURI(srcUrl, 'jpeg')
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_DATA_URI_PNG]: (async ({ mediaType, srcUrl }) => {
+, ['IMAGE_TO_DATA_URI_PNG']: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return await convertUrlToImageDataURI(srcUrl, 'png')
     }
   }) as ContextMenusClickHandler
-, [IMAGE_TO_DATA_URI_WEBP]: (async ({ mediaType, srcUrl }) => {
+, ['IMAGE_TO_DATA_URI_WEBP']: (async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
       return await convertUrlToImageDataURI(srcUrl, 'webp')
     }
   }) as ContextMenusClickHandler
-, [AUDIO_TO_HTML]: ((info, tab) => {
+, ['AUDIO_TO_HTML']: ((info, tab) => {
     if (info.mediaType === 'audio' && info.srcUrl) {
       if (tab && tab.url) {
         const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
@@ -329,7 +293,7 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [VIDEO_TO_HTML]: ((info, tab) => {
+, ['VIDEO_TO_HTML']: ((info, tab) => {
     if (info.mediaType === 'video' && info.srcUrl) {
       if (tab && tab.url) {
         const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
@@ -339,9 +303,9 @@ export const handlers: UniversalHandlers = {
       }
     }
   }) as ContextMenusClickHandler
-, [SELECTION_TO_MARKDOWN]: (async (info, tab) => {
+, ['SELECTION_TO_MARKDOWN']: (async (info, tab) => {
     if (tab && tab.id) {
-      const client = createTabClient<ITabAPI>({
+      const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
@@ -362,9 +326,9 @@ export const handlers: UniversalHandlers = {
       )
     }
   }) as CommandComplicateHandler
-, [SELECTION_TO_HTML]: (async (info, tab) => {
+, ['SELECTION_TO_HTML']: (async (info, tab) => {
     if (tab && tab.id) {
-      const client = createTabClient<ITabAPI>({
+      const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
@@ -381,9 +345,9 @@ export const handlers: UniversalHandlers = {
       )
     }
   }) as CommandComplicateHandler
-, [SELECTION_TO_HTML_ONLY_A_TAG]: (async (info, tab) => {
+, ['SELECTION_TO_HTML_ONLY_A_TAG']: (async (info, tab) => {
     if (tab && tab.id) {
-      const client = createTabClient<ITabAPI>({
+      const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
@@ -402,9 +366,9 @@ export const handlers: UniversalHandlers = {
       )
     }
   }) as CommandComplicateHandler
-, [SELECTION_TO_HTML_NO_ATTR]: (async (info, tab) => {
+, ['SELECTION_TO_HTML_NO_ATTR']: (async (info, tab) => {
     if (tab && tab.id) {
-      const client = createTabClient<ITabAPI>({
+      const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
@@ -419,9 +383,9 @@ export const handlers: UniversalHandlers = {
       )
     }
   }) as CommandComplicateHandler
-, [SELECTION_TO_BBCODE]: (async (info, tab) => {
+, ['SELECTION_TO_BBCODE']: (async (info, tab) => {
     if (tab && tab.id) {
-      const client = createTabClient<ITabAPI>({
+      const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
@@ -440,9 +404,9 @@ export const handlers: UniversalHandlers = {
       )
     }
   }) as CommandComplicateHandler
-, [SELECTION_TO_PLAIN]: (async (info, tab) => {
+, ['SELECTION_TO_PLAIN']: (async (info, tab) => {
     if (tab && tab.id) {
-      const client = createTabClient<ITabAPI>({
+      const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
@@ -450,9 +414,9 @@ export const handlers: UniversalHandlers = {
       return await client.getSelectionText()
     }
   }) as CommandComplicateHandler
-, [SELECTION_TO_PLAIN_TRIMMED]: (async (info, tab) => {
+, ['SELECTION_TO_PLAIN_TRIMMED']: (async (info, tab) => {
     if (tab && tab.id) {
-      const client = createTabClient<ITabAPI>({
+      const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
@@ -461,9 +425,9 @@ export const handlers: UniversalHandlers = {
       return convertTextToTrimmedText(text)
     }
   }) as CommandComplicateHandler
-, [SELECTION_TO_RAW_STRING]: (async (info, tab) => {
+, ['SELECTION_TO_RAW_STRING']: (async (info, tab) => {
     if (tab && tab.id) {
-      const client = createTabClient<ITabAPI>({
+      const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
