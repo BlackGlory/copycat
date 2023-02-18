@@ -1,4 +1,4 @@
-import { loadConfigure } from '@src/configure'
+import { loadConfigure, URLFormat } from '@src/configure'
 import { convertHtmlToAbsoluteLinkHTML } from './absolute'
 import { convertHtmlToRelativeLinkHTML } from './relative'
 import { convertHtmlToRootRelativeLinkHTML } from './root-relative'
@@ -9,13 +9,13 @@ export function convertHtmlToFormattedLinkHTML(
 ): string {
   const { urlFormat } = loadConfigure()
   switch (urlFormat) {
-    case 'absolute':
+    case URLFormat.Absolute:
       return convertHtmlToAbsoluteLinkHTML(html, baseUrl)
-    case 'relative':
+    case URLFormat.Relative:
       return convertHtmlToRelativeLinkHTML(html, baseUrl)
-    case 'root-relative':
+    case URLFormat.RootRelative:
       return convertHtmlToRootRelativeLinkHTML(html, baseUrl)
-    case 'original':
+    case URLFormat.Original:
       return html
   }
 }

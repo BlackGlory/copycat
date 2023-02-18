@@ -1,4 +1,4 @@
-import { loadConfigure } from '@src/configure'
+import { loadConfigure, URLFormat } from '@src/configure'
 import { convertUrlToAbsoluteURL } from './absolute'
 import { convertUrlToRelativeURL } from './relative'
 import { convertUrlToRootRelativeURL } from './root-relative'
@@ -6,13 +6,13 @@ import { convertUrlToRootRelativeURL } from './root-relative'
 export function convertUrlToFormattedURL(url: string, baseUrl: string): string {
   const { urlFormat } = loadConfigure()
   switch (urlFormat) {
-    case 'absolute':
+    case URLFormat.Absolute:
       return convertUrlToAbsoluteURL(url, baseUrl)
-    case 'relative':
+    case URLFormat.Relative:
       return convertUrlToRelativeURL(url, baseUrl)
-    case 'root-relative':
+    case URLFormat.RootRelative:
       return convertUrlToRootRelativeURL(url, baseUrl)
-    case 'original':
+    case URLFormat.Original:
       return url
   }
 }

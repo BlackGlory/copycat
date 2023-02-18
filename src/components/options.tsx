@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useImmer } from 'use-immer'
-import { loadConfigure, saveConfigure, Config, UrlFormat, MarkdownFlavor } from '@src/configure'
+import { loadConfigure, saveConfigure, Config, URLFormat, MarkdownFlavor } from '@src/configure'
 import { i18n } from '@utils/i18n'
 
 const Window = styled.div`
@@ -33,7 +33,7 @@ export function Options() {
             <td>
               <Select value={selector.urlFormat} onChange={e => {
                 setSelector(selector => {
-                  selector.urlFormat = e.target.value as UrlFormat
+                  selector.urlFormat = e.target.value as URLFormat
                   saveConfigure(selector)
                 })
               }}>

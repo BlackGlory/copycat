@@ -1,6 +1,10 @@
-import { go } from '@blackglory/prelude'
 import browser from 'webextension-polyfill'
-import handlers, { ContextMenusClickHandler, CommandComplicateHandler } from './handlers'
+import { go } from '@blackglory/prelude'
+import {
+  handlers
+, ContextMenusClickHandler
+, CommandComplicateHandler
+} from './handlers'
 import menus from './menus'
 
 async function writeTextToClipboard(text: string): Promise<void> {
@@ -56,7 +60,11 @@ browser.contextMenus.onClicked.addListener(async (info, tab) => {
 })
 
 browser.commands.onCommand.addListener(async command => {
-  const tabs = await browser.tabs.query({ currentWindow: true, active: true })
+  const tabs = await browser.tabs.query({
+    currentWindow: true
+  , active: true
+  })
+
   if (tabs.length) {
     const text = await (handlers[command] as CommandComplicateHandler)({}, tabs[0])
     if (text) {

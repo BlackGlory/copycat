@@ -1,27 +1,29 @@
 import browser from 'webextension-polyfill'
 
-export type UrlFormat =
-| 'original'
-| 'absolute'
-| 'relative'
-| 'root-relative'
+export enum URLFormat {
+  Original = 'original'
+, Absolute = 'absolute'
+, Relative = 'relative'
+, RootRelative = 'root-relative'
+}
 
-export type MarkdownFlavor =
-| 'commonmark'
-| 'gfm'
-| 'ghost'
+export enum MarkdownFlavor {
+  Commonmark = 'commonmark'
+, GFM = 'gfm'
+, Ghost = 'ghost'
+}
 
 export interface Config {
   version: string
-  urlFormat: UrlFormat
+  urlFormat: URLFormat
   markdownFlavor: MarkdownFlavor
 }
 
 function createDefaultConfig(): Config {
   return {
     version: browser.runtime.getManifest().version
-  , urlFormat: 'absolute'
-  , markdownFlavor: 'gfm'
+  , urlFormat: URLFormat.Absolute
+  , markdownFlavor: MarkdownFlavor.GFM
   }
 }
 

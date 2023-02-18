@@ -1,4 +1,4 @@
-import { loadConfigure } from '@src/configure'
+import { loadConfigure, MarkdownFlavor } from '@src/configure'
 import { convertHtmlToCommonmarkMarkdown } from './commonmark'
 import { convertHtmlToGfmMarkdown } from './gfm'
 import { convertHtmlToGhostMarkdown } from './ghost'
@@ -6,11 +6,11 @@ import { convertHtmlToGhostMarkdown } from './ghost'
 export function convertHtmlToMarkdown(html: string): string {
   const { markdownFlavor } = loadConfigure()
   switch (markdownFlavor) {
-    case 'commonmark':
+    case MarkdownFlavor.Commonmark:
       return convertHtmlToCommonmarkMarkdown(html)
-    case 'gfm':
+    case MarkdownFlavor.GFM:
       return convertHtmlToGfmMarkdown(html)
-    case 'ghost':
+    case MarkdownFlavor.Ghost:
       return convertHtmlToGhostMarkdown(html)
   }
 }

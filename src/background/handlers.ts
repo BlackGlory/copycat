@@ -58,20 +58,23 @@ import { convertHtmlToOnlyATagHTML } from '@converters/html/html/only-a-tag'
 import { convertHtmlToNoAttrHTML } from '@converters/html/html/no-attr'
 import { convertTextToTrimmedText } from '@converters/text/trim'
 import { convertTextToRawString } from '@converters/text/raw-string'
+import { Awaitable } from '@blackglory/prelude'
 
 export type ContextMenusClickHandler = (
   info: browser.Menus.OnClickData
 , tab?: browser.Tabs.Tab
-) => string | void | Promise<string | void>
+) => Awaitable<string | void>
 
-export type CommandComplicateHandler = (info: { [index: string]: any }, tab?: browser.Tabs.Tab) =>
-  string | void | Promise<string | void>
+export type CommandComplicateHandler = (
+  info: Record<string, any>
+, tab?: browser.Tabs.Tab
+) => Awaitable<string | void>
 
 interface UniversalHandlers {
   [menuItemId: string]: ContextMenusClickHandler | CommandComplicateHandler
 }
 
-export default {
+export const handlers: UniversalHandlers = {
   [TAB_URL_TO_PLAIN]: ((info, tab) => {
     if (tab && tab.url) {
       return convertUrlToLinkPlain(tab.url, tab.title)
@@ -469,4 +472,4 @@ export default {
       return convertTextToRawString(text)
     }
   }) as CommandComplicateHandler
-} as UniversalHandlers
+}
