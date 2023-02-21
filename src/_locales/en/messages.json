@@ -47,6 +47,9 @@
 , "TAB_URL_TO_BBCODE": {
     "message": "Tab link → BBCode"
   }
+, "TAB_URL_TO_ORG_MODE": {
+    "message": "Tab link → Org-Mode"
+  }
 , "FRAME_URL_TO_PLAIN": {
     "message": "Frame link → Plaintext"
   }
@@ -58,6 +61,9 @@
   }
 , "FRAME_URL_TO_BBCODE": {
     "message": "Frame link → BBCode"
+  }
+, "FRAME_URL_TO_ORG_MODE": {
+    "message": "Frame link → Org-Mode"
   }
 , "LINK_TEXT": {
     "message": "Copy link text"

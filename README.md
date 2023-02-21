@@ -19,14 +19,14 @@ Copy content from web powerful than ever before.
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
-  - [ ] Org-mode
+  - [x] Org-mode
   - [ ] AsciiDoc
 - [x] Copy a frame link as
   - [x] Plaintext
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
-  - [ ] Org-Mode
+  - [x] Org-Mode
   - [ ] AsciiDoc
 - [x] Copy a link text
 - [x] Copy a link as

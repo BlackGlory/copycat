@@ -11,18 +11,21 @@ export const menus = new Map<string[], IMenuItem[]>([
   , { id: 'TAB_URL_TO_MARKDOWN' }
   , { id: 'TAB_URL_TO_BBCODE' }
   , { id: 'TAB_URL_TO_HTML' }
+  , { id: 'TAB_URL_TO_ORG_MODE' }
   ]]
 , [['frame'], [
     { id: 'FRAME_URL_TO_PLAIN' }
   , { id: 'FRAME_URL_TO_MARKDOWN' }
   , { id: 'FRAME_URL_TO_BBCODE' }
   , { id: 'FRAME_URL_TO_HTML' }
+  , { id: 'FRAME_URL_TO_ORG_MODE' }
   ]]
 , [['link'], [
     { id: 'LINK_TEXT' }
   , { id: 'LINK_TO_MARKDOWN' }
   , { id: 'LINK_TO_BBCODE' }
   , { id: 'LINK_TO_HTML' }
+  , { id: 'LINK_TO_ORG_MODE' }
   ]]
 , [['selection'], [
     { id: 'SELECTION_TO_MARKDOWN' }

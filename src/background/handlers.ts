@@ -43,6 +43,11 @@ export const handlers: Handlers = {
       return await offscreenClient.convertUrlToLinkBBCode(tab.url, tab.title)
     }
   })
+, ['TAB_URL_TO_ORG_MODE']: createCommandComplicateHandler(async (info, tab) => {
+    if (tab?.url) {
+      return await offscreenClient.convertUrlToLinkOrgMode(tab.url, tab.title)
+    }
+  })
 , ['FRAME_URL_TO_PLAIN']: createContextMenusClickHandler(async (info, tab) => {
     if (info.frameUrl) {
       if (tab?.id && tab.url) {
@@ -113,6 +118,25 @@ export const handlers: Handlers = {
         return await offscreenClient.convertUrlToLinkBBCode(url, title)
       } else {
         return await offscreenClient.convertUrlToLinkBBCode(info.frameUrl)
+      }
+    }
+  })
+, ['FRAME_URL_TO_ORG_MODE']: createContextMenusClickHandler(async (info, tab) => {
+    if (info.frameUrl) {
+      if (tab?.id && tab.url) {
+        const tabClient = createTabClient<IFrameAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
+        const url = await convertUrlToFormattedURL(
+          info.frameUrl
+        , tab.url
+        )
+        const title = await tabClient.getDocumentTitle()
+        return await offscreenClient.convertUrlToLinkOrgMode(url, title)
+      } else {
+        return await offscreenClient.convertUrlToLinkOrgMode(info.frameUrl)
       }
     }
   })

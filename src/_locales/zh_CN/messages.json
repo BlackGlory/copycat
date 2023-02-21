@@ -38,6 +38,9 @@
 , "TAB_URL_TO_BBCODE": {
     "message": "标签页链接 → BBCode"
   }
+, "TAB_URL_TO_ORG_MODE": {
+    "message": "标签页链接 → Org-Mode"
+  }
 , "FRAME_URL_TO_PLAIN": {
     "message": "框架链接 → 纯文本"
   }
@@ -49,6 +52,9 @@
   }
 , "FRAME_URL_TO_BBCODE": {
     "message": "框架链接 → BBCode"
+  }
+, "FRAME_URL_TO_ORG_MODE": {
+    "message": "框架链接 → Org-Mode"
   }
 , "LINK_TEXT": {
     "message": "复制链接文本"
