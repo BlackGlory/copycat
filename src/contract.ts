@@ -73,6 +73,7 @@ export interface IOffscreenAPI {
   convertUrlToLinkHTML(url: string, text?: string): string
   convertUrlToLinkMarkdown(url: string, text?: string): string
   convertUrlToLinkPlain(url: string, text?: string): string
+  convertUrlToLinkOrgMode(url: string, text?: string): string 
   convertUrlToRelativeURL(absoluteUrl: string, baseUrl: string): string
   convertUrlToRootRelativeURL(url: string, baseUrl: string): string
   convertUrlToVideoHTML(url: string): string

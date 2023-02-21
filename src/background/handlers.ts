@@ -131,7 +131,8 @@ export const handlers: Handlers = {
 
         const url = await convertUrlToFormattedURL(
           info.linkUrl
-        , info.frameUrl || tab.url)
+        , info.frameUrl ?? tab.url
+        )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
@@ -142,10 +143,39 @@ export const handlers: Handlers = {
         )
         return await offscreenClient.convertUrlToLinkMarkdown(
           url
-        , title || info.linkText
+        , title
         )
       } else {
         return await offscreenClient.convertUrlToLinkMarkdown(
+          info.linkUrl
+        , info.linkText
+        )
+      }
+    }
+  })
+, ['LINK_TO_ORG_MODE']: createContextMenusClickHandler(async (info, tab) => {
+    if (info.linkUrl) {
+      if (tab && tab.id && tab.url) {
+        const tabClient = createTabClient<IFrameAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
+        const url = await convertUrlToFormattedURL(
+          info.linkUrl
+        , info.frameUrl ?? tab.url
+        )
+        const html = await tabClient.getActiveElementContent()
+        const title = await pipeAsync(
+          html
+        , offscreenClient.convertHtmlToSafeHTML
+        , offscreenClient.convertHtmlToBeautifyHTML
+        , convertHtmlToMarkdown
+        , offscreenClient.convertMarkdownToBeautifyMarkdown
+        )
+        return await offscreenClient.convertUrlToLinkOrgMode(url, title)
+      } else {
+        return await offscreenClient.convertUrlToLinkOrgMode(
           info.linkUrl
         , info.linkText
         )
@@ -162,7 +192,7 @@ export const handlers: Handlers = {
 
         const url = await convertUrlToFormattedURL(
           info.linkUrl
-        , info.frameUrl || tab.url
+        , info.frameUrl ?? tab.url
         )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
@@ -172,7 +202,7 @@ export const handlers: Handlers = {
         )
         return await offscreenClient.convertUrlToLinkHTML(
           url
-        , title || info.linkText
+        , title
         )
       } else {
         return await offscreenClient.convertUrlToLinkHTML(
@@ -192,7 +222,7 @@ export const handlers: Handlers = {
 
         const url = await convertUrlToFormattedURL(
           info.linkUrl
-        , info.frameUrl || tab.url
+        , info.frameUrl ?? tab.url
         )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
@@ -203,7 +233,7 @@ export const handlers: Handlers = {
         )
         return await offscreenClient.convertUrlToLinkBBCode(
           url
-        , title || info.linkText
+        , title
         )
       } else {
         return await offscreenClient.convertUrlToLinkBBCode(
@@ -218,7 +248,7 @@ export const handlers: Handlers = {
       if (tab && tab.url) {
         const url = await convertUrlToFormattedURL(
           info.srcUrl
-        , info.frameUrl || tab.url
+        , info.frameUrl ?? tab.url
         )
         return await offscreenClient.convertUrlToImageMarkdown(url)
       } else {
@@ -267,7 +297,7 @@ export const handlers: Handlers = {
       if (tab && tab.url) {
         const url = await convertUrlToFormattedURL(
           info.srcUrl
-        , info.frameUrl || tab.url
+        , info.frameUrl ?? tab.url
         )
         return await offscreenClient.convertUrlToImageHTML(url)
       } else {
@@ -316,7 +346,7 @@ export const handlers: Handlers = {
       if (tab?.url) {
         const url = await convertUrlToFormattedURL(
           info.srcUrl
-        , info.frameUrl || tab.url
+        , info.frameUrl ?? tab.url
         )
         return await offscreenClient.convertUrlToImageBBCode(url)
       } else {
@@ -367,7 +397,7 @@ export const handlers: Handlers = {
       if (tab?.url) {
         const url = await convertUrlToFormattedURL(
           info.srcUrl
-        , info.frameUrl || tab.url
+        , info.frameUrl ?? tab.url
         )
         return await offscreenClient.convertUrlToAudioHTML(url)
       } else {
@@ -380,7 +410,7 @@ export const handlers: Handlers = {
       if (tab?.url) {
         const url = await convertUrlToFormattedURL(
           info.srcUrl
-        , info.frameUrl || tab.url
+        , info.frameUrl ?? tab.url
         )
         return offscreenClient.convertUrlToVideoHTML(url)
       } else {
@@ -396,7 +426,7 @@ export const handlers: Handlers = {
       })
 
       const html = await client.getSelectionHTML()
-      const baseUrl = info.frameUrl || info.pageUrl || tab.url
+      const baseUrl = info.frameUrl ?? info.pageUrl ?? tab.url
       return await pipeAsync(
         html
       , offscreenClient.convertHtmlToSafeHTML
@@ -415,7 +445,7 @@ export const handlers: Handlers = {
       })
 
       const html = await client.getSelectionHTML()
-      const baseUrl = info.frameUrl || info.pageUrl || tab.url
+      const baseUrl = info.frameUrl ?? info.pageUrl ?? tab.url
       return await pipeAsync(
         html
       , offscreenClient.convertHtmlToSafeHTML
@@ -435,7 +465,7 @@ export const handlers: Handlers = {
       })
 
       const html = await client.getSelectionHTML()
-      const baseUrl = info.frameUrl || info.pageUrl || tab.url
+      const baseUrl = info.frameUrl ?? info.pageUrl ?? tab.url
       return await pipeAsync(
         html
       , offscreenClient.convertHtmlToSafeHTML
@@ -469,7 +499,7 @@ export const handlers: Handlers = {
       })
 
       const html = await client.getSelectionHTML()
-      const baseUrl = info.frameUrl || info.pageUrl || tab.url
+      const baseUrl = info.frameUrl ?? info.pageUrl ?? tab.url
       return await pipeAsync(
         html
       , offscreenClient.convertHtmlToSafeHTML

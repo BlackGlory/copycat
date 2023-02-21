@@ -14,26 +14,26 @@ Copy content from web powerful than ever before.
 [Firefox]: https://addons.mozilla.org/firefox/addon/extension-copycat/
 
 ## Features
-- [x] Copy tab link as
+- [x] Copy a tab link as
   - [x] Plaintext
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
   - [ ] Org-mode
   - [ ] AsciiDoc
-- [x] Copy frame link as
+- [x] Copy a frame link as
   - [x] Plaintext
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
   - [ ] Org-Mode
   - [ ] AsciiDoc
-- [x] Copy link text
-- [x] Copy link as
+- [x] Copy a link text
+- [x] Copy a link as
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
-  - [ ] Org-mode
+  - [x] Org-mode
   - [ ] AsciiDoc
 - [x] Copy selection as
   - [x] Plaintext
@@ -44,7 +44,7 @@ Copy content from web powerful than ever before.
   - [x] HTML(only \<a\> tag)
   - [x] HTML(no attributes)
   - [ ] JSON string
-- [x] Copy image as
+- [x] Copy an image as
   - [x] Markdown
   - [x] Markdown(DataURI jpeg, png, webp\*)
   - [x] HTML
@@ -52,7 +52,7 @@ Copy content from web powerful than ever before.
   - [x] DataURI(original format)
   - [x] DataURI(jpeg, png, webp\*)
   - [x] BBCode
-- [x] Copy browser native audio/video as HTML
+- [x] Copy browser a native audio/video as HTML
 
 ## Supported Markdown flavors
 - [x] [GitHub Flavored Markdown]
@@ -64,7 +64,7 @@ Copy content from web powerful than ever before.
 [Ghost's Markdown]: https://help.ghost.org/article/4-markdown-guide
 
 ## Extension shortcuts
-Copy tab link and selection can be set as extension shortcuts.
+Copy tab links and selections can be set as extension shortcuts.
 
 Manage Chrome shortcuts:
 `chrome://extensions/shortcuts`
