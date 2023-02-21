@@ -19,7 +19,7 @@ Copy content from web powerful than ever before.
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
-  - [x] Org-mode
+  - [x] Org-Mode
   - [x] AsciiDoc
 - [x] Copy a frame link as
   - [x] Plaintext
@@ -33,7 +33,7 @@ Copy content from web powerful than ever before.
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
-  - [x] Org-mode
+  - [x] Org-Mode
   - [x] AsciiDoc
 - [x] Copy selection as
   - [x] Plaintext
