@@ -1,4 +1,4 @@
-import { convertUrlToVideoHTML } from '@converters/convert-url-to-video-html'
+import { convertUrlToVideoHTML } from '@converters/convert-url-to-video-html.js'
 
 test('convertUrlToVideoHTML', () => {
   const result = convertUrlToVideoHTML('hello.mp3')

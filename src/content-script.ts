@@ -1,5 +1,5 @@
 import { createServer } from '@delight-rpc/webextension'
-import { IFrameAPI } from '@src/contract'
+import { IFrameAPI } from '@src/contract.js'
 
 createServer<IFrameAPI>({
   getActiveElementContent

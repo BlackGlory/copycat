@@ -1,4 +1,4 @@
-import { convertUrlToLinkBBCode } from '@converters/convert-url-to-link-bbcode'
+import { convertUrlToLinkBBCode } from '@converters/convert-url-to-link-bbcode.js'
 
 test('convertUrlToLinkBBCode', () => {
   const result1 = convertUrlToLinkBBCode('https://hello.world')

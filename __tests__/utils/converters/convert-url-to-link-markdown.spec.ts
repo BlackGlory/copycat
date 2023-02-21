@@ -1,4 +1,4 @@
-import { convertUrlToLinkMarkdown } from '@converters/convert-url-to-link-markdown'
+import { convertUrlToLinkMarkdown } from '@converters/convert-url-to-link-markdown.js'
 
 test('convertUrlToLinkMarkdown', () => {
   const result1 = convertUrlToLinkMarkdown('https://hello.world')

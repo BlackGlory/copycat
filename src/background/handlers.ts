@@ -1,12 +1,12 @@
 import browser from 'webextension-polyfill'
 import { createTabClient } from '@delight-rpc/webextension'
-import { IFrameAPI, ImageFormat } from '@src/contract'
+import { IFrameAPI, ImageFormat } from '@src/contract.js'
 import { Awaitable } from '@blackglory/prelude'
 import { pipeAsync } from 'extra-utils'
-import { offscreenClient } from './offscreen-client'
-import { convertHtmlToFormattedLinkHTML } from './convert-html-to-formatted-link-html'
-import { convertHtmlToMarkdown } from './convert-html-to-markdown'
-import { convertUrlToFormattedURL } from './convert-url-to-formatted-url'
+import { offscreenClient } from './offscreen-client.js'
+import { convertHtmlToFormattedLinkHTML } from './convert-html-to-formatted-link-html.js'
+import { convertHtmlToMarkdown } from './convert-html-to-markdown.js'
+import { convertUrlToFormattedURL } from './convert-url-to-formatted-url.js'
 
 export type ContextMenusClickHandler = (
   info: browser.Menus.OnClickData

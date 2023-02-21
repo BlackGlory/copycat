@@ -1,5 +1,5 @@
 import { LocalStorage } from 'extra-webextension'
-import { StorageItemKey, IStorage, IConfigStorage, MarkdownFlavor, URLFormat } from '@src/contract'
+import { StorageItemKey, IStorage, IConfigStorage, MarkdownFlavor, URLFormat } from '@src/contract.js'
 
 const storage = new LocalStorage<IStorage>()
 

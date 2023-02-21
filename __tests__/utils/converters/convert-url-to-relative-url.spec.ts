@@ -1,4 +1,4 @@
-import { convertUrlToRelativeURL } from '@converters/convert-url-to-relative-url'
+import { convertUrlToRelativeURL } from '@converters/convert-url-to-relative-url.js'
 
 test('convertUrlToRelativeURL', () => {
   const result = convertUrlToRelativeURL(

@@ -1,11 +1,13 @@
 import { useMemo } from 'react'
 import { useMount } from 'extra-react-hooks'
-import styled from 'styled-components'
+import _styled from 'styled-components'
 import { useImmer } from 'use-immer'
-import { IBackgroundAPI, IConfigStorage, URLFormat, MarkdownFlavor } from '@src/contract'
+import { IBackgroundAPI, IConfigStorage, URLFormat, MarkdownFlavor } from '@src/contract.js'
 import { createBackgroundClient } from '@delight-rpc/webextension'
-import { i18n } from '@utils/i18n'
+import { i18n } from '@utils/i18n.js'
 import { go } from '@blackglory/prelude'
+
+const styled = _styled.default
 
 const Window = styled.div`
   min-width: 600px;

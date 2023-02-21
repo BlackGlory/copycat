@@ -1,8 +1,14 @@
+import { createDOMParser } from 'extra-dom'
+
 export function convertHtmlToOnlyATagHTML(html: string): string {
-  const template = document.createElement('template')
-  template.innerHTML = html
-  const fragment = template.content
-  const treeWalker = document.createTreeWalker(fragment, NodeFilter.SHOW_TEXT + NodeFilter.SHOW_ELEMENT)
+  const parser = createDOMParser()
+  const document = parser.parseFromString(html, 'text/html')
+
+  const treeWalker = document.createTreeWalker(
+    document.body
+  , NodeFilter.SHOW_TEXT + NodeFilter.SHOW_ELEMENT
+  )
+
   const container = document.createElement('div')
   while (treeWalker.nextNode()) {
     const node = treeWalker.currentNode
@@ -13,5 +19,6 @@ export function convertHtmlToOnlyATagHTML(html: string): string {
       treeWalker.nextNode()
     }
   }
+
   return container.innerHTML
 }

@@ -1,4 +1,4 @@
-import { convertTextToTrimmedText } from '@converters/convert-text-to-trimmed-text'
+import { convertTextToTrimmedText } from '@converters/convert-text-to-trimmed-text.js'
 
 test('convertTextToTrimmedText', () => {
   const result = convertTextToTrimmedText(`

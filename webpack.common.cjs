@@ -20,6 +20,10 @@ module.exports = {
   , fallback: {
       'path': require.resolve('path-browserify')
     }
+  , extensionAlias: {
+      '.js': ['.ts', '.js']
+    , '.jsx': ['.tsx', '.jsx']
+    }
   }
 , module: {
     rules: [

@@ -1,4 +1,4 @@
-import { convertUrlToLinkHTML } from '@converters/convert-url-to-link-html'
+import { convertUrlToLinkHTML } from '@converters/convert-url-to-link-html.js'
 
 test('convertUrlToLinkHTML', () => {
   const result1 = convertUrlToLinkHTML('https://hello.world')

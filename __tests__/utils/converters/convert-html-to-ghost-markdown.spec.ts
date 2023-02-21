@@ -1,4 +1,4 @@
-import { convertHtmlToGhostMarkdown } from '@converters/convert-html-to-ghost-markdown'
+import { convertHtmlToGhostMarkdown } from '@converters/convert-html-to-ghost-markdown.js'
 
 test('convertHtmlToGhostMarkdown', () => {
   const result = convertHtmlToGhostMarkdown('<em><none>Hello*World</none></em>')

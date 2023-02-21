@@ -1,4 +1,4 @@
-import { convertUrlToImageHTML } from '@converters/convert-url-to-image-html'
+import { convertUrlToImageHTML } from '@converters/convert-url-to-image-html.js'
 
 test('convertUrlToImageHTML', () => {
   const result = convertUrlToImageHTML('https://hello.world')

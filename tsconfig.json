@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
     "target": "ES2018"
-  , "module": "ES2015"
-  , "moduleResolution": "Node"
+  , "module": "NodeNext"
+  , "moduleResolution": "Nodenext"
   , "jsx": "react-jsx"
-  , "allowSyntheticDefaultImports": true
   , "esModuleInterop": true
   , "strict": true
   , "removeComments": true
@@ -17,7 +16,12 @@
     , "@converters/*": ["src/utils/converters/*"]
     , "@hooks/*": ["src/hooks/*"]
     , "@utils/*": ["src/utils/*"]
+    , "@test/*": ["__tests__/*"]
     }
+  , "plugins": [
+      { "transform": "typescript-transform-paths" }
+    , { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
   }
 , "include": [
     "src"

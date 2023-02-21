@@ -1,4 +1,4 @@
-import { convertUrlToLinkPlain } from '@converters/convert-url-to-link-plain'
+import { convertUrlToLinkPlain } from '@converters/convert-url-to-link-plain.js'
 
 test('convertUrlToLinkPlain', () => {
   const result1 = convertUrlToLinkPlain('https://hello.world')

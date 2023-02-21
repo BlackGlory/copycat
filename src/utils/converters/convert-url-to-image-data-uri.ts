@@ -1,4 +1,4 @@
-import { ImageFormat } from '@src/contract'
+import { ImageFormat } from '@src/contract.js'
 
 export function convertUrlToImageDataURI(url: string, format?: ImageFormat): Promise<string> {
   if (format) {

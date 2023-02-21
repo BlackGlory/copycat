@@ -1,4 +1,4 @@
-import { convertHtmlToNoAttrHTML } from '@converters/convert-html-to-no-attr-html'
+import { convertHtmlToNoAttrHTML } from '@converters/convert-html-to-no-attr-html.js'
 
 test('convertHtmlToNoAttrHTML', () => {
   const result = convertHtmlToNoAttrHTML('<a href="../hello">Hello World</a>')

@@ -1,6 +1,6 @@
-import { URLFormat } from '@src/contract'
-import { getConfig } from './storage'
-import { offscreenClient } from './offscreen-client'
+import { URLFormat } from '@src/contract.js'
+import { getConfig } from './storage.js'
+import { offscreenClient } from './offscreen-client.js'
 
 export async function convertUrlToFormattedURL(
   url: string

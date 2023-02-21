@@ -1,4 +1,4 @@
-import { convertUrlToRootRelativeURL } from '@converters/convert-url-to-root-relative-url'
+import { convertUrlToRootRelativeURL } from '@converters/convert-url-to-root-relative-url.js'
 
 test('convertUrlToRootRelativeURL', () => {
   const result = convertUrlToRootRelativeURL(

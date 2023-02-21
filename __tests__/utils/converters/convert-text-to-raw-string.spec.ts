@@ -1,4 +1,4 @@
-import { convertTextToRawString } from '@converters/convert-text-to-raw-string'
+import { convertTextToRawString } from '@converters/convert-text-to-raw-string.js'
 
 test('convertTextToRawString', () => {
   const result = convertTextToRawString('\nHello World\n')

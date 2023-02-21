@@ -12,7 +12,7 @@ export function convertUrlToRelativeURL(
     } else {
       return absoluteUrl
     }
-  } catch (e) {
+  } catch {
     return absoluteUrl
   }
 }

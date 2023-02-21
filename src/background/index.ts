@@ -1,11 +1,11 @@
 import browser from 'webextension-polyfill'
 import { go } from '@blackglory/prelude'
-import { handlers, ContextMenusClickHandler, CommandComplicateHandler } from './handlers'
-import { menus } from './menus'
-import { initStorage } from './storage'
-import { migrate } from './migrate'
+import { handlers, ContextMenusClickHandler, CommandComplicateHandler } from './handlers.js'
+import { menus } from './menus.js'
+import { initStorage } from './storage.js'
+import { migrate } from './migrate.js'
 import { each } from 'extra-promise'
-import { offscreenClient } from './offscreen-client'
+import { offscreenClient } from './offscreen-client.js'
 
 browser.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
   switch (reason) {

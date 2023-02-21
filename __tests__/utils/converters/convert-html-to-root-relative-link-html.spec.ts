@@ -1,12 +1,16 @@
-import { convertHtmlToRootRelativeLinkHTML } from '@converters/convert-html-to-root-relative-link-html'
+import { convertHtmlToRootRelativeLinkHTML } from '@converters/convert-html-to-root-relative-link-html.js'
+import { dedent } from 'extra-tags'
 
 test('convertHtmlToRootRelativeLinkHTML', () => {
-  const result = convertHtmlToRootRelativeLinkHTML(`
-    <img src="https://hello.world/test/hello">
-    <a href="https://hello.world/test/hello">Hello World</a>
-  `, 'https://hello.world/test/test')
+  const result = convertHtmlToRootRelativeLinkHTML(
+    dedent`
+      <img src="https://hello.world/test/hello">
+      <a href="https://hello.world/test/hello">Hello World</a>
+    `
+  , 'https://hello.world/test/test'
+  )
 
-  expect(result).toBe(`
+  expect(result).toBe(dedent`
     <img src="/test/hello">
     <a href="/test/hello">Hello World</a>
   `)

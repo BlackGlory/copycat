@@ -10,7 +10,7 @@ export function convertUrlToRootRelativeURL(
     } else {
       return url
     }
-  } catch (e) {
+  } catch {
     return url
   }
 }

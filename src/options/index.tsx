@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import { Options } from '@components/options'
+import { Options } from '@components/options.jsx'
 import { assert } from '@blackglory/prelude'
 
 const main = document.querySelector('main')

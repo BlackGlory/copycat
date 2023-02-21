@@ -1,6 +1,6 @@
-import { URLFormat } from '@src/contract'
-import { offscreenClient } from './offscreen-client'
-import { getConfig } from './storage'
+import { URLFormat } from '@src/contract.js'
+import { offscreenClient } from './offscreen-client.js'
+import { getConfig } from './storage.js'
 
 export async function convertHtmlToFormattedLinkHTML(
   html: string
