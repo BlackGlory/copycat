@@ -1,33 +1,51 @@
 import browser from 'webextension-polyfill'
 import { go } from '@blackglory/prelude'
-import {
-  handlers
-, ContextMenusClickHandler
-, CommandComplicateHandler
-} from './handlers'
+import { handlers, ContextMenusClickHandler, CommandComplicateHandler } from './handlers'
 import { menus } from './menus'
+import { initStorage } from './storage'
+import { migrate } from './migrate'
+import { each } from 'extra-promise'
+import { offscreenClient } from './offscreen-client'
 
-// Inject after installed / available
-browser.runtime.onInstalled.addListener(async () => {
-  for (const { id } of await queryAllInjectableTabs()) {
-    if (id) {
-      const manifest = browser.runtime.getManifest()
-      for (const file of manifest.content_scripts![0].js!) {
-        browser.tabs.executeScript(id, {
-          file
-        , allFrames: true
-        , matchAboutBlank: true
-        , runAt: 'document_end'
-        })
+browser.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
+  switch (reason) {
+    case 'install': {
+      await initStorage()
+      break
+    }
+    case 'update': {
+      // 在升级后执行迁移.
+      if (previousVersion) {
+        await migrate(previousVersion)
       }
+      break
     }
   }
+
+  // 尝试将内容脚本注入所有现有页面.
+  const manifest = browser.runtime.getManifest()
+  const contentScripts = manifest.content_scripts?.[0].js ?? []
+  await each(await browser.tabs.query({}), async ({ id }) => {
+    if (id) {
+      try {
+        await browser.scripting.executeScript({
+          target: {
+            tabId: id
+          , allFrames: true
+          }
+        , files: contentScripts
+        })
+      } catch (e) {
+        console.warn(e)
+      }
+    }
+  })
 })
 
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
   const text = await (handlers[info.menuItemId] as ContextMenusClickHandler)(info, tab)
   if (text) {
-    await writeTextToClipboard(text)
+    await offscreenClient.writeTextToClipboard(text)
   }
 })
 
@@ -40,7 +58,7 @@ browser.commands.onCommand.addListener(async command => {
   if (tabs.length) {
     const text = await (handlers[command] as CommandComplicateHandler)({}, tabs[0])
     if (text) {
-      await writeTextToClipboard(text)
+      await offscreenClient.writeTextToClipboard(text)
     }
   }
 })
@@ -58,32 +76,15 @@ go(async () => {
       browser.contextMenus.create(item as browser.Menus.CreateCreatePropertiesType)
     }
   }
-})
 
-async function writeTextToClipboard(text: string): Promise<void> {
-  try {
-    return await navigator.clipboard.writeText(text)
-  } catch {
-    const textarea = document.createElement('textarea')
-    textarea.textContent = text
-    document.body.appendChild(textarea)
-    textarea.select()
-    document.execCommand('Copy', false)
-    document.body.removeChild(textarea)
+  if (!await chrome.offscreen.hasDocument()) {
+    await chrome.offscreen.createDocument({
+      url: 'offscreen.html'
+    , reasons: [
+        chrome.offscreen.Reason.DOM_PARSER
+      // , chrome.offscreen.Reason.CLIPBOARD
+      ]
+    , justification: 'The extension need access to DOM.'
+    })
   }
-}
-
-async function queryAllInjectableTabs(): Promise<browser.Tabs.Tab[]> {
-  const invalidList = [
-    'about:'
-  , 'browser:'
-  , 'view-source:'
-  , 'chrome:'
-  , 'chrome-error:'
-  , 'https://chrome.google.com/'
-  ]
-  const tabs = await browser.tabs.query({})
-  return tabs.filter(({ url = '' }) => {
-    return invalidList.every(invalid => !url.startsWith(invalid))
-  })
-}
+})

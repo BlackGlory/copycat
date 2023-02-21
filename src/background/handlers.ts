@@ -1,28 +1,12 @@
 import browser from 'webextension-polyfill'
 import { createTabClient } from '@delight-rpc/webextension'
-import { IFrameAPI } from '@src/contract'
-import { convertHtmlToBBCode } from '@converters/html/bbcode'
-import { convertUrlToLinkPlain } from '@converters/url/link/plain'
-import { convertUrlToLinkMarkdown } from '@converters/url/link/markdown'
-import { convertUrlToLinkHTML } from '@converters/url/link/html'
-import { convertUrlToLinkBBCode } from '@converters/url/link/bbcode'
-import { convertUrlToFormattedURL } from '@converters/url/formatted'
-import { convertMarkdownToBeautifyMarkdown } from '@converters/markdown/beautify'
-import { convertHtmlToMarkdown } from '@converters/html/markdown'
-import { convertHtmlToBeautifyHTML } from '@converters/html/html/beautify'
-import { convertHtmlToSafeHTML } from '@converters/html/html/safe'
-import { convertUrlToImageMarkdown } from '@converters/url/image/markdown'
-import { convertUrlToImageDataURI } from '@converters/url/image/data-uri'
-import { convertUrlToImageHTML } from '@converters/url/image/html'
-import { convertUrlToImageBBCode } from '@converters/url/image/bbcode'
-import { convertUrlToAudioHTML } from '@converters/url/audio/html'
-import { convertUrlToVideoHTML } from '@converters/url/video/html'
-import { convertHtmlToFormattedLinkHTML } from '@converters/html/html/formatted-link'
-import { convertHtmlToOnlyATagHTML } from '@converters/html/html/only-a-tag'
-import { convertHtmlToNoAttrHTML } from '@converters/html/html/no-attr'
-import { convertTextToTrimmedText } from '@converters/text/trim'
-import { convertTextToRawString } from '@converters/text/raw-string'
+import { IFrameAPI, ImageFormat } from '@src/contract'
 import { Awaitable } from '@blackglory/prelude'
+import { pipeAsync } from 'extra-utils'
+import { offscreenClient } from './offscreen-client'
+import { convertHtmlToFormattedLinkHTML } from './convert-html-to-formatted-link-html'
+import { convertHtmlToMarkdown } from './convert-html-to-markdown'
+import { convertUrlToFormattedURL } from './convert-url-to-formatted-url'
 
 export type ContextMenusClickHandler = (
   info: browser.Menus.OnClickData
@@ -39,165 +23,201 @@ interface Handlers {
 }
 
 export const handlers: Handlers = {
-  ['TAB_URL_TO_PLAIN']: createCommandComplicateHandler((info, tab) => {
-    if (tab && tab.url) {
-      return convertUrlToLinkPlain(tab.url, tab.title)
+  ['TAB_URL_TO_PLAIN']: createCommandComplicateHandler(async (info, tab) => {
+    if (tab?.url) {
+      return await offscreenClient.convertUrlToLinkPlain(tab.url, tab.title)
     }
   })
-, ['TAB_URL_TO_MARKDOWN']: createCommandComplicateHandler((info, tab) => {
-    if (tab && tab.url) {
-      return convertUrlToLinkMarkdown(tab.url, tab.title)
+, ['TAB_URL_TO_MARKDOWN']: createCommandComplicateHandler(async (info, tab) => {
+    if (tab?.url) {
+      return await offscreenClient.convertUrlToLinkMarkdown(tab.url, tab.title)
     }
   })
-, ['TAB_URL_TO_HTML']: createCommandComplicateHandler((info, tab) => {
-    if (tab && tab.url) {
-      return convertUrlToLinkHTML(tab.url, tab.title)
+, ['TAB_URL_TO_HTML']: createCommandComplicateHandler(async (info, tab) => {
+    if (tab?.url) {
+      return await offscreenClient.convertUrlToLinkHTML(tab.url, tab.title)
     }
   })
-, ['TAB_URL_TO_BBCODE']: createCommandComplicateHandler((info, tab) => {
-    if (tab && tab.url) {
-      return convertUrlToLinkBBCode(tab.url, tab.title)
+, ['TAB_URL_TO_BBCODE']: createCommandComplicateHandler(async (info, tab) => {
+    if (tab?.url) {
+      return await offscreenClient.convertUrlToLinkBBCode(tab.url, tab.title)
     }
   })
 , ['FRAME_URL_TO_PLAIN']: createContextMenusClickHandler(async (info, tab) => {
     if (info.frameUrl) {
-      if (tab && tab.id && tab.url) {
-        const client = createTabClient<IFrameAPI>({
+      if (tab?.id && tab.url) {
+        const tabClient = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
 
-        const url = convertUrlToFormattedURL(info.frameUrl, tab.url)
-        const title = await client.getDocumentTitle()
-        return convertUrlToLinkPlain(url, title)
+        const url = await convertUrlToFormattedURL(
+          info.frameUrl
+        , tab.url
+        )
+        const title = await tabClient.getDocumentTitle()
+        return await offscreenClient.convertUrlToLinkPlain(url, title)
       } else {
-        return convertUrlToLinkPlain(info.frameUrl)
+        return await offscreenClient.convertUrlToLinkPlain(info.frameUrl)
       }
     }
   })
 , ['FRAME_URL_TO_MARKDOWN']: createContextMenusClickHandler(async (info, tab) => {
     if (info.frameUrl) {
-      if (tab && tab.id && tab.url) {
-        const client = createTabClient<IFrameAPI>({
+      if (tab?.id && tab.url) {
+        const tabClient = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
 
-        const url = convertUrlToFormattedURL(info.frameUrl, tab.url)
-        const title = await client.getDocumentTitle()
-        return convertUrlToLinkMarkdown(url, title)
+        const url = await convertUrlToFormattedURL(
+          info.frameUrl
+        , tab.url
+        )
+        const title = await tabClient.getDocumentTitle()
+        return await offscreenClient.convertUrlToLinkMarkdown(url, title)
       } else {
-        return convertUrlToLinkMarkdown(info.frameUrl)
+        return await offscreenClient.convertUrlToLinkMarkdown(info.frameUrl)
       }
     }
   })
 , ['FRAME_URL_TO_HTML']: createContextMenusClickHandler(async (info, tab) => {
     if (info.frameUrl) {
-      if (tab && tab.id && tab.url) {
-        const client = createTabClient<IFrameAPI>({
+      if (tab?.id && tab.url) {
+        const tabClient = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
 
-        const url = convertUrlToFormattedURL(info.frameUrl, tab.url)
-        const title = await client.getDocumentTitle()
-        return convertUrlToLinkHTML(url, title)
+        const url = await convertUrlToFormattedURL(info.frameUrl, tab.url)
+        const title = await tabClient.getDocumentTitle()
+        return await offscreenClient.convertUrlToLinkHTML(url, title)
       } else {
-        return convertUrlToLinkHTML(info.frameUrl)
+        return await offscreenClient.convertUrlToLinkHTML(info.frameUrl)
       }
     }
   })
 , ['FRAME_URL_TO_BBCODE']: createContextMenusClickHandler(async (info, tab) => {
     if (info.frameUrl) {
-      if (tab && tab.id && tab.url) {
+      if (tab?.id && tab.url) {
         const client = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
 
-        const url = convertUrlToFormattedURL(info.frameUrl, tab.url)
+        const url = await convertUrlToFormattedURL(
+          info.frameUrl
+        , tab.url
+        )
         const title = await client.getDocumentTitle()
-        return convertUrlToLinkBBCode(url, title)
+        return await offscreenClient.convertUrlToLinkBBCode(url, title)
       } else {
-        return convertUrlToLinkBBCode(info.frameUrl)
+        return await offscreenClient.convertUrlToLinkBBCode(info.frameUrl)
       }
     }
   })
 , ['LINK_TO_MARKDOWN']: createContextMenusClickHandler(async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
-        const client = createTabClient<IFrameAPI>({
+        const tabClient = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
 
-        const url = convertUrlToFormattedURL(info.linkUrl, info.frameUrl || tab.url)
-        const html = await client.getActiveElementContent()
-        const title =
-        convertMarkdownToBeautifyMarkdown(
-          convertHtmlToMarkdown(
-            convertHtmlToBeautifyHTML(
-              convertHtmlToSafeHTML(html)
-            )
-          )
+        const url = await convertUrlToFormattedURL(
+          info.linkUrl
+        , info.frameUrl || tab.url)
+        const html = await tabClient.getActiveElementContent()
+        const title = await pipeAsync(
+          html
+        , offscreenClient.convertHtmlToSafeHTML
+        , offscreenClient.convertHtmlToBeautifyHTML
+        , convertHtmlToMarkdown
+        , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
-        return convertUrlToLinkMarkdown(url, title || info.linkText)
+        return await offscreenClient.convertUrlToLinkMarkdown(
+          url
+        , title || info.linkText
+        )
       } else {
-        return convertUrlToLinkMarkdown(info.linkUrl, info.linkText)
+        return await offscreenClient.convertUrlToLinkMarkdown(
+          info.linkUrl
+        , info.linkText
+        )
       }
     }
   })
 , ['LINK_TO_HTML']: createContextMenusClickHandler(async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
-        const client = createTabClient<IFrameAPI>({
+        const tabClient = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
 
-        const url = convertUrlToFormattedURL(info.linkUrl, info.frameUrl || tab.url)
-        const html = await client.getActiveElementContent()
-        const title =
-        convertHtmlToBeautifyHTML(
-          convertHtmlToSafeHTML(html)
+        const url = await convertUrlToFormattedURL(
+          info.linkUrl
+        , info.frameUrl || tab.url
         )
-        return convertUrlToLinkHTML(url, title || info.linkText)
+        const html = await tabClient.getActiveElementContent()
+        const title = await pipeAsync(
+          html
+        , offscreenClient.convertHtmlToSafeHTML
+        , offscreenClient.convertHtmlToBeautifyHTML
+        )
+        return await offscreenClient.convertUrlToLinkHTML(
+          url
+        , title || info.linkText
+        )
       } else {
-        return convertUrlToLinkHTML(info.linkUrl, info.linkText)
+        return await offscreenClient.convertUrlToLinkHTML(
+          info.linkUrl
+        , info.linkText
+        )
       }
     }
   })
 , ['LINK_TO_BBCODE']: createContextMenusClickHandler(async (info, tab) => {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
-        const client = createTabClient<IFrameAPI>({
+        const tabClient = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
 
-        const url = convertUrlToFormattedURL(info.linkUrl, info.frameUrl || tab.url)
-        const html = await client.getActiveElementContent()
-        const title =
-        convertHtmlToBBCode(
-          convertHtmlToBeautifyHTML(
-            convertHtmlToSafeHTML(
-              html
-            )
-          )
+        const url = await convertUrlToFormattedURL(
+          info.linkUrl
+        , info.frameUrl || tab.url
         )
-        return convertUrlToLinkBBCode(url, title || info.linkText)
+        const html = await tabClient.getActiveElementContent()
+        const title = await pipeAsync(
+          html
+        , offscreenClient.convertHtmlToSafeHTML
+        , offscreenClient.convertHtmlToBeautifyHTML
+        , offscreenClient.convertHtmlToBBCode
+        )
+        return await offscreenClient.convertUrlToLinkBBCode(
+          url
+        , title || info.linkText
+        )
       } else {
-        return convertUrlToLinkBBCode(info.linkUrl, info.linkText)
+        return await offscreenClient.convertUrlToLinkBBCode(
+          info.linkUrl
+        , info.linkText
+        )
       }
     }
   })
-, ['IMAGE_TO_MARKDOWN']: createContextMenusClickHandler((info, tab) => {
+, ['IMAGE_TO_MARKDOWN']: createContextMenusClickHandler(async (info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
-        const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
-        return convertUrlToImageMarkdown(url)
+        const url = await convertUrlToFormattedURL(
+          info.srcUrl
+        , info.frameUrl || tab.url
+        )
+        return await offscreenClient.convertUrlToImageMarkdown(url)
       } else {
-        return convertUrlToImageMarkdown(info.srcUrl)
+        return await offscreenClient.convertUrlToImageMarkdown(info.srcUrl)
       }
     }
   })
@@ -206,8 +226,10 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return convertUrlToImageMarkdown(
-        await convertUrlToImageDataURI(srcUrl, 'jpeg')
+      return await pipeAsync(
+        srcUrl
+      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.JPEG)
+      , offscreenClient.convertUrlToImageMarkdown
       )
     }
   })
@@ -216,8 +238,10 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return convertUrlToImageMarkdown(
-        await convertUrlToImageDataURI(srcUrl, 'png')
+      return await pipeAsync(
+        srcUrl
+      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.PNG)
+      , offscreenClient.convertUrlToImageMarkdown
       )
     }
   })
@@ -226,18 +250,23 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return convertUrlToImageMarkdown(
-        await convertUrlToImageDataURI(srcUrl, 'webp')
+      return await pipeAsync(
+        srcUrl
+      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.WebP)
+      , offscreenClient.convertUrlToImageMarkdown
       )
     }
   })
-, ['IMAGE_TO_HTML']: createContextMenusClickHandler((info, tab) => {
+, ['IMAGE_TO_HTML']: createContextMenusClickHandler(async (info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
-        const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
-        return convertUrlToImageHTML(url)
+        const url = await convertUrlToFormattedURL(
+          info.srcUrl
+        , info.frameUrl || tab.url
+        )
+        return await offscreenClient.convertUrlToImageHTML(url)
       } else {
-        return convertUrlToImageHTML(info.srcUrl)
+        return await offscreenClient.convertUrlToImageHTML(info.srcUrl)
       }
     }
   })
@@ -246,8 +275,10 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return convertUrlToImageHTML(
-        await convertUrlToImageDataURI(srcUrl, 'jpeg')
+      return await pipeAsync(
+        srcUrl
+      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.JPEG)
+      , offscreenClient.convertUrlToImageHTML
       )
     }
   })
@@ -256,8 +287,10 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return convertUrlToImageHTML(
-        await convertUrlToImageDataURI(srcUrl, 'png')
+      return await pipeAsync(
+        srcUrl
+      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.PNG)
+      , offscreenClient.convertUrlToImageHTML
       )
     }
   })
@@ -266,18 +299,23 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return convertUrlToImageHTML(
-        await convertUrlToImageDataURI(srcUrl, 'webp')
+      return await pipeAsync(
+        srcUrl
+      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.WebP)
+      , offscreenClient.convertUrlToImageHTML
       )
     }
   })
 , ['IMAGE_TO_BBCODE']: createContextMenusClickHandler(async (info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
-      if (tab && tab.url) {
-        const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
-        return convertUrlToImageBBCode(url)
+      if (tab?.url) {
+        const url = await convertUrlToFormattedURL(
+          info.srcUrl
+        , info.frameUrl || tab.url
+        )
+        return await offscreenClient.convertUrlToImageBBCode(url)
       } else {
-        return convertUrlToImageBBCode(info.srcUrl)
+        return await offscreenClient.convertUrlToImageBBCode(info.srcUrl)
       }
     }
   })
@@ -286,7 +324,7 @@ export const handlers: Handlers = {
   , tab
   ) => {
     if (mediaType === 'image' && srcUrl) {
-      return await convertUrlToImageDataURI(srcUrl)
+      return await offscreenClient.convertUrlToImageDataURI(srcUrl)
     }
   })
 , ['IMAGE_TO_DATA_URI_JPEG']: createContextMenusClickHandler(async ({
@@ -294,7 +332,10 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await convertUrlToImageDataURI(srcUrl, 'jpeg')
+      return await offscreenClient.convertUrlToImageDataURI(
+        srcUrl
+      , ImageFormat.JPEG
+      )
     }
   })
 , ['IMAGE_TO_DATA_URI_PNG']: createContextMenusClickHandler(async ({
@@ -302,7 +343,7 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await convertUrlToImageDataURI(srcUrl, 'png')
+      return await offscreenClient.convertUrlToImageDataURI(srcUrl, ImageFormat.PNG)
     }
   })
 , ['IMAGE_TO_DATA_URI_WEBP']: createContextMenusClickHandler(async ({
@@ -310,31 +351,40 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await convertUrlToImageDataURI(srcUrl, 'webp')
+      return await offscreenClient.convertUrlToImageDataURI(
+        srcUrl
+      , ImageFormat.WebP
+      )
     }
   })
-, ['AUDIO_TO_HTML']: createContextMenusClickHandler((info, tab) => {
+, ['AUDIO_TO_HTML']: createContextMenusClickHandler(async (info, tab) => {
     if (info.mediaType === 'audio' && info.srcUrl) {
-      if (tab && tab.url) {
-        const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
-        return convertUrlToAudioHTML(url)
+      if (tab?.url) {
+        const url = await convertUrlToFormattedURL(
+          info.srcUrl
+        , info.frameUrl || tab.url
+        )
+        return await offscreenClient.convertUrlToAudioHTML(url)
       } else {
-        return convertUrlToAudioHTML(info.srcUrl)
+        return await offscreenClient.convertUrlToAudioHTML(info.srcUrl)
       }
     }
   })
-, ['VIDEO_TO_HTML']: createContextMenusClickHandler((info, tab) => {
+, ['VIDEO_TO_HTML']: createContextMenusClickHandler(async (info, tab) => {
     if (info.mediaType === 'video' && info.srcUrl) {
-      if (tab && tab.url) {
-        const url = convertUrlToFormattedURL(info.srcUrl, info.frameUrl || tab.url)
-        return convertUrlToVideoHTML(url)
+      if (tab?.url) {
+        const url = await convertUrlToFormattedURL(
+          info.srcUrl
+        , info.frameUrl || tab.url
+        )
+        return offscreenClient.convertUrlToVideoHTML(url)
       } else {
-        return convertUrlToVideoHTML(info.srcUrl)
+        return offscreenClient.convertUrlToVideoHTML(info.srcUrl)
       }
     }
   })
 , ['SELECTION_TO_MARKDOWN']: createCommandComplicateHandler(async (info, tab) => {
-    if (tab && tab.id) {
+    if (tab?.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
@@ -342,22 +392,18 @@ export const handlers: Handlers = {
 
       const html = await client.getSelectionHTML()
       const baseUrl = info.frameUrl || info.pageUrl || tab.url
-      return (
-        convertMarkdownToBeautifyMarkdown(
-          convertHtmlToMarkdown(
-            convertHtmlToBeautifyHTML(
-              convertHtmlToFormattedLinkHTML(
-                convertHtmlToSafeHTML(html)
-              , baseUrl
-              )
-            )
-          )
-        )
+      return await pipeAsync(
+        html
+      , offscreenClient.convertHtmlToSafeHTML
+      , html => convertHtmlToFormattedLinkHTML(html, baseUrl)
+      , offscreenClient.convertHtmlToBeautifyHTML
+      , convertHtmlToMarkdown
+      , offscreenClient.convertMarkdownToBeautifyMarkdown
       )
     }
   })
 , ['SELECTION_TO_HTML']: createCommandComplicateHandler(async (info, tab) => {
-    if (tab && tab.id) {
+    if (tab?.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
@@ -365,13 +411,11 @@ export const handlers: Handlers = {
 
       const html = await client.getSelectionHTML()
       const baseUrl = info.frameUrl || info.pageUrl || tab.url
-      return (
-        convertHtmlToBeautifyHTML(
-          convertHtmlToFormattedLinkHTML(
-            convertHtmlToSafeHTML(html)
-          , baseUrl
-          )
-        )
+      return await pipeAsync(
+        html
+      , offscreenClient.convertHtmlToSafeHTML
+      , html => convertHtmlToFormattedLinkHTML(html, baseUrl)
+      , offscreenClient.convertHtmlToBeautifyHTML
       )
     }
   })
@@ -379,7 +423,7 @@ export const handlers: Handlers = {
     info
   , tab
   ) => {
-    if (tab && tab.id) {
+    if (tab?.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
@@ -387,37 +431,33 @@ export const handlers: Handlers = {
 
       const html = await client.getSelectionHTML()
       const baseUrl = info.frameUrl || info.pageUrl || tab.url
-      return (
-        convertHtmlToBeautifyHTML(
-          convertHtmlToOnlyATagHTML(
-            convertHtmlToFormattedLinkHTML(
-              convertHtmlToSafeHTML(html)
-            , baseUrl
-            )
-          )
-        )
+      return await pipeAsync(
+        html
+      , offscreenClient.convertHtmlToSafeHTML
+      , html => convertHtmlToFormattedLinkHTML(html, baseUrl)
+      , offscreenClient.convertHtmlToOnlyATagHTML
+      , offscreenClient.convertHtmlToBeautifyHTML
       )
     }
   })
 , ['SELECTION_TO_HTML_NO_ATTR']: createCommandComplicateHandler(async (info, tab) => {
-    if (tab && tab.id) {
-      const client = createTabClient<IFrameAPI>({
+    if (tab?.id) {
+      const tabClient = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
 
-      const html = await client.getSelectionHTML()
-      return (
-        convertHtmlToBeautifyHTML(
-          convertHtmlToNoAttrHTML(
-            convertHtmlToSafeHTML(html)
-          )
-        )
+      const html = await tabClient.getSelectionHTML()
+      return await pipeAsync(
+        html
+      , offscreenClient.convertHtmlToSafeHTML
+      , offscreenClient.convertHtmlToNoAttrHTML
+      , offscreenClient.convertHtmlToBeautifyHTML
       )
     }
   })
 , ['SELECTION_TO_BBCODE']: createCommandComplicateHandler(async (info, tab) => {
-    if (tab && tab.id) {
+    if (tab?.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
@@ -425,48 +465,45 @@ export const handlers: Handlers = {
 
       const html = await client.getSelectionHTML()
       const baseUrl = info.frameUrl || info.pageUrl || tab.url
-      return (
-        convertHtmlToBBCode(
-          convertHtmlToBeautifyHTML(
-            convertHtmlToFormattedLinkHTML(
-              convertHtmlToSafeHTML(html)
-            , baseUrl
-            )
-          )
-        )
+      return await pipeAsync(
+        html
+      , offscreenClient.convertHtmlToSafeHTML
+      , html => convertHtmlToFormattedLinkHTML(html, baseUrl)
+      , offscreenClient.convertHtmlToBeautifyHTML
+      , offscreenClient.convertHtmlToBBCode
       )
     }
   })
 , ['SELECTION_TO_PLAIN']: createCommandComplicateHandler(async (info, tab) => {
-    if (tab && tab.id) {
-      const client = createTabClient<IFrameAPI>({
+    if (tab?.id) {
+      const tabClient = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
 
-      return await client.getSelectionText()
+      return await tabClient.getSelectionText()
     }
   })
 , ['SELECTION_TO_PLAIN_TRIMMED']: createCommandComplicateHandler(async (info, tab) => {
-    if (tab && tab.id) {
-      const client = createTabClient<IFrameAPI>({
+    if (tab?.id) {
+      const tabClient = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
 
-      const text = await client.getSelectionText()
-      return convertTextToTrimmedText(text)
+      const text = await tabClient.getSelectionText()
+      return await offscreenClient.convertTextToTrimmedText(text)
     }
   })
 , ['SELECTION_TO_RAW_STRING']: createCommandComplicateHandler(async (info, tab) => {
-    if (tab && tab.id) {
-      const client = createTabClient<IFrameAPI>({
+    if (tab?.id) {
+      const tabClient = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
 
-      const text = await client.getSelectionText()
-      return convertTextToRawString(text)
+      const text = await tabClient.getSelectionText()
+      return await offscreenClient.convertTextToRawString(text)
     }
   })
 }

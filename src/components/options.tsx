@@ -1,7 +1,11 @@
+import { useMemo } from 'react'
+import { useMount } from 'extra-react-hooks'
 import styled from 'styled-components'
 import { useImmer } from 'use-immer'
-import { loadConfigure, saveConfigure, Config, URLFormat, MarkdownFlavor } from '@src/config'
+import { IBackgroundAPI, IConfigStorage, URLFormat, MarkdownFlavor } from '@src/contract'
+import { createBackgroundClient } from '@delight-rpc/webextension'
 import { i18n } from '@utils/i18n'
+import { go } from '@blackglory/prelude'
 
 const Window = styled.div`
   min-width: 600px;
@@ -22,7 +26,18 @@ const Select = styled.select`
 `
 
 export function Options() {
-  const [selector, setSelector] = useImmer<Config>(loadConfigure())
+  const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
+  const [config, setConfig] = useImmer<IConfigStorage>({
+    markdownFlavor: MarkdownFlavor.GFM
+  , urlFormat: URLFormat.Absolute
+  })
+
+  useMount(() => {
+    go(async () => {
+      const config = await client.getConfig()
+      setConfig(config)
+    })
+  })
 
   return (
     <Window>
@@ -31,10 +46,10 @@ export function Options() {
           <tr>
             <td><Label>{i18n('Options_UrlFormat')}</Label></td>
             <td>
-              <Select value={selector.urlFormat} onChange={e => {
-                setSelector(selector => {
-                  selector.urlFormat = e.target.value as URLFormat
-                  saveConfigure(selector)
+              <Select value={config.urlFormat} onChange={e => {
+                setConfig(config => {
+                  config.urlFormat = e.target.value as URLFormat
+                  setConfig(config)
                 })
               }}>
                 <option value='absolute'>{i18n('Options_AbsoluteURL')}</option>
@@ -47,10 +62,10 @@ export function Options() {
           <tr>
             <td><Label>{i18n('Options_MarkdownFlavor')}</Label></td>
             <td>
-              <Select value={selector.markdownFlavor} onChange={e => {
-                setSelector(selector => {
+              <Select value={config.markdownFlavor} onChange={e => {
+                setConfig(selector => {
                   selector.markdownFlavor = e.target.value as MarkdownFlavor
-                  saveConfigure(selector)
+                  setConfig(selector)
                 })
               }}>
                 <option value='gfm'>{i18n('Options_GitHubFlavoredMarkdown')}</option>

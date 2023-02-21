@@ -1,8 +1,8 @@
 {
   "name": "__MSG_extensionName__"
 , "author": "BlackGlory"
-, "version": "2.4.5"
-, "manifest_version": 2
+, "version": "3.0.0"
+, "manifest_version": 3
 , "default_locale": "en"
 , "description": "__MSG_extensionDescription__"
 , "icons": {
@@ -58,10 +58,9 @@
   , "run_at": "document_end"
   }]
 , "background": {
-    "scripts": ["background.js"]
-  , "persistent": false
+    "service_worker": "background.js"
   }
-, "browser_action": {
+, "action": {
     "default_title": "__MSG_extensionBrowserActionTitle__"
   , "default_popup": "options.html"
   , "default_icon": {
@@ -74,12 +73,16 @@
   }
 , "options_ui": {
     "page": "options.html"
-  , "chrome_style": true
   }
-, "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsJiFjdf0ILsn7ANBdvCrIqYaVFLNo2aQwiXTqgoiYaQgdnXrui7reR1iNopylmI6jKyXHJmL2kijqy5GjyqFyl8AR365a8dbLpR+5QIBemV+3j3/igmqR6w/2tvhvs1STPdAANPO8tB6CqQ6atf59UrL1r4Sl7zbLgsaJqAmyz/fOl6338cA/sYmZpnNZ8ouX481HaA24tbjStsw5Tl+FPGGUaaEXZbczL6YfNQH1Y/UMt5zo9GfyS7Zndp+/mLrTcFat3bKp0YGLMkl8pfJBBdf7UXqfLuXfHiH/a1TQK3SgxBjCDY0XLKjo432l1kz22/bQRo4JbppnY/bYR9ymwIDAQAB",
-  "permissions": [
+, "permissions": [
     "contextMenus"
+  , "scripting"
   , "clipboardWrite"
-  , "<all_urls>"
+  , "offscreen"
+  , "storage"
   ]
+, "host_permissions": [
+    "<all_urls>"
+  ]
+, "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsJiFjdf0ILsn7ANBdvCrIqYaVFLNo2aQwiXTqgoiYaQgdnXrui7reR1iNopylmI6jKyXHJmL2kijqy5GjyqFyl8AR365a8dbLpR+5QIBemV+3j3/igmqR6w/2tvhvs1STPdAANPO8tB6CqQ6atf59UrL1r4Sl7zbLgsaJqAmyz/fOl6338cA/sYmZpnNZ8ouX481HaA24tbjStsw5Tl+FPGGUaaEXZbczL6YfNQH1Y/UMt5zo9GfyS7Zndp+/mLrTcFat3bKp0YGLMkl8pfJBBdf7UXqfLuXfHiH/a1TQK3SgxBjCDY0XLKjo432l1kz22/bQRo4JbppnY/bYR9ymwIDAQAB"
 }

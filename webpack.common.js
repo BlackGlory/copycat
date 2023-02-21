@@ -8,6 +8,7 @@ module.exports = {
     'background': './src/background/index.ts'
   , 'copycat': './src/content-script.ts'
   , 'options': './src/options/index.tsx'
+  , 'offscreen': './src/offscreen/index.ts'
   }
 , output: {
     path: path.join(__dirname, 'dist')
@@ -39,6 +40,7 @@ module.exports = {
           }
         }
       , { from: './src/options/index.html', to: 'options.html' }
+      , { from: './src/offscreen/index.html', to: 'offscreen.html' }
       ]
     })
   ]

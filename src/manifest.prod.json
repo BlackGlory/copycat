@@ -1,8 +1,8 @@
 {
   "name": "__MSG_extensionName__"
 , "author": "BlackGlory"
-, "version": "2.4.5"
-, "manifest_version": 2
+, "version": "3.0.0"
+, "manifest_version": 3
 , "default_locale": "en"
 , "description": "__MSG_extensionDescription__"
 , "icons": {
@@ -54,14 +54,13 @@
     "matches": ["<all_urls>"]
   , "match_about_blank": true
   , "all_frames": true
-  , "js": ["browser-polyfill.min.js", "copycat.js"]
+  , "js": ["copycat.js"]
   , "run_at": "document_end"
   }]
 , "background": {
-    "scripts": ["browser-polyfill.min.js", "background.js"]
-  , "persistent": false
+    "service_worker": "background.js"
   }
-, "browser_action": {
+, "action": {
     "default_title": "__MSG_extensionBrowserActionTitle__"
   , "default_popup": "options.html"
   , "default_icon": {
@@ -74,11 +73,15 @@
   }
 , "options_ui": {
     "page": "options.html"
-  , "chrome_style": true
   }
 , "permissions": [
     "contextMenus"
+  , "scripting"
   , "clipboardWrite"
-  , "<all_urls>"
+  , "offscreen"
+  , "storage"
+  ]
+, "host_permissions": [
+    "<all_urls>"
   ]
 }
