@@ -1,5 +1,5 @@
 import { LocalStorage } from 'extra-webextension'
-import { StorageItemKey, IStorage, IConfigStorage, MarkdownFlavor, URLFormat } from '@src/contract.js'
+import { StorageItemKey, IStorage, IConfigStorage, MarkdownFlavor, URLFormat, URLEncoding } from '@src/contract.js'
 
 const storage = new LocalStorage<IStorage>()
 
@@ -7,6 +7,7 @@ export async function initStorage(): Promise<void> {
   await storage.setItem(StorageItemKey.Config, {
     markdownFlavor: MarkdownFlavor.GFM
   , urlFormat: URLFormat.Absolute
+  , urlEncoding: URLEncoding.AlwaysEncode
   })
 }
 

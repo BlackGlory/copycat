@@ -7,26 +7,33 @@ export interface IStorage {
 }
 
 export enum URLFormat {
-  Original = 'original'
-, Absolute = 'absolute'
-, Relative = 'relative'
-, RootRelative = 'root-relative'
+  Original
+, Absolute
+, Relative
+, RootRelative
+}
+
+export enum URLEncoding {
+  Original
+, AlwaysEncode
+, AlwaysDecode
 }
 
 export enum MarkdownFlavor {
-  Commonmark = 'commonmark'
-, GFM = 'gfm'
-, Ghost = 'ghost'
+  Commonmark
+, GFM
+, Ghost
 }
 
 export enum ImageFormat {
-  JPEG = 'jpeg'
-, WebP = 'webp'
-, PNG = 'png'
+  JPEG
+, WebP
+, PNG
 }
 
 export interface IConfigStorage {
   urlFormat: URLFormat
+  urlEncoding: URLEncoding
   markdownFlavor: MarkdownFlavor
 }
 

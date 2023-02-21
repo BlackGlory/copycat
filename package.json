@@ -68,6 +68,8 @@
   "dependencies": {
     "@blackglory/prelude": "^0.3.1",
     "@delight-rpc/webextension": "^0.1.0",
+    "@headlessui/react": "^1.7.11",
+    "@heroicons/react": "^2.0.16",
     "delight-rpc": "^5.0.4",
     "ent": "^2.2.0",
     "extra-dom": "^0.5.3",
@@ -84,6 +86,7 @@
     "react-is": "^18.2.0",
     "turndown": "^7.1.1",
     "turndown-plugin-gfm": "^1.0.2",
+    "url-operator": "^0.3.0",
     "use-immer": "^0.8.1",
     "webextension-polyfill": "^0.10.0"
   }
