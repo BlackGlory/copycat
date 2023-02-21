@@ -20,21 +20,21 @@ Copy content from web powerful than ever before.
   - [x] BBCode
   - [x] HTML
   - [x] Org-mode
-  - [ ] AsciiDoc
+  - [x] AsciiDoc
 - [x] Copy a frame link as
   - [x] Plaintext
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
   - [x] Org-Mode
-  - [ ] AsciiDoc
+  - [x] AsciiDoc
 - [x] Copy a link text
 - [x] Copy a link as
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
   - [x] Org-mode
-  - [ ] AsciiDoc
+  - [x] AsciiDoc
 - [x] Copy selection as
   - [x] Plaintext
   - [x] Raw strings
@@ -52,7 +52,7 @@ Copy content from web powerful than ever before.
   - [x] DataURI(original format)
   - [x] DataURI(JPEG, PNG, WebP)
   - [x] BBCode
-- [x] Copy browser a native audio/video as HTML
+- [x] Copy a native audio/video as HTML
 
 ## Supported Markdown flavors
 - [x] [GitHub Flavored Markdown]

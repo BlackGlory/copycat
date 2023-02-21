@@ -48,6 +48,11 @@ export const handlers: Handlers = {
       return await offscreenClient.convertUrlToLinkOrgMode(tab.url, tab.title)
     }
   })
+, ['TAB_URL_TO_ASCII_DOC']: createCommandComplicateHandler(async (info, tab) => {
+    if (tab?.url) {
+      return await offscreenClient.convertUrlToLinkAsciiDoc(tab.url, tab.title)
+    }
+  })
 , ['FRAME_URL_TO_PLAIN']: createContextMenusClickHandler(async (info, tab) => {
     if (info.frameUrl) {
       if (tab?.id && tab.url) {
@@ -140,6 +145,25 @@ export const handlers: Handlers = {
       }
     }
   })
+, ['FRAME_URL_TO_ASCII_DOC']: createContextMenusClickHandler(async (info, tab) => {
+    if (info.frameUrl) {
+      if (tab?.id && tab.url) {
+        const tabClient = createTabClient<IFrameAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
+        const url = await convertUrlToFormattedURL(
+          info.frameUrl
+        , tab.url
+        )
+        const title = await tabClient.getDocumentTitle()
+        return await offscreenClient.convertUrlToLinkAsciiDoc(url, title)
+      } else {
+        return await offscreenClient.convertUrlToLinkAsciiDoc(info.frameUrl)
+      }
+    }
+  })
 , ['LINK_TEXT']: createContextMenusClickHandler(async (info, tab) => {
     if (info.linkText) {
       return info.linkText
@@ -200,6 +224,35 @@ export const handlers: Handlers = {
         return await offscreenClient.convertUrlToLinkOrgMode(url, title)
       } else {
         return await offscreenClient.convertUrlToLinkOrgMode(
+          info.linkUrl
+        , info.linkText
+        )
+      }
+    }
+  })
+, ['LINK_TO_ASCII_DOC']: createContextMenusClickHandler(async (info, tab) => {
+    if (info.linkUrl) {
+      if (tab && tab.id && tab.url) {
+        const tabClient = createTabClient<IFrameAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
+        const url = await convertUrlToFormattedURL(
+          info.linkUrl
+        , info.frameUrl ?? tab.url
+        )
+        const html = await tabClient.getActiveElementContent()
+        const title = await pipeAsync(
+          html
+        , offscreenClient.convertHtmlToSafeHTML
+        , offscreenClient.convertHtmlToBeautifyHTML
+        , convertHtmlToMarkdown
+        , offscreenClient.convertMarkdownToBeautifyMarkdown
+        )
+        return await offscreenClient.convertUrlToLinkAsciiDoc(url, title)
+      } else {
+        return await offscreenClient.convertUrlToLinkAsciiDoc(
           info.linkUrl
         , info.linkText
         )

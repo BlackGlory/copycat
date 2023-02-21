@@ -12,6 +12,7 @@ export const menus = new Map<string[], IMenuItem[]>([
   , { id: 'TAB_URL_TO_BBCODE' }
   , { id: 'TAB_URL_TO_HTML' }
   , { id: 'TAB_URL_TO_ORG_MODE' }
+  , { id: 'TAB_URL_TO_ASCII_DOC' }
   ]]
 , [['frame'], [
     { id: 'FRAME_URL_TO_PLAIN' }
@@ -19,6 +20,7 @@ export const menus = new Map<string[], IMenuItem[]>([
   , { id: 'FRAME_URL_TO_BBCODE' }
   , { id: 'FRAME_URL_TO_HTML' }
   , { id: 'FRAME_URL_TO_ORG_MODE' }
+  , { id: 'FRAME_URL_TO_ASCII_DOC' }
   ]]
 , [['link'], [
     { id: 'LINK_TEXT' }
@@ -26,6 +28,7 @@ export const menus = new Map<string[], IMenuItem[]>([
   , { id: 'LINK_TO_BBCODE' }
   , { id: 'LINK_TO_HTML' }
   , { id: 'LINK_TO_ORG_MODE' }
+  , { id: 'LINK_TO_ASCII_DOC' }
   ]]
 , [['selection'], [
     { id: 'SELECTION_TO_MARKDOWN' }

@@ -50,6 +50,9 @@
 , "TAB_URL_TO_ORG_MODE": {
     "message": "Tab link → Org-Mode"
   }
+, "TAB_URL_TO_ASCII_DOC": {
+    "message": "Tab link → AsciiDoc"
+  }
 , "FRAME_URL_TO_PLAIN": {
     "message": "Frame link → Plaintext"
   }
@@ -65,6 +68,9 @@
 , "FRAME_URL_TO_ORG_MODE": {
     "message": "Frame link → Org-Mode"
   }
+, "FRAME_URL_TO_ASCII_DOC": {
+    "message": "Frame link → AsciiDoc"
+  }
 , "LINK_TEXT": {
     "message": "Copy link text"
   }
@@ -76,6 +82,12 @@
   }
 , "LINK_TO_BBCODE": {
     "message": "Link → BBCode"
+  }
+, "LINK_TO_ORG_MODE": {
+    "message": "Link → Org-Mode"
+  }
+, "LINK_TO_ASCII_DOC": {
+    "message": "Link → AsciiDoc"
   }
 , "SELECTION_TO_MARKDOWN": {
     "message": "Selection → Markdown"

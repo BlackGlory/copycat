@@ -31,6 +31,7 @@ import { convertUrlToRootRelativeURL } from '@converters/convert-url-to-root-rel
 import { convertUrlToVideoHTML } from '@converters/convert-url-to-video-html.js'
 import { writeTextToClipboard } from '@utils/write-text-to-clipboard.js'
 import { convertUrlToLinkOrgMode } from '@converters/convert-url-to-link-org-mode.js'
+import { convertUrlToLinkAsciiDoc } from '@converters/convert-url-to-link-ascii-doc.js'
 
 createServer<IOffscreenAPI>({
   writeTextToClipboard
@@ -62,6 +63,7 @@ createServer<IOffscreenAPI>({
 , convertUrlToLinkMarkdown
 , convertUrlToLinkPlain
 , convertUrlToLinkOrgMode
+, convertUrlToLinkAsciiDoc
 , convertUrlToRelativeURL
 , convertUrlToRootRelativeURL
 , convertUrlToVideoHTML

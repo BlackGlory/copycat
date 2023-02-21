@@ -41,6 +41,9 @@
 , "TAB_URL_TO_ORG_MODE": {
     "message": "标签页链接 → Org-Mode"
   }
+, "TAB_URL_TO_ASCII_DOC": {
+    "message": "标签页链接 → AsciiDoc"
+  }
 , "FRAME_URL_TO_PLAIN": {
     "message": "框架链接 → 纯文本"
   }
@@ -56,6 +59,9 @@
 , "FRAME_URL_TO_ORG_MODE": {
     "message": "框架链接 → Org-Mode"
   }
+, "FRAME_URL_TO_ASCII_DOC": {
+    "message": "框架链接 → AsciiDoc"
+  }
 , "LINK_TEXT": {
     "message": "复制链接文本"
   }
@@ -67,6 +73,12 @@
   }
 , "LINK_TO_BBCODE": {
     "message": "链接 → BBCode"
+  }
+, "LINK_TO_ORG_MODE": {
+    "message": "链接 → Org-Mode"
+  }
+, "LINK_TO_ASCII_DOC": {
+    "message": "链接 → AsciiDoc"
   }
 , "SELECTION_TO_MARKDOWN": {
     "message": "选中内容 → Markdown"
