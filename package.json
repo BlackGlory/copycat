@@ -1,6 +1,6 @@
 {
   "private": true,
-  "repository": "git@github.com:BlackGlory/Copycat.git",
+  "repository": "git@github.com:BlackGlory/copycat.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "type": "module",
