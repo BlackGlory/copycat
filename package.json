@@ -4,6 +4,9 @@
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "prepare": "ts-patch install -s",
     "postinstall": "patch-package",
