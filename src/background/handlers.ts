@@ -11,12 +11,12 @@ import { convertUrlToFormattedURL } from './convert-url-to-formatted-url.js'
 export type ContextMenusClickHandler = (
   info: browser.Menus.OnClickData
 , tab?: browser.Tabs.Tab
-) => Awaitable<string | void>
+) => Awaitable<string | undefined>
 
 export type CommandComplicateHandler = (
   info: Record<string, any>
 , tab?: browser.Tabs.Tab
-) => Awaitable<string | void>
+) => Awaitable<string | undefined>
 
 interface Handlers {
   [menuItemId: string]: ContextMenusClickHandler | CommandComplicateHandler
@@ -114,6 +114,11 @@ export const handlers: Handlers = {
       } else {
         return await offscreenClient.convertUrlToLinkBBCode(info.frameUrl)
       }
+    }
+  })
+, ['LINK_TEXT']: createContextMenusClickHandler(async (info, tab) => {
+    if (info.linkText) {
+      return info.linkText
     }
   })
 , ['LINK_TO_MARKDOWN']: createContextMenusClickHandler(async (info, tab) => {

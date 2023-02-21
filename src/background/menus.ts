@@ -19,7 +19,8 @@ export const menus = new Map<string[], IMenuItem[]>([
   , { id: 'FRAME_URL_TO_HTML' }
   ]]
 , [['link'], [
-    { id: 'LINK_TO_MARKDOWN' }
+    { id: 'LINK_TEXT' }
+  , { id: 'LINK_TO_MARKDOWN' }
   , { id: 'LINK_TO_BBCODE' }
   , { id: 'LINK_TO_HTML' }
   ]]

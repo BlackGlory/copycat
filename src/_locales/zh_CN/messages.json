@@ -50,6 +50,9 @@
 , "FRAME_URL_TO_BBCODE": {
     "message": "框架链接 → BBCode"
   }
+, "LINK_TEXT": {
+    "message": "复制链接文本"
+  }
 , "LINK_TO_MARKDOWN": {
     "message": "链接 → Markdown"
   }

@@ -59,6 +59,9 @@
 , "FRAME_URL_TO_BBCODE": {
     "message": "Frame link → BBCode"
   }
+, "LINK_TEXT": {
+    "message": "Copy link text"
+  }
 , "LINK_TO_MARKDOWN": {
     "message": "Link → Markdown"
   }

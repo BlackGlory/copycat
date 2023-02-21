@@ -28,6 +28,7 @@ Copy content from web powerful than ever before.
   - [x] HTML
   - [ ] Org-Mode
   - [ ] AsciiDoc
+- [x] Copy link text
 - [x] Copy link as
   - [x] Markdown
   - [x] BBCode
