@@ -1,3 +1,4 @@
+import '@src/globals.css'
 import { createRoot } from 'react-dom/client'
 import { Options } from '@components/options.jsx'
 import { assert } from '@blackglory/prelude'
