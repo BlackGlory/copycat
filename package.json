@@ -70,6 +70,7 @@
     "@delight-rpc/webextension": "^0.1.0",
     "@headlessui/react": "^1.7.11",
     "@heroicons/react": "^2.0.16",
+    "classnames": "^2.3.2",
     "delight-rpc": "^5.0.4",
     "ent": "^2.2.0",
     "extra-blob": "^0.1.0",

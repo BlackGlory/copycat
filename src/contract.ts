@@ -1,9 +1,28 @@
 export enum StorageItemKey {
   Config = 'config'
+, Menu = 'menu'
 }
 
+export interface IMenuItem {
+  id: string
+  visible: boolean
+}
+
+export enum MenuContext {
+  Page = 'page'
+, Frame = 'frame'
+, Link = 'link'
+, Selection = 'selection'
+, Image = 'image'
+, Video = 'video'
+, Audio = 'audio'
+}
+
+export type IMenuStore = Record<MenuContext, IMenuItem[]>
+
 export interface IStorage {
-  [StorageItemKey.Config]: IConfigStorage
+  [StorageItemKey.Config]: IConfigStore
+  [StorageItemKey.Menu]: IMenuStore
 }
 
 export enum URLFormat {
@@ -31,7 +50,7 @@ export enum ImageFormat {
 , PNG
 }
 
-export interface IConfigStorage {
+export interface IConfigStore {
   urlFormat: URLFormat
   urlEncoding: URLEncoding
   markdownFlavor: MarkdownFlavor
@@ -47,8 +66,11 @@ export interface IFrameAPI {
 export const OffscreenChannel = 'offscreen'
 
 export interface IBackgroundAPI {
-  getConfig(): IConfigStorage
-  setConfig(config: IConfigStorage): null
+  getConfig(): IConfigStore
+  setConfig(config: IConfigStore): null
+
+  getMenu(): IMenuStore
+  setMenu(menu: IMenuStore): null
 }
 
 export interface IOffscreenAPI {
