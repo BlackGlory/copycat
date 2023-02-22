@@ -1058,11 +1058,6 @@
     "@types/filesystem" "*"
     "@types/har-format" "*"
 
-"@types/ent@^2.2.5":
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/@types/ent/-/ent-2.2.5.tgz#47fb7f97134c39f8ecc3288c50b5028857905975"
-  integrity sha512-Y4jhbuBfO6P+8Stgdu35D0XZUHBHz8NlbD8pali+DiknVvYeSP3JnFL6nabUQCp/A4d8sJ/nKUZT3vWsCSXc6A==
-
 "@types/eslint-scope@^3.7.3":
   version "3.7.4"
   resolved "https://registry.yarnpkg.com/@types/eslint-scope/-/eslint-scope-3.7.4.tgz#37fc1223f0786c39627068a12e94d6e6fc61de16"
@@ -2378,11 +2373,6 @@ enhanced-resolve@^5.0.0, enhanced-resolve@^5.10.0, enhanced-resolve@^5.7.0:
   dependencies:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
-
-ent@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/ent/-/ent-2.2.0.tgz#e964219325a21d05f44466a2f686ed6ce5f5dd1d"
-  integrity sha1-6WQhkyWiHQX0RGai9obtbOX13R0=
 
 entities@^4.4.0:
   version "4.4.0"

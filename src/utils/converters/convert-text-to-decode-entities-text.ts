@@ -1,5 +1,5 @@
-import * as ent from 'ent'
+import { decode } from 'entities'
 
 export function convertTextToDecodeEntitiesText(text: string): string {
-  return ent.decode(text)
+  return decode(text)
 }
