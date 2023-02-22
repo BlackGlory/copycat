@@ -18,18 +18,18 @@ Copy content from web powerful than ever before.
   - [x] Plaintext
   - [x] Markdown
   - [x] BBCode
-  - [x] HTML
+  - [x] HTML (plain text)
+  - [x] HTML (rich text)
   - [x] Org-Mode
   - [x] AsciiDoc
-  - [x] Rich text (HTML)
 - [x] Copy a frame link as
   - [x] Plaintext
   - [x] Markdown
   - [x] BBCode
-  - [x] HTML
+  - [x] HTML (plain text)
+  - [x] HTML (rich text)
   - [x] Org-Mode
   - [x] AsciiDoc
-  - [x] Rich text (HTML)
 - [x] Copy a link text
 - [x] Copy a link as
   - [x] Markdown
@@ -39,12 +39,12 @@ Copy content from web powerful than ever before.
   - [x] AsciiDoc
 - [x] Copy selection as
   - [x] Plaintext
-  - [x] Raw strings
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
-  - [x] HTML(\<a\> tags only)
+  - [x] HTML(`<a>` tags only)
   - [x] HTML(no attributes)
+  - [x] Raw string
   - [ ] JSON string
 - [x] Copy an image as
   - [x] Markdown
@@ -59,11 +59,9 @@ Copy content from web powerful than ever before.
 ## Supported Markdown flavors
 - [x] [GitHub Flavored Markdown]
 - [x] [CommonMark]
-- [x] [Ghost's Markdown]
 
 [GitHub Flavored Markdown]: https://github.github.com/gfm/
 [CommonMark]: http://commonmark.org/
-[Ghost's Markdown]: https://help.ghost.org/article/4-markdown-guide
 
 ## Extension shortcuts
 Copy tab links and selections can be set as extension shortcuts.
