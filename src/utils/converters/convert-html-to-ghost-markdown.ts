@@ -1,7 +1,7 @@
 import TurndownService from 'turndown'
 import { tables, highlightedCodeBlock } from 'turndown-plugin-gfm'
 
-export function convertHtmlToGhostMarkdown(html: string): string {
+export function convertHTMLToGhostMarkdown(html: string): string {
   const turndownService = createTurndownService()
   return turndownService.turndown(html)
 }

@@ -1,7 +1,7 @@
-import { convertUrlToRootRelativeURL } from './convert-url-to-root-relative-url.js'
+import { convertURLToRootRelativeURL } from './convert-url-to-root-relative-url.js'
 import { createDOMParser } from 'extra-dom'
 
-export function convertHtmlToRootRelativeLinkHTML(
+export function convertHTMLToRootRelativeLinkHTML(
   html: string
 , baseUrl: string
 ): string {
@@ -12,12 +12,12 @@ export function convertHtmlToRootRelativeLinkHTML(
     .querySelectorAll('[href]')
     .forEach(ele => {
       const url = ele.getAttribute('href')!
-      ele.setAttribute('href', convertUrlToRootRelativeURL(url, baseUrl))
+      ele.setAttribute('href', convertURLToRootRelativeURL(url, baseUrl))
     })
   document.querySelectorAll('[src]')
     .forEach(ele => {
       const url = ele.getAttribute('src')!
-      ele.setAttribute('src', convertUrlToRootRelativeURL(url, baseUrl))
+      ele.setAttribute('src', convertURLToRootRelativeURL(url, baseUrl))
     })
 
   return document.body.innerHTML

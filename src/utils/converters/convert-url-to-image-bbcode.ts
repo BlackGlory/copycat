@@ -1,3 +1,3 @@
-export function convertUrlToImageBBCode(url: string): string {
+export function convertURLToImageBBCode(url: string): string {
   return `[img]${url}[/img]`
 }

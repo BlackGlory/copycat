@@ -1,3 +1,3 @@
-export function convertUrlToImageHTML(url: string): string {
+export function convertURLToImageHTML(url: string): string {
   return `<img src="${url}" />`
 }

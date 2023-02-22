@@ -3,23 +3,20 @@ import { getConfig } from './storage.js'
 import { offscreenClient } from './offscreen-client.js'
 import { encode, decode } from 'url-operator'
 
-export async function convertUrlToFormattedURL(
-  url: string
-, baseUrl: string
-): Promise<string> {
+export async function formatURL(url: string, baseURL: string): Promise<string> {
   const { urlFormat, urlEncoding } = await getConfig()
 
   switch (urlFormat) {
     case URLFormat.Absolute: {
-      url = await offscreenClient.convertUrlToAbsoluteURL(url, baseUrl)
+      url = await offscreenClient.convertURLToAbsoluteURL(url, baseURL)
       break
     }
     case URLFormat.Relative: {
-      url = await offscreenClient.convertUrlToRelativeURL(url, baseUrl)
+      url = await offscreenClient.convertURLToRelativeURL(url, baseURL)
       break
     }
     case URLFormat.RootRelative: {
-      url = await offscreenClient.convertUrlToRootRelativeURL(url, baseUrl)
+      url = await offscreenClient.convertURLToRootRelativeURL(url, baseURL)
       break
     }
     case URLFormat.Original: {

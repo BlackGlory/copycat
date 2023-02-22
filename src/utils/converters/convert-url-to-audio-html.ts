@@ -1,3 +1,3 @@
-export function convertUrlToAudioHTML(url: string): string {
+export function convertURLToAudioHTML(url: string): string {
   return `<audio controls src="${url}"></audio>`
 }

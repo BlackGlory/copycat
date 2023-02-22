@@ -1,4 +1,4 @@
-export function convertUrlToLinkMarkdown(url: string, text?: string): string {
+export function convertURLToLinkMarkdown(url: string, text?: string): string {
   if (text) {
     return `[${text}](${url})`
   } else {

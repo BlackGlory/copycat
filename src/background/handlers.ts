@@ -4,9 +4,9 @@ import { IFrameAPI, ImageFormat } from '@src/contract.js'
 import { Awaitable } from '@blackglory/prelude'
 import { pipeAsync } from 'extra-utils'
 import { offscreenClient } from './offscreen-client.js'
-import { convertHtmlToFormattedLinkHTML } from './convert-html-to-formatted-link-html.js'
-import { convertHtmlToMarkdown } from './convert-html-to-markdown.js'
-import { convertUrlToFormattedURL } from './convert-url-to-formatted-url.js'
+import { convertHTMLToMarkdown } from './convert-html-to-markdown.js'
+import { formatURLsInHTML } from './format-links-in-html.js'
+import { formatURL } from './format-url.js'
 
 export type ContextMenusClickHandler = (
   info: browser.Menus.OnClickData
@@ -18,39 +18,39 @@ export type CommandComplicateHandler = (
 , tab?: browser.Tabs.Tab
 ) => Awaitable<string | undefined>
 
-interface Handlers {
+interface IHandlers {
   [menuItemId: string]: ContextMenusClickHandler | CommandComplicateHandler
 }
 
-export const handlers: Handlers = {
+export const handlers: IHandlers = {
   ['TAB_URL_TO_PLAIN']: createCommandComplicateHandler(async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertUrlToLinkPlain(tab.url, tab.title)
+      return await offscreenClient.convertURLToLinkPlain(tab.url, tab.title)
     }
   })
 , ['TAB_URL_TO_MARKDOWN']: createCommandComplicateHandler(async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertUrlToLinkMarkdown(tab.url, tab.title)
+      return await offscreenClient.convertURLToLinkMarkdown(tab.url, tab.title)
     }
   })
 , ['TAB_URL_TO_HTML']: createCommandComplicateHandler(async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertUrlToLinkHTML(tab.url, tab.title)
+      return await offscreenClient.convertURLToLinkHTML(tab.url, tab.title)
     }
   })
 , ['TAB_URL_TO_BBCODE']: createCommandComplicateHandler(async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertUrlToLinkBBCode(tab.url, tab.title)
+      return await offscreenClient.convertURLToLinkBBCode(tab.url, tab.title)
     }
   })
 , ['TAB_URL_TO_ORG_MODE']: createCommandComplicateHandler(async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertUrlToLinkOrgMode(tab.url, tab.title)
+      return await offscreenClient.convertURLToLinkOrgMode(tab.url, tab.title)
     }
   })
 , ['TAB_URL_TO_ASCII_DOC']: createCommandComplicateHandler(async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertUrlToLinkAsciiDoc(tab.url, tab.title)
+      return await offscreenClient.convertURLToLinkAsciiDoc(tab.url, tab.title)
     }
   })
 , ['FRAME_URL_TO_PLAIN']: createContextMenusClickHandler(async (info, tab) => {
@@ -61,14 +61,14 @@ export const handlers: Handlers = {
         , frameId: info.frameId
         })
 
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.frameUrl
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return await offscreenClient.convertUrlToLinkPlain(url, title)
+        return await offscreenClient.convertURLToLinkPlain(url, title)
       } else {
-        return await offscreenClient.convertUrlToLinkPlain(info.frameUrl)
+        return await offscreenClient.convertURLToLinkPlain(info.frameUrl)
       }
     }
   })
@@ -80,14 +80,14 @@ export const handlers: Handlers = {
         , frameId: info.frameId
         })
 
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.frameUrl
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return await offscreenClient.convertUrlToLinkMarkdown(url, title)
+        return await offscreenClient.convertURLToLinkMarkdown(url, title)
       } else {
-        return await offscreenClient.convertUrlToLinkMarkdown(info.frameUrl)
+        return await offscreenClient.convertURLToLinkMarkdown(info.frameUrl)
       }
     }
   })
@@ -99,11 +99,11 @@ export const handlers: Handlers = {
         , frameId: info.frameId
         })
 
-        const url = await convertUrlToFormattedURL(info.frameUrl, tab.url)
+        const url = await formatURL(info.frameUrl, tab.url)
         const title = await tabClient.getDocumentTitle()
-        return await offscreenClient.convertUrlToLinkHTML(url, title)
+        return await offscreenClient.convertURLToLinkHTML(url, title)
       } else {
-        return await offscreenClient.convertUrlToLinkHTML(info.frameUrl)
+        return await offscreenClient.convertURLToLinkHTML(info.frameUrl)
       }
     }
   })
@@ -115,14 +115,14 @@ export const handlers: Handlers = {
         , frameId: info.frameId
         })
 
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.frameUrl
         , tab.url
         )
         const title = await client.getDocumentTitle()
-        return await offscreenClient.convertUrlToLinkBBCode(url, title)
+        return await offscreenClient.convertURLToLinkBBCode(url, title)
       } else {
-        return await offscreenClient.convertUrlToLinkBBCode(info.frameUrl)
+        return await offscreenClient.convertURLToLinkBBCode(info.frameUrl)
       }
     }
   })
@@ -134,14 +134,14 @@ export const handlers: Handlers = {
         , frameId: info.frameId
         })
 
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.frameUrl
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return await offscreenClient.convertUrlToLinkOrgMode(url, title)
+        return await offscreenClient.convertURLToLinkOrgMode(url, title)
       } else {
-        return await offscreenClient.convertUrlToLinkOrgMode(info.frameUrl)
+        return await offscreenClient.convertURLToLinkOrgMode(info.frameUrl)
       }
     }
   })
@@ -153,14 +153,14 @@ export const handlers: Handlers = {
         , frameId: info.frameId
         })
 
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.frameUrl
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return await offscreenClient.convertUrlToLinkAsciiDoc(url, title)
+        return await offscreenClient.convertURLToLinkAsciiDoc(url, title)
       } else {
-        return await offscreenClient.convertUrlToLinkAsciiDoc(info.frameUrl)
+        return await offscreenClient.convertURLToLinkAsciiDoc(info.frameUrl)
       }
     }
   })
@@ -177,24 +177,24 @@ export const handlers: Handlers = {
         , frameId: info.frameId
         })
 
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
         )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.convertHtmlToSafeHTML
-        , offscreenClient.convertHtmlToBeautifyHTML
-        , convertHtmlToMarkdown
+        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToBeautifyHTML
+        , convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
-        return await offscreenClient.convertUrlToLinkMarkdown(
+        return await offscreenClient.convertURLToLinkMarkdown(
           url
         , title
         )
       } else {
-        return await offscreenClient.convertUrlToLinkMarkdown(
+        return await offscreenClient.convertURLToLinkMarkdown(
           info.linkUrl
         , info.linkText
         )
@@ -209,21 +209,21 @@ export const handlers: Handlers = {
         , frameId: info.frameId
         })
 
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
         )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.convertHtmlToSafeHTML
-        , offscreenClient.convertHtmlToBeautifyHTML
-        , convertHtmlToMarkdown
+        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToBeautifyHTML
+        , convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
-        return await offscreenClient.convertUrlToLinkOrgMode(url, title)
+        return await offscreenClient.convertURLToLinkOrgMode(url, title)
       } else {
-        return await offscreenClient.convertUrlToLinkOrgMode(
+        return await offscreenClient.convertURLToLinkOrgMode(
           info.linkUrl
         , info.linkText
         )
@@ -238,21 +238,21 @@ export const handlers: Handlers = {
         , frameId: info.frameId
         })
 
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
         )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.convertHtmlToSafeHTML
-        , offscreenClient.convertHtmlToBeautifyHTML
-        , convertHtmlToMarkdown
+        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToBeautifyHTML
+        , convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
-        return await offscreenClient.convertUrlToLinkAsciiDoc(url, title)
+        return await offscreenClient.convertURLToLinkAsciiDoc(url, title)
       } else {
-        return await offscreenClient.convertUrlToLinkAsciiDoc(
+        return await offscreenClient.convertURLToLinkAsciiDoc(
           info.linkUrl
         , info.linkText
         )
@@ -267,22 +267,22 @@ export const handlers: Handlers = {
         , frameId: info.frameId
         })
 
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
         )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.convertHtmlToSafeHTML
-        , offscreenClient.convertHtmlToBeautifyHTML
+        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToBeautifyHTML
         )
-        return await offscreenClient.convertUrlToLinkHTML(
+        return await offscreenClient.convertURLToLinkHTML(
           url
         , title
         )
       } else {
-        return await offscreenClient.convertUrlToLinkHTML(
+        return await offscreenClient.convertURLToLinkHTML(
           info.linkUrl
         , info.linkText
         )
@@ -297,23 +297,23 @@ export const handlers: Handlers = {
         , frameId: info.frameId
         })
 
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
         )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.convertHtmlToSafeHTML
-        , offscreenClient.convertHtmlToBeautifyHTML
-        , offscreenClient.convertHtmlToBBCode
+        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToBeautifyHTML
+        , offscreenClient.convertHTMLToBBCode
         )
-        return await offscreenClient.convertUrlToLinkBBCode(
+        return await offscreenClient.convertURLToLinkBBCode(
           url
         , title
         )
       } else {
-        return await offscreenClient.convertUrlToLinkBBCode(
+        return await offscreenClient.convertURLToLinkBBCode(
           info.linkUrl
         , info.linkText
         )
@@ -323,13 +323,13 @@ export const handlers: Handlers = {
 , ['IMAGE_TO_MARKDOWN']: createContextMenusClickHandler(async (info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return await offscreenClient.convertUrlToImageMarkdown(url)
+        return await offscreenClient.convertURLToImageMarkdown(url)
       } else {
-        return await offscreenClient.convertUrlToImageMarkdown(info.srcUrl)
+        return await offscreenClient.convertURLToImageMarkdown(info.srcUrl)
       }
     }
   })
@@ -340,8 +340,8 @@ export const handlers: Handlers = {
     if (mediaType === 'image' && srcUrl) {
       return await pipeAsync(
         srcUrl
-      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.JPEG)
-      , offscreenClient.convertUrlToImageMarkdown
+      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.JPEG)
+      , offscreenClient.convertURLToImageMarkdown
       )
     }
   })
@@ -352,8 +352,8 @@ export const handlers: Handlers = {
     if (mediaType === 'image' && srcUrl) {
       return await pipeAsync(
         srcUrl
-      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.PNG)
-      , offscreenClient.convertUrlToImageMarkdown
+      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.PNG)
+      , offscreenClient.convertURLToImageMarkdown
       )
     }
   })
@@ -364,21 +364,21 @@ export const handlers: Handlers = {
     if (mediaType === 'image' && srcUrl) {
       return await pipeAsync(
         srcUrl
-      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.WebP)
-      , offscreenClient.convertUrlToImageMarkdown
+      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.WebP)
+      , offscreenClient.convertURLToImageMarkdown
       )
     }
   })
 , ['IMAGE_TO_HTML']: createContextMenusClickHandler(async (info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return await offscreenClient.convertUrlToImageHTML(url)
+        return await offscreenClient.convertURLToImageHTML(url)
       } else {
-        return await offscreenClient.convertUrlToImageHTML(info.srcUrl)
+        return await offscreenClient.convertURLToImageHTML(info.srcUrl)
       }
     }
   })
@@ -389,8 +389,8 @@ export const handlers: Handlers = {
     if (mediaType === 'image' && srcUrl) {
       return await pipeAsync(
         srcUrl
-      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.JPEG)
-      , offscreenClient.convertUrlToImageHTML
+      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.JPEG)
+      , offscreenClient.convertURLToImageHTML
       )
     }
   })
@@ -401,8 +401,8 @@ export const handlers: Handlers = {
     if (mediaType === 'image' && srcUrl) {
       return await pipeAsync(
         srcUrl
-      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.PNG)
-      , offscreenClient.convertUrlToImageHTML
+      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.PNG)
+      , offscreenClient.convertURLToImageHTML
       )
     }
   })
@@ -413,21 +413,21 @@ export const handlers: Handlers = {
     if (mediaType === 'image' && srcUrl) {
       return await pipeAsync(
         srcUrl
-      , url => offscreenClient.convertUrlToImageDataURI(url, ImageFormat.WebP)
-      , offscreenClient.convertUrlToImageHTML
+      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.WebP)
+      , offscreenClient.convertURLToImageHTML
       )
     }
   })
 , ['IMAGE_TO_BBCODE']: createContextMenusClickHandler(async (info, tab) => {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab?.url) {
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return await offscreenClient.convertUrlToImageBBCode(url)
+        return await offscreenClient.convertURLToImageBBCode(url)
       } else {
-        return await offscreenClient.convertUrlToImageBBCode(info.srcUrl)
+        return await offscreenClient.convertURLToImageBBCode(info.srcUrl)
       }
     }
   })
@@ -436,7 +436,7 @@ export const handlers: Handlers = {
   , tab
   ) => {
     if (mediaType === 'image' && srcUrl) {
-      return await offscreenClient.convertUrlToImageDataURI(srcUrl)
+      return await offscreenClient.convertURLToImageDataURI(srcUrl)
     }
   })
 , ['IMAGE_TO_DATA_URI_JPEG']: createContextMenusClickHandler(async ({
@@ -444,7 +444,7 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await offscreenClient.convertUrlToImageDataURI(
+      return await offscreenClient.convertURLToImageDataURI(
         srcUrl
       , ImageFormat.JPEG
       )
@@ -455,7 +455,7 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await offscreenClient.convertUrlToImageDataURI(srcUrl, ImageFormat.PNG)
+      return await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.PNG)
     }
   })
 , ['IMAGE_TO_DATA_URI_WEBP']: createContextMenusClickHandler(async ({
@@ -463,7 +463,7 @@ export const handlers: Handlers = {
   , srcUrl
   }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await offscreenClient.convertUrlToImageDataURI(
+      return await offscreenClient.convertURLToImageDataURI(
         srcUrl
       , ImageFormat.WebP
       )
@@ -472,26 +472,26 @@ export const handlers: Handlers = {
 , ['AUDIO_TO_HTML']: createContextMenusClickHandler(async (info, tab) => {
     if (info.mediaType === 'audio' && info.srcUrl) {
       if (tab?.url) {
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return await offscreenClient.convertUrlToAudioHTML(url)
+        return await offscreenClient.convertURLToAudioHTML(url)
       } else {
-        return await offscreenClient.convertUrlToAudioHTML(info.srcUrl)
+        return await offscreenClient.convertURLToAudioHTML(info.srcUrl)
       }
     }
   })
 , ['VIDEO_TO_HTML']: createContextMenusClickHandler(async (info, tab) => {
     if (info.mediaType === 'video' && info.srcUrl) {
       if (tab?.url) {
-        const url = await convertUrlToFormattedURL(
+        const url = await formatURL(
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return offscreenClient.convertUrlToVideoHTML(url)
+        return offscreenClient.convertURLToVideoHTML(url)
       } else {
-        return offscreenClient.convertUrlToVideoHTML(info.srcUrl)
+        return offscreenClient.convertURLToVideoHTML(info.srcUrl)
       }
     }
   })
@@ -503,13 +503,13 @@ export const handlers: Handlers = {
       })
 
       const html = await client.getSelectionHTML()
-      const baseUrl = info.frameUrl ?? info.pageUrl ?? tab.url
+      const baseURL = info.frameUrl ?? info.pageURL ?? tab.url
       return await pipeAsync(
         html
-      , offscreenClient.convertHtmlToSafeHTML
-      , html => convertHtmlToFormattedLinkHTML(html, baseUrl)
-      , offscreenClient.convertHtmlToBeautifyHTML
-      , convertHtmlToMarkdown
+      , offscreenClient.convertHTMLToSafeHTML
+      , html => formatURLsInHTML(html, baseURL)
+      , offscreenClient.convertHTMLToBeautifyHTML
+      , convertHTMLToMarkdown
       , offscreenClient.convertMarkdownToBeautifyMarkdown
       )
     }
@@ -522,12 +522,12 @@ export const handlers: Handlers = {
       })
 
       const html = await client.getSelectionHTML()
-      const baseUrl = info.frameUrl ?? info.pageUrl ?? tab.url
+      const baseURL = info.frameUrl ?? info.pageURL ?? tab.url
       return await pipeAsync(
         html
-      , offscreenClient.convertHtmlToSafeHTML
-      , html => convertHtmlToFormattedLinkHTML(html, baseUrl)
-      , offscreenClient.convertHtmlToBeautifyHTML
+      , offscreenClient.convertHTMLToSafeHTML
+      , html => formatURLsInHTML(html, baseURL)
+      , offscreenClient.convertHTMLToBeautifyHTML
       )
     }
   })
@@ -542,13 +542,13 @@ export const handlers: Handlers = {
       })
 
       const html = await client.getSelectionHTML()
-      const baseUrl = info.frameUrl ?? info.pageUrl ?? tab.url
+      const baseURL = info.frameUrl ?? info.pageURL ?? tab.url
       return await pipeAsync(
         html
-      , offscreenClient.convertHtmlToSafeHTML
-      , html => convertHtmlToFormattedLinkHTML(html, baseUrl)
-      , offscreenClient.convertHtmlToOnlyATagHTML
-      , offscreenClient.convertHtmlToBeautifyHTML
+      , offscreenClient.convertHTMLToSafeHTML
+      , html => formatURLsInHTML(html, baseURL)
+      , offscreenClient.convertHTMLToOnlyATagHTML
+      , offscreenClient.convertHTMLToBeautifyHTML
       )
     }
   })
@@ -562,9 +562,9 @@ export const handlers: Handlers = {
       const html = await tabClient.getSelectionHTML()
       return await pipeAsync(
         html
-      , offscreenClient.convertHtmlToSafeHTML
-      , offscreenClient.convertHtmlToNoAttrHTML
-      , offscreenClient.convertHtmlToBeautifyHTML
+      , offscreenClient.convertHTMLToSafeHTML
+      , offscreenClient.convertHTMLToNoAttrHTML
+      , offscreenClient.convertHTMLToBeautifyHTML
       )
     }
   })
@@ -576,13 +576,13 @@ export const handlers: Handlers = {
       })
 
       const html = await client.getSelectionHTML()
-      const baseUrl = info.frameUrl ?? info.pageUrl ?? tab.url
+      const baseURL = info.frameUrl ?? info.pageURL ?? tab.url
       return await pipeAsync(
         html
-      , offscreenClient.convertHtmlToSafeHTML
-      , html => convertHtmlToFormattedLinkHTML(html, baseUrl)
-      , offscreenClient.convertHtmlToBeautifyHTML
-      , offscreenClient.convertHtmlToBBCode
+      , offscreenClient.convertHTMLToSafeHTML
+      , html => formatURLsInHTML(html, baseURL)
+      , offscreenClient.convertHTMLToBeautifyHTML
+      , offscreenClient.convertHTMLToBBCode
       )
     }
   })

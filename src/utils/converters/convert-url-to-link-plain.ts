@@ -1,4 +1,4 @@
-export function convertUrlToLinkPlain(url: string, text?: string): string {
+export function convertURLToLinkPlain(url: string, text?: string): string {
   if (text) {
     return `${text}\n${url}`
   } else {

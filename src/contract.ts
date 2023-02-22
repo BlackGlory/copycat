@@ -54,35 +54,35 @@ export interface IBackgroundAPI {
 export interface IOffscreenAPI {
   writeTextToClipboard(text: string): null
 
-  convertHtmlToAbsoluteLinkHTML(html: string, baseUrl: string): string
-  convertHtmlToBBCode(html: string): string
-  convertHtmlToBeautifyHTML(html: string): string
-  convertHtmlToCommonmarkMarkdown(html: string): string
-  convertHtmlToGfmMarkdown(html: string): string
-  convertHtmlToGhostMarkdown(html: string): string
-  convertHtmlToNoAttrHTML(html: string): string
-  convertHtmlToOnlyATagHTML(html: string): string
-  convertHtmlToPlainText(html: string): string
-  convertHtmlToRelativeLinkHTML(html: string, baseUrl: string): string
-  convertHtmlToRootRelativeLinkHTML(html: string, baseUrl: string): string
-  convertHtmlToSafeHTML(html: string): string
+  convertHTMLToAbsoluteLinkHTML(html: string, baseURL: string): string
+  convertHTMLToBBCode(html: string): string
+  convertHTMLToBeautifyHTML(html: string): string
+  convertHTMLToCommonmarkMarkdown(html: string): string
+  convertHTMLToGfmMarkdown(html: string): string
+  convertHTMLToGhostMarkdown(html: string): string
+  convertHTMLToNoAttrHTML(html: string): string
+  convertHTMLToOnlyATagHTML(html: string): string
+  convertHTMLToPlainText(html: string): string
+  convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
+  convertHTMLToRootRelativeLinkHTML(html: string, baseURL: string): string
+  convertHTMLToSafeHTML(html: string): string
   convertMarkdownToBeautifyMarkdown(markdown: string): string
   convertTextToDecodeEntitiesText(text: string): string
   convertTextToRawString(text: string): string
   convertTextToTrimmedText(text: string): string
-  convertUrlToAbsoluteURL(relativeUrl: string, baseUrl: string): string
-  convertUrlToAudioHTML(url: string): string
-  convertUrlToImageBBCode(url: string): string
-  convertUrlToImageDataURI(url: string, format?: ImageFormat): string
-  convertUrlToImageHTML(url: string): string
-  convertUrlToImageMarkdown(url: string): string
-  convertUrlToLinkBBCode(url: string, text?: string): string
-  convertUrlToLinkHTML(url: string, text?: string): string
-  convertUrlToLinkMarkdown(url: string, text?: string): string
-  convertUrlToLinkPlain(url: string, text?: string): string
-  convertUrlToLinkOrgMode(url: string, text?: string): string 
-  convertUrlToLinkAsciiDoc(url: string, text?: string): string
-  convertUrlToRelativeURL(absoluteUrl: string, baseUrl: string): string
-  convertUrlToRootRelativeURL(url: string, baseUrl: string): string
-  convertUrlToVideoHTML(url: string): string
+  convertURLToAbsoluteURL(relativeURL: string, baseURL: string): string
+  convertURLToAudioHTML(url: string): string
+  convertURLToImageBBCode(url: string): string
+  convertURLToImageDataURI(url: string, format?: ImageFormat): string
+  convertURLToImageHTML(url: string): string
+  convertURLToImageMarkdown(url: string): string
+  convertURLToLinkBBCode(url: string, text?: string): string
+  convertURLToLinkHTML(url: string, text?: string): string
+  convertURLToLinkMarkdown(url: string, text?: string): string
+  convertURLToLinkPlain(url: string, text?: string): string
+  convertURLToLinkOrgMode(url: string, text?: string): string 
+  convertURLToLinkAsciiDoc(url: string, text?: string): string
+  convertURLToRelativeURL(absoluteURL: string, baseURL: string): string
+  convertURLToRootRelativeURL(url: string, baseURL: string): string
+  convertURLToVideoHTML(url: string): string
 }

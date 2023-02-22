@@ -1,6 +1,6 @@
 import { createDOMParser } from 'extra-dom'
 
-export function convertHtmlToOnlyATagHTML(html: string): string {
+export function convertHTMLToOnlyATagHTML(html: string): string {
   const parser = createDOMParser()
   const document = parser.parseFromString(html, 'text/html')
 

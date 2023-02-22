@@ -1,4 +1,4 @@
-export function convertUrlToLinkAsciiDoc(url: string, text?: string): string {
+export function convertURLToLinkAsciiDoc(url: string, text?: string): string {
   if (text) {
     return `${url}[${text}]`
   } else {

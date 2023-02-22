@@ -1,7 +1,7 @@
-import { convertUrlToAbsoluteURL } from '@converters/convert-url-to-absolute-url.js'
+import { convertURLToAbsoluteURL } from '@converters/convert-url-to-absolute-url.js'
 
 test('convertUrlToAbsoluteURL', () => {
-  const result = convertUrlToAbsoluteURL(
+  const result = convertURLToAbsoluteURL(
     '../hello'
   , 'https://hello.world/test/test'
   )

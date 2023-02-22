@@ -1,6 +1,6 @@
 import path from 'path'
 
-export function convertUrlToRelativeURL(
+export function convertURLToRelativeURL(
   absoluteUrl: string
 , baseUrl: string
 ): string {

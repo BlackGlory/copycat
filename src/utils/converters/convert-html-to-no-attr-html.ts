@@ -1,6 +1,6 @@
 import { createDOMParser } from 'extra-dom'
 
-export function convertHtmlToNoAttrHTML(html: string): string {
+export function convertHTMLToNoAttrHTML(html: string): string {
   const parser = createDOMParser()
   const document = parser.parseFromString(html, 'text/html')
 

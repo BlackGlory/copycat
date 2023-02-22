@@ -1,4 +1,4 @@
-export function convertUrlToRootRelativeURL(
+export function convertURLToRootRelativeURL(
   url: string
 , baseUrl: string
 ): string {

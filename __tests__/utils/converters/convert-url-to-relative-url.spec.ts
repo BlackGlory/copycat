@@ -1,7 +1,7 @@
-import { convertUrlToRelativeURL } from '@converters/convert-url-to-relative-url.js'
+import { convertURLToRelativeURL } from '@converters/convert-url-to-relative-url.js'
 
 test('convertUrlToRelativeURL', () => {
-  const result = convertUrlToRelativeURL(
+  const result = convertURLToRelativeURL(
     'https://hello.world/test/hello'
   , 'https://hello.world/test/test'
   )

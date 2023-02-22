@@ -1,6 +1,6 @@
 import { createDOMParser } from 'extra-dom'
 
-export function convertHtmlToSafeHTML(html: string): string {
+export function convertHTMLToSafeHTML(html: string): string {
   const parser = createDOMParser()
   const document = parser.parseFromString(html, 'text/html')
 

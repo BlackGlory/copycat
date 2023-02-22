@@ -4,11 +4,11 @@ import { TextEncoder, TextDecoder } from 'util'
 globalThis.TextEncoder = TextEncoder
 globalThis.TextDecoder = TextDecoder as typeof globalThis.TextDecoder
 
-import { convertHtmlToAbsoluteLinkHTML } from '@converters/convert-html-to-absolute-link-html.js'
+import { convertHTMLToAbsoluteLinkHTML } from '@converters/convert-html-to-absolute-link-html.js'
 import { dedent  } from 'extra-tags'
 
 test('convertHtmlToAbsoluteLinkHTML', () => {
-  const result = convertHtmlToAbsoluteLinkHTML(
+  const result = convertHTMLToAbsoluteLinkHTML(
     dedent`
       <img src="../hello">
       <a href="../hello">Hello World</a>

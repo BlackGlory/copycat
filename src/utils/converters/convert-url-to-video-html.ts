@@ -1,3 +1,3 @@
-export function convertUrlToVideoHTML(url: string): string {
+export function convertURLToVideoHTML(url: string): string {
   return `<video controls src="${url}"></video>`
 }

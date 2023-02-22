@@ -1,4 +1,4 @@
-export function convertUrlToAbsoluteURL(
+export function convertURLToAbsoluteURL(
   relativeUrl: string
 , baseUrl: string
 ): string {

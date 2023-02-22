@@ -1,7 +1,7 @@
-import { convertUrlToImageBBCode } from '@converters/convert-url-to-image-bbcode.js'
+import { convertURLToImageBBCode } from '@converters/convert-url-to-image-bbcode.js'
 
 test('convertUrlToImageBBCode', () => {
-  const result = convertUrlToImageBBCode('https://hello.world')
+  const result = convertURLToImageBBCode('https://hello.world')
 
   expect(result).toBe('[img]https://hello.world[/img]')
 })

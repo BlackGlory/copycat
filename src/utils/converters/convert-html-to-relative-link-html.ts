@@ -1,7 +1,7 @@
-import { convertUrlToRelativeURL } from './convert-url-to-relative-url.js'
+import { convertURLToRelativeURL } from './convert-url-to-relative-url.js'
 import { createDOMParser } from 'extra-dom'
 
-export function convertHtmlToRelativeLinkHTML(html: string, baseUrl: string): string {
+export function convertHTMLToRelativeLinkHTML(html: string, baseUrl: string): string {
   const parser = createDOMParser()
   const document = parser.parseFromString(html, 'text/html')
 
@@ -10,7 +10,7 @@ export function convertHtmlToRelativeLinkHTML(html: string, baseUrl: string): st
     .forEach(ele => {
       const url = ele.getAttribute('href')!
       if (isAbsoluteURL(url)) {
-        ele.setAttribute('href', convertUrlToRelativeURL(url, baseUrl))
+        ele.setAttribute('href', convertURLToRelativeURL(url, baseUrl))
       }
     })
   document
@@ -18,7 +18,7 @@ export function convertHtmlToRelativeLinkHTML(html: string, baseUrl: string): st
     .forEach(ele => {
       const url = ele.getAttribute('src')!
       if (isAbsoluteURL(url)) {
-        ele.setAttribute('src', convertUrlToRelativeURL(url, baseUrl))
+        ele.setAttribute('src', convertURLToRelativeURL(url, baseUrl))
       }
     })
 

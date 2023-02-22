@@ -1,7 +1,7 @@
 import TurndownService from 'turndown'
 import { gfm } from 'turndown-plugin-gfm'
 
-export function convertHtmlToGfmMarkdown(html: string): string {
+export function convertHTMLToGfmMarkdown(html: string): string {
   const turndownService = createTurndownService()
   return turndownService.turndown(html)
 }

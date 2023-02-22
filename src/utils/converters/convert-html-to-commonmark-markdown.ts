@@ -1,6 +1,6 @@
 import TurndownService from 'turndown'
 
-export function convertHtmlToCommonmarkMarkdown(html: string): string {
+export function convertHTMLToCommonmarkMarkdown(html: string): string {
   const turndownService = createTurndownService()
   return turndownService.turndown(html)
 }

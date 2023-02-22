@@ -1,8 +1,8 @@
-import { convertHtmlToBeautifyHTML } from '@converters/convert-html-to-beautify-html.js'
+import { convertHTMLToBeautifyHTML } from '@converters/convert-html-to-beautify-html.js'
 import { dedent } from 'extra-tags'
 
 test('convertHtmlToBeautifyHTML', () => {
-  const result = convertHtmlToBeautifyHTML(dedent`
+  const result = convertHTMLToBeautifyHTML(dedent`
     <div>
     <p>Hello World</p>
     </div>
