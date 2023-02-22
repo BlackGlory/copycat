@@ -42,7 +42,8 @@ Copy content from web powerful than ever before.
   - [x] Markdown
   - [x] BBCode
   - [x] HTML
-  - [x] HTML (`<a>` tags only)
+  - [x] HTML (`a` tags only)
+  - [x] HTML (`a`, `img` tags only)
   - [x] HTML (no attributes)
   - [x] Raw string
   - [x] JSON string

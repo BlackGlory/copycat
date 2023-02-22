@@ -10,9 +10,7 @@ export async function convertHTMLToMarkdown(
   switch (markdownFlavor) {
     case MarkdownFlavor.Commonmark:
       return await offscreenClient.convertHTMLToCommonmarkMarkdown(html)
-    case MarkdownFlavor.GFM:
+    case MarkdownFlavor.GitHubFlavoredMarkdown:
       return await offscreenClient.convertHTMLToGfmMarkdown(html)
-    case MarkdownFlavor.Ghost:
-      return await offscreenClient.convertHTMLToGhostMarkdown(html)
   }
 }

@@ -48,9 +48,8 @@ export function ConfigEditor() {
         <Select
           value={config.markdownFlavor}
           items={[
-            { name: i18n('Options_GitHubFlavoredMarkdown'), value: MarkdownFlavor.GFM }
+            { name: i18n('Options_GitHubFlavoredMarkdown'), value: MarkdownFlavor.GitHubFlavoredMarkdown }
           , { name: i18n('Options_CommonMark'), value: MarkdownFlavor.Commonmark }
-          , { name: i18n('Options_Ghost'), value: MarkdownFlavor.Ghost }
           ]}
           onChange={value => setConfig(config => {
             config.markdownFlavor = value

@@ -7,7 +7,6 @@ import { convertHTMLToBBCode } from '@converters/convert-html-to-bbcode.js'
 import { convertHTMLToBeautifyHTML } from '@converters/convert-html-to-beautify-html.js'
 import { convertHTMLToCommonmarkMarkdown } from '@converters/convert-html-to-commonmark-markdown.js'
 import { convertHTMLToGfmMarkdown } from '@converters/convert-html-to-gfm-markdown.js'
-import { convertHTMLToGhostMarkdown } from '@converters/convert-html-to-ghost-markdown.js'
 import { convertHTMLToNoAttrHTML } from '@converters/convert-html-to-no-attr-html.js'
 import { convertHTMLToOnlyATagHTML } from '@converters/convert-html-to-only-a-tag-html.js'
 import { convertHTMLToPlainText } from '@converters/convert-html-to-plain-text.js'
@@ -44,7 +43,6 @@ createServer<IOffscreenAPI>({
 , convertHTMLToBeautifyHTML
 , convertHTMLToCommonmarkMarkdown
 , convertHTMLToGfmMarkdown
-, convertHTMLToGhostMarkdown
 , convertHTMLToNoAttrHTML
 , convertHTMLToOnlyATagHTML
 , convertHTMLToPlainText

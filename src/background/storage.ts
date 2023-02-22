@@ -10,7 +10,7 @@ export async function initStorage(): Promise<void> {
 
 async function initConfig(): Promise<void> {
   const config: IConfigStore = {
-    markdownFlavor: MarkdownFlavor.GFM
+    markdownFlavor: MarkdownFlavor.GitHubFlavoredMarkdown
   , urlFormat: URLFormat.Absolute
   , urlEncoding: URLEncoding.AlwaysEncode
   }

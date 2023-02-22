@@ -32,9 +32,6 @@
 , "Options_CommonMark": {
     "message": "CommonMark"
   }
-, "Options_Ghost": {
-    "message": "Ghost"
-  }
 , "TAB_URL_TO_PLAIN": {
     "message": "Tab link → Plaintext"
   }

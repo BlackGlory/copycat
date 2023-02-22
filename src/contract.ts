@@ -40,8 +40,7 @@ export enum URLEncoding {
 
 export enum MarkdownFlavor {
   Commonmark
-, GFM
-, Ghost
+, GitHubFlavoredMarkdown
 }
 
 export enum ImageFormat {
@@ -82,7 +81,6 @@ export interface IOffscreenAPI {
   convertHTMLToBeautifyHTML(html: string): string
   convertHTMLToCommonmarkMarkdown(html: string): string
   convertHTMLToGfmMarkdown(html: string): string
-  convertHTMLToGhostMarkdown(html: string): string
   convertHTMLToNoAttrHTML(html: string): string
   convertHTMLToOnlyATagHTML(html: string): string
   convertHTMLToPlainText(html: string): string
