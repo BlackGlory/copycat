@@ -13,6 +13,7 @@ export const menus = new Map<string[], IMenuItem[]>([
   , { id: 'TAB_URL_TO_HTML' }
   , { id: 'TAB_URL_TO_ORG_MODE' }
   , { id: 'TAB_URL_TO_ASCII_DOC' }
+  , { id: 'TAB_URL_TO_RICH_TEXT' }
   ]]
 , [['frame'], [
     { id: 'FRAME_URL_TO_PLAIN' }
@@ -21,6 +22,7 @@ export const menus = new Map<string[], IMenuItem[]>([
   , { id: 'FRAME_URL_TO_HTML' }
   , { id: 'FRAME_URL_TO_ORG_MODE' }
   , { id: 'FRAME_URL_TO_ASCII_DOC' }
+  , { id: 'FRAME_URL_TO_RICH_TEXT' }
   ]]
 , [['link'], [
     { id: 'LINK_TEXT' }

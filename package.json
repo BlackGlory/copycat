@@ -72,6 +72,7 @@
     "@heroicons/react": "^2.0.16",
     "delight-rpc": "^5.0.4",
     "ent": "^2.2.0",
+    "extra-blob": "^0.1.0",
     "extra-dom": "^0.5.3",
     "extra-promise": "^6.0.3",
     "extra-react-hooks": "^0.4.3",

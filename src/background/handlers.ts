@@ -21,7 +21,31 @@ export interface IInfo {
 export type Handler = (
   info: IInfo
 , tab?: browser.Tabs.Tab
-) => Awaitable<string | undefined>
+) => Awaitable<Result | undefined>
+
+export interface Result {
+  type: ResultType
+  content: string
+}
+
+export enum ResultType {
+  PlainText
+, RichText
+}
+
+function plainText(content: string): Result {
+  return {
+    type: ResultType.PlainText
+  , content
+  }
+}
+
+function richText(content: string): Result {
+  return {
+    type: ResultType.RichText
+  , content
+  }
+}
 
 interface IHandlers {
   [id: string]: Handler
@@ -30,32 +54,51 @@ interface IHandlers {
 export const handlers: IHandlers = {
   ['TAB_URL_TO_PLAIN']: async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertURLToLinkPlain(tab.url, tab.title)
+      return plainText(
+        await offscreenClient.convertURLToLinkPlain(tab.url, tab.title)
+      )
     }
   }
 , ['TAB_URL_TO_MARKDOWN']: async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertURLToLinkMarkdown(tab.url, tab.title)
+      return plainText(
+        await offscreenClient.convertURLToLinkMarkdown(tab.url, tab.title)
+      )
     }
   }
 , ['TAB_URL_TO_HTML']: async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertURLToLinkHTML(tab.url, tab.title)
+      return plainText(
+        await offscreenClient.convertURLToLinkHTML(tab.url, tab.title)
+      )
     }
   }
 , ['TAB_URL_TO_BBCODE']: async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertURLToLinkBBCode(tab.url, tab.title)
+      return plainText(
+        await offscreenClient.convertURLToLinkBBCode(tab.url, tab.title)
+      )
     }
   }
 , ['TAB_URL_TO_ORG_MODE']: async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertURLToLinkOrgMode(tab.url, tab.title)
+      return plainText(
+        await offscreenClient.convertURLToLinkOrgMode(tab.url, tab.title)
+      )
     }
   }
 , ['TAB_URL_TO_ASCII_DOC']: async (info, tab) => {
     if (tab?.url) {
-      return await offscreenClient.convertURLToLinkAsciiDoc(tab.url, tab.title)
+      return plainText(
+        await offscreenClient.convertURLToLinkAsciiDoc(tab.url, tab.title)
+      )
+    }
+  }
+, ['TAB_URL_TO_RICH_TEXT']: async (info, tab) => {
+    if (tab?.url) {
+      return richText(
+        await offscreenClient.convertURLToLinkHTML(tab.url, tab.title)
+      )
     }
   }
 , ['FRAME_URL_TO_PLAIN']: async (info, tab) => {
@@ -71,9 +114,9 @@ export const handlers: IHandlers = {
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return await offscreenClient.convertURLToLinkPlain(url, title)
+        return plainText(await offscreenClient.convertURLToLinkPlain(url, title))
       } else {
-        return await offscreenClient.convertURLToLinkPlain(info.frameUrl)
+        return plainText(await offscreenClient.convertURLToLinkPlain(info.frameUrl))
       }
     }
   }
@@ -90,9 +133,9 @@ export const handlers: IHandlers = {
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return await offscreenClient.convertURLToLinkMarkdown(url, title)
+        return plainText(await offscreenClient.convertURLToLinkMarkdown(url, title))
       } else {
-        return await offscreenClient.convertURLToLinkMarkdown(info.frameUrl)
+        return plainText(await offscreenClient.convertURLToLinkMarkdown(info.frameUrl))
       }
     }
   }
@@ -106,9 +149,9 @@ export const handlers: IHandlers = {
 
         const url = await formatURL(info.frameUrl, tab.url)
         const title = await tabClient.getDocumentTitle()
-        return await offscreenClient.convertURLToLinkHTML(url, title)
+        return plainText(await offscreenClient.convertURLToLinkHTML(url, title))
       } else {
-        return await offscreenClient.convertURLToLinkHTML(info.frameUrl)
+        return plainText(await offscreenClient.convertURLToLinkHTML(info.frameUrl))
       }
     }
   }
@@ -125,9 +168,9 @@ export const handlers: IHandlers = {
         , tab.url
         )
         const title = await client.getDocumentTitle()
-        return await offscreenClient.convertURLToLinkBBCode(url, title)
+        return plainText(await offscreenClient.convertURLToLinkBBCode(url, title))
       } else {
-        return await offscreenClient.convertURLToLinkBBCode(info.frameUrl)
+        return plainText(await offscreenClient.convertURLToLinkBBCode(info.frameUrl))
       }
     }
   }
@@ -144,9 +187,9 @@ export const handlers: IHandlers = {
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return await offscreenClient.convertURLToLinkOrgMode(url, title)
+        return plainText(await offscreenClient.convertURLToLinkOrgMode(url, title))
       } else {
-        return await offscreenClient.convertURLToLinkOrgMode(info.frameUrl)
+        return plainText(await offscreenClient.convertURLToLinkOrgMode(info.frameUrl))
       }
     }
   }
@@ -163,15 +206,31 @@ export const handlers: IHandlers = {
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return await offscreenClient.convertURLToLinkAsciiDoc(url, title)
+        return plainText(await offscreenClient.convertURLToLinkAsciiDoc(url, title))
       } else {
-        return await offscreenClient.convertURLToLinkAsciiDoc(info.frameUrl)
+        return plainText(await offscreenClient.convertURLToLinkAsciiDoc(info.frameUrl))
+      }
+    }
+  }
+, ['FRAME_URL_TO_RICH_TEXT']: async (info, tab) => {
+    if (info.frameUrl) {
+      if (tab?.id && tab.url) {
+        const tabClient = createTabClient<IFrameAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
+        const url = await formatURL(info.frameUrl, tab.url)
+        const title = await tabClient.getDocumentTitle()
+        return richText(await offscreenClient.convertURLToLinkHTML(url, title))
+      } else {
+        return richText(await offscreenClient.convertURLToLinkHTML(info.frameUrl))
       }
     }
   }
 , ['LINK_TEXT']: async (info, tab) => {
     if (info.linkText) {
-      return info.linkText
+      return plainText(info.linkText)
     }
   }
 , ['LINK_TO_MARKDOWN']: async (info, tab) => {
@@ -194,14 +253,12 @@ export const handlers: IHandlers = {
         , convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
-        return await offscreenClient.convertURLToLinkMarkdown(
-          url
-        , title
+        return plainText(
+          await offscreenClient.convertURLToLinkMarkdown(url, title)
         )
       } else {
-        return await offscreenClient.convertURLToLinkMarkdown(
-          info.linkUrl
-        , info.linkText
+        return plainText(
+          await offscreenClient.convertURLToLinkMarkdown(info.linkUrl, info.linkText)
         )
       }
     }
@@ -226,11 +283,12 @@ export const handlers: IHandlers = {
         , convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
-        return await offscreenClient.convertURLToLinkOrgMode(url, title)
+        return plainText(
+          await offscreenClient.convertURLToLinkOrgMode(url, title)
+        )
       } else {
-        return await offscreenClient.convertURLToLinkOrgMode(
-          info.linkUrl
-        , info.linkText
+        return plainText(
+          await offscreenClient.convertURLToLinkOrgMode(info.linkUrl, info.linkText)
         )
       }
     }
@@ -255,11 +313,13 @@ export const handlers: IHandlers = {
         , convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
-        return await offscreenClient.convertURLToLinkAsciiDoc(url, title)
+        return plainText(await offscreenClient.convertURLToLinkAsciiDoc(url, title))
       } else {
-        return await offscreenClient.convertURLToLinkAsciiDoc(
-          info.linkUrl
-        , info.linkText
+        return plainText(
+          await offscreenClient.convertURLToLinkAsciiDoc(
+            info.linkUrl
+          , info.linkText
+          )
         )
       }
     }
@@ -282,14 +342,12 @@ export const handlers: IHandlers = {
         , offscreenClient.convertHTMLToSafeHTML
         , offscreenClient.convertHTMLToBeautifyHTML
         )
-        return await offscreenClient.convertURLToLinkHTML(
-          url
-        , title
+        return plainText(
+          await offscreenClient.convertURLToLinkHTML(url, title)
         )
       } else {
-        return await offscreenClient.convertURLToLinkHTML(
-          info.linkUrl
-        , info.linkText
+        return plainText(
+          await offscreenClient.convertURLToLinkHTML(info.linkUrl, info.linkText)
         )
       }
     }
@@ -313,14 +371,12 @@ export const handlers: IHandlers = {
         , offscreenClient.convertHTMLToBeautifyHTML
         , offscreenClient.convertHTMLToBBCode
         )
-        return await offscreenClient.convertURLToLinkBBCode(
-          url
-        , title
+        return plainText(
+          await offscreenClient.convertURLToLinkBBCode(url, title)
         )
       } else {
-        return await offscreenClient.convertURLToLinkBBCode(
-          info.linkUrl
-        , info.linkText
+        return plainText(
+          await offscreenClient.convertURLToLinkBBCode(info.linkUrl, info.linkText)
         )
       }
     }
@@ -332,36 +388,42 @@ export const handlers: IHandlers = {
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return await offscreenClient.convertURLToImageMarkdown(url)
+        return plainText(await offscreenClient.convertURLToImageMarkdown(url))
       } else {
-        return await offscreenClient.convertURLToImageMarkdown(info.srcUrl)
+        return plainText(await offscreenClient.convertURLToImageMarkdown(info.srcUrl))
       }
     }
   }
 , ['IMAGE_TO_MARKDOWN_DATA_URI_JPEG']: async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await pipeAsync(
-        srcUrl
-      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.JPEG)
-      , offscreenClient.convertURLToImageMarkdown
+      return plainText(
+        await pipeAsync(
+          srcUrl
+        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.JPEG)
+        , offscreenClient.convertURLToImageMarkdown
+        )
       )
     }
   }
 , ['IMAGE_TO_MARKDOWN_DATA_URI_PNG']: async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await pipeAsync(
-        srcUrl
-      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.PNG)
-      , offscreenClient.convertURLToImageMarkdown
+      return plainText(
+        await pipeAsync(
+          srcUrl
+        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.PNG)
+        , offscreenClient.convertURLToImageMarkdown
+        )
       )
     }
   }
 , ['IMAGE_TO_MARKDOWN_DATA_URI_WEBP']: async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await pipeAsync(
-        srcUrl
-      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.WebP)
-      , offscreenClient.convertURLToImageMarkdown
+      return plainText(
+        await pipeAsync(
+          srcUrl
+        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.WebP)
+        , offscreenClient.convertURLToImageMarkdown
+        )
       )
     }
   }
@@ -372,36 +434,42 @@ export const handlers: IHandlers = {
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return await offscreenClient.convertURLToImageHTML(url)
+        return plainText(await offscreenClient.convertURLToImageHTML(url))
       } else {
-        return await offscreenClient.convertURLToImageHTML(info.srcUrl)
+        return plainText(await offscreenClient.convertURLToImageHTML(info.srcUrl))
       }
     }
   }
 , ['IMAGE_TO_HTML_DATA_URI_JPEG']: async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await pipeAsync(
-        srcUrl
-      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.JPEG)
-      , offscreenClient.convertURLToImageHTML
+      return plainText(
+        await pipeAsync(
+          srcUrl
+        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.JPEG)
+        , offscreenClient.convertURLToImageHTML
+        )
       )
     }
   }
 , ['IMAGE_TO_HTML_DATA_URI_PNG']: async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await pipeAsync(
-        srcUrl
-      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.PNG)
-      , offscreenClient.convertURLToImageHTML
+      return plainText(
+        await pipeAsync(
+          srcUrl
+        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.PNG)
+        , offscreenClient.convertURLToImageHTML
+        )
       )
     }
   }
 , ['IMAGE_TO_HTML_DATA_URI_WEBP']: async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await pipeAsync(
-        srcUrl
-      , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.WebP)
-      , offscreenClient.convertURLToImageHTML
+      return plainText(
+        await pipeAsync(
+          srcUrl
+        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.WebP)
+        , offscreenClient.convertURLToImageHTML
+        )
       )
     }
   }
@@ -412,35 +480,35 @@ export const handlers: IHandlers = {
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return await offscreenClient.convertURLToImageBBCode(url)
+        return plainText(await offscreenClient.convertURLToImageBBCode(url))
       } else {
-        return await offscreenClient.convertURLToImageBBCode(info.srcUrl)
+        return plainText(await offscreenClient.convertURLToImageBBCode(info.srcUrl))
       }
     }
   }
 , ['IMAGE_TO_DATA_URI_RAW']: async ({ mediaType, srcUrl }, tab) => {
     if (mediaType === 'image' && srcUrl) {
-      return await offscreenClient.convertURLToImageDataURI(srcUrl)
+      return plainText(await offscreenClient.convertURLToImageDataURI(srcUrl))
     }
   }
 , ['IMAGE_TO_DATA_URI_JPEG']: async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await offscreenClient.convertURLToImageDataURI(
-        srcUrl
-      , ImageFormat.JPEG
+      return plainText(
+        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.JPEG)
       )
     }
   }
 , ['IMAGE_TO_DATA_URI_PNG']: async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.PNG)
+      return plainText(
+        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.PNG)
+      )
     }
   }
 , ['IMAGE_TO_DATA_URI_WEBP']: async ({ mediaType, srcUrl }) => {
     if (mediaType === 'image' && srcUrl) {
-      return await offscreenClient.convertURLToImageDataURI(
-        srcUrl
-      , ImageFormat.WebP
+      return plainText(
+        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.WebP)
       )
     }
   }
@@ -451,9 +519,9 @@ export const handlers: IHandlers = {
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return await offscreenClient.convertURLToAudioHTML(url)
+        return plainText(await offscreenClient.convertURLToAudioHTML(url))
       } else {
-        return await offscreenClient.convertURLToAudioHTML(info.srcUrl)
+        return plainText(await offscreenClient.convertURLToAudioHTML(info.srcUrl))
       }
     }
   }
@@ -464,9 +532,9 @@ export const handlers: IHandlers = {
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return offscreenClient.convertURLToVideoHTML(url)
+        return plainText(await offscreenClient.convertURLToVideoHTML(url))
       } else {
-        return offscreenClient.convertURLToVideoHTML(info.srcUrl)
+        return plainText(await offscreenClient.convertURLToVideoHTML(info.srcUrl))
       }
     }
   }
@@ -480,13 +548,15 @@ export const handlers: IHandlers = {
       const html = await client.getSelectionHTML()
       const baseURL = info.frameUrl ?? info.pageUrl ?? tab.url
       if (baseURL) {
-        return await pipeAsync(
-          html
-        , offscreenClient.convertHTMLToSafeHTML
-        , html => formatURLsInHTML(html, baseURL)
-        , offscreenClient.convertHTMLToBeautifyHTML
-        , convertHTMLToMarkdown
-        , offscreenClient.convertMarkdownToBeautifyMarkdown
+        return plainText(
+          await pipeAsync(
+            html
+          , offscreenClient.convertHTMLToSafeHTML
+          , html => formatURLsInHTML(html, baseURL)
+          , offscreenClient.convertHTMLToBeautifyHTML
+          , convertHTMLToMarkdown
+          , offscreenClient.convertMarkdownToBeautifyMarkdown
+          )
         )
       }
     }
@@ -501,11 +571,13 @@ export const handlers: IHandlers = {
       const html = await client.getSelectionHTML()
       const baseURL = info.frameUrl ?? info.pageUrl ?? tab.url
       if (baseURL) {
-        return await pipeAsync(
-          html
-        , offscreenClient.convertHTMLToSafeHTML
-        , html => formatURLsInHTML(html, baseURL)
-        , offscreenClient.convertHTMLToBeautifyHTML
+        return plainText(
+          await pipeAsync(
+            html
+          , offscreenClient.convertHTMLToSafeHTML
+          , html => formatURLsInHTML(html, baseURL)
+          , offscreenClient.convertHTMLToBeautifyHTML
+          )
         )
       }
     }
@@ -520,12 +592,14 @@ export const handlers: IHandlers = {
       const html = await client.getSelectionHTML()
       const baseURL = info.frameUrl ?? info.pageUrl ?? tab.url
       if (baseURL) {
-        return await pipeAsync(
-          html
-        , offscreenClient.convertHTMLToSafeHTML
-        , html => formatURLsInHTML(html, baseURL)
-        , offscreenClient.convertHTMLToOnlyATagHTML
-        , offscreenClient.convertHTMLToBeautifyHTML
+        return plainText(
+          await pipeAsync(
+            html
+          , offscreenClient.convertHTMLToSafeHTML
+          , html => formatURLsInHTML(html, baseURL)
+          , offscreenClient.convertHTMLToOnlyATagHTML
+          , offscreenClient.convertHTMLToBeautifyHTML
+          )
         )
       }
     }
@@ -538,11 +612,13 @@ export const handlers: IHandlers = {
       })
 
       const html = await tabClient.getSelectionHTML()
-      return await pipeAsync(
-        html
-      , offscreenClient.convertHTMLToSafeHTML
-      , offscreenClient.convertHTMLToNoAttrHTML
-      , offscreenClient.convertHTMLToBeautifyHTML
+      return plainText(
+        await pipeAsync(
+          html
+        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToNoAttrHTML
+        , offscreenClient.convertHTMLToBeautifyHTML
+        )
       )
     }
   }
@@ -556,12 +632,14 @@ export const handlers: IHandlers = {
       const html = await client.getSelectionHTML()
       const baseURL = info.frameUrl ?? info.pageUrl ?? tab.url
       if (baseURL) {
-        return await pipeAsync(
-          html
-        , offscreenClient.convertHTMLToSafeHTML
-        , html => formatURLsInHTML(html, baseURL)
-        , offscreenClient.convertHTMLToBeautifyHTML
-        , offscreenClient.convertHTMLToBBCode
+        return plainText(
+          await pipeAsync(
+            html
+          , offscreenClient.convertHTMLToSafeHTML
+          , html => formatURLsInHTML(html, baseURL)
+          , offscreenClient.convertHTMLToBeautifyHTML
+          , offscreenClient.convertHTMLToBBCode
+          )
         )
       }
     }
@@ -573,7 +651,7 @@ export const handlers: IHandlers = {
       , frameId: info.frameId
       })
 
-      return await tabClient.getSelectionText()
+      return plainText(await tabClient.getSelectionText())
     }
   }
 , ['SELECTION_TO_PLAIN_TRIMMED']: async (info, tab) => {
@@ -584,7 +662,7 @@ export const handlers: IHandlers = {
       })
 
       const text = await tabClient.getSelectionText()
-      return await offscreenClient.convertTextToTrimmedText(text)
+      return plainText(await offscreenClient.convertTextToTrimmedText(text))
     }
   }
 , ['SELECTION_TO_RAW_STRING']: async (info, tab) => {
@@ -595,7 +673,7 @@ export const handlers: IHandlers = {
       })
 
       const text = await tabClient.getSelectionText()
-      return await offscreenClient.convertTextToRawString(text)
+      return plainText(await offscreenClient.convertTextToRawString(text))
     }
   }
 }

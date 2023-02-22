@@ -44,6 +44,9 @@
 , "TAB_URL_TO_ASCII_DOC": {
     "message": "标签页链接 → AsciiDoc"
   }
+, "TAB_URL_TO_RICH_TEXT": {
+    "message": "标签页链接 → 富文本"
+  }
 , "FRAME_URL_TO_PLAIN": {
     "message": "框架链接 → 纯文本"
   }
@@ -61,6 +64,9 @@
   }
 , "FRAME_URL_TO_ASCII_DOC": {
     "message": "框架链接 → AsciiDoc"
+  }
+, "FRAME_URL_TO_RICH_TEXT": {
+    "message": "框架链接 → 富文本"
   }
 , "LINK_TEXT": {
     "message": "复制链接文本"

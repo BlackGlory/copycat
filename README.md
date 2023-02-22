@@ -21,6 +21,7 @@ Copy content from web powerful than ever before.
   - [x] HTML
   - [x] Org-Mode
   - [x] AsciiDoc
+  - [x] Rich text (HTML)
 - [x] Copy a frame link as
   - [x] Plaintext
   - [x] Markdown
@@ -28,6 +29,7 @@ Copy content from web powerful than ever before.
   - [x] HTML
   - [x] Org-Mode
   - [x] AsciiDoc
+  - [x] Rich text (HTML)
 - [x] Copy a link text
 - [x] Copy a link as
   - [x] Markdown

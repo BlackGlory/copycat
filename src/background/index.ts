@@ -1,11 +1,12 @@
 import browser from 'webextension-polyfill'
 import { go } from '@blackglory/prelude'
-import { handlers } from './handlers.js'
+import { ResultType, handlers } from './handlers.js'
 import { menus } from './menus.js'
 import { initStorage } from './storage.js'
 import { migrate } from './migrate.js'
 import { each } from 'extra-promise'
 import { offscreenClient } from './offscreen-client.js'
+import { getActiveTab } from 'extra-webextension'
 
 browser.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
   switch (reason) {
@@ -43,22 +44,33 @@ browser.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
 })
 
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
-  const text = await handlers[info.menuItemId](info, tab)
-  if (text) {
-    await offscreenClient.writeTextToClipboard(text)
+  const result = await handlers[info.menuItemId](info, tab)
+  if (result) {
+    switch (result.type) {
+      case ResultType.PlainText: {
+        await offscreenClient.writeTextToClipboard(result.content)
+        break
+      }
+      case ResultType.RichText: {
+        await offscreenClient.writeHTMLToClipboard(result.content)
+      }
+    }
   }
 })
 
 browser.commands.onCommand.addListener(async command => {
-  const tabs = await browser.tabs.query({
-    currentWindow: true
-  , active: true
-  })
+  const tab = await getActiveTab()
 
-  if (tabs.length) {
-    const text = await handlers[command]({}, tabs[0])
-    if (text) {
-      await offscreenClient.writeTextToClipboard(text)
+  const result = await handlers[command]({}, tab)
+  if (result) {
+    switch (result.type) {
+      case ResultType.PlainText: {
+        await offscreenClient.writeTextToClipboard(result.content)
+        break
+      }
+      case ResultType.RichText: {
+        await offscreenClient.writeHTMLToClipboard(result.content)
+      }
     }
   }
 })

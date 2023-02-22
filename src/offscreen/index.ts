@@ -1,5 +1,7 @@
 import { createServer } from '@delight-rpc/webextension'
 import { IOffscreenAPI, OffscreenChannel } from '@src/contract.js'
+import { writeTextToClipboard } from '@utils/write-text-to-clipboard.js'
+import { writeHTMLToClipboard } from '@utils/write-html-to-clipboard.js'
 import { convertHTMLToAbsoluteLinkHTML } from '@converters/convert-html-to-absolute-link-html.js'
 import { convertHTMLToBBCode } from '@converters/convert-html-to-bbcode.js'
 import { convertHTMLToBeautifyHTML } from '@converters/convert-html-to-beautify-html.js'
@@ -29,12 +31,12 @@ import { convertURLToLinkPlain } from '@converters/convert-url-to-link-plain.js'
 import { convertURLToRelativeURL } from '@converters/convert-url-to-relative-url.js'
 import { convertURLToRootRelativeURL } from '@converters/convert-url-to-root-relative-url.js'
 import { convertURLToVideoHTML } from '@converters/convert-url-to-video-html.js'
-import { writeTextToClipboard } from '@utils/write-text-to-clipboard.js'
 import { convertURLToLinkOrgMode } from '@converters/convert-url-to-link-org-mode.js'
 import { convertURLToLinkAsciiDoc } from '@converters/convert-url-to-link-ascii-doc.js'
 
 createServer<IOffscreenAPI>({
   writeTextToClipboard
+, writeHTMLToClipboard
 
 , convertHTMLToAbsoluteLinkHTML
 , convertHTMLToBBCode

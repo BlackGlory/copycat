@@ -2661,6 +2661,11 @@ extra-abort@^0.3.0:
     iterable-operator "^4.0.1"
     justypes "^4.1.0"
 
+extra-blob@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/extra-blob/-/extra-blob-0.1.0.tgz#5cc9b08805f4155f13efed7c042df2eb6992b7d8"
+  integrity sha512-69BKIP9ANV21fxtl1JxdFmg66oAhOLy2npbztka31b7+WiB//63MEfBLU0G/TTbeX1TfBen0SuihDoQGtzL1fw==
+
 extra-compatible@^0.1.8:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/extra-compatible/-/extra-compatible-0.1.8.tgz#8568d222a4090a6da1a9c106cc4613d7fe141eae"

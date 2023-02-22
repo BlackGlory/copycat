@@ -53,6 +53,7 @@ export interface IBackgroundAPI {
 
 export interface IOffscreenAPI {
   writeTextToClipboard(text: string): null
+  writeHTMLToClipboard(html: string): null
 
   convertHTMLToAbsoluteLinkHTML(html: string, baseURL: string): string
   convertHTMLToBBCode(html: string): string

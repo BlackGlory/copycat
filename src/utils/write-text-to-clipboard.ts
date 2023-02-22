@@ -9,5 +9,6 @@ export async function writeTextToClipboard(text: string): Promise<null> {
     document.execCommand('Copy', false)
     document.body.removeChild(textarea)
   }
+
   return null
 }

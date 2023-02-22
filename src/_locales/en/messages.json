@@ -53,6 +53,9 @@
 , "TAB_URL_TO_ASCII_DOC": {
     "message": "Tab link → AsciiDoc"
   }
+, "TAB_URL_TO_RICH_TEXT": {
+    "message": "Tab link → Rich text"
+  }
 , "FRAME_URL_TO_PLAIN": {
     "message": "Frame link → Plaintext"
   }
@@ -70,6 +73,9 @@
   }
 , "FRAME_URL_TO_ASCII_DOC": {
     "message": "Frame link → AsciiDoc"
+  }
+, "FRAME_URL_TO_RICH_TEXT": {
+    "message": "Frame link → Rich text"
   }
 , "LINK_TEXT": {
     "message": "Copy link text"
