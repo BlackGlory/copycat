@@ -6,6 +6,7 @@
   , "jsx": "react-jsx"
   , "esModuleInterop": true
   , "strict": true
+  , "sourceMap": true
   , "removeComments": true
   , "noUnusedLocals": false
   , "noUnusedParameters": false

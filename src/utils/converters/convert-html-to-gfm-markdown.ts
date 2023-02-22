@@ -1,23 +1,26 @@
-import TurndownService from 'turndown'
-import { gfm } from 'turndown-plugin-gfm'
+import { unified } from 'unified'
+import rehypeParse from 'rehype-parse'
+import rehypeRemark from 'rehype-remark'
+import remarkStringify from 'remark-stringify'
+import remarkGfm from 'remark-gfm'
 
-export function convertHTMLToGfmMarkdown(html: string): string {
-  const turndownService = createTurndownService()
-  return turndownService.turndown(html)
-}
+export async function convertHTMLToGfmMarkdown(html: string): Promise<string> {
+  const file = await unified()
+    .use(rehypeParse)
+    .use(rehypeRemark)
+    .use(remarkGfm)
+    .use(remarkStringify, {
+      bullet: '*'
+    , fence: '`'
+    , fences: true
+    , emphasis: '*'
+    , strong: '*'
+    , incrementListMarker: true
+    , rule: '-'
+    })
+    .process(html)
 
-function createTurndownService() {
-  return new TurndownService({
-    headingStyle: 'atx'
-  , hr: '---'
-  , bulletListMarker: '*'
-  , codeBlockStyle: 'fenced'
-  , fence: '```'
-  , emDelimiter: '*'
-  , strongDelimiter: '**'
-  , linkStyle: 'inlined'
-  , keepReplacement(content: string): string {
-      return content
-    }
-  }).use(gfm)
+  return file
+    .toString()
+    .trim()
 }

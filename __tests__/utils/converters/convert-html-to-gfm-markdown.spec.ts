@@ -1,7 +1,9 @@
 import { convertHTMLToGfmMarkdown } from '@converters/convert-html-to-gfm-markdown.js'
 
-test('convertHtmlToGfmMarkdown', () => {
-  const result = convertHTMLToGfmMarkdown('<em><none>Hello*World</none></em>')
+test('convertHtmlToGfmMarkdown', async () => {
+  const html = '<em><none>Hello*World</none></em>'
+
+  const result = await convertHTMLToGfmMarkdown(html)
 
   expect(result).toBe('*Hello\\*World*')
 })

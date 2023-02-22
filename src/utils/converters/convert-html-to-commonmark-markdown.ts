@@ -1,28 +1,24 @@
-import TurndownService from 'turndown'
+import { unified } from 'unified'
+import rehypeParse from 'rehype-parse'
+import rehypeRemark from 'rehype-remark'
+import remarkStringify from 'remark-stringify'
 
-export function convertHTMLToCommonmarkMarkdown(html: string): string {
-  const turndownService = createTurndownService()
-  return turndownService.turndown(html)
-}
+export async function convertHTMLToCommonmarkMarkdown(html: string): Promise<string> {
+  const file = await unified()
+    .use(rehypeParse)
+    .use(rehypeRemark)
+    .use(remarkStringify, {
+      bullet: '*'
+    , fence: '`'
+    , fences: true
+    , emphasis: '*'
+    , strong: '*'
+    , incrementListMarker: true
+    , rule: '-'
+    })
+    .process(html)
 
-function createTurndownService() {
-  return new TurndownService({
-    headingStyle: 'atx'
-  , hr: '---'
-  , bulletListMarker: '*'
-  , codeBlockStyle: 'fenced'
-  , fence: '```'
-  , emDelimiter: '*'
-  , strongDelimiter: '**'
-  , linkStyle: 'inlined'
-  , keepReplacement(content: string): string {
-      return content
-    }
-  }).addRule('strikethrough', {
-    // @ts-ignore
-    filter: ['del', 's', 'strike'],
-    replacement(content) {
-      return '~~' + content + '~~'
-    }
-  })
+  return file
+    .toString()
+    .trim()
 }

@@ -21,20 +21,21 @@ module.exports = {
       'path': require.resolve('path-browserify')
     }
   , extensionAlias: {
-      '.js': ['.ts', '.js']
-    , '.jsx': ['.tsx', '.jsx']
+      '.js': ['.js', '.ts']
+    , '.jsx': ['.jsx', '.tsx']
+    , '.cjs': ['.cjs', '.cts']
+    , '.mjs': ['.mjs', '.mts']
     }
   }
 , module: {
     rules: [
       {
-        test: /\.tsx?$/
-      , exclude: /node_module/
-      , use: 'ts-loader'
+        test: /\.([cm]?ts|tsx)$/
+      , loader: 'ts-loader'
       }
     , {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        test: /\.css$/i
+      , use: ['style-loader', 'css-loader', 'postcss-loader'],
       }
     ]
   }
