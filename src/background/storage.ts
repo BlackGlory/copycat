@@ -55,6 +55,7 @@ async function initMenu(): Promise<void> {
     , { id: 'SELECTION_TO_PLAIN', visible: true }
     , { id: 'SELECTION_TO_PLAIN_TRIMMED', visible: true }
     , { id: 'SELECTION_TO_RAW_STRING', visible: true }
+    , { id: 'SELECTION_TO_JSON_STRING', visible: true }
     ]
   , [MenuContext.Image]: [
       { id: 'IMAGE_TO_MARKDOWN', visible: true }

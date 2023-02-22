@@ -662,6 +662,17 @@ export const handlers: IHandlers = {
       return plainText(await offscreenClient.convertTextToRawString(text))
     }
   }
+, async SELECTION_TO_JSON_STRING(info, tab) {
+    if (tab?.id) {
+      const tabClient = createTabClient<IFrameAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      const text = await tabClient.getSelectionText()
+      return plainText(await offscreenClient.convertTextToJSONString(text))
+    }
+  }
 }
 
 function plainText(content: string): Result {

@@ -110,6 +110,9 @@
 , "SELECTION_TO_RAW_STRING": {
     "message": "选中内容 → 原始字符串"
   }
+, "SELECTION_TO_JSON_STRING": {
+    "message": "选中内容 → JSON字符串"
+  }
 , "IMAGE_TO_MARKDOWN": {
     "message": "图片 → Markdown"
   }

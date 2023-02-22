@@ -33,6 +33,7 @@ import { convertURLToRootRelativeURL } from '@converters/convert-url-to-root-rel
 import { convertURLToVideoHTML } from '@converters/convert-url-to-video-html.js'
 import { convertURLToLinkOrgMode } from '@converters/convert-url-to-link-org-mode.js'
 import { convertURLToLinkAsciiDoc } from '@converters/convert-url-to-link-ascii-doc.js'
+import { convertTextToJSONString } from '@converters/convert-text-to-json-string.js'
 
 createServer<IOffscreenAPI>({
   writeTextToClipboard
@@ -53,6 +54,7 @@ createServer<IOffscreenAPI>({
 , convertMarkdownToBeautifyMarkdown
 , convertTextToDecodeEntitiesText
 , convertTextToRawString
+, convertTextToJSONString
 , convertTextToTrimmedText
 , convertURLToAbsoluteURL
 , convertURLToAudioHTML

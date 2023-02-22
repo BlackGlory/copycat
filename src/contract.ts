@@ -92,6 +92,7 @@ export interface IOffscreenAPI {
   convertMarkdownToBeautifyMarkdown(markdown: string): string
   convertTextToDecodeEntitiesText(text: string): string
   convertTextToRawString(text: string): string
+  convertTextToJSONString(text: string): string
   convertTextToTrimmedText(text: string): string
   convertURLToAbsoluteURL(relativeURL: string, baseURL: string): string
   convertURLToAudioHTML(url: string): string
