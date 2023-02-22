@@ -234,7 +234,7 @@ export const handlers: IHandlers = {
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToCleanHTML
         , offscreenClient.convertHTMLToBeautifyHTML
         , convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
@@ -264,7 +264,7 @@ export const handlers: IHandlers = {
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToCleanHTML
         , offscreenClient.convertHTMLToBeautifyHTML
         , convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
@@ -294,7 +294,7 @@ export const handlers: IHandlers = {
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToCleanHTML
         , offscreenClient.convertHTMLToBeautifyHTML
         , convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
@@ -325,7 +325,7 @@ export const handlers: IHandlers = {
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToCleanHTML
         , offscreenClient.convertHTMLToBeautifyHTML
         )
         return plainText(
@@ -353,7 +353,7 @@ export const handlers: IHandlers = {
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToCleanHTML
         , offscreenClient.convertHTMLToBeautifyHTML
         , offscreenClient.convertHTMLToBBCode
         )
@@ -537,7 +537,7 @@ export const handlers: IHandlers = {
         return plainText(
           await pipeAsync(
             html
-          , offscreenClient.convertHTMLToSafeHTML
+          , offscreenClient.convertHTMLToCleanHTML
           , html => formatURLsInHTML(html, baseURL)
           , offscreenClient.convertHTMLToBeautifyHTML
           , convertHTMLToMarkdown
@@ -560,7 +560,7 @@ export const handlers: IHandlers = {
         return plainText(
           await pipeAsync(
             html
-          , offscreenClient.convertHTMLToSafeHTML
+          , offscreenClient.convertHTMLToCleanHTML
           , html => formatURLsInHTML(html, baseURL)
           , offscreenClient.convertHTMLToBeautifyHTML
           )
@@ -581,7 +581,7 @@ export const handlers: IHandlers = {
         return plainText(
           await pipeAsync(
             html
-          , offscreenClient.convertHTMLToSafeHTML
+          , offscreenClient.convertHTMLToCleanHTML
           , html => formatURLsInHTML(html, baseURL)
           , offscreenClient.convertHTMLToOnlyATagHTML
           , offscreenClient.convertHTMLToBeautifyHTML
@@ -601,7 +601,7 @@ export const handlers: IHandlers = {
       return plainText(
         await pipeAsync(
           html
-        , offscreenClient.convertHTMLToSafeHTML
+        , offscreenClient.convertHTMLToCleanHTML
         , offscreenClient.convertHTMLToNoAttrHTML
         , offscreenClient.convertHTMLToBeautifyHTML
         )
@@ -621,7 +621,7 @@ export const handlers: IHandlers = {
         return plainText(
           await pipeAsync(
             html
-          , offscreenClient.convertHTMLToSafeHTML
+          , offscreenClient.convertHTMLToCleanHTML
           , html => formatURLsInHTML(html, baseURL)
           , offscreenClient.convertHTMLToBeautifyHTML
           , offscreenClient.convertHTMLToBBCode

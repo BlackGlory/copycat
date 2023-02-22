@@ -12,7 +12,7 @@ import { convertHTMLToOnlyATagHTML } from '@converters/convert-html-to-only-a-ta
 import { convertHTMLToPlainText } from '@converters/convert-html-to-plain-text.js'
 import { convertHTMLToRelativeLinkHTML } from '@converters/convert-html-to-relative-link-html.js'
 import { convertHTMLToRootRelativeLinkHTML } from '@converters/convert-html-to-root-relative-link-html.js'
-import { convertHTMLToSafeHTML } from '@converters/convert-html-to-safe-html.js'
+import { convertHTMLToCleanHTML } from '@converters/convert-html-to-clean-html.js'
 import { convertMarkdownToBeautifyMarkdown } from '@converters/convert-markdown-to-beautify-markdown.js'
 import { convertTextToDecodeEntitiesText } from '@converters/convert-text-to-decode-entities-text.js'
 import { convertTextToRawString } from '@converters/convert-text-to-raw-string.js'
@@ -48,7 +48,7 @@ createServer<IOffscreenAPI>({
 , convertHTMLToPlainText
 , convertHTMLToRelativeLinkHTML
 , convertHTMLToRootRelativeLinkHTML
-, convertHTMLToSafeHTML
+, convertHTMLToCleanHTML
 , convertMarkdownToBeautifyMarkdown
 , convertTextToDecodeEntitiesText
 , convertTextToRawString

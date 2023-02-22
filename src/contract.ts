@@ -86,7 +86,7 @@ export interface IOffscreenAPI {
   convertHTMLToPlainText(html: string): string
   convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToRootRelativeLinkHTML(html: string, baseURL: string): string
-  convertHTMLToSafeHTML(html: string): string
+  convertHTMLToCleanHTML(html: string): string
   convertMarkdownToBeautifyMarkdown(markdown: string): string
   convertTextToDecodeEntitiesText(text: string): string
   convertTextToRawString(text: string): string
