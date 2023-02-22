@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill'
 import { go } from '@blackglory/prelude'
-import { handlers, ContextMenusClickHandler, CommandComplicateHandler } from './handlers.js'
+import { handlers } from './handlers.js'
 import { menus } from './menus.js'
 import { initStorage } from './storage.js'
 import { migrate } from './migrate.js'
@@ -43,7 +43,7 @@ browser.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
 })
 
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
-  const text = await (handlers[info.menuItemId] as ContextMenusClickHandler)(info, tab)
+  const text = await handlers[info.menuItemId](info, tab)
   if (text) {
     await offscreenClient.writeTextToClipboard(text)
   }
@@ -56,7 +56,7 @@ browser.commands.onCommand.addListener(async command => {
   })
 
   if (tabs.length) {
-    const text = await (handlers[command] as CommandComplicateHandler)({}, tabs[0])
+    const text = await handlers[command]({}, tabs[0])
     if (text) {
       await offscreenClient.writeTextToClipboard(text)
     }
