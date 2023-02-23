@@ -1,7 +1,7 @@
 import { convertHTMLToRelativeLinkHTML } from '@converters/convert-html-to-relative-link-html.js'
 import { dedent } from 'extra-tags'
 
-test('convertHtmlToRelativeLinkHTML', () => {
+test('convertHTMLToRelativeLinkHTML', () => {
   const result = convertHTMLToRelativeLinkHTML(
     dedent`
       <img src="https://hello.world/test/hello">

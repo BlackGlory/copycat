@@ -10,9 +10,18 @@ export async function initStorage(): Promise<void> {
 
 async function initConfig(): Promise<void> {
   const config: IConfigStore = {
-    markdownFlavor: MarkdownFlavor.GitHubFlavoredMarkdown
-  , urlFormat: URLFormat.Absolute
-  , urlEncoding: URLEncoding.AlwaysEncode
+    url: {
+      encoding: URLEncoding.AlwaysEncode
+    , format: URLFormat.Absolute
+    }
+  , markdown: {
+      flavor: MarkdownFlavor.GitHubFlavoredMarkdown
+    }
+  , html: {
+      cleaner: {
+        allowlist: []
+      }
+    }
   }
 
   await storage.setItem(StorageItemKey.Config, config)

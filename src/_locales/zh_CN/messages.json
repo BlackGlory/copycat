@@ -92,8 +92,8 @@
 , "SELECTION_TO_HTML": {
     "message": "选中内容 → HTML"
   }
-, "SELECTION_TO_HTML_ONLY_A_TAG": {
-    "message": "选中内容 → HTML(仅<a>标签)"
+, "SELECTION_TO_HTML_CLEAN": {
+    "message": "选中内容 → HTML(经过净化)"
   }
 , "SELECTION_TO_HTML_NO_ATTR": {
     "message": "选中内容 → HTML(去除标签属性)"

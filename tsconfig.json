@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES2018"
+    "target": "ES2020"
   , "module": "NodeNext"
-  , "moduleResolution": "Nodenext"
+  , "moduleResolution": "NodeNext"
   , "jsx": "react-jsx"
   , "esModuleInterop": true
+  , "allowSyntheticDefaultImports": true
   , "strict": true
   , "sourceMap": true
   , "removeComments": true
@@ -23,6 +24,7 @@
       { "transform": "typescript-transform-paths" }
     , { "transform": "typescript-transform-paths", "afterDeclarations": true }
     ]
+  , "types": ["@types/chrome", "vitest/globals"]
   }
 , "include": [
     "src"

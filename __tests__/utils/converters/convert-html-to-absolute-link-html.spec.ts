@@ -1,13 +1,7 @@
-import { TextEncoder, TextDecoder } from 'util'
-
-// 在JSDOM的测试环境下缺少TextEncoder
-globalThis.TextEncoder = TextEncoder
-globalThis.TextDecoder = TextDecoder as typeof globalThis.TextDecoder
-
 import { convertHTMLToAbsoluteLinkHTML } from '@converters/convert-html-to-absolute-link-html.js'
 import { dedent  } from 'extra-tags'
 
-test('convertHtmlToAbsoluteLinkHTML', () => {
+test('convertHTMLToAbsoluteLinkHTML', () => {
   const result = convertHTMLToAbsoluteLinkHTML(
     dedent`
       <img src="../hello">

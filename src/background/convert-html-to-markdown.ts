@@ -5,9 +5,9 @@ import { offscreenClient } from './offscreen-client.js'
 export async function convertHTMLToMarkdown(
   html: string
 ): Promise<string> {
-  const { markdownFlavor } = await getConfig()
+  const config = await getConfig()
 
-  switch (markdownFlavor) {
+  switch (config.markdown.flavor) {
     case MarkdownFlavor.Commonmark:
       return await offscreenClient.convertHTMLToCommonmarkMarkdown(html)
     case MarkdownFlavor.GitHubFlavoredMarkdown:

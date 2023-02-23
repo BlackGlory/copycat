@@ -98,8 +98,8 @@
 , "SELECTION_TO_HTML": {
     "message": "Selection → HTML"
   }
-, "SELECTION_TO_HTML_ONLY_A_TAG": {
-    "message": "Selection → HTML(only <a> tag)"
+, "SELECTION_TO_HTML_CLEAN": {
+    "message": "Selection → HTML(clean)"
   }
 , "SELECTION_TO_HTML_NO_ATTR": {
     "message": "Selection → HTML(no attributes)"

@@ -9,7 +9,7 @@ import { UpButton } from './up-button.jsx'
 import { DownButton } from './down-button.jsx'
 import { useMenu } from '@hooks/use-menu.js'
 
-export function MenuEditor() {
+export function MenuOptions() {
   const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
   const [menu, setMenu] = useMenu(client)
 

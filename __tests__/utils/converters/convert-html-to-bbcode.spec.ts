@@ -1,6 +1,6 @@
 import { convertHTMLToBBCode } from '@converters/convert-html-to-bbcode.js'
 
-describe('convertHtmlToBBCode', () => {
+describe('convertHTMLToBBCode', () => {
   test('img', () => {
     const html = '<img src="hello.jpg" />'
 

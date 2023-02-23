@@ -1,7 +1,7 @@
 import { convertHTMLToRootRelativeLinkHTML } from '@converters/convert-html-to-root-relative-link-html.js'
 import { dedent } from 'extra-tags'
 
-test('convertHtmlToRootRelativeLinkHTML', () => {
+test('convertHTMLToRootRelativeLinkHTML', () => {
   const result = convertHTMLToRootRelativeLinkHTML(
     dedent`
       <img src="https://hello.world/test/hello">

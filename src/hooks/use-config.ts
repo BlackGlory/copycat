@@ -11,9 +11,18 @@ export function useConfig(client: DelightRPC.ClientProxy<IBackgroundAPI>): [
 , setConfig: Updater<IConfigStore>
 ] {
   const [config, setConfig] = useState<IConfigStore>({
-    markdownFlavor: MarkdownFlavor.GitHubFlavoredMarkdown
-  , urlFormat: URLFormat.Absolute
-  , urlEncoding: URLEncoding.AlwaysEncode
+    url: {
+      format: URLFormat.Absolute
+    , encoding: URLEncoding.AlwaysEncode
+    }
+  , markdown: {
+      flavor: MarkdownFlavor.GitHubFlavoredMarkdown
+    }
+  , html: {
+      cleaner: {
+        allowlist: []
+      }
+    }
   })
 
   useMount(() => {

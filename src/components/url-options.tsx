@@ -1,21 +1,21 @@
-import { useMemo } from 'react'
-import { IBackgroundAPI, URLFormat, MarkdownFlavor, URLEncoding } from '@src/contract.js'
-import { createBackgroundClient } from '@delight-rpc/webextension'
+import { URLFormat, URLEncoding, IConfigStore } from '@src/contract.js'
 import { i18n } from '@utils/i18n.js'
 import { Select } from '@components/select.jsx'
-import { useConfig } from '@hooks/use-config.js'
+import { Updater } from 'use-immer'
 
-export function ConfigEditor() {
-  const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
-  const [config, setConfig] = useConfig(client)
+interface IURLOptionsProps {
+  config: IConfigStore
+  setConfig: Updater<IConfigStore>
+}
 
+export function URLOptions({ config, setConfig }: IURLOptionsProps) {
   return (
     <div>
       <section>
         <label>{i18n('Options_UrlFormat')}</label>
 
         <Select
-          value={config.urlFormat}
+          value={config.url.format}
           items={[
             { name: i18n('Options_AbsoluteURL'), value: URLFormat.Absolute }
           , { name: i18n('Options_RelativeURL'), value: URLFormat.Relative }
@@ -23,7 +23,7 @@ export function ConfigEditor() {
           , { name: i18n('Options_OriginalURL'), value: URLFormat.Original }
           ]}
           onChange={value => setConfig(config => {
-            config.urlFormat = value
+            config.url.format = value
           })}
         />
       </section>
@@ -31,28 +31,14 @@ export function ConfigEditor() {
       <section>
         <label>URL Encoding</label>
         <Select
-          value={config.urlEncoding}
+          value={config.url.encoding}
           items={[
             { name: 'Original', value: URLEncoding.Original }
           , { name: 'Always Encode', value: URLEncoding.AlwaysEncode }
           , { name: 'Always Decode', value: URLEncoding.AlwaysDecode }
           ]}
           onChange={value => setConfig(config => {
-            config.urlEncoding = value
-          })}
-        />
-      </section>
-
-      <section>
-        <label>{i18n('Options_MarkdownFlavor')}</label>
-        <Select
-          value={config.markdownFlavor}
-          items={[
-            { name: i18n('Options_GitHubFlavoredMarkdown'), value: MarkdownFlavor.GitHubFlavoredMarkdown }
-          , { name: i18n('Options_CommonMark'), value: MarkdownFlavor.Commonmark }
-          ]}
-          onChange={value => setConfig(config => {
-            config.markdownFlavor = value
+            config.url.encoding = value
           })}
         />
       </section>

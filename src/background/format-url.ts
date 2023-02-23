@@ -4,9 +4,9 @@ import { offscreenClient } from './offscreen-client.js'
 import { encode, decode } from 'url-operator'
 
 export async function formatURL(url: string, baseURL: string): Promise<string> {
-  const { urlFormat, urlEncoding } = await getConfig()
+  const config = await getConfig()
 
-  switch (urlFormat) {
+  switch (config.url.format) {
     case URLFormat.Absolute: {
       url = await offscreenClient.convertURLToAbsoluteURL(url, baseURL)
       break
@@ -24,7 +24,7 @@ export async function formatURL(url: string, baseURL: string): Promise<string> {
     }
   }
 
-  switch (urlEncoding) {
+  switch (config.url.encoding) {
     case URLEncoding.AlwaysEncode: {
       url = encode(url)
       break

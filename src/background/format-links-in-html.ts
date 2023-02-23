@@ -6,9 +6,9 @@ export async function formatURLsInHTML(
   html: string
 , baseUrl: string
 ): Promise<string> {
-  const { urlFormat } = await getConfig()
+  const config = await getConfig()
 
-  switch (urlFormat) {
+  switch (config.url.format) {
     case URLFormat.Absolute:
       return await offscreenClient.convertHTMLToAbsoluteLinkHTML(html, baseUrl)
     case URLFormat.Relative:

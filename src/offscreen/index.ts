@@ -8,11 +8,11 @@ import { convertHTMLToBeautifyHTML } from '@converters/convert-html-to-beautify-
 import { convertHTMLToCommonmarkMarkdown } from '@converters/convert-html-to-commonmark-markdown.js'
 import { convertHTMLToGfmMarkdown } from '@converters/convert-html-to-gfm-markdown.js'
 import { convertHTMLToNoAttrHTML } from '@converters/convert-html-to-no-attr-html.js'
-import { convertHTMLToOnlyATagHTML } from '@converters/convert-html-to-only-a-tag-html.js'
+import { convertHTMLToCleanHTML } from '@converters/convert-html-to-clean-html.js'
 import { convertHTMLToPlainText } from '@converters/convert-html-to-plain-text.js'
 import { convertHTMLToRelativeLinkHTML } from '@converters/convert-html-to-relative-link-html.js'
 import { convertHTMLToRootRelativeLinkHTML } from '@converters/convert-html-to-root-relative-link-html.js'
-import { convertHTMLToCleanHTML } from '@converters/convert-html-to-clean-html.js'
+import { convertHTMLToSanitizedHTML } from '@converters/convert-html-to-sanitized-html.js'
 import { convertMarkdownToBeautifyMarkdown } from '@converters/convert-markdown-to-beautify-markdown.js'
 import { convertTextToDecodeEntitiesText } from '@converters/convert-text-to-decode-entities-text.js'
 import { convertTextToRawString } from '@converters/convert-text-to-raw-string.js'
@@ -44,11 +44,11 @@ createServer<IOffscreenAPI>({
 , convertHTMLToCommonmarkMarkdown
 , convertHTMLToGfmMarkdown
 , convertHTMLToNoAttrHTML
-, convertHTMLToOnlyATagHTML
+, convertHTMLToCleanHTML
+, convertHTMLToSanitizedHTML
 , convertHTMLToPlainText
 , convertHTMLToRelativeLinkHTML
 , convertHTMLToRootRelativeLinkHTML
-, convertHTMLToCleanHTML
 , convertMarkdownToBeautifyMarkdown
 , convertTextToDecodeEntitiesText
 , convertTextToRawString

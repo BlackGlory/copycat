@@ -1,6 +1,6 @@
 export enum StorageItemKey {
-  Config = 'config'
-, Menu = 'menu'
+  Menu = 'menu'
+, Config = 'config'
 }
 
 export interface IMenuItem {
@@ -21,38 +21,36 @@ export enum MenuContext {
 export type IMenuStore = Record<MenuContext, IMenuItem[]>
 
 export interface IStorage {
-  [StorageItemKey.Config]: IConfigStore
   [StorageItemKey.Menu]: IMenuStore
-}
-
-export enum URLFormat {
-  Original
-, Absolute
-, Relative
-, RootRelative
-}
-
-export enum URLEncoding {
-  Original
-, AlwaysEncode
-, AlwaysDecode
-}
-
-export enum MarkdownFlavor {
-  Commonmark
-, GitHubFlavoredMarkdown
-}
-
-export enum ImageFormat {
-  JPEG
-, WebP
-, PNG
+  [StorageItemKey.Config]: IConfigStore
 }
 
 export interface IConfigStore {
-  urlFormat: URLFormat
-  urlEncoding: URLEncoding
-  markdownFlavor: MarkdownFlavor
+  url: IURLConfig
+  markdown: IMarkdownConfig
+  html: IHTMLConfig
+}
+
+export interface IURLConfig {
+  format: URLFormat
+  encoding: URLEncoding
+}
+
+export interface IMarkdownConfig {
+  flavor: MarkdownFlavor
+}
+
+export interface IHTMLConfig {
+  cleaner: IHTMLCleanerConfig
+}
+
+export interface IHTMLCleanerConfig {
+  allowlist: IHTMLCleanerAllowlistItem[]
+}
+
+export interface IHTMLCleanerAllowlistItem {
+  elements: string
+  attributes: string
 }
 
 export interface IFrameAPI {
@@ -82,11 +80,11 @@ export interface IOffscreenAPI {
   convertHTMLToCommonmarkMarkdown(html: string): string
   convertHTMLToGfmMarkdown(html: string): string
   convertHTMLToNoAttrHTML(html: string): string
-  convertHTMLToOnlyATagHTML(html: string): string
   convertHTMLToPlainText(html: string): string
   convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToRootRelativeLinkHTML(html: string, baseURL: string): string
-  convertHTMLToCleanHTML(html: string): string
+  convertHTMLToCleanHTML(html: string, config: IHTMLCleanerConfig): string
+  convertHTMLToSanitizedHTML(html: string): string
   convertMarkdownToBeautifyMarkdown(markdown: string): string
   convertTextToDecodeEntitiesText(text: string): string
   convertTextToRawString(text: string): string
@@ -107,4 +105,28 @@ export interface IOffscreenAPI {
   convertURLToRelativeURL(absoluteURL: string, baseURL: string): string
   convertURLToRootRelativeURL(url: string, baseURL: string): string
   convertURLToVideoHTML(url: string): string
+}
+
+export enum URLFormat {
+  Original
+, Absolute
+, Relative
+, RootRelative
+}
+
+export enum URLEncoding {
+  Original
+, AlwaysEncode
+, AlwaysDecode
+}
+
+export enum MarkdownFlavor {
+  Commonmark
+, GitHubFlavoredMarkdown
+}
+
+export enum ImageFormat {
+  JPEG
+, WebP
+, PNG
 }
