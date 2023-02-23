@@ -17,7 +17,7 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
           value={config.markdown.flavor}
           items={[
             { name: i18n('Options_GitHubFlavoredMarkdown'), value: MarkdownFlavor.GitHubFlavoredMarkdown }
-          , { name: i18n('Options_CommonMark'), value: MarkdownFlavor.Commonmark }
+          , { name: i18n('Options_CommonMark'), value: MarkdownFlavor.CommonMark }
           ]}
           onChange={value => setConfig(config => {
             config.markdown.flavor = value

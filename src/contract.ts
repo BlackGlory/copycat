@@ -121,7 +121,7 @@ export enum URLEncoding {
 }
 
 export enum MarkdownFlavor {
-  Commonmark
+  CommonMark
 , GitHubFlavoredMarkdown
 }
 

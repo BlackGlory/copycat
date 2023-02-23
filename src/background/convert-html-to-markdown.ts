@@ -8,7 +8,7 @@ export async function convertHTMLToMarkdown(
   const config = await getConfig()
 
   switch (config.markdown.flavor) {
-    case MarkdownFlavor.Commonmark:
+    case MarkdownFlavor.CommonMark:
       return await offscreenClient.convertHTMLToCommonmarkMarkdown(html)
     case MarkdownFlavor.GitHubFlavoredMarkdown:
       return await offscreenClient.convertHTMLToGfmMarkdown(html)
