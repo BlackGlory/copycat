@@ -227,6 +227,7 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
+        const config = await getConfig()
         const url = await formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
@@ -236,7 +237,7 @@ export const handlers: IHandlers = {
           html
         , offscreenClient.convertHTMLToSanitizedHTML
         , offscreenClient.convertHTMLToBeautifyHTML
-        , offscreenClient.convertHTMLToMarkdown
+        , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
         return plainText(
@@ -257,6 +258,7 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
+        const config = await getConfig()
         const url = await formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
@@ -266,7 +268,7 @@ export const handlers: IHandlers = {
           html
         , offscreenClient.convertHTMLToSanitizedHTML
         , offscreenClient.convertHTMLToBeautifyHTML
-        , offscreenClient.convertHTMLToMarkdown
+        , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
         return plainText(
@@ -287,6 +289,7 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
+        const config = await getConfig()
         const url = await formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
@@ -296,7 +299,7 @@ export const handlers: IHandlers = {
           html
         , offscreenClient.convertHTMLToSanitizedHTML
         , offscreenClient.convertHTMLToBeautifyHTML
-        , offscreenClient.convertHTMLToMarkdown
+        , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
         return plainText(await offscreenClient.convertURLToLinkAsciiDoc(url, title))
@@ -531,6 +534,7 @@ export const handlers: IHandlers = {
       , frameId: info.frameId
       })
 
+      const config = await getConfig()
       const html = await client.getSelectionHTML()
       const baseURL = info.frameUrl ?? info.pageUrl ?? tab.url
       if (baseURL) {
@@ -540,7 +544,7 @@ export const handlers: IHandlers = {
           , offscreenClient.convertHTMLToSanitizedHTML
           , html => formatURLsInHTML(html, baseURL)
           , offscreenClient.convertHTMLToBeautifyHTML
-          , offscreenClient.convertHTMLToMarkdown
+          , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
           , offscreenClient.convertMarkdownToBeautifyMarkdown
           )
         )

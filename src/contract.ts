@@ -36,8 +36,52 @@ export interface IURLConfig {
   encoding: URLEncoding
 }
 
-// eslint-disable-next-line
-export interface IMarkdownConfig {}
+export interface IMarkdownConfig {
+  bullet: MarkdownBullet
+  bulletOrdered: MarkdownBulletOrdered
+  emphasis: MarkdownEmphasis
+  fence: MarkdownFence
+  listItemIndent: MarkdownListItemIndent
+  rule: MarkdownRule
+  strong: MarkdownStrong
+}
+
+export enum MarkdownBullet {
+  '-'
+, '*'
+, '+'
+}
+
+export enum MarkdownBulletOrdered {
+  '.'
+, ')'
+}
+
+export enum MarkdownEmphasis {
+  '*'
+, '_'
+}
+
+export enum MarkdownFence {
+  '`'
+, '~'
+}
+
+export enum MarkdownListItemIndent {
+  Space
+, Tab
+}
+
+export enum MarkdownRule {
+  '*'
+, '-'
+, '_'
+}
+
+export enum MarkdownStrong {
+  '*'
+, '_'
+}
 
 export interface IHTMLConfig {
   cleaner: IHTMLCleanerConfig
@@ -76,7 +120,7 @@ export interface IOffscreenAPI {
   convertHTMLToAbsoluteLinkHTML(html: string, baseURL: string): string
   convertHTMLToBBCode(html: string): string
   convertHTMLToBeautifyHTML(html: string): string
-  convertHTMLToMarkdown(html: string): string
+  convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
   convertHTMLToNoAttrHTML(html: string): string
   convertHTMLToPlainText(html: string): string
   convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string

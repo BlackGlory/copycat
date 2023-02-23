@@ -1,5 +1,20 @@
 import { LocalStorage } from 'extra-webextension'
-import { StorageItemKey, IStorage, IConfigStore, URLFormat, URLEncoding, MenuContext, IMenuStore } from '@src/contract.js'
+import {
+  StorageItemKey
+, IStorage
+, IConfigStore
+, URLFormat
+, URLEncoding
+, MenuContext
+, IMenuStore
+, MarkdownBullet
+, MarkdownBulletOrdered
+, MarkdownEmphasis
+, MarkdownFence
+, MarkdownListItemIndent
+, MarkdownRule
+, MarkdownStrong
+} from '@src/contract.js'
 
 const storage = new LocalStorage<IStorage>()
 
@@ -14,7 +29,15 @@ async function initConfig(): Promise<void> {
       encoding: URLEncoding.AlwaysEncode
     , format: URLFormat.Absolute
     }
-  , markdown: {}
+  , markdown: {
+      bullet: MarkdownBullet['*']
+    , bulletOrdered: MarkdownBulletOrdered['.']
+    , emphasis: MarkdownEmphasis['_']
+    , fence: MarkdownFence['`']
+    , listItemIndent: MarkdownListItemIndent.Space
+    , rule: MarkdownRule['-']
+    , strong: MarkdownStrong['*']
+    }
   , html: {
       cleaner: {
         allowlist: []

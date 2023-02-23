@@ -20,7 +20,6 @@ test('convertHTMLToCleanHTML', () => {
       ]
     }
   )
-  console.log(result)
 
   expect(result).toBe('<a href="../hello">Hello World</a>')
 })

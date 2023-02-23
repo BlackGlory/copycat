@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { useMount } from 'extra-react-hooks'
-import { IBackgroundAPI, IConfigStore, URLFormat, URLEncoding } from '@src/contract.js'
+import { IBackgroundAPI, IConfigStore, URLFormat, URLEncoding, MarkdownBullet, MarkdownBulletOrdered, MarkdownEmphasis, MarkdownFence, MarkdownListItemIndent, MarkdownRule, MarkdownStrong } from '@src/contract.js'
 import * as DelightRPC from 'delight-rpc'
 import { go, isFunction } from '@blackglory/prelude'
 import { Updater } from 'use-immer'
@@ -15,7 +15,15 @@ export function useConfig(client: DelightRPC.ClientProxy<IBackgroundAPI>): [
       format: URLFormat.Absolute
     , encoding: URLEncoding.AlwaysEncode
     }
-  , markdown: {}
+  , markdown: {
+      bullet: MarkdownBullet['*']
+    , bulletOrdered: MarkdownBulletOrdered['.']
+    , emphasis: MarkdownEmphasis['_']
+    , fence: MarkdownFence['`']
+    , listItemIndent: MarkdownListItemIndent.Space
+    , rule: MarkdownRule['-']
+    , strong: MarkdownStrong['*']
+    }
   , html: {
       cleaner: {
         allowlist: []
