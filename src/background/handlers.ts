@@ -4,7 +4,6 @@ import { IFrameAPI, ImageFormat } from '@src/contract.js'
 import { Awaitable } from '@blackglory/prelude'
 import { pipeAsync } from 'extra-utils'
 import { offscreenClient } from './offscreen-client.js'
-import { convertHTMLToMarkdown } from './convert-html-to-markdown.js'
 import { formatURLsInHTML } from './format-links-in-html.js'
 import { formatURL } from './format-url.js'
 import { getConfig } from './storage.js'
@@ -237,7 +236,7 @@ export const handlers: IHandlers = {
           html
         , offscreenClient.convertHTMLToSanitizedHTML
         , offscreenClient.convertHTMLToBeautifyHTML
-        , convertHTMLToMarkdown
+        , offscreenClient.convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
         return plainText(
@@ -267,7 +266,7 @@ export const handlers: IHandlers = {
           html
         , offscreenClient.convertHTMLToSanitizedHTML
         , offscreenClient.convertHTMLToBeautifyHTML
-        , convertHTMLToMarkdown
+        , offscreenClient.convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
         return plainText(
@@ -297,7 +296,7 @@ export const handlers: IHandlers = {
           html
         , offscreenClient.convertHTMLToSanitizedHTML
         , offscreenClient.convertHTMLToBeautifyHTML
-        , convertHTMLToMarkdown
+        , offscreenClient.convertHTMLToMarkdown
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
         return plainText(await offscreenClient.convertURLToLinkAsciiDoc(url, title))
@@ -541,7 +540,7 @@ export const handlers: IHandlers = {
           , offscreenClient.convertHTMLToSanitizedHTML
           , html => formatURLsInHTML(html, baseURL)
           , offscreenClient.convertHTMLToBeautifyHTML
-          , convertHTMLToMarkdown
+          , offscreenClient.convertHTMLToMarkdown
           , offscreenClient.convertMarkdownToBeautifyMarkdown
           )
         )

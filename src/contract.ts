@@ -36,9 +36,8 @@ export interface IURLConfig {
   encoding: URLEncoding
 }
 
-export interface IMarkdownConfig {
-  flavor: MarkdownFlavor
-}
+// eslint-disable-next-line
+export interface IMarkdownConfig {}
 
 export interface IHTMLConfig {
   cleaner: IHTMLCleanerConfig
@@ -77,8 +76,7 @@ export interface IOffscreenAPI {
   convertHTMLToAbsoluteLinkHTML(html: string, baseURL: string): string
   convertHTMLToBBCode(html: string): string
   convertHTMLToBeautifyHTML(html: string): string
-  convertHTMLToCommonmarkMarkdown(html: string): string
-  convertHTMLToGfmMarkdown(html: string): string
+  convertHTMLToMarkdown(html: string): string
   convertHTMLToNoAttrHTML(html: string): string
   convertHTMLToPlainText(html: string): string
   convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
@@ -118,11 +116,6 @@ export enum URLEncoding {
   Original
 , AlwaysEncode
 , AlwaysDecode
-}
-
-export enum MarkdownFlavor {
-  CommonMark
-, GitHubFlavoredMarkdown
 }
 
 export enum ImageFormat {

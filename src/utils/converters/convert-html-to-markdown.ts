@@ -4,7 +4,7 @@ import rehypeRemark from 'rehype-remark'
 import remarkStringify from 'remark-stringify'
 import remarkGfm from 'remark-gfm'
 
-export async function convertHTMLToGfmMarkdown(html: string): Promise<string> {
+export async function convertHTMLToMarkdown(html: string): Promise<string> {
   const file = await unified()
     .use(rehypeParse)
     .use(rehypeRemark)

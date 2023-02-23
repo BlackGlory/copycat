@@ -5,8 +5,7 @@ import { writeHTMLToClipboard } from '@utils/write-html-to-clipboard.js'
 import { convertHTMLToAbsoluteLinkHTML } from '@converters/convert-html-to-absolute-link-html.js'
 import { convertHTMLToBBCode } from '@converters/convert-html-to-bbcode.js'
 import { convertHTMLToBeautifyHTML } from '@converters/convert-html-to-beautify-html.js'
-import { convertHTMLToCommonmarkMarkdown } from '@converters/convert-html-to-commonmark-markdown.js'
-import { convertHTMLToGfmMarkdown } from '@converters/convert-html-to-gfm-markdown.js'
+import { convertHTMLToMarkdown } from '@converters/convert-html-to-markdown.js'
 import { convertHTMLToNoAttrHTML } from '@converters/convert-html-to-no-attr-html.js'
 import { convertHTMLToCleanHTML } from '@converters/convert-html-to-clean-html.js'
 import { convertHTMLToPlainText } from '@converters/convert-html-to-plain-text.js'
@@ -41,8 +40,7 @@ createServer<IOffscreenAPI>({
 , convertHTMLToAbsoluteLinkHTML
 , convertHTMLToBBCode
 , convertHTMLToBeautifyHTML
-, convertHTMLToCommonmarkMarkdown
-, convertHTMLToGfmMarkdown
+, convertHTMLToMarkdown
 , convertHTMLToNoAttrHTML
 , convertHTMLToCleanHTML
 , convertHTMLToSanitizedHTML

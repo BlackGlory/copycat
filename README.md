@@ -56,13 +56,6 @@ Copy content from web powerful than ever before.
   - [x] BBCode
 - [x] Copy a native audio/video as HTML
 
-## Supported Markdown flavors
-- [x] [GitHub Flavored Markdown]
-- [x] [CommonMark]
-
-[GitHub Flavored Markdown]: https://github.github.com/gfm/
-[CommonMark]: http://commonmark.org/
-
 ## Extension shortcuts
 Copy tab links and selections can be set as extension shortcuts.
 
