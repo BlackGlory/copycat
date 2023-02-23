@@ -31,8 +31,8 @@
   , "SELECTION_TO_HTML": {
       "description": "__MSG_SELECTION_TO_HTML__"
     }
-  , "SELECTION_TO_HTML_ONLY_A_TAG": {
-      "description": "__MSG_SELECTION_TO_HTML_ONLY_A_TAG__"
+  , "SELECTION_TO_HTML_CLEAN": {
+      "description": "__MSG_SELECTION_TO_HTML_CLEAN__"
     }
   , "SELECTION_TO_HTML_NO_ATTR": {
       "description": "__MSG_SELECTION_TO_HTML_NO_ATTR__"

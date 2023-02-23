@@ -325,10 +325,10 @@
     "@blackglory/errors" "^2.4.3"
     "@blackglory/prelude" "^0.2.2"
 
-"@delight-rpc/webextension@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@delight-rpc/webextension/-/webextension-0.1.0.tgz#9dfe416e3cef854c592ce49789dfc89986530a16"
-  integrity sha512-p+3jK+PDbp8oYnGcxYoFP1AeGhLSYT2Fb3cO/RN34ivqTQbRzLuPbUSqSbiwpu3W5Z/8wAHANoJ2Ff/ZBGppaw==
+"@delight-rpc/webextension@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@delight-rpc/webextension/-/webextension-0.1.1.tgz#3d899e9e32fc432ded0f1ec0501c14a80d024096"
+  integrity sha512-bWu8e4Ole99aVRmUfA+jgCbNvvI/hWsy8TtGinXPL63Z1wgdcPzsEWi49XbURBLXBgJ6+q7g07wZDJsvljTm5g==
   dependencies:
     "@blackglory/prelude" "^0.1.8"
     "@delight-rpc/protocol" "^3.0.0"
@@ -1759,10 +1759,10 @@ delayed-stream@~1.0.0:
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==
 
-delight-rpc@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/delight-rpc/-/delight-rpc-5.0.4.tgz#a5f30f86ded0fab4e99223eecb00ad0b3506f9e0"
-  integrity sha512-sxc4/3MmdnCd3UmpfNXLAMjWJHcQOhbcc9KB6lA1cw3nh5/r/3AVy1kSM6OWmFR0q0+aUBaBWRtx2hvsl57caw==
+delight-rpc@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/delight-rpc/-/delight-rpc-5.1.0.tgz#90585eaabc0ac38e945c3faefcc5f4660f60c0e0"
+  integrity sha512-fmz/11mi4G16PyiBnQ8nGNk5xAK6LzmmaySYZF0CC7h8mWgEt9h54NaopnItxVwLkHrl3YvM3pRs5B/nt5EhOg==
   dependencies:
     "@blackglory/errors" "^2.4.3"
     "@blackglory/prelude" "^0.2.4"

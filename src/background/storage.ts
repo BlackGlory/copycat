@@ -80,7 +80,7 @@ async function initMenu(): Promise<void> {
       { id: 'SELECTION_TO_MARKDOWN', visible: true }
     , { id: 'SELECTION_TO_BBCODE', visible: true }
     , { id: 'SELECTION_TO_HTML', visible: true }
-    , { id: 'SELECTION_TO_HTML_ONLY_A_TAG', visible: true }
+    , { id: 'SELECTION_TO_HTML_CLEAN', visible: true }
     , { id: 'SELECTION_TO_HTML_NO_ATTR', visible: true }
     , { id: 'SELECTION_TO_PLAIN', visible: true }
     , { id: 'SELECTION_TO_PLAIN_TRIMMED', visible: true }

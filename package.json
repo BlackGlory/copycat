@@ -63,11 +63,11 @@
   },
   "dependencies": {
     "@blackglory/prelude": "^0.3.1",
-    "@delight-rpc/webextension": "^0.1.0",
+    "@delight-rpc/webextension": "^0.1.1",
     "@headlessui/react": "^1.7.11",
     "@heroicons/react": "^2.0.16",
     "classnames": "^2.3.2",
-    "delight-rpc": "^5.0.4",
+    "delight-rpc": "^5.1.0",
     "dompurify": "^3.0.0",
     "entities": "^4.4.0",
     "extra-blob": "^0.1.0",
