@@ -6,7 +6,7 @@ interface ICheckboxProps {
 
 export function Checkbox({ value, children, onClick }: ICheckboxProps) {
   return (
-    <label className='flex space-x-1 cursor-pointer'>
+    <label className='py-2 flex space-x-1 cursor-pointer'>
       <input
         className='border accent-gray-700'
         type='checkbox'

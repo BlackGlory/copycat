@@ -27,8 +27,8 @@ export interface IStorage {
 
 export interface IConfigStore {
   url: IURLConfig
-  markdown: IMarkdownConfig
   html: IHTMLConfig
+  markdown: IMarkdownConfig
 }
 
 export interface IURLConfig {

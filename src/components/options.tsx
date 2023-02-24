@@ -3,7 +3,7 @@ import { MenuOptions } from '@components/menu-options.jsx'
 
 export function Options() {
   return (
-    <div className='min-w-[600px]'>
+    <div className='min-w-[500px] min-h-[500px]'>
       <ConfigOptions />
       <MenuOptions />
     </div>
