@@ -10,15 +10,15 @@ export function useMenu(client: DelightRPC.ClientProxy<IBackgroundAPI>): [
   menu: IMenuStore
 , setMenu: Updater<IMenuStore>
 ] {
-  const [menu, setMenu] = useState<IMenuStore>({
-    [MenuContext.Page]: []
-  , [MenuContext.Frame]: []
-  , [MenuContext.Link]: []
-  , [MenuContext.Selection]: []
-  , [MenuContext.Image]: []
-  , [MenuContext.Video]: []
-  , [MenuContext.Audio]: []
-  })
+  const [menu, setMenu] = useState<IMenuStore>([
+    { context: MenuContext.Page, items: [] }
+  , { context: MenuContext.Frame, items: [] }
+  , { context: MenuContext.Link, items: [] }
+  , { context: MenuContext.Selection, items: [] }
+  , { context: MenuContext.Image, items: [] }
+  , { context: MenuContext.Video, items: [] }
+  , { context: MenuContext.Audio, items: [] }
+  ])
 
   useMount(() => {
     go(async () => {

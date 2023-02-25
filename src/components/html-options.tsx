@@ -35,7 +35,10 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
 
         <ul className='mt-1'>
           {allowlist.map((item, i) => (
-            <li className='py-2.5 px-4 flex justify-between hover:bg-gray-300'>
+            <li
+              key={i}
+              className='py-2.5 px-4 flex justify-between hover:bg-gray-300'
+            >
               <div>
                 <section>
                   <label>

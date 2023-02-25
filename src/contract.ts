@@ -18,7 +18,10 @@ export enum MenuContext {
 , Audio = 'audio'
 }
 
-export type IMenuStore = Record<MenuContext, IMenuItem[]>
+export type IMenuStore = Array<{
+  context: MenuContext
+, items: IMenuItem[]
+}>
 
 export interface IStorage {
   [StorageItemKey.Menu]: IMenuStore
