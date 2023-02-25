@@ -3,6 +3,7 @@
 , "author": "BlackGlory"
 , "version": "3.0.0"
 , "manifest_version": 3
+, "minimum_chrome_version": "109"
 , "default_locale": "en"
 , "description": "__MSG_extensionDescription__"
 , "icons": {
