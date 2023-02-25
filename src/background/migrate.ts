@@ -1,11 +1,7 @@
-import { createMigration } from 'extra-semver'
-import { pipeAsync } from 'extra-utils'
+import { pass } from '@blackglory/prelude'
 
 export async function migrate(previousVersion: string): Promise<void> {
-  await pipeAsync(
-    previousVersion
-  , createMigration('^2.0.0', '3.0.0', async () => {
-      // TODO
-    })
-  )
+  // Copycat V2升级到Copycat V3之间的数据是不可迁移的,
+  // 因为V3使用的Manifest V3无法访问Manifest V2才有的localStorage.
+  pass()
 }
