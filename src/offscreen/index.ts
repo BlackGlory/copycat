@@ -2,6 +2,8 @@ import { createServer } from '@delight-rpc/webextension'
 import { IOffscreenAPI, OffscreenChannel } from '@src/contract.js'
 import { writeTextToClipboard } from '@utils/write-text-to-clipboard.js'
 import { writeHTMLToClipboard } from '@utils/write-html-to-clipboard.js'
+import { sanitizeHTML } from '@src/utils/sanitize-html.js'
+
 import { convertHTMLToAbsoluteLinkHTML } from '@src/utils/offscreen/convert-html-to-absolute-link-html.js'
 import { convertHTMLToCleanHTML } from '@src/utils/offscreen/convert-html-to-clean-html.js'
 import { convertHTMLToMarkdown } from '@src/utils/offscreen/convert-html-to-markdown.js'
@@ -9,7 +11,6 @@ import { convertHTMLToNoAttrHTML } from '@src/utils/offscreen/convert-html-to-no
 import { convertHTMLToPlainText } from '@src/utils/offscreen/convert-html-to-plain-text.js'
 import { convertHTMLToRelativeLinkHTML } from '@src/utils/offscreen/convert-html-to-relative-link-html.js'
 import { convertHTMLToRootRelativeLinkHTML } from '@src/utils/offscreen/convert-html-to-root-relative-link-html.js'
-import { convertHTMLToSanitizedHTML } from '@src/utils/offscreen/convert-html-to-sanitized-html.js'
 import { convertMarkdownToBeautifyMarkdown } from '@src/utils/offscreen/convert-markdown-to-beautify-markdown.js'
 import { convertTextToDecodeEntitiesText } from '@src/utils/offscreen/convert-text-to-decode-entities-text.js'
 import { convertTextToTrimmedText } from '@src/utils/offscreen/convert-text-to-trimmed-text.js'
@@ -21,6 +22,7 @@ import { convertURLToRootRelativeURL } from '@src/utils/offscreen/convert-url-to
 createServer<IOffscreenAPI>({
   writeTextToClipboard
 , writeHTMLToClipboard
+, sanitizeHTML
 
 , convertHTMLToAbsoluteLinkHTML
 , convertHTMLToCleanHTML
@@ -29,7 +31,6 @@ createServer<IOffscreenAPI>({
 , convertHTMLToPlainText
 , convertHTMLToRelativeLinkHTML
 , convertHTMLToRootRelativeLinkHTML
-, convertHTMLToSanitizedHTML
 , convertMarkdownToBeautifyMarkdown
 , convertTextToDecodeEntitiesText
 , convertTextToTrimmedText

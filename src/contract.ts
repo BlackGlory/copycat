@@ -119,6 +119,7 @@ export interface IBackgroundAPI {
 export interface IOffscreenAPI {
   writeTextToClipboard(text: string): null
   writeHTMLToClipboard(html: string): null
+  sanitizeHTML(html: string): string
 
   convertHTMLToAbsoluteLinkHTML(html: string, baseURL: string): string
   convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
@@ -127,7 +128,6 @@ export interface IOffscreenAPI {
   convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToRootRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToCleanHTML(html: string, config: IHTMLCleanHTMLConfig): string
-  convertHTMLToSanitizedHTML(html: string): string
   convertMarkdownToBeautifyMarkdown(markdown: string): string
   convertTextToDecodeEntitiesText(text: string): string
   convertTextToTrimmedText(text: string): string
