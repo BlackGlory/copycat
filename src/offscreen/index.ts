@@ -6,7 +6,7 @@ import { sanitizeHTML } from '@src/utils/sanitize-html.js'
 import { convertHTMLToPlainText } from '@utils/convert-html-to-plain-text.js'
 
 import { convertHTMLToAbsoluteLinkHTML } from '@src/utils/offscreen/convert-html-to-absolute-link-html.js'
-import { convertHTMLToCleanHTML } from '@src/utils/offscreen/convert-html-to-clean-html.js'
+import { cleanHTML } from '@utils/clean-html.js'
 import { convertHTMLToMarkdown } from '@src/utils/offscreen/convert-html-to-markdown.js'
 import { convertHTMLToNoAttrHTML } from '@src/utils/offscreen/convert-html-to-no-attr-html.js'
 import { convertHTMLToRelativeLinkHTML } from '@src/utils/offscreen/convert-html-to-relative-link-html.js'
@@ -18,9 +18,9 @@ createServer<IOffscreenAPI>({
 , writeHTMLToClipboard
 , sanitizeHTML
 , convertHTMLToPlainText
+, cleanHTML
 
 , convertHTMLToAbsoluteLinkHTML
-, convertHTMLToCleanHTML
 , convertHTMLToMarkdown
 , convertHTMLToNoAttrHTML
 , convertHTMLToRelativeLinkHTML

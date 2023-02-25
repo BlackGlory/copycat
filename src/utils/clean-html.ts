@@ -3,10 +3,7 @@ import { IHTMLCleanHTMLConfig } from '@src/contract.js'
 import { pipe } from 'extra-utils'
 import * as Iter from 'iterable-operator'
 
-export function convertHTMLToCleanHTML(
-  html: string
-, config: IHTMLCleanHTMLConfig
-): string {
+export function cleanHTML(html: string, config: IHTMLCleanHTMLConfig): string {
   const allowlist = config.allowlist
     .map(item => ({
       elements: item.elements

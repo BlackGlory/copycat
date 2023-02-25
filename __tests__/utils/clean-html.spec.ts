@@ -1,7 +1,7 @@
-import { convertHTMLToCleanHTML } from '@offscreen/convert-html-to-clean-html.js'
+import { cleanHTML } from '@utils/clean-html.js'
 import { dedent } from 'extra-tags'
 
-test('convertHTMLToCleanHTML', () => {
+test('cleanHTML', () => {
   const html = dedent`
     <div>
       <img src="../hello" />
@@ -9,7 +9,7 @@ test('convertHTMLToCleanHTML', () => {
     </div>
   `
 
-  const result = convertHTMLToCleanHTML(
+  const result = cleanHTML(
     html
   , {
       allowlist: [

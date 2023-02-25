@@ -471,7 +471,7 @@ export const handlers: IHandlers = {
             html
           , offscreen.sanitizeHTML
           , html => formatURLsInHTML(html, baseURL)
-          , html => offscreen.convertHTMLToCleanHTML(html, config.html.cleanHTML)
+          , html => offscreen.cleanHTML(html, config.html.cleanHTML)
           , formatHTML
           )
         )

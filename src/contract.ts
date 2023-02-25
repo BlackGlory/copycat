@@ -121,13 +121,13 @@ export interface IOffscreenAPI {
   writeHTMLToClipboard(html: string): null
   sanitizeHTML(html: string): string
   convertHTMLToPlainText(html: string): string
+  cleanHTML(html: string, config: IHTMLCleanHTMLConfig): string
 
   convertHTMLToAbsoluteLinkHTML(html: string, baseURL: string): string
   convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
   convertHTMLToNoAttrHTML(html: string): string
   convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToRootRelativeLinkHTML(html: string, baseURL: string): string
-  convertHTMLToCleanHTML(html: string, config: IHTMLCleanHTMLConfig): string
   convertURLToImageDataURI(url: string, format?: ImageFormat): string
 }
 
