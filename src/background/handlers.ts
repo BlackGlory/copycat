@@ -544,27 +544,29 @@ export const handlers: IHandlers = {
   }
 , async commandImageAsDataURL({ mediaType, srcUrl }, tab) {
     if (mediaType === 'image' && srcUrl) {
-      return plainText(await offscreen.convertURLToImageDataURI(srcUrl))
+      return plainText(
+        await offscreen.convertImageURLToDataURL(srcUrl)
+      )
     }
   }
 , async commandImageAsDataURLJPEG({ mediaType, srcUrl }) {
     if (mediaType === 'image' && srcUrl) {
       return plainText(
-        await offscreen.convertURLToImageDataURI(srcUrl, ImageFormat.JPEG)
+        await offscreen.convertImageURLToDataURL(srcUrl, ImageFormat.JPEG)
       )
     }
   }
 , async commandImageAsDataURLPNG({ mediaType, srcUrl }) {
     if (mediaType === 'image' && srcUrl) {
       return plainText(
-        await offscreen.convertURLToImageDataURI(srcUrl, ImageFormat.PNG)
+        await offscreen.convertImageURLToDataURL(srcUrl, ImageFormat.PNG)
       )
     }
   }
 , async commandImageAsDataURLWebP({ mediaType, srcUrl }) {
     if (mediaType === 'image' && srcUrl) {
       return plainText(
-        await offscreen.convertURLToImageDataURI(srcUrl, ImageFormat.WebP)
+        await offscreen.convertImageURLToDataURL(srcUrl, ImageFormat.WebP)
       )
     }
   }

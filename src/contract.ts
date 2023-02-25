@@ -122,13 +122,13 @@ export interface IOffscreenAPI {
   sanitizeHTML(html: string): string
   convertHTMLToPlainText(html: string): string
   cleanHTML(html: string, config: IHTMLCleanHTMLConfig): string
+  convertImageURLToDataURL(url: string, format?: ImageFormat): string
 
   convertHTMLToAbsoluteLinkHTML(html: string, baseURL: string): string
   convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
   convertHTMLToNoAttrHTML(html: string): string
   convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToRootRelativeLinkHTML(html: string, baseURL: string): string
-  convertURLToImageDataURI(url: string, format?: ImageFormat): string
 }
 
 export enum URLFormat {
