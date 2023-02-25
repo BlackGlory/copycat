@@ -12,7 +12,7 @@ import {
 , MarkdownEmphasis
 , MarkdownFence
 , MarkdownListItemIndent
-, MarkdownRule
+, MarkdownThematicBreak
 , MarkdownStrong
 } from '@src/contract.js'
 
@@ -26,20 +26,20 @@ export async function initStorage(): Promise<void> {
 async function initConfig(): Promise<void> {
   const config: IConfigStore = {
     url: {
-      encoding: URLEncoding.AlwaysEncode
-    , format: URLFormat.Absolute
+      encoding: URLEncoding.Original
+    , format: URLFormat.Original
     }
   , markdown: {
-      bullet: MarkdownBullet['*']
-    , bulletOrdered: MarkdownBulletOrdered['.']
-    , emphasis: MarkdownEmphasis['_']
-    , fence: MarkdownFence['`']
-    , listItemIndent: MarkdownListItemIndent.Space
-    , rule: MarkdownRule['-']
+      emphasis: MarkdownEmphasis['_']
     , strong: MarkdownStrong['*']
+    , bulletUnordered: MarkdownBullet['*']
+    , bulletOrdered: MarkdownBulletOrdered['.']
+    , listItemIndent: MarkdownListItemIndent.Space
+    , thematicBreak: MarkdownThematicBreak['-']
+    , fence: MarkdownFence['`']
     }
   , html: {
-      cleaner: {
+      cleanHTML: {
         allowlist: []
       }
     }

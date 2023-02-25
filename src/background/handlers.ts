@@ -487,7 +487,7 @@ export const handlers: IHandlers = {
             html
           , offscreenClient.convertHTMLToSanitizedHTML
           , html => formatURLsInHTML(html, baseURL)
-          , html => offscreenClient.convertHTMLToCleanHTML(html, config.html.cleaner)
+          , html => offscreenClient.convertHTMLToCleanHTML(html, config.html.cleanHTML)
           , offscreenClient.convertHTMLToBeautifyHTML
           )
         )

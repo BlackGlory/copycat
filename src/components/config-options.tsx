@@ -5,6 +5,7 @@ import { useConfig } from '@hooks/use-config.js'
 import { URLOptions } from '@components/url-options.jsx'
 import { MarkdownOptions } from '@components/markdown-options.jsx'
 import { HTMLOptions } from '@components/html-options.jsx'
+import { i18n } from '@utils/i18n.js'
 
 export function ConfigOptions() {
   const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
@@ -12,7 +13,7 @@ export function ConfigOptions() {
 
   return (
     <div>
-      <h2 className='text-lg p-4 border-y font-bold'>配置</h2>
+      <h2 className='text-lg p-4 border-y font-bold'>{i18n('HeadingConfig')}</h2>
       <div>
         <Section>
           <URLOptions config={config} setConfig={setConfig} />

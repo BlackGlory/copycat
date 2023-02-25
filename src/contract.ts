@@ -37,13 +37,13 @@ export interface IURLConfig {
 }
 
 export interface IMarkdownConfig {
-  bullet: MarkdownBullet
-  bulletOrdered: MarkdownBulletOrdered
   emphasis: MarkdownEmphasis
-  fence: MarkdownFence
-  listItemIndent: MarkdownListItemIndent
-  rule: MarkdownRule
   strong: MarkdownStrong
+  bulletUnordered: MarkdownBullet
+  bulletOrdered: MarkdownBulletOrdered
+  listItemIndent: MarkdownListItemIndent
+  thematicBreak: MarkdownThematicBreak
+  fence: MarkdownFence
 }
 
 export enum MarkdownBullet {
@@ -72,7 +72,7 @@ export enum MarkdownListItemIndent {
 , Tab
 }
 
-export enum MarkdownRule {
+export enum MarkdownThematicBreak {
   '*'
 , '-'
 , '_'
@@ -84,10 +84,10 @@ export enum MarkdownStrong {
 }
 
 export interface IHTMLConfig {
-  cleaner: IHTMLCleanerConfig
+  cleanHTML: IHTMLCleanHTMLConfig
 }
 
-export interface IHTMLCleanerConfig {
+export interface IHTMLCleanHTMLConfig {
   allowlist: IHTMLCleanerAllowlistItem[]
 }
 
@@ -125,7 +125,7 @@ export interface IOffscreenAPI {
   convertHTMLToPlainText(html: string): string
   convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToRootRelativeLinkHTML(html: string, baseURL: string): string
-  convertHTMLToCleanHTML(html: string, config: IHTMLCleanerConfig): string
+  convertHTMLToCleanHTML(html: string, config: IHTMLCleanHTMLConfig): string
   convertHTMLToSanitizedHTML(html: string): string
   convertMarkdownToBeautifyMarkdown(markdown: string): string
   convertTextToDecodeEntitiesText(text: string): string
@@ -158,8 +158,8 @@ export enum URLFormat {
 
 export enum URLEncoding {
   Original
-, AlwaysEncode
-, AlwaysDecode
+, Encode
+, Decode
 }
 
 export enum ImageFormat {

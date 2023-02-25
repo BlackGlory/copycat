@@ -122,11 +122,20 @@
 , "commandVideoAsHTML": {
     "message": "Video → HTML"
   }
-, "selectURLFormat": {
+, "headingConfig": {
+    "message": "Config"
+  }
+, "headingURLConfig": {
+    "message": "URL Config"
+  }
+, "labelURLFormat": {
     "message": "URL Format"
   }
+, "selectOriginalURL": {
+    "message": "Leave URLs as they are"
+  }
 , "selectAbsoluteURL": {
-    "message": "Always use absolute URLs"
+    "message": "Use absolute URLs where possible"
   }
 , "selectRelativeURL": {
     "message": "Use relative URLs where possible"
@@ -134,7 +143,55 @@
 , "selectRootRelativeURL": {
     "message": "Use root-relative URLs where possible"
   }
-, "selectOriginalURL": {
-    "message": "Leave URLs as they are"
+, "labelURLEncoding": {
+    "message": "URL Encoding"
+  }
+, "selectEncodeURL": {
+    "message": "Always encode URLs"
+  }
+, "selectDecodeURL": {
+    "message": "Always decode URLs"
+  }
+, "headingMarkdownConfig": {
+    "message": "Markdown Config"
+  }
+, "labelMarkdownEmphasis": {
+    "message": "Emphasis"
+  }
+, "labelMarkdownStrong": {
+    "message": "Strong"
+  }
+, "labelMarkdownBulletUnordered": {
+    "message": "Bullets of items in unordered lists"
+  }
+, "labelMarkdownBulletOrdered": {
+    "message": "Bullets of items in ordered lists"
+  }
+, "labelMarkdownIndention": {
+    "message": "Indention the content of list items"
+  }
+, "labelMarkdownThematicBreak": {
+    "message": "Thematic breaks"
+  }
+, "labelMarkdownFence": {
+    "message": "Fenced code"
+  }
+, "headingHTMLConfig": {
+    "message": "HTML Config"
+  }
+, "headingCleanHTMLAllowlist": {
+    "message": "Allowlist for Clean HTML"
+  }
+, "buttonCreateItem": {
+    "message": "Create Item"
+  }
+, "labelElements": {
+    "message": "HTML element names separated by \",\""
+  }
+, "labelAttributes": {
+    "message": "HTML attribute names separated by \",\""
+  }
+, "headingMenu": {
+    "message": "Menu"
   }
 }

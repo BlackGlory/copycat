@@ -25,11 +25,11 @@ export async function formatURL(url: string, baseURL: string): Promise<string> {
   }
 
   switch (config.url.encoding) {
-    case URLEncoding.AlwaysEncode: {
+    case URLEncoding.Encode: {
       url = encode(url)
       break
     }
-    case URLEncoding.AlwaysDecode: {
+    case URLEncoding.Decode: {
       url = decode(url)
       break
     }

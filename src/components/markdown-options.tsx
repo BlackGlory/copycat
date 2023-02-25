@@ -5,11 +5,12 @@ import {
 , MarkdownEmphasis
 , MarkdownFence
 , MarkdownListItemIndent
-, MarkdownRule
+, MarkdownThematicBreak
 , MarkdownStrong
 } from '@src/contract.js'
 import { Select } from '@components/select.jsx'
 import { Updater } from 'use-immer'
+import { i18n } from '@utils/i18n.js'
 
 interface IMarkdownOptionsProps {
   config: IConfigStore
@@ -21,54 +22,10 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
 
   return (
     <div className='mb-2'>
-      <h3 className='text-base px-4 py-2'>配置Markdown</h3>
+      <h3 className='text-base px-4 py-2'>{i18n('headingMarkdownConfig')}</h3>
       <div className='px-4 py-2 space-y-2'>
         <Section>
-          <label>Bullets of items in unordered lists</label>
-          <Select
-            value={markdown.bullet}
-            items={[
-              {
-                name: '*'
-              , value: MarkdownBullet['*']
-              }
-            , {
-                name: '+'
-              , value: MarkdownBullet['+']
-              }
-            , {
-                name: '+'
-              , value: MarkdownBullet['-']
-              }
-            ]}
-            onChange={value => setConfig(config => {
-              config.markdown.bullet = value
-            })}
-          />
-        </Section>
-
-        <Section>
-          <label>Bullets of items in ordered lists</label>
-          <Select
-            value={markdown.bulletOrdered}
-            items={[
-              {
-                name: ')'
-              , value: MarkdownBulletOrdered[')']
-              }
-            , {
-                name: '.'
-              , value: MarkdownBulletOrdered['.']
-              }
-            ]}
-            onChange={value => setConfig(config => {
-              config.markdown.bulletOrdered = value
-            })}
-          />
-        </Section>
-
-        <Section>
-          <label>Emphasis</label>
+          <label>{i18n('labelMarkdownEmphasis')}</label>
           <Select
             value={markdown.emphasis}
             items={[
@@ -88,27 +45,71 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
         </Section>
 
         <Section>
-          <label>Fenced code</label>
+          <label>{i18n('labelMarkdownStrong')}</label>
           <Select
-            value={markdown.fence}
+            value={markdown.strong}
             items={[
               {
-                name: '`'
-              , value: MarkdownFence['`']
+                name: '*'
+              , value: MarkdownStrong['*']
               }
             , {
-                name: '~'
-              , value: MarkdownFence['~']
+                name: '_'
+              , value: MarkdownStrong['_']
               }
             ]}
             onChange={value => setConfig(config => {
-              config.markdown.fence = value
+              config.markdown.strong = value
             })}
           />
         </Section>
 
         <Section>
-          <label>Indention the content of list items</label>
+          <label>{i18n('labelMarkdownBulletUnordered')}</label>
+          <Select
+            value={markdown.bulletUnordered}
+            items={[
+              {
+                name: '*'
+              , value: MarkdownBullet['*']
+              }
+            , {
+                name: '+'
+              , value: MarkdownBullet['+']
+              }
+            , {
+                name: '+'
+              , value: MarkdownBullet['-']
+              }
+            ]}
+            onChange={value => setConfig(config => {
+              config.markdown.bulletUnordered = value
+            })}
+          />
+        </Section>
+
+        <Section>
+          <label>{i18n('labelMarkdownBulletOrdered')}</label>
+          <Select
+            value={markdown.bulletOrdered}
+            items={[
+              {
+                name: ')'
+              , value: MarkdownBulletOrdered[')']
+              }
+            , {
+                name: '.'
+              , value: MarkdownBulletOrdered['.']
+              }
+            ]}
+            onChange={value => setConfig(config => {
+              config.markdown.bulletOrdered = value
+            })}
+          />
+        </Section>
+
+        <Section>
+          <label>{i18n('labelMarkdownIndention')}</label>
           <Select
             value={markdown.listItemIndent}
             items={[
@@ -128,45 +129,45 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
         </Section>
 
         <Section>
-          <label>Thematic breaks</label>
+          <label>{i18n('labelMarkdownThematicBreak')}</label>
           <Select
-            value={markdown.rule}
+            value={markdown.thematicBreak}
             items={[
               {
                 name: '*'
-              , value: MarkdownRule['*']
+              , value: MarkdownThematicBreak['*']
               }
             , {
                 name: '-'
-              , value: MarkdownRule['-']
+              , value: MarkdownThematicBreak['-']
               }
             , {
                 name: '_'
-              , value: MarkdownRule['_']
+              , value: MarkdownThematicBreak['_']
               }
             ]}
             onChange={value => setConfig(config => {
-              config.markdown.rule = value
+              config.markdown.thematicBreak = value
             })}
           />
         </Section>
 
         <Section>
-          <label>Strong</label>
+          <label>{i18n('labelMarkdownFence')}</label>
           <Select
-            value={markdown.strong}
+            value={markdown.fence}
             items={[
               {
-                name: '*'
-              , value: MarkdownStrong['*']
+                name: '`'
+              , value: MarkdownFence['`']
               }
             , {
-                name: '_'
-              , value: MarkdownStrong['_']
+                name: '~'
+              , value: MarkdownFence['~']
               }
             ]}
             onChange={value => setConfig(config => {
-              config.markdown.strong = value
+              config.markdown.fence = value
             })}
           />
         </Section>

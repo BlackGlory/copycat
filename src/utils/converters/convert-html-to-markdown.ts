@@ -3,7 +3,7 @@ import rehypeParse from 'rehype-parse'
 import rehypeRemark from 'rehype-remark'
 import remarkStringify from 'remark-stringify'
 import remarkGfm from 'remark-gfm'
-import { IMarkdownConfig, MarkdownBullet, MarkdownBulletOrdered, MarkdownEmphasis, MarkdownFence, MarkdownListItemIndent, MarkdownRule, MarkdownStrong } from '@src/contract.js'
+import { IMarkdownConfig, MarkdownBullet, MarkdownBulletOrdered, MarkdownEmphasis, MarkdownFence, MarkdownListItemIndent, MarkdownThematicBreak, MarkdownStrong } from '@src/contract.js'
 import { go } from '@blackglory/prelude'
 
 export async function convertHTMLToMarkdown(
@@ -21,7 +21,7 @@ export async function convertHTMLToMarkdown(
     , ruleSpaces: true
     , tightDefinitions: true
     , bullet: go(() => {
-        switch (config.bullet) {
+        switch (config.bulletUnordered) {
           case MarkdownBullet['*']: return '*'
           case MarkdownBullet['+']: return '+'
           case MarkdownBullet['-']: return '-'
@@ -52,10 +52,10 @@ export async function convertHTMLToMarkdown(
         }
       })
     , rule: go(() => {
-        switch (config.rule) {
-          case MarkdownRule['*']: return '*'
-          case MarkdownRule['-']: return '-'
-          case MarkdownRule['_']: return '_'
+        switch (config.thematicBreak) {
+          case MarkdownThematicBreak['*']: return '*'
+          case MarkdownThematicBreak['-']: return '-'
+          case MarkdownThematicBreak['_']: return '_'
         }
       })
     , strong: go(() => {

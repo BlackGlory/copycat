@@ -1,11 +1,11 @@
 import { flatMap, stringify, parse, isElement } from 'extra-dom'
-import { IHTMLCleanerConfig } from '@src/contract.js'
+import { IHTMLCleanHTMLConfig } from '@src/contract.js'
 import { pipe } from 'extra-utils'
 import * as Iter from 'iterable-operator'
 
 export function convertHTMLToCleanHTML(
   html: string
-, config: IHTMLCleanerConfig
+, config: IHTMLCleanHTMLConfig
 ): string {
   const allowlist = config.allowlist
     .map(item => ({

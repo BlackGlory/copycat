@@ -16,7 +16,7 @@ export function MenuOptions() {
 
   return (
     <div>
-      <h2 className='text-lg px-4 py-4 border-y font-bold'>编辑菜单</h2>
+      <h2 className='text-lg px-4 py-4 border-y font-bold'>{i18n('headingMenu')}</h2>
       <ul className='my-2 space-y-2'>
         {
           Object

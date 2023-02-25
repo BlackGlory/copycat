@@ -122,8 +122,17 @@
 , "commandVideoAsHTML": {
     "message": "视频 → HTML"
   }
-, "selectURLFormat": {
+, "headingConfig": {
+    "message": "配置"
+  }
+, "headingURLConfig": {
+    "message": "URL配置"
+  }
+, "labelURLFormat": {
     "message": "URL格式"
+  }
+, "selectOriginalURL": {
+    "message": "保持原样"
   }
 , "selectAbsoluteURL": {
     "message": "总是使用绝对URL"
@@ -134,7 +143,55 @@
 , "selectRootRelativeURL": {
     "message": "尽可能使用相对根目录的URL"
   }
-, "selectOriginalURL": {
-    "message": "让URL保持原样"
+, "labelURLEncoding": {
+    "message": "URL编码"
+  }
+, "selectEncodeURL": {
+    "message": "总是编码URL"
+  }
+, "selectDecodeURL": {
+    "message": "总是解码URL"
+  }
+, "headingMarkdownConfig": {
+    "message": "Markdown配置"
+  }
+, "labelMarkdownEmphasis": {
+    "message": "Emphasis"
+  }
+, "labelMarkdownStrong": {
+    "message": "Strong"
+  }
+, "labelMarkdownBulletUnordered": {
+    "message": "无序列表的子弹符号"
+  }
+, "labelMarkdownBulletOrdered": {
+    "message": "有序列表的子弹符号"
+  }
+, "labelMarkdownIndention": {
+    "message": "列表缩进"
+  }
+, "labelMarkdownThematicBreak": {
+    "message": "Thematic breaks"
+  }
+, "labelMarkdownFence": {
+    "message": "代码"
+  }
+, "headingHTMLConfig": {
+    "message": "HTML配置"
+  }
+, "headingCleanHTMLAllowlist": {
+    "message": "定义干净HTML的白名单"
+  }
+, "buttonCreateItem": {
+    "message": "创建项目"
+  }
+, "labelElements": {
+    "message": "HTML元素名称，用\",\"分隔多个项"
+  }
+, "labelAttributes": {
+    "message": "HTML属性名称，用\",\"分隔多个项"
+  }
+, "headingMenu": {
+    "message": "菜单"
   }
 }

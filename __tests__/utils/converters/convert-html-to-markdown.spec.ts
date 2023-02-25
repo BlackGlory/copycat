@@ -1,16 +1,16 @@
 import { convertHTMLToMarkdown } from '@converters/convert-html-to-markdown.js'
-import { MarkdownBullet, MarkdownBulletOrdered, MarkdownEmphasis, MarkdownFence, MarkdownListItemIndent, MarkdownRule, MarkdownStrong } from '@src/contract.js'
+import { MarkdownBullet, MarkdownBulletOrdered, MarkdownEmphasis, MarkdownFence, MarkdownListItemIndent, MarkdownThematicBreak, MarkdownStrong } from '@src/contract.js'
 
 test('convertHTMLToMarkdown', async () => {
   const html = '<em><strong>strong</strong>emphasis</em>'
 
   const result = await convertHTMLToMarkdown(html, {
-    bullet: MarkdownBullet['*']
+    bulletUnordered: MarkdownBullet['*']
   , bulletOrdered: MarkdownBulletOrdered['.']
   , emphasis: MarkdownEmphasis['_']
   , fence: MarkdownFence['`']
   , listItemIndent: MarkdownListItemIndent.Space
-  , rule: MarkdownRule['-']
+  , thematicBreak: MarkdownThematicBreak['-']
   , strong: MarkdownStrong['*']
   })
 

@@ -3,6 +3,7 @@ import { Updater } from 'use-immer'
 import { TextInput } from '@components/text-input.jsx'
 import { Button } from '@components/button.jsx'
 import { RemoveButton } from '@components/remove-button.jsx'
+import { i18n } from '@utils/i18n.js'
 
 interface IHTMLOptionsProps {
   config: IConfigStore
@@ -10,25 +11,25 @@ interface IHTMLOptionsProps {
 }
 
 export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
-  const allowlist = config.html.cleaner.allowlist
+  const allowlist = config.html.cleanHTML.allowlist
 
   return (
     <div className='mb-2'>
-      <h3 className='text-base px-4 py-2'>HTML配置项</h3>
+      <h3 className='text-base px-4 py-2'>{i18n('headingHTMLConfig')}</h3>
       <div className='py-2'>
-        <h4 className='px-4 text-sm'>Alllowlist for HTML (clean) </h4>
+        <h4 className='px-4 text-sm'>{i18n('headingCleanHTMLAllowlist')}</h4>
 
         <nav className='px-4'>
           <Button
             className='w-full'
             onClick={() => setConfig(config => {
-              config.html.cleaner.allowlist.push({
+              config.html.cleanHTML.allowlist.push({
                 elements: '*'
               , attributes: '*'
               })
             })}
           >
-            添加项目
+            {i18n('buttonCreateItem')}
           </Button>
         </nav>
 
@@ -38,11 +39,11 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
               <div>
                 <section>
                   <label>
-                    <span>Elements (separator: <code>,</code>)</span>
+                    <span>{i18n('labelElements')}</span>
                     <TextInput
                       value={item.elements}
                       onChange={e => setConfig(config => {
-                        config.html.cleaner.allowlist[i].elements = e.target.value
+                        config.html.cleanHTML.allowlist[i].elements = e.target.value
                       })}
                     />
                   </label>
@@ -50,11 +51,11 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
 
                 <section>
                   <label>
-                    <span>Attributes (separator: <code>,</code>)</span>
+                    <span>{i18n('labelAttributes')}</span>
                     <TextInput
                       value={item.attributes}
                       onChange={e => setConfig(config => {
-                        config.html.cleaner.allowlist[i].attributes = e.target.value
+                        config.html.cleanHTML.allowlist[i].attributes = e.target.value
                       })}
                     />
                   </label>
@@ -64,7 +65,7 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
               <aside>
                 <RemoveButton
                   onClick={() => setConfig(config => {
-                    config.html.cleaner.allowlist.splice(i, 1)
+                    config.html.cleanHTML.allowlist.splice(i, 1)
                   })}
                 />
               </aside>
