@@ -18,6 +18,7 @@ import { createMarkdownImage } from '@utils/create-markdown-image.js'
 import { createMarkdownLink } from '@utils/create-markdown-link.js'
 import { createOrgModeLink } from '@utils/create-org-mode-link.js'
 import { createPlainTextLink } from '@utils/create-plain-text-link.js'
+import { convertHTMLToBBCode } from '@utils/convert-html-to-bbcode.js'
 
 export interface IInfo {
   pageUrl?: string
@@ -359,7 +360,7 @@ export const handlers: IHandlers = {
           html
         , offscreenClient.convertHTMLToSanitizedHTML
         , offscreenClient.convertHTMLToBeautifyHTML
-        , offscreenClient.convertHTMLToBBCode
+        , convertHTMLToBBCode
         )
 
         return plainText(createBBCodeLink(url, title))
@@ -491,7 +492,7 @@ export const handlers: IHandlers = {
           , offscreenClient.convertHTMLToSanitizedHTML
           , html => formatURLsInHTML(html, baseURL)
           , offscreenClient.convertHTMLToBeautifyHTML
-          , offscreenClient.convertHTMLToBBCode
+          , convertHTMLToBBCode
           )
         )
       }

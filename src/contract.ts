@@ -121,7 +121,6 @@ export interface IOffscreenAPI {
   writeHTMLToClipboard(html: string): null
 
   convertHTMLToAbsoluteLinkHTML(html: string, baseURL: string): string
-  convertHTMLToBBCode(html: string): string
   convertHTMLToBeautifyHTML(html: string): string
   convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
   convertHTMLToNoAttrHTML(html: string): string
