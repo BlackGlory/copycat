@@ -15,6 +15,7 @@ import {
 , MarkdownThematicBreak
 , MarkdownStrong
 } from '@src/contract.js'
+import { updateMenu } from './menu.js'
 
 const storage = new LocalStorage<IStorage>()
 
@@ -123,6 +124,8 @@ export async function getMenu(): Promise<IMenuStore> {
 
 export async function setMenu(menu: IMenuStore): Promise<null> {
   await storage.setItem(StorageItemKey.Menu, menu)
+
+  await updateMenu()
 
   return null
 }

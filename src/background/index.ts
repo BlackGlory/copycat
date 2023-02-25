@@ -1,16 +1,14 @@
 import browser from 'webextension-polyfill'
 import { go } from '@blackglory/prelude'
-import { inEnum } from 'extra-utils'
 import { ResultType, handlers, Result } from './handlers.js'
 import { initStorage, getMenu, getConfig, setConfig, setMenu } from './storage.js'
 import { migrate } from './migrate.js'
 import { each } from 'extra-promise'
 import { offscreenClient } from './offscreen-client.js'
 import { getActiveTab } from 'extra-webextension'
-import { i18n } from '@utils/i18n.js'
-import { IBackgroundAPI, MenuContext } from '@src/contract.js'
-import { convertMenuContextToBrowserContextType } from '@utils/menu-context.js'
+import { IBackgroundAPI } from '@src/contract.js'
 import { createServer } from '@delight-rpc/webextension'
+import { updateMenu } from './menu.js'
 
 browser.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
   switch (reason) {
@@ -55,29 +53,8 @@ go(async () => {
   })
 
   await ensureOffscreenDocument()
-  await ensureMenu()
+  await updateMenu()
 })
-
-async function ensureMenu(): Promise<void> {
-  const menu = await getMenu()
-
-  await browser.contextMenus.removeAll()
-  for (const [context, items] of Object.entries(menu)) {
-    if (inEnum<MenuContext>(context, MenuContext)) {
-      for (const item of items) {
-        const props: browser.Menus.CreateCreatePropertiesType = {
-          id: item.id
-        , visible: item.visible
-        , type: 'normal'
-        , title: i18n(item.id)
-        , contexts: [convertMenuContextToBrowserContextType(context)]
-        }
-
-        browser.contextMenus.create(props)
-      }
-    }
-  }
-}
 
 async function ensureOffscreenDocument(): Promise<void> {
   if (!await chrome.offscreen.hasDocument()) {
