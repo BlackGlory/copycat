@@ -1,5 +1,5 @@
 import beautify from 'js-beautify'
 
-export function convertHTMLToBeautifyHTML(html: string): string {
+export function formatHTML(html: string): string {
   return beautify.html(html)
 }

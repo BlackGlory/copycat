@@ -3,7 +3,6 @@ import { IOffscreenAPI, OffscreenChannel } from '@src/contract.js'
 import { writeTextToClipboard } from '@utils/write-text-to-clipboard.js'
 import { writeHTMLToClipboard } from '@utils/write-html-to-clipboard.js'
 import { convertHTMLToAbsoluteLinkHTML } from '@src/utils/offscreen/convert-html-to-absolute-link-html.js'
-import { convertHTMLToBeautifyHTML } from '@src/utils/offscreen/convert-html-to-beautify-html.js'
 import { convertHTMLToCleanHTML } from '@src/utils/offscreen/convert-html-to-clean-html.js'
 import { convertHTMLToMarkdown } from '@src/utils/offscreen/convert-html-to-markdown.js'
 import { convertHTMLToNoAttrHTML } from '@src/utils/offscreen/convert-html-to-no-attr-html.js'
@@ -24,7 +23,6 @@ createServer<IOffscreenAPI>({
 , writeHTMLToClipboard
 
 , convertHTMLToAbsoluteLinkHTML
-, convertHTMLToBeautifyHTML
 , convertHTMLToCleanHTML
 , convertHTMLToMarkdown
 , convertHTMLToNoAttrHTML

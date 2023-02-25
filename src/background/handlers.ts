@@ -19,6 +19,7 @@ import { createMarkdownLink } from '@utils/create-markdown-link.js'
 import { createOrgModeLink } from '@utils/create-org-mode-link.js'
 import { createPlainTextLink } from '@utils/create-plain-text-link.js'
 import { convertHTMLToBBCode } from '@utils/convert-html-to-bbcode.js'
+import { formatHTML } from '@utils/format-html.js'
 
 export interface IInfo {
   pageUrl?: string
@@ -250,7 +251,7 @@ export const handlers: IHandlers = {
         const title = await pipeAsync(
           html
         , offscreenClient.convertHTMLToSanitizedHTML
-        , offscreenClient.convertHTMLToBeautifyHTML
+        , formatHTML
         )
 
         return plainText(createHTMLLink(url, title))
@@ -276,7 +277,7 @@ export const handlers: IHandlers = {
         const text = await pipeAsync(
           html
         , offscreenClient.convertHTMLToSanitizedHTML
-        , offscreenClient.convertHTMLToBeautifyHTML
+        , formatHTML
         , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
@@ -304,7 +305,7 @@ export const handlers: IHandlers = {
         const title = await pipeAsync(
           html
         , offscreenClient.convertHTMLToSanitizedHTML
-        , offscreenClient.convertHTMLToBeautifyHTML
+        , formatHTML
         , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
@@ -332,7 +333,7 @@ export const handlers: IHandlers = {
         const title = await pipeAsync(
           html
         , offscreenClient.convertHTMLToSanitizedHTML
-        , offscreenClient.convertHTMLToBeautifyHTML
+        , formatHTML
         , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
@@ -359,7 +360,7 @@ export const handlers: IHandlers = {
         const title = await pipeAsync(
           html
         , offscreenClient.convertHTMLToSanitizedHTML
-        , offscreenClient.convertHTMLToBeautifyHTML
+        , formatHTML
         , convertHTMLToBBCode
         )
 
@@ -406,7 +407,7 @@ export const handlers: IHandlers = {
             html
           , offscreenClient.convertHTMLToSanitizedHTML
           , html => formatURLsInHTML(html, baseURL)
-          , offscreenClient.convertHTMLToBeautifyHTML
+          , formatHTML
           , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
           , offscreenClient.convertMarkdownToBeautifyMarkdown
           )
@@ -429,7 +430,7 @@ export const handlers: IHandlers = {
             html
           , offscreenClient.convertHTMLToSanitizedHTML
           , html => formatURLsInHTML(html, baseURL)
-          , offscreenClient.convertHTMLToBeautifyHTML
+          , formatHTML
           )
         )
       }
@@ -448,7 +449,7 @@ export const handlers: IHandlers = {
           html
         , offscreenClient.convertHTMLToSanitizedHTML
         , offscreenClient.convertHTMLToNoAttrHTML
-        , offscreenClient.convertHTMLToBeautifyHTML
+        , formatHTML
         )
       )
     }
@@ -470,7 +471,7 @@ export const handlers: IHandlers = {
           , offscreenClient.convertHTMLToSanitizedHTML
           , html => formatURLsInHTML(html, baseURL)
           , html => offscreenClient.convertHTMLToCleanHTML(html, config.html.cleanHTML)
-          , offscreenClient.convertHTMLToBeautifyHTML
+          , formatHTML
           )
         )
       }
@@ -491,7 +492,7 @@ export const handlers: IHandlers = {
             html
           , offscreenClient.convertHTMLToSanitizedHTML
           , html => formatURLsInHTML(html, baseURL)
-          , offscreenClient.convertHTMLToBeautifyHTML
+          , formatHTML
           , convertHTMLToBBCode
           )
         )
