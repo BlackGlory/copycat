@@ -4,9 +4,8 @@ import { IFrameAPI, ImageFormat } from '@src/contract.js'
 import { Awaitable } from '@blackglory/prelude'
 import { pipeAsync } from 'extra-utils'
 import { offscreen } from './offscreen-client.js'
-import { formatURLsInHTML } from './format-links-in-html.js'
-import { formatURL } from './format-url.js'
 import { getConfig } from './storage.js'
+import { formatURL } from '@utils/format-url.js'
 import { createAsciiDocLink } from '@utils/create-ascii-doc-link.js'
 import { createBBCodeImage } from '@utils/create-bbcode-image.js'
 import { createBBCodeLink } from '@utils/create-bbcode-link.js'
@@ -95,9 +94,11 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
+        const config = await getConfig()
         const url = await formatURL(
           info.frameUrl
         , tab.url
+        , config.url
         )
         const title = await tabClient.getDocumentTitle()
 
@@ -115,7 +116,8 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
-        const url = await formatURL(info.frameUrl, tab.url)
+        const config = await getConfig()
+        const url = formatURL(info.frameUrl, tab.url, config.url)
         const title = await tabClient.getDocumentTitle()
 
         return richText(createHTMLLink(url, title))
@@ -132,7 +134,8 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
-        const url = await formatURL(info.frameUrl, tab.url)
+        const config = await getConfig()
+        const url = formatURL(info.frameUrl, tab.url, config.url)
         const title = await tabClient.getDocumentTitle()
 
         return plainText(createHTMLLink(url, title))
@@ -149,10 +152,8 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
-        const url = await formatURL(
-          info.frameUrl
-        , tab.url
-        )
+        const config = await getConfig()
+        const url = formatURL(info.frameUrl, tab.url, config.url)
         const title = await tabClient.getDocumentTitle()
 
         return plainText(createMarkdownLink(url, title))
@@ -169,10 +170,8 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
-        const url = await formatURL(
-          info.frameUrl
-        , tab.url
-        )
+        const config = await getConfig()
+        const url = formatURL(info.frameUrl, tab.url, config.url)
         const title = await tabClient.getDocumentTitle()
 
         return plainText(createOrgModeLink(url, title))
@@ -189,10 +188,8 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
-        const url = await formatURL(
-          info.frameUrl
-        , tab.url
-        )
+        const config = await getConfig()
+        const url = formatURL(info.frameUrl, tab.url, config.url)
         const title = await tabClient.getDocumentTitle()
 
         return plainText(createAsciiDocLink(url, title))
@@ -209,10 +206,8 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
-        const url = await formatURL(
-          info.frameUrl
-        , tab.url
-        )
+        const config = await getConfig()
+        const url = formatURL(info.frameUrl, tab.url, config.url)
         const title = await client.getDocumentTitle()
 
         return plainText(createBBCodeLink(url, title))
@@ -244,9 +239,11 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
-        const url = await formatURL(
+        const config = await getConfig()
+        const url = formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
+        , config.url
         )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
@@ -270,9 +267,10 @@ export const handlers: IHandlers = {
         })
 
         const config = await getConfig()
-        const url = await formatURL(
+        const url = formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
+        , config.url
         )
         const html = await tabClient.getActiveElementContent()
         const text = await pipeAsync(
@@ -298,9 +296,10 @@ export const handlers: IHandlers = {
         })
 
         const config = await getConfig()
-        const url = await formatURL(
+        const url = formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
+        , config.url
         )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
@@ -326,9 +325,10 @@ export const handlers: IHandlers = {
         })
 
         const config = await getConfig()
-        const url = await formatURL(
+        const url = formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
+        , config.url
         )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
@@ -353,9 +353,11 @@ export const handlers: IHandlers = {
         , frameId: info.frameId
         })
 
-        const url = await formatURL(
+        const config = await getConfig()
+        const url = formatURL(
           info.linkUrl
         , info.frameUrl ?? tab.url
+        , config.url
         )
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
@@ -407,7 +409,7 @@ export const handlers: IHandlers = {
           await pipeAsync(
             html
           , offscreen.sanitizeHTML
-          , html => formatURLsInHTML(html, baseURL)
+          , html => offscreen.formatURLsInHTML(html, baseURL, config.url)
           , formatHTML
           , html => offscreen.convertHTMLToMarkdown(html, config.markdown)
           , formatMarkdown
@@ -423,6 +425,7 @@ export const handlers: IHandlers = {
       , frameId: info.frameId
       })
 
+      const config = await getConfig()
       const html = await client.getSelectionHTML()
       const baseURL = info.frameUrl ?? info.pageUrl ?? tab.url
       if (baseURL) {
@@ -430,7 +433,7 @@ export const handlers: IHandlers = {
           await pipeAsync(
             html
           , offscreen.sanitizeHTML
-          , html => formatURLsInHTML(html, baseURL)
+          , html => offscreen.formatURLsInHTML(html, baseURL, config.url)
           , formatHTML
           )
         )
@@ -470,7 +473,7 @@ export const handlers: IHandlers = {
           await pipeAsync(
             html
           , offscreen.sanitizeHTML
-          , html => formatURLsInHTML(html, baseURL)
+          , html => offscreen.formatURLsInHTML(html, baseURL, config.url)
           , html => offscreen.cleanHTML(html, config.html.cleanHTML)
           , formatHTML
           )
@@ -485,6 +488,7 @@ export const handlers: IHandlers = {
       , frameId: info.frameId
       })
 
+      const config = await getConfig()
       const html = await client.getSelectionHTML()
       const baseURL = info.frameUrl ?? info.pageUrl ?? tab.url
       if (baseURL) {
@@ -492,7 +496,7 @@ export const handlers: IHandlers = {
           await pipeAsync(
             html
           , offscreen.sanitizeHTML
-          , html => formatURLsInHTML(html, baseURL)
+          , html => offscreen.formatURLsInHTML(html, baseURL, config.url)
           , formatHTML
           , convertHTMLToBBCode
           )
@@ -503,9 +507,11 @@ export const handlers: IHandlers = {
 , async commandImageAsHTML(info, tab) {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
-        const url = await formatURL(
+        const config = await getConfig()
+        const url = formatURL(
           info.srcUrl
         , info.frameUrl ?? tab.url
+        , config.url
         )
 
         return plainText(createHTMLImage(url))
@@ -517,9 +523,11 @@ export const handlers: IHandlers = {
 , async commandImageAsMarkdown(info, tab) {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab && tab.url) {
-        const url = await formatURL(
+        const config = await getConfig()
+        const url = formatURL(
           info.srcUrl
         , info.frameUrl ?? tab.url
+        , config.url
         )
 
         return plainText(createMarkdownImage(url))
@@ -531,9 +539,11 @@ export const handlers: IHandlers = {
 , async commandImageAsBBCode(info, tab) {
     if (info.mediaType === 'image' && info.srcUrl) {
       if (tab?.url) {
-        const url = await formatURL(
+        const config = await getConfig()
+        const url = formatURL(
           info.srcUrl
         , info.frameUrl ?? tab.url
+        , config.url
         )
 
         return plainText(createBBCodeImage(url))
@@ -573,9 +583,11 @@ export const handlers: IHandlers = {
 , async commandAudioAsHTML(info, tab) {
     if (info.mediaType === 'audio' && info.srcUrl) {
       if (tab?.url) {
-        const url = await formatURL(
+        const config = await getConfig()
+        const url = formatURL(
           info.srcUrl
         , info.frameUrl ?? tab.url
+        , config.url
         )
 
         return plainText(createHTMLAudio(url))
@@ -587,9 +599,11 @@ export const handlers: IHandlers = {
 , async commandVideoAsHTML(info, tab) {
     if (info.mediaType === 'video' && info.srcUrl) {
       if (tab?.url) {
-        const url = await formatURL(
+        const config = await getConfig()
+        const url = formatURL(
           info.srcUrl
         , info.frameUrl ?? tab.url
+        , config.url
         )
         return plainText(createHTMLVideo(url))
       } else {

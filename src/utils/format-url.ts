@@ -1,14 +1,12 @@
 import { URLFormat, URLEncoding } from '@src/contract.js'
-import { getConfig } from './storage.js'
 import { encode, decode } from 'url-operator'
 import { convertURLToAbsoluteURL } from '@utils/convert-url-to-absolute-url.js'
 import { convertURLToRelativeURL } from '@utils/convert-url-to-relative-url.js'
 import { convertURLToRootRelativeURL } from '@utils/convert-url-to-root-relative-url.js'
+import { IURLConfig } from '@src/contract.js'
 
-export async function formatURL(url: string, baseURL: string): Promise<string> {
-  const config = await getConfig()
-
-  switch (config.url.format) {
+export function formatURL(url: string, baseURL: string, config: IURLConfig): string {
+  switch (config.format) {
     case URLFormat.Absolute: {
       url = convertURLToAbsoluteURL(url, baseURL)
       break
@@ -26,7 +24,7 @@ export async function formatURL(url: string, baseURL: string): Promise<string> {
     }
   }
 
-  switch (config.url.encoding) {
+  switch (config.encoding) {
     case URLEncoding.Encode: {
       url = encode(url)
       break

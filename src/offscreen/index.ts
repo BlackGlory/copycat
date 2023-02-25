@@ -7,11 +7,8 @@ import { convertHTMLToPlainText } from '@utils/convert-html-to-plain-text.js'
 import { convertHTMLToMarkdown } from '@utils/convert-html-to-markdown.js'
 import { convertImageURLToDataURL } from '@utils/convert-image-url-to-data-url.js'
 import { cleanAllHTMLAttributes } from '@utils/clean-all-html-attributes.js'
-
-import { convertHTMLToAbsoluteLinkHTML } from '@src/utils/offscreen/convert-html-to-absolute-link-html.js'
 import { cleanHTML } from '@utils/clean-html.js'
-import { convertHTMLToRelativeLinkHTML } from '@src/utils/offscreen/convert-html-to-relative-link-html.js'
-import { convertHTMLToRootRelativeLinkHTML } from '@src/utils/offscreen/convert-html-to-root-relative-link-html.js'
+import { formatURLsInHTML } from '@utils/format-urls-in-html.js'
 
 createServer<IOffscreenAPI>({
   writeTextToClipboard
@@ -22,8 +19,5 @@ createServer<IOffscreenAPI>({
 , convertHTMLToMarkdown
 , convertImageURLToDataURL
 , cleanAllHTMLAttributes
-
-, convertHTMLToAbsoluteLinkHTML
-, convertHTMLToRelativeLinkHTML
-, convertHTMLToRootRelativeLinkHTML
+, formatURLsInHTML
 }, { channel: OffscreenChannel })

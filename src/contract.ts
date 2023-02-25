@@ -125,10 +125,7 @@ export interface IOffscreenAPI {
   convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
   convertImageURLToDataURL(url: string, format?: ImageFormat): string
   cleanAllHTMLAttributes(html: string): string
-
-  convertHTMLToAbsoluteLinkHTML(html: string, baseURL: string): string
-  convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
-  convertHTMLToRootRelativeLinkHTML(html: string, baseURL: string): string
+, formatURLsInHTML(html: string, baseURL: string, config: IURLConfig): string
 }
 
 export enum URLFormat {
