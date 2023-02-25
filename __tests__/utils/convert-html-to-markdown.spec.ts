@@ -1,4 +1,4 @@
-import { convertHTMLToMarkdown } from '@offscreen/convert-html-to-markdown.js'
+import { convertHTMLToMarkdown } from '@utils/convert-html-to-markdown.js'
 import { MarkdownBullet, MarkdownBulletOrdered, MarkdownEmphasis, MarkdownFence, MarkdownListItemIndent, MarkdownThematicBreak, MarkdownStrong } from '@src/contract.js'
 
 test('convertHTMLToMarkdown', async () => {
