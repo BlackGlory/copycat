@@ -15,46 +15,48 @@ Copy content from web powerful than ever before.
 
 ## Features
 - [x] Copy a tab link as
-  - [x] Plaintext
+  - [x] Plain text
+  - [x] Rich text
+  - [x] HTML
   - [x] Markdown
-  - [x] BBCode
-  - [x] HTML (plain text)
-  - [x] HTML (rich text)
   - [x] Org-Mode
   - [x] AsciiDoc
+  - [x] BBCode
 - [x] Copy a frame link as
-  - [x] Plaintext
+  - [x] Plain text
+  - [x] Rich text
+  - [x] HTML
   - [x] Markdown
-  - [x] BBCode
-  - [x] HTML (plain text)
-  - [x] HTML (rich text)
   - [x] Org-Mode
   - [x] AsciiDoc
+  - [x] BBCode
 - [x] Copy a link text
 - [x] Copy a link as
-  - [x] Markdown
-  - [x] BBCode
+  - [x] Plain text
+  - [x] Rich text
   - [x] HTML
+  - [x] Markdown
   - [x] Org-Mode
   - [x] AsciiDoc
+  - [x] BBCode
 - [x] Copy selection as
-  - [x] Plaintext
+  - [x] Plain text
+  - [x] JSON
   - [x] Markdown
-  - [x] BBCode
   - [x] HTML
-  - [x] HTML (clean)
-  - [x] HTML (no attributes)
-  - [x] Raw string
-  - [x] JSON string
+  - [x] HTML without attributes
+  - [x] Clean HTML (defined by the user)
+  - [x] BBCode
 - [x] Copy an image as
-  - [x] Markdown
-  - [x] Markdown (DataURI JPEG, PNG, WebP)
   - [x] HTML
-  - [x] HTML (DataURI JPEG, PNG, WebP)
-  - [x] DataURI (original format)
-  - [x] DataURI (JPEG, PNG, WebP)
+  - [x] Markdown
   - [x] BBCode
-- [x] Copy a native audio/video as HTML
+  - [x] Data URL
+  - [x] Data URL (JPEG)
+  - [x] Data URL (PNG)
+  - [x] Data URL (WebP)
+- [x] Copy a native audio as HTML
+- [x] Copy a native video as HTML
 
 ## Extension shortcuts
 Copy tab links and selections can be set as extension shortcuts.

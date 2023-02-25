@@ -3,159 +3,138 @@
     "message": "拷贝猫"
   }
 , "extensionDescription": {
-    "message": "为网页提供前所未有的强大复制功能."
+    "message": "为网页提供前所未有的强大复制功能。"
   }
-, "extensionBrowserActionTitle": {
-    "message": "Copycat 选项"
+, "extensionActionTitle": {
+    "message": "Copycat选项"
   }
-, "Options_UrlFormat": {
-    "message": "URL 格式"
-  }
-, "Options_AbsoluteURL": {
-    "message": "总是使用绝对 URL"
-  }
-, "Options_RelativeURL": {
-    "message": "总是使用相对 URL(如果可能的话)"
-  }
-, "Options_RootRelativeURL": {
-    "message": "总是使用相对根目录的 URL(如果可能的话)"
-  }
-, "Options_OriginalURL": {
-    "message": "原始 URL"
-  }
-, "Options_MarkdownFlavor": {
-    "message": "Markdown 风格"
-  }
-, "TAB_URL_TO_PLAIN": {
+, "commandTabLinkAsPlainText": {
     "message": "标签页链接 → 纯文本"
   }
-, "TAB_URL_TO_MARKDOWN": {
-    "message": "标签页链接 → Markdown"
-  }
-, "TAB_URL_TO_HTML": {
-    "message": "标签页链接 → HTML"
-  }
-, "TAB_URL_TO_BBCODE": {
-    "message": "标签页链接 → BBCode"
-  }
-, "TAB_URL_TO_ORG_MODE": {
-    "message": "标签页链接 → Org-Mode"
-  }
-, "TAB_URL_TO_ASCII_DOC": {
-    "message": "标签页链接 → AsciiDoc"
-  }
-, "TAB_URL_TO_RICH_TEXT": {
+, "commandTabLinkAsRichText": {
     "message": "标签页链接 → 富文本"
   }
-, "FRAME_URL_TO_PLAIN": {
+, "commandTabLinkAsHTML": {
+    "message": "标签页链接 → HTML"
+  }
+, "commandTabLinkAsMarkdown": {
+    "message": "标签页链接 → Markdown"
+  }
+, "commandTabLinkAsOrgMode": {
+    "message": "标签页链接 → Org-Mode"
+  }
+, "commandTabLinkAsAsciiDoc": {
+    "message": "标签页链接 → AsciiDoc"
+  }
+, "commandTabLinkAsBBCode": {
+    "message": "标签页链接 → BBCode"
+  }
+, "commandFrameLinkAsPlainText": {
     "message": "框架链接 → 纯文本"
   }
-, "FRAME_URL_TO_MARKDOWN": {
-    "message": "框架链接 → Markdown"
-  }
-, "FRAME_URL_TO_HTML": {
-    "message": "框架链接 → HTML"
-  }
-, "FRAME_URL_TO_BBCODE": {
-    "message": "框架链接 → BBCode"
-  }
-, "FRAME_URL_TO_ORG_MODE": {
-    "message": "框架链接 → Org-Mode"
-  }
-, "FRAME_URL_TO_ASCII_DOC": {
-    "message": "框架链接 → AsciiDoc"
-  }
-, "FRAME_URL_TO_RICH_TEXT": {
+, "commandFrameLinkAsRichText": {
     "message": "框架链接 → 富文本"
   }
-, "LINK_TEXT": {
-    "message": "复制链接文本"
+, "commandFrameLinkAsHTML": {
+    "message": "框架链接 → HTML"
   }
-, "LINK_TO_MARKDOWN": {
-    "message": "链接 → Markdown"
+, "commandFrameLinkAsMarkdown": {
+    "message": "框架链接 → Markdown"
   }
-, "LINK_TO_HTML": {
+, "commandFrameLinkAsOrgMode": {
+    "message": "框架链接 → Org-Mode"
+  }
+, "commandFrameLinkAsAsciiDoc": {
+    "message": "框架链接 → AsciiDoc"
+  }
+, "commandFrameLinkAsBBCode": {
+    "message": "框架链接 → BBCode"
+  }
+, "commandLinkText": {
+    "message": "链接文本"
+  }
+, "commandLinkAsPlainText": {
+    "message": "链接 → 纯文本"
+  }
+, "commandLinkAsRichText": {
+    "message": "链接 → 富文本"
+  }
+, "commandLinkAsHTML": {
     "message": "链接 → HTML"
   }
-, "LINK_TO_BBCODE": {
-    "message": "链接 → BBCode"
+, "commandLinkAsMarkdown": {
+    "message": "链接 → Markdown"
   }
-, "LINK_TO_ORG_MODE": {
+, "commandLinkAsOrgMode": {
     "message": "链接 → Org-Mode"
   }
-, "LINK_TO_ASCII_DOC": {
+, "commandLinkAsAsciiDoc": {
     "message": "链接 → AsciiDoc"
   }
-, "SELECTION_TO_MARKDOWN": {
-    "message": "选中内容 → Markdown"
+, "commandLinkAsBBCode": {
+    "message": "链接 → BBCode"
   }
-, "SELECTION_TO_HTML": {
-    "message": "选中内容 → HTML"
-  }
-, "SELECTION_TO_HTML_CLEAN": {
-    "message": "选中内容 → HTML(经过净化)"
-  }
-, "SELECTION_TO_HTML_NO_ATTR": {
-    "message": "选中内容 → HTML(去除标签属性)"
-  }
-, "SELECTION_TO_BBCODE": {
-    "message": "选中内容 → BBCode"
-  }
-, "SELECTION_TO_PLAIN": {
+, "commandSelectionAsPlainText": {
     "message": "选中内容 → 纯文本"
   }
-, "SELECTION_TO_PLAIN_TRIMMED": {
-    "message": "选中内容 → 纯文本(修剪前后)"
+, "commandSelectionAsJSON": {
+    "message": "选中内容 → JSON"
   }
-, "SELECTION_TO_RAW_STRING": {
-    "message": "选中内容 → 原始字符串"
+, "commandSelectionAsMarkdown": {
+    "message": "选中内容 → Markdown"
   }
-, "SELECTION_TO_JSON_STRING": {
-    "message": "选中内容 → JSON字符串"
+, "commandSelectionAsHTML": {
+    "message": "选中内容 → HTML"
   }
-, "IMAGE_TO_MARKDOWN": {
-    "message": "图片 → Markdown"
+, "commandSelectionAsHTMLWithoutAttributes": {
+    "message": "选中内容 → 无属性的HTML"
   }
-, "IMAGE_TO_MARKDOWN_DATA_URI_JPEG": {
-    "message": "图片 → Markdown(DataURI jpeg)"
+, "commandSelectionAsCleanHTML": {
+    "message": "选中内容 → 干净的HTML（由用户自己定义）"
   }
-, "IMAGE_TO_MARKDOWN_DATA_URI_PNG": {
-    "message": "图片 → Markdown(DataURI png)"
+, "commandSelectionAsBBCode": {
+    "message": "选中内容 → BBCode"
   }
-, "IMAGE_TO_MARKDOWN_DATA_URI_WEBP": {
-    "message": "图片 → Markdown(DataURI webp)"
-  }
-, "IMAGE_TO_HTML": {
+, "commandImageAsHTML": {
     "message": "图片 → HTML"
   }
-, "IMAGE_TO_HTML_DATA_URI_JPEG": {
-    "message": "图片 → HTML(DataURI jpeg)"
+, "commandImageAsMarkdown": {
+    "message": "图片 → Markdown"
   }
-, "IMAGE_TO_HTML_DATA_URI_PNG": {
-    "message": "图片 → HTML(DataURI png)"
-  }
-, "IMAGE_TO_HTML_DATA_URI_WEBP": {
-    "message": "图片 → HTML(DataURI webp)"
-  }
-, "IMAGE_TO_BBCODE": {
+, "commandImageAsBBCode": {
     "message": "图片 → BBCode"
   }
-, "IMAGE_TO_DATA_URI_RAW": {
-    "message": "图片 → DataURI(原始格式)"
+, "commandImageAsDataURL": {
+    "message": "图片 → Data URL"
   }
-, "IMAGE_TO_DATA_URI_JPEG": {
-    "message": "图片 → DataURI(jpeg)"
+, "commandImageAsDataURLJPEG": {
+    "message": "图片 → Data URL (JPEG)"
   }
-, "IMAGE_TO_DATA_URI_PNG": {
-    "message": "图片 → DataURI(png)"
+, "commandImageAsDataURLPNG": {
+    "message": "图片 → Data URL (PNG)"
   }
-, "IMAGE_TO_DATA_URI_WEBP": {
-    "message": "图片 → DataURI(webp)"
+, "commandImageAsDataURLWebP": {
+    "message": "图片 → Data URL (WebP)"
   }
-, "AUDIO_TO_HTML": {
+, "commandAudioAsHTML": {
     "message": "音频 → HTML"
   }
-, "VIDEO_TO_HTML": {
+, "commandVideoAsHTML": {
     "message": "视频 → HTML"
+  }
+, "selectURLFormat": {
+    "message": "URL格式"
+  }
+, "selectAbsoluteURL": {
+    "message": "总是使用绝对URL"
+  }
+, "selectRelativeURL": {
+    "message": "尽可能使用相对URL"
+  }
+, "selectRootRelativeURL": {
+    "message": "尽可能使用相对根目录的URL"
+  }
+, "selectOriginalURL": {
+    "message": "让URL保持原样"
   }
 }

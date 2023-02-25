@@ -14,14 +14,14 @@ export function URLOptions({ config, setConfig }: IURLOptionsProps) {
       <h3 className='text-base px-4 py-2'>URL配置项</h3>
       <div className='px-4 py-2 space-y-2'>
         <Section>
-          <label>{i18n('Options_UrlFormat')}</label>
+          <label>{i18n('selectURLFormat')}</label>
           <Select
             value={config.url.format}
             items={[
-              { name: i18n('Options_AbsoluteURL'), value: URLFormat.Absolute }
-            , { name: i18n('Options_RelativeURL'), value: URLFormat.Relative }
-            , { name: i18n('Options_RootRelativeURL'), value: URLFormat.RootRelative }
-            , { name: i18n('Options_OriginalURL'), value: URLFormat.Original }
+              { name: i18n('selectAbsoluteURL'), value: URLFormat.Absolute }
+            , { name: i18n('selectRelativeURL'), value: URLFormat.Relative }
+            , { name: i18n('selectRootRelativeURL'), value: URLFormat.RootRelative }
+            , { name: i18n('selectOriginalURL'), value: URLFormat.Original }
             ]}
             onChange={value => setConfig(config => {
               config.url.format = value

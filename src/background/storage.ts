@@ -51,62 +51,56 @@ async function initConfig(): Promise<void> {
 async function initMenu(): Promise<void> {
   const menu: IMenuStore = {
     [MenuContext.Page]: [
-      { id: 'TAB_URL_TO_PLAIN', visible: true }
-    , { id: 'TAB_URL_TO_MARKDOWN', visible: true }
-    , { id: 'TAB_URL_TO_BBCODE', visible: true }
-    , { id: 'TAB_URL_TO_HTML', visible: true }
-    , { id: 'TAB_URL_TO_ORG_MODE', visible: true }
-    , { id: 'TAB_URL_TO_ASCII_DOC', visible: true }
-    , { id: 'TAB_URL_TO_RICH_TEXT', visible: true }
+      { id: 'commandTabLinkAsPlainText', visible: true }
+    , { id: 'commandTabLinkAsRichText', visible: true }
+    , { id: 'commandTabLinkAsHTML', visible: true }
+    , { id: 'commandTabLinkAsMarkdown', visible: true }
+    , { id: 'commandTabLinkAsOrgMode', visible: true }
+    , { id: 'commandTabLinkAsAsciiDoc', visible: true }
+    , { id: 'commandTabLinkAsBBCode', visible: true }
     ]
   , [MenuContext.Frame]: [
-      { id: 'FRAME_URL_TO_PLAIN', visible: true }
-    , { id: 'FRAME_URL_TO_MARKDOWN', visible: true }
-    , { id: 'FRAME_URL_TO_BBCODE', visible: true }
-    , { id: 'FRAME_URL_TO_HTML', visible: true }
-    , { id: 'FRAME_URL_TO_ORG_MODE', visible: true }
-    , { id: 'FRAME_URL_TO_ASCII_DOC', visible: true }
-    , { id: 'FRAME_URL_TO_RICH_TEXT', visible: true }
+      { id: 'commandFrameLinkAsPlainText', visible: true }
+    , { id: 'commandFrameLinkAsRichText', visible: true }
+    , { id: 'commandFrameLinkAsHTML', visible: true }
+    , { id: 'commandFrameLinkAsMarkdown', visible: true }
+    , { id: 'commandFrameLinkAsOrgMode', visible: true }
+    , { id: 'commandFrameLinkAsAsciiDoc', visible: true }
+    , { id: 'commandFrameLinkAsBBCode', visible: true }
     ]
   , [MenuContext.Link]: [
-      { id: 'LINK_TEXT', visible: true }
-    , { id: 'LINK_TO_MARKDOWN', visible: true }
-    , { id: 'LINK_TO_BBCODE', visible: true }
-    , { id: 'LINK_TO_HTML', visible: true }
-    , { id: 'LINK_TO_ORG_MODE', visible: true }
-    , { id: 'LINK_TO_ASCII_DOC', visible: true }
+      { id: 'commandLinkText', visible: true }
+    , { id: 'commandLinkAsPlainText', visible: true }
+    , { id: 'commandLinkAsRichText', visible: true }
+    , { id: 'commandLinkAsHTML', visible: true }
+    , { id: 'commandLinkAsMarkdown', visible: true }
+    , { id: 'commandLinkAsOrgMode', visible: true }
+    , { id: 'commandLinkAsAsciiDoc', visible: true }
+    , { id: 'commandLinkAsBBCode', visible: true }
     ]
   , [MenuContext.Selection]: [
-      { id: 'SELECTION_TO_MARKDOWN', visible: true }
-    , { id: 'SELECTION_TO_BBCODE', visible: true }
-    , { id: 'SELECTION_TO_HTML', visible: true }
-    , { id: 'SELECTION_TO_HTML_CLEAN', visible: true }
-    , { id: 'SELECTION_TO_HTML_NO_ATTR', visible: true }
-    , { id: 'SELECTION_TO_PLAIN', visible: true }
-    , { id: 'SELECTION_TO_PLAIN_TRIMMED', visible: true }
-    , { id: 'SELECTION_TO_RAW_STRING', visible: true }
-    , { id: 'SELECTION_TO_JSON_STRING', visible: true }
+      { id: 'commandSelectionAsPlainText', visible: true }
+    , { id: 'commandSelectionAsJSON', visible: true }
+    , { id: 'commandSelectionAsMarkdown', visible: true }
+    , { id: 'commandSelectionAsHTML', visible: true }
+    , { id: 'commandSelectionAsHTMLWithoutAttributes', visible: true }
+    , { id: 'commandSelectionAsCleanHTML', visible: true }
+    , { id: 'commandSelectionAsBBCode', visible: true }
     ]
   , [MenuContext.Image]: [
-      { id: 'IMAGE_TO_MARKDOWN', visible: true }
-    , { id: 'IMAGE_TO_MARKDOWN_DATA_URI_JPEG', visible: true }
-    , { id: 'IMAGE_TO_MARKDOWN_DATA_URI_PNG', visible: true }
-    , { id: 'IMAGE_TO_MARKDOWN_DATA_URI_WEBP', visible: true }
-    , { id: 'IMAGE_TO_BBCODE', visible: true }
-    , { id: 'IMAGE_TO_HTML', visible: true }
-    , { id: 'IMAGE_TO_HTML_DATA_URI_JPEG', visible: true }
-    , { id: 'IMAGE_TO_HTML_DATA_URI_PNG', visible: true }
-    , { id: 'IMAGE_TO_HTML_DATA_URI_WEBP', visible: true }
-    , { id: 'IMAGE_TO_DATA_URI_RAW', visible: true }
-    , { id: 'IMAGE_TO_DATA_URI_JPEG', visible: true }
-    , { id: 'IMAGE_TO_DATA_URI_PNG', visible: true }
-    , { id: 'IMAGE_TO_DATA_URI_WEBP', visible: true }
+      { id: 'commandImageAsMarkdown', visible: true }
+    , { id: 'commandImageAsBBCode', visible: true }
+    , { id: 'commandImageAsDataURL', visible: true }
+    , { id: 'commandImageAsDataURLJPEG', visible: true }
+    , { id: 'commandImageAsDataURLPNG', visible: true }
+    , { id: 'commandImageAsDataURLWebP', visible: true }
+    , { id: 'commandImageAsHTML', visible: true }
     ]
   , [MenuContext.Video]: [
-      { id: 'AUDIO_TO_HTML', visible: true }
+      { id: 'commandAudioAsHTML', visible: true }
     ]
   , [MenuContext.Audio]: [
-      { id: 'VIDEO_TO_HTML', visible: true }
+      { id: 'commandVideoAsHTML', visible: true }
     ]
   }
 

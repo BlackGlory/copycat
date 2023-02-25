@@ -11,6 +11,7 @@ import { i18n } from '@utils/i18n.js'
 import { IBackgroundAPI, MenuContext } from '@src/contract.js'
 import { convertMenuContextToBrowserContextType } from '@utils/menu-context.js'
 import { createServer } from '@delight-rpc/webextension'
+import { log } from '@blackglory/prelude'
 
 browser.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
   switch (reason) {
@@ -69,7 +70,7 @@ async function ensureMenu(): Promise<void> {
           id: item.id
         , visible: item.visible
         , type: 'normal'
-        , title: i18n(item.id)
+        , title: log(item.id, i18n(item.id))
         , contexts: [convertMenuContextToBrowserContextType(context)]
         }
 

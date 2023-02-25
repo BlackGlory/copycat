@@ -13,41 +13,47 @@
   , "128": "assets/images/icon-128.png"
   }
 , "commands": {
-    "TAB_URL_TO_PLAIN": {
-      "description": "__MSG_TAB_URL_TO_PLAIN__"
+    "commandTabLinkAsPlainText": {
+      "description": "__MSG_commandTabLinkAsPlainText__"
     }
-  , "TAB_URL_TO_MARKDOWN": {
-      "description": "__MSG_TAB_URL_TO_MARKDOWN__"
+  , "commandTabLinkAsRichText": {
+      "description": "__MSG_commandTabLinkAsRichText__"
     }
-  , "TAB_URL_TO_HTML": {
-      "description": "__MSG_TAB_URL_TO_HTML__"
+  , "commandTabLinkAsHTML": {
+      "description": "__MSG_commandTabLinkAsHTML__"
     }
-  , "TAB_URL_TO_BBCODE": {
-      "description": "__MSG_TAB_URL_TO_BBCODE__"
+  , "commandTabLinkAsMarkdown": {
+      "description": "__MSG_commandTabLinkAsMarkdown__"
     }
-  , "SELECTION_TO_MARKDOWN": {
-      "description": "__MSG_SELECTION_TO_MARKDOWN__"
+  , "commandTabLinkAsOrgMode": {
+      "description": "__MSG_commandTabLinkAsOrgMode__"
     }
-  , "SELECTION_TO_HTML": {
-      "description": "__MSG_SELECTION_TO_HTML__"
+  , "commandTabLinkAsAsciiDoc": {
+      "description": "__MSG_commandTabLinkAsAsciiDoc__"
     }
-  , "SELECTION_TO_HTML_CLEAN": {
-      "description": "__MSG_SELECTION_TO_HTML_CLEAN__"
+  , "commandTabLinkAsBBCode": {
+      "description": "__MSG_commandTabLinkAsBBCode__"
     }
-  , "SELECTION_TO_HTML_NO_ATTR": {
-      "description": "__MSG_SELECTION_TO_HTML_NO_ATTR__"
+  , "commandSelectionAsPlainText": {
+      "description": "__MSG_commandSelectionAsPlainText__"
     }
-  , "SELECTION_TO_BBCODE": {
-      "description": "__MSG_SELECTION_TO_BBCODE__"
+  , "commandSelectionAsJSON": {
+      "description": "__MSG_commandSelectionAsJSON__"
     }
-  , "SELECTION_TO_PLAIN": {
-      "description": "__MSG_SELECTION_TO_PLAIN__"
+  , "commandSelectionAsMarkdown": {
+      "description": "__MSG_commandSelectionAsMarkdown__"
     }
-  , "SELECTION_TO_PLAIN_TRIMMED": {
-      "description": "__MSG_SELECTION_TO_PLAIN_TRIMMED__"
+  , "commandSelectionAsHTML": {
+      "description": "__MSG_commandSelectionAsHTML__"
     }
-  , "SELECTION_TO_RAW_STRING": {
-      "description": "__MSG_SELECTION_TO_RAW_STRING__"
+  , "commandSelectionAsHTMLWithoutAttributes": {
+      "description": "__MSG_commandSelectionAsHTMLWithoutAttributes__"
+    }
+  , "commandSelectionAsCleanHTML": {
+      "description": "__MSG_commandSelectionAsCleanHTML__"
+    }
+  , "commandSelectionAsBBCode": {
+      "description": "__MSG_commandSelectionAsBBCode__"
     }
   }
 , "content_scripts": [{
@@ -61,7 +67,7 @@
     "service_worker": "background.js"
   }
 , "action": {
-    "default_title": "__MSG_extensionBrowserActionTitle__"
+    "default_title": "__MSG_extensionActionTitle__"
   , "default_popup": "options.html"
   , "default_icon": {
       "16": "assets/images/icon-16.png"

@@ -5,163 +5,136 @@
 , "extensionDescription": {
     "message": "Copy content from web powerful than ever before."
   }
-, "extensionBrowserActionTitle": {
+, "extensionActionTitle": {
     "message": "Copycat Options"
   }
-, "Options_UrlFormat": {
-    "message": "URL Format"
+, "commandTabLinkAsPlainText": {
+    "message": "Tab link → Plain text"
   }
-, "Options_AbsoluteURL": {
-    "message": "Always absolute URL"
-  }
-, "Options_RelativeURL": {
-    "message": "Always relative URL(if possible)"
-  }
-, "Options_RootRelativeURL": {
-    "message": "Always root-relative URL(if possible)"
-  }
-, "Options_OriginalURL": {
-    "message": "Original URL"
-  }
-, "Options_MarkdownFlavor": {
-    "message": "Markdown Flavor"
-  }
-, "Options_GitHubFlavoredMarkdown": {
-    "message": "GitHub Flavored Markdown"
-  }
-, "Options_CommonMark": {
-    "message": "CommonMark"
-  }
-, "TAB_URL_TO_PLAIN": {
-    "message": "Tab link → Plaintext"
-  }
-, "TAB_URL_TO_MARKDOWN": {
-    "message": "Tab link → Markdown"
-  }
-, "TAB_URL_TO_HTML": {
-    "message": "Tab link → HTML"
-  }
-, "TAB_URL_TO_BBCODE": {
-    "message": "Tab link → BBCode"
-  }
-, "TAB_URL_TO_ORG_MODE": {
-    "message": "Tab link → Org-Mode"
-  }
-, "TAB_URL_TO_ASCII_DOC": {
-    "message": "Tab link → AsciiDoc"
-  }
-, "TAB_URL_TO_RICH_TEXT": {
+, "commandTabLinkAsRichText": {
     "message": "Tab link → Rich text"
   }
-, "FRAME_URL_TO_PLAIN": {
-    "message": "Frame link → Plaintext"
+, "commandTabLinkAsHTML": {
+    "message": "Tab link → HTML"
   }
-, "FRAME_URL_TO_MARKDOWN": {
-    "message": "Frame link → Markdown"
+, "commandTabLinkAsMarkdown": {
+    "message": "Tab link → Markdown"
   }
-, "FRAME_URL_TO_HTML": {
-    "message": "Frame link → HTML"
+, "commandTabLinkAsOrgMode": {
+    "message": "Tab link → Org-Mode"
   }
-, "FRAME_URL_TO_BBCODE": {
-    "message": "Frame link → BBCode"
+, "commandTabLinkAsAsciiDoc": {
+    "message": "Tab link → AsciiDoc"
   }
-, "FRAME_URL_TO_ORG_MODE": {
-    "message": "Frame link → Org-Mode"
+, "commandTabLinkAsBBCode": {
+    "message": "Tab link → BBCode"
   }
-, "FRAME_URL_TO_ASCII_DOC": {
-    "message": "Frame link → AsciiDoc"
+, "commandFrameLinkAsPlainText": {
+    "message": "Frame link → Plain text"
   }
-, "FRAME_URL_TO_RICH_TEXT": {
+, "commandFrameLinkAsRichText": {
     "message": "Frame link → Rich text"
   }
-, "LINK_TEXT": {
-    "message": "Copy link text"
+, "commandFrameLinkAsHTML": {
+    "message": "Frame link → HTML"
   }
-, "LINK_TO_MARKDOWN": {
-    "message": "Link → Markdown"
+, "commandFrameLinkAsMarkdown": {
+    "message": "Frame link → Markdown"
   }
-, "LINK_TO_HTML": {
+, "commandFrameLinkAsOrgMode": {
+    "message": "Frame link → Org-Mode"
+  }
+, "commandFrameLinkAsAsciiDoc": {
+    "message": "Frame link → AsciiDoc"
+  }
+, "commandFrameLinkAsBBCode": {
+    "message": "Frame link → BBCode"
+  }
+, "commandLinkText": {
+    "message": "Link text"
+  }
+, "commandLinkAsPlainText": {
+    "message": "Link → Plain text"
+  }
+, "commandLinkAsRichText": {
+    "message": "Link → Rich text"
+  }
+, "commandLinkAsHTML": {
     "message": "Link → HTML"
   }
-, "LINK_TO_BBCODE": {
-    "message": "Link → BBCode"
+, "commandLinkAsMarkdown": {
+    "message": "Link → Markdown"
   }
-, "LINK_TO_ORG_MODE": {
+, "commandLinkAsOrgMode": {
     "message": "Link → Org-Mode"
   }
-, "LINK_TO_ASCII_DOC": {
+, "commandLinkAsAsciiDoc": {
     "message": "Link → AsciiDoc"
   }
-, "SELECTION_TO_MARKDOWN": {
+, "commandLinkAsBBCode": {
+    "message": "Link → BBCode"
+  }
+, "commandSelectionAsPlainText": {
+    "message": "Selection → Plain text"
+  }
+, "commandSelectionAsJSON": {
+    "message": "Selection → JSON"
+  }
+, "commandSelectionAsMarkdown": {
     "message": "Selection → Markdown"
   }
-, "SELECTION_TO_HTML": {
+, "commandSelectionAsHTML": {
     "message": "Selection → HTML"
   }
-, "SELECTION_TO_HTML_CLEAN": {
-    "message": "Selection → HTML(clean)"
+, "commandSelectionAsHTMLWithoutAttributes": {
+    "message": "Selection → HTML without attributes"
   }
-, "SELECTION_TO_HTML_NO_ATTR": {
-    "message": "Selection → HTML(no attributes)"
+, "commandSelectionAsCleanHTML": {
+    "message": "Selection → Clean HTML (defined by the user)"
   }
-, "SELECTION_TO_BBCODE": {
+, "commandSelectionAsBBCode": {
     "message": "Selection → BBCode"
   }
-, "SELECTION_TO_PLAIN": {
-    "message": "Selection → Plaintext"
-  }
-, "SELECTION_TO_PLAIN_TRIMMED": {
-    "message": "Selection → Plaintext(trimmed)"
-  }
-, "SELECTION_TO_RAW_STRING": {
-    "message": "Selection → Raw string"
-  }
-, "SELECTION_TO_JSON_STRING": {
-    "message": "Selection → JSON string"
-  }
-, "IMAGE_TO_MARKDOWN": {
-    "message": "Image → Markdown"
-  }
-, "IMAGE_TO_MARKDOWN_DATA_URI_JPEG": {
-    "message": "Image → Markdown(DataURI jpeg)"
-  }
-, "IMAGE_TO_MARKDOWN_DATA_URI_PNG": {
-    "message": "Image → Markdown(DataURI png)"
-  }
-, "IMAGE_TO_MARKDOWN_DATA_URI_WEBP": {
-    "message": "Image → Markdown(DataURI webp)"
-  }
-, "IMAGE_TO_HTML": {
+, "commandImageAsHTML": {
     "message": "Image → HTML"
   }
-, "IMAGE_TO_HTML_DATA_URI_JPEG": {
-    "message": "Image → HTML(DataURI jpeg)"
+, "commandImageAsMarkdown": {
+    "message": "Image → Markdown"
   }
-, "IMAGE_TO_HTML_DATA_URI_PNG": {
-    "message": "Image → HTML(DataURI png)"
-  }
-, "IMAGE_TO_HTML_DATA_URI_WEBP": {
-    "message": "Image → HTML(DataURI webp)"
-  }
-, "IMAGE_TO_BBCODE": {
+, "commandImageAsBBCode": {
     "message": "Image → BBCode"
   }
-, "IMAGE_TO_DATA_URI_RAW": {
-    "message": "Image → DataURI(original format)"
+, "commandImageAsDataURL": {
+    "message": "Image → Data URL"
   }
-, "IMAGE_TO_DATA_URI_JPEG": {
-    "message": "Image → DataURI(jpeg)"
+, "commandImageAsDataURLJPEG": {
+    "message": "Image → Data URL (JPEG)"
   }
-, "IMAGE_TO_DATA_URI_PNG": {
-    "message": "Image → DataURI(png)"
+, "commandImageAsDataURLPNG": {
+    "message": "Image → Data URL (PNG)"
   }
-, "IMAGE_TO_DATA_URI_WEBP": {
-    "message": "Image → DataURI(webp)"
+, "commandImageAsDataURLWebP": {
+    "message": "Image → Data URL (WebP)"
   }
-, "AUDIO_TO_HTML": {
+, "commandAudioAsHTML": {
     "message": "Audio → HTML"
   }
-, "VIDEO_TO_HTML": {
+, "commandVideoAsHTML": {
     "message": "Video → HTML"
+  }
+, "selectURLFormat": {
+    "message": "URL Format"
+  }
+, "selectAbsoluteURL": {
+    "message": "Always use absolute URLs"
+  }
+, "selectRelativeURL": {
+    "message": "Use relative URLs where possible"
+  }
+, "selectRootRelativeURL": {
+    "message": "Use root-relative URLs where possible"
+  }
+, "selectOriginalURL": {
+    "message": "Leave URLs as they are"
   }
 }

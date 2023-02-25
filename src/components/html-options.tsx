@@ -16,7 +16,7 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
     <div className='mb-2'>
       <h3 className='text-base px-4 py-2'>HTML配置项</h3>
       <div className='py-2'>
-        <h4 className='px-4 text-sm'>Allowlist</h4>
+        <h4 className='px-4 text-sm'>Alllowlist for HTML (clean) </h4>
 
         <nav className='px-4'>
           <Button

@@ -38,56 +38,56 @@ interface IHandlers {
 }
 
 export const handlers: IHandlers = {
-  async TAB_URL_TO_PLAIN(info, tab) {
+  async commandTabLinkAsPlainText(info, tab) {
     if (tab?.url) {
       return plainText(
         await offscreenClient.convertURLToLinkPlain(tab.url, tab.title)
       )
     }
   }
-, async TAB_URL_TO_MARKDOWN(info, tab) {
-    if (tab?.url) {
-      return plainText(
-        await offscreenClient.convertURLToLinkMarkdown(tab.url, tab.title)
-      )
-    }
-  }
-, async TAB_URL_TO_HTML(info, tab) {
-    if (tab?.url) {
-      return plainText(
-        await offscreenClient.convertURLToLinkHTML(tab.url, tab.title)
-      )
-    }
-  }
-, async TAB_URL_TO_BBCODE(info, tab) {
-    if (tab?.url) {
-      return plainText(
-        await offscreenClient.convertURLToLinkBBCode(tab.url, tab.title)
-      )
-    }
-  }
-, async TAB_URL_TO_ORG_MODE(info, tab) {
-    if (tab?.url) {
-      return plainText(
-        await offscreenClient.convertURLToLinkOrgMode(tab.url, tab.title)
-      )
-    }
-  }
-, async TAB_URL_TO_ASCII_DOC(info, tab) {
-    if (tab?.url) {
-      return plainText(
-        await offscreenClient.convertURLToLinkAsciiDoc(tab.url, tab.title)
-      )
-    }
-  }
-, async TAB_URL_TO_RICH_TEXT(info, tab) {
+, async commandTabLinkAsRichText(info, tab) {
     if (tab?.url) {
       return richText(
         await offscreenClient.convertURLToLinkHTML(tab.url, tab.title)
       )
     }
   }
-, async FRAME_URL_TO_PLAIN(info, tab) {
+, async commandTabLinkAsHTML(info, tab) {
+    if (tab?.url) {
+      return plainText(
+        await offscreenClient.convertURLToLinkHTML(tab.url, tab.title)
+      )
+    }
+  }
+, async commandTabLinkAsMarkdown(info, tab) {
+    if (tab?.url) {
+      return plainText(
+        await offscreenClient.convertURLToLinkMarkdown(tab.url, tab.title)
+      )
+    }
+  }
+, async commandTabLinkAsOrgMode(info, tab) {
+    if (tab?.url) {
+      return plainText(
+        await offscreenClient.convertURLToLinkOrgMode(tab.url, tab.title)
+      )
+    }
+  }
+, async commandTabLinkAsAsciiDoc(info, tab) {
+    if (tab?.url) {
+      return plainText(
+        await offscreenClient.convertURLToLinkAsciiDoc(tab.url, tab.title)
+      )
+    }
+  }
+, async commandTabLinkAsBBCode(info, tab) {
+    if (tab?.url) {
+      return plainText(
+        await offscreenClient.convertURLToLinkBBCode(tab.url, tab.title)
+      )
+    }
+  }
+, async commandFrameLinkAsPlainText(info, tab) {
     if (info.frameUrl) {
       if (tab?.id && tab.url) {
         const tabClient = createTabClient<IFrameAPI>({
@@ -106,7 +106,39 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async FRAME_URL_TO_MARKDOWN(info, tab) {
+, async commandFrameLinkAsRichText(info, tab) {
+    if (info.frameUrl) {
+      if (tab?.id && tab.url) {
+        const tabClient = createTabClient<IFrameAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
+        const url = await formatURL(info.frameUrl, tab.url)
+        const title = await tabClient.getDocumentTitle()
+        return richText(await offscreenClient.convertURLToLinkHTML(url, title))
+      } else {
+        return richText(await offscreenClient.convertURLToLinkHTML(info.frameUrl))
+      }
+    }
+  }
+, async commandFrameLinkAsHTML(info, tab) {
+    if (info.frameUrl) {
+      if (tab?.id && tab.url) {
+        const tabClient = createTabClient<IFrameAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
+        const url = await formatURL(info.frameUrl, tab.url)
+        const title = await tabClient.getDocumentTitle()
+        return plainText(await offscreenClient.convertURLToLinkHTML(url, title))
+      } else {
+        return plainText(await offscreenClient.convertURLToLinkHTML(info.frameUrl))
+      }
+    }
+  }
+, async commandFrameLinkAsMarkdown(info, tab) {
     if (info.frameUrl) {
       if (tab?.id && tab.url) {
         const tabClient = createTabClient<IFrameAPI>({
@@ -125,42 +157,7 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async FRAME_URL_TO_HTML(info, tab) {
-    if (info.frameUrl) {
-      if (tab?.id && tab.url) {
-        const tabClient = createTabClient<IFrameAPI>({
-          tabId: tab.id
-        , frameId: info.frameId
-        })
-
-        const url = await formatURL(info.frameUrl, tab.url)
-        const title = await tabClient.getDocumentTitle()
-        return plainText(await offscreenClient.convertURLToLinkHTML(url, title))
-      } else {
-        return plainText(await offscreenClient.convertURLToLinkHTML(info.frameUrl))
-      }
-    }
-  }
-, async FRAME_URL_TO_BBCODE(info, tab) {
-    if (info.frameUrl) {
-      if (tab?.id && tab.url) {
-        const client = createTabClient<IFrameAPI>({
-          tabId: tab.id
-        , frameId: info.frameId
-        })
-
-        const url = await formatURL(
-          info.frameUrl
-        , tab.url
-        )
-        const title = await client.getDocumentTitle()
-        return plainText(await offscreenClient.convertURLToLinkBBCode(url, title))
-      } else {
-        return plainText(await offscreenClient.convertURLToLinkBBCode(info.frameUrl))
-      }
-    }
-  }
-, async FRAME_URL_TO_ORG_MODE(info, tab) {
+, async commandFrameLinkAsOrgMode(info, tab) {
     if (info.frameUrl) {
       if (tab?.id && tab.url) {
         const tabClient = createTabClient<IFrameAPI>({
@@ -179,7 +176,7 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async FRAME_URL_TO_ASCII_DOC(info, tab) {
+, async commandFrameLinkAsAsciiDoc(info, tab) {
     if (info.frameUrl) {
       if (tab?.id && tab.url) {
         const tabClient = createTabClient<IFrameAPI>({
@@ -198,28 +195,76 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async FRAME_URL_TO_RICH_TEXT(info, tab) {
+, async commandFrameLinkAsBBCode(info, tab) {
     if (info.frameUrl) {
       if (tab?.id && tab.url) {
+        const client = createTabClient<IFrameAPI>({
+          tabId: tab.id
+        , frameId: info.frameId
+        })
+
+        const url = await formatURL(
+          info.frameUrl
+        , tab.url
+        )
+        const title = await client.getDocumentTitle()
+        return plainText(await offscreenClient.convertURLToLinkBBCode(url, title))
+      } else {
+        return plainText(await offscreenClient.convertURLToLinkBBCode(info.frameUrl))
+      }
+    }
+  }
+, async commandLinkText(info, tab) {
+    if (info.linkText) {
+      return plainText(info.linkText)
+    }
+  }
+, async commandLinkAsPlainText(info, tab) {
+    if (info.linkText && info.linkUrl) {
+      return plainText(
+        await offscreenClient.convertURLToLinkPlain(
+          info.linkUrl
+        , info.linkText
+        )
+      )
+    }
+  }
+, async commandLinkAsRichText(info, tab) {
+    if (info.linkText && info.linkUrl) {
+      return richText(
+        await offscreenClient.convertURLToLinkHTML(info.linkUrl, info.linkText)
+      )
+    }
+  }
+, async commandLinkAsHTML(info, tab) {
+    if (info.linkUrl) {
+      if (tab && tab.id && tab.url) {
         const tabClient = createTabClient<IFrameAPI>({
           tabId: tab.id
         , frameId: info.frameId
         })
 
-        const url = await formatURL(info.frameUrl, tab.url)
-        const title = await tabClient.getDocumentTitle()
-        return richText(await offscreenClient.convertURLToLinkHTML(url, title))
+        const url = await formatURL(
+          info.linkUrl
+        , info.frameUrl ?? tab.url
+        )
+        const html = await tabClient.getActiveElementContent()
+        const title = await pipeAsync(
+          html
+        , offscreenClient.convertHTMLToSanitizedHTML
+        , offscreenClient.convertHTMLToBeautifyHTML
+        )
+        return plainText(
+          await offscreenClient.convertURLToLinkHTML(url, title)
+        )
       } else {
-        return richText(await offscreenClient.convertURLToLinkHTML(info.frameUrl))
+        return plainText(
+          await offscreenClient.convertURLToLinkHTML(info.linkUrl, info.linkText)
+        )
       }
     }
   }
-, async LINK_TEXT(info, tab) {
-    if (info.linkText) {
-      return plainText(info.linkText)
-    }
-  }
-, async LINK_TO_MARKDOWN(info, tab) {
+, async commandLinkAsMarkdown(info, tab) {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
         const tabClient = createTabClient<IFrameAPI>({
@@ -250,7 +295,7 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async LINK_TO_ORG_MODE(info, tab) {
+, async commandLinkAsOrgMode(info, tab) {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
         const tabClient = createTabClient<IFrameAPI>({
@@ -281,7 +326,7 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async LINK_TO_ASCII_DOC(info, tab) {
+, async commandLinkAsAsciiDoc(info, tab) {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
         const tabClient = createTabClient<IFrameAPI>({
@@ -313,35 +358,7 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async LINK_TO_HTML(info, tab) {
-    if (info.linkUrl) {
-      if (tab && tab.id && tab.url) {
-        const tabClient = createTabClient<IFrameAPI>({
-          tabId: tab.id
-        , frameId: info.frameId
-        })
-
-        const url = await formatURL(
-          info.linkUrl
-        , info.frameUrl ?? tab.url
-        )
-        const html = await tabClient.getActiveElementContent()
-        const title = await pipeAsync(
-          html
-        , offscreenClient.convertHTMLToSanitizedHTML
-        , offscreenClient.convertHTMLToBeautifyHTML
-        )
-        return plainText(
-          await offscreenClient.convertURLToLinkHTML(url, title)
-        )
-      } else {
-        return plainText(
-          await offscreenClient.convertURLToLinkHTML(info.linkUrl, info.linkText)
-        )
-      }
-    }
-  }
-, async LINK_TO_BBCODE(info, tab) {
+, async commandLinkAsBBCode(info, tab) {
     if (info.linkUrl) {
       if (tab && tab.id && tab.url) {
         const tabClient = createTabClient<IFrameAPI>({
@@ -370,164 +387,28 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async IMAGE_TO_MARKDOWN(info, tab) {
-    if (info.mediaType === 'image' && info.srcUrl) {
-      if (tab && tab.url) {
-        const url = await formatURL(
-          info.srcUrl
-        , info.frameUrl ?? tab.url
-        )
-        return plainText(await offscreenClient.convertURLToImageMarkdown(url))
-      } else {
-        return plainText(await offscreenClient.convertURLToImageMarkdown(info.srcUrl))
-      }
+, async commandSelectionAsPlainText(info, tab) {
+    if (tab?.id) {
+      const tabClient = createTabClient<IFrameAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      return plainText(await tabClient.getSelectionText())
     }
   }
-, async IMAGE_TO_MARKDOWN_DATA_URI_JPEG({ mediaType, srcUrl }) {
-    if (mediaType === 'image' && srcUrl) {
-      return plainText(
-        await pipeAsync(
-          srcUrl
-        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.JPEG)
-        , offscreenClient.convertURLToImageMarkdown
-        )
-      )
+, async commandSelectionAsJSON(info, tab) {
+    if (tab?.id) {
+      const tabClient = createTabClient<IFrameAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      const text = await tabClient.getSelectionText()
+      return plainText(await offscreenClient.convertTextToJSONString(text))
     }
   }
-, async IMAGE_TO_MARKDOWN_DATA_URI_PNG({ mediaType, srcUrl }) {
-    if (mediaType === 'image' && srcUrl) {
-      return plainText(
-        await pipeAsync(
-          srcUrl
-        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.PNG)
-        , offscreenClient.convertURLToImageMarkdown
-        )
-      )
-    }
-  }
-, async IMAGE_TO_MARKDOWN_DATA_URI_WEBP({ mediaType, srcUrl }) {
-    if (mediaType === 'image' && srcUrl) {
-      return plainText(
-        await pipeAsync(
-          srcUrl
-        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.WebP)
-        , offscreenClient.convertURLToImageMarkdown
-        )
-      )
-    }
-  }
-, async IMAGE_TO_HTML(info, tab) {
-    if (info.mediaType === 'image' && info.srcUrl) {
-      if (tab && tab.url) {
-        const url = await formatURL(
-          info.srcUrl
-        , info.frameUrl ?? tab.url
-        )
-        return plainText(await offscreenClient.convertURLToImageHTML(url))
-      } else {
-        return plainText(await offscreenClient.convertURLToImageHTML(info.srcUrl))
-      }
-    }
-  }
-, async IMAGE_TO_HTML_DATA_URI_JPEG({ mediaType, srcUrl }) {
-    if (mediaType === 'image' && srcUrl) {
-      return plainText(
-        await pipeAsync(
-          srcUrl
-        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.JPEG)
-        , offscreenClient.convertURLToImageHTML
-        )
-      )
-    }
-  }
-, async IMAGE_TO_HTML_DATA_URI_PNG({ mediaType, srcUrl }) {
-    if (mediaType === 'image' && srcUrl) {
-      return plainText(
-        await pipeAsync(
-          srcUrl
-        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.PNG)
-        , offscreenClient.convertURLToImageHTML
-        )
-      )
-    }
-  }
-, async IMAGE_TO_HTML_DATA_URI_WEBP({ mediaType, srcUrl }) {
-    if (mediaType === 'image' && srcUrl) {
-      return plainText(
-        await pipeAsync(
-          srcUrl
-        , url => offscreenClient.convertURLToImageDataURI(url, ImageFormat.WebP)
-        , offscreenClient.convertURLToImageHTML
-        )
-      )
-    }
-  }
-, async IMAGE_TO_BBCODE(info, tab) {
-    if (info.mediaType === 'image' && info.srcUrl) {
-      if (tab?.url) {
-        const url = await formatURL(
-          info.srcUrl
-        , info.frameUrl ?? tab.url
-        )
-        return plainText(await offscreenClient.convertURLToImageBBCode(url))
-      } else {
-        return plainText(await offscreenClient.convertURLToImageBBCode(info.srcUrl))
-      }
-    }
-  }
-, async IMAGE_TO_DATA_URI_RAW({ mediaType, srcUrl }, tab) {
-    if (mediaType === 'image' && srcUrl) {
-      return plainText(await offscreenClient.convertURLToImageDataURI(srcUrl))
-    }
-  }
-, async IMAGE_TO_DATA_URI_JPEG({ mediaType, srcUrl }) {
-    if (mediaType === 'image' && srcUrl) {
-      return plainText(
-        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.JPEG)
-      )
-    }
-  }
-, async IMAGE_TO_DATA_URI_PNG({ mediaType, srcUrl }) {
-    if (mediaType === 'image' && srcUrl) {
-      return plainText(
-        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.PNG)
-      )
-    }
-  }
-, async IMAGE_TO_DATA_URI_WEBP({ mediaType, srcUrl }) {
-    if (mediaType === 'image' && srcUrl) {
-      return plainText(
-        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.WebP)
-      )
-    }
-  }
-, async AUDIO_TO_HTML(info, tab) {
-    if (info.mediaType === 'audio' && info.srcUrl) {
-      if (tab?.url) {
-        const url = await formatURL(
-          info.srcUrl
-        , info.frameUrl ?? tab.url
-        )
-        return plainText(await offscreenClient.convertURLToAudioHTML(url))
-      } else {
-        return plainText(await offscreenClient.convertURLToAudioHTML(info.srcUrl))
-      }
-    }
-  }
-, async VIDEO_TO_HTML(info, tab) {
-    if (info.mediaType === 'video' && info.srcUrl) {
-      if (tab?.url) {
-        const url = await formatURL(
-          info.srcUrl
-        , info.frameUrl ?? tab.url
-        )
-        return plainText(await offscreenClient.convertURLToVideoHTML(url))
-      } else {
-        return plainText(await offscreenClient.convertURLToVideoHTML(info.srcUrl))
-      }
-    }
-  }
-, async SELECTION_TO_MARKDOWN(info, tab) {
+, async commandSelectionAsMarkdown(info, tab) {
     if (tab?.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -551,7 +432,7 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async SELECTION_TO_HTML(info, tab) {
+, async commandSelectionAsHTML(info, tab) {
     if (tab?.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -572,7 +453,25 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async SELECTION_TO_HTML_CLEAN(info, tab) {
+, async commandSelectionAsHTMLWithoutAttributes(info, tab) {
+    if (tab?.id) {
+      const tabClient = createTabClient<IFrameAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
+
+      const html = await tabClient.getSelectionHTML()
+      return plainText(
+        await pipeAsync(
+          html
+        , offscreenClient.convertHTMLToSanitizedHTML
+        , offscreenClient.convertHTMLToNoAttrHTML
+        , offscreenClient.convertHTMLToBeautifyHTML
+        )
+      )
+    }
+  }
+, async commandSelectionAsCleanHTML(info, tab) {
     if (tab?.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -595,25 +494,7 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async SELECTION_TO_HTML_NO_ATTR(info, tab) {
-    if (tab?.id) {
-      const tabClient = createTabClient<IFrameAPI>({
-        tabId: tab.id
-      , frameId: info.frameId
-      })
-
-      const html = await tabClient.getSelectionHTML()
-      return plainText(
-        await pipeAsync(
-          html
-        , offscreenClient.convertHTMLToSanitizedHTML
-        , offscreenClient.convertHTMLToNoAttrHTML
-        , offscreenClient.convertHTMLToBeautifyHTML
-        )
-      )
-    }
-  }
-, async SELECTION_TO_BBCODE(info, tab) {
+, async commandSelectionAsBBCode(info, tab) {
     if (tab?.id) {
       const client = createTabClient<IFrameAPI>({
         tabId: tab.id
@@ -635,47 +516,95 @@ export const handlers: IHandlers = {
       }
     }
   }
-, async SELECTION_TO_PLAIN(info, tab) {
-    if (tab?.id) {
-      const tabClient = createTabClient<IFrameAPI>({
-        tabId: tab.id
-      , frameId: info.frameId
-      })
-
-      return plainText(await tabClient.getSelectionText())
+, async commandImageAsHTML(info, tab) {
+    if (info.mediaType === 'image' && info.srcUrl) {
+      if (tab && tab.url) {
+        const url = await formatURL(
+          info.srcUrl
+        , info.frameUrl ?? tab.url
+        )
+        return plainText(await offscreenClient.convertURLToImageHTML(url))
+      } else {
+        return plainText(await offscreenClient.convertURLToImageHTML(info.srcUrl))
+      }
     }
   }
-, async SELECTION_TO_PLAIN_TRIMMED(info, tab) {
-    if (tab?.id) {
-      const tabClient = createTabClient<IFrameAPI>({
-        tabId: tab.id
-      , frameId: info.frameId
-      })
-
-      const text = await tabClient.getSelectionText()
-      return plainText(await offscreenClient.convertTextToTrimmedText(text))
+, async commandImageAsMarkdown(info, tab) {
+    if (info.mediaType === 'image' && info.srcUrl) {
+      if (tab && tab.url) {
+        const url = await formatURL(
+          info.srcUrl
+        , info.frameUrl ?? tab.url
+        )
+        return plainText(await offscreenClient.convertURLToImageMarkdown(url))
+      } else {
+        return plainText(await offscreenClient.convertURLToImageMarkdown(info.srcUrl))
+      }
     }
   }
-, async SELECTION_TO_RAW_STRING(info, tab) {
-    if (tab?.id) {
-      const tabClient = createTabClient<IFrameAPI>({
-        tabId: tab.id
-      , frameId: info.frameId
-      })
-
-      const text = await tabClient.getSelectionText()
-      return plainText(await offscreenClient.convertTextToRawString(text))
+, async commandImageAsBBCode(info, tab) {
+    if (info.mediaType === 'image' && info.srcUrl) {
+      if (tab?.url) {
+        const url = await formatURL(
+          info.srcUrl
+        , info.frameUrl ?? tab.url
+        )
+        return plainText(await offscreenClient.convertURLToImageBBCode(url))
+      } else {
+        return plainText(await offscreenClient.convertURLToImageBBCode(info.srcUrl))
+      }
     }
   }
-, async SELECTION_TO_JSON_STRING(info, tab) {
-    if (tab?.id) {
-      const tabClient = createTabClient<IFrameAPI>({
-        tabId: tab.id
-      , frameId: info.frameId
-      })
-
-      const text = await tabClient.getSelectionText()
-      return plainText(await offscreenClient.convertTextToJSONString(text))
+, async commandImageAsDataURL({ mediaType, srcUrl }, tab) {
+    if (mediaType === 'image' && srcUrl) {
+      return plainText(await offscreenClient.convertURLToImageDataURI(srcUrl))
+    }
+  }
+, async commandImageAsDataURLJPEG({ mediaType, srcUrl }) {
+    if (mediaType === 'image' && srcUrl) {
+      return plainText(
+        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.JPEG)
+      )
+    }
+  }
+, async commandImageAsDataURLPNG({ mediaType, srcUrl }) {
+    if (mediaType === 'image' && srcUrl) {
+      return plainText(
+        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.PNG)
+      )
+    }
+  }
+, async commandImageAsDataURLWebP({ mediaType, srcUrl }) {
+    if (mediaType === 'image' && srcUrl) {
+      return plainText(
+        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.WebP)
+      )
+    }
+  }
+, async commandAudioAsHTML(info, tab) {
+    if (info.mediaType === 'audio' && info.srcUrl) {
+      if (tab?.url) {
+        const url = await formatURL(
+          info.srcUrl
+        , info.frameUrl ?? tab.url
+        )
+        return plainText(await offscreenClient.convertURLToAudioHTML(url))
+      } else {
+        return plainText(await offscreenClient.convertURLToAudioHTML(info.srcUrl))
+      }
+    }
+  }
+, async commandVideoAsHTML(info, tab) {
+    if (info.mediaType === 'video' && info.srcUrl) {
+      if (tab?.url) {
+        const url = await formatURL(
+          info.srcUrl
+        , info.frameUrl ?? tab.url
+        )
+        return plainText(await offscreenClient.convertURLToVideoHTML(url))
+      } else {
+        return plainText(await offscreenClient.convertURLToVideoHTML(info.srcUrl))
+      }
     }
   }
 }
