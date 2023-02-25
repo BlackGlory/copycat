@@ -1,10 +1,11 @@
 import URI from 'urijs'
+import { isRelativeURL } from '@utils/is-relative-url.js'
 
 export function convertURLToRootRelativeURL(
   url: string
 , absoluteBaseURL: string
 ): string {
-  if (isRelative(url)) {
+  if (isRelativeURL(url)) {
     return new URI(url, absoluteBaseURL)
       .resource()
   } else {
@@ -17,14 +18,5 @@ export function convertURLToRootRelativeURL(
     } else {
       return url
     }
-  }
-}
-
-function isRelative(url: string): boolean {
-  try {
-    new URL(url)
-    return false
-  } catch {
-    return true
   }
 }

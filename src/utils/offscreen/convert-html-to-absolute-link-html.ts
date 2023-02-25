@@ -1,5 +1,6 @@
 import { convertURLToAbsoluteURL } from '@utils/convert-url-to-absolute-url.js'
 import { createDOMParser } from 'extra-dom'
+import { isRelativeURL } from '@utils/is-relative-url.js'
 
 export function convertHTMLToAbsoluteLinkHTML(html: string, baseUrl: string): string {
   const parser = createDOMParser()
@@ -9,7 +10,7 @@ export function convertHTMLToAbsoluteLinkHTML(html: string, baseUrl: string): st
     .querySelectorAll('[href]')
     .forEach(ele => {
       const url = ele.getAttribute('href')!
-      if (isRelativeUrl(url)) {
+      if (isRelativeURL(url)) {
         ele.setAttribute('href', convertURLToAbsoluteURL(url, baseUrl))
       }
     })
@@ -17,19 +18,10 @@ export function convertHTMLToAbsoluteLinkHTML(html: string, baseUrl: string): st
     .querySelectorAll('[src]')
     .forEach(ele => {
       const url = ele.getAttribute('src')!
-      if (isRelativeUrl(url)) {
+      if (isRelativeURL(url)) {
         ele.setAttribute('src', convertURLToAbsoluteURL(url, baseUrl))
       }
     })
 
   return document.body.innerHTML
-}
-
-function isRelativeUrl(url: string) {
-  try {
-    new URL(url)
-    return false
-  } catch (e) {
-    return true
-  }
 }

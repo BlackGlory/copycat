@@ -1,5 +1,6 @@
 import { convertURLToRelativeURL } from '@utils/convert-url-to-relative-url.js'
 import { createDOMParser } from 'extra-dom'
+import { isAbsoluteURL } from '@utils/is-absolute-url.js'
 
 export function convertHTMLToRelativeLinkHTML(html: string, baseUrl: string): string {
   const parser = createDOMParser()
@@ -23,13 +24,4 @@ export function convertHTMLToRelativeLinkHTML(html: string, baseUrl: string): st
     })
 
   return document.body.innerHTML
-}
-
-function isAbsoluteURL(url: string) {
-  try {
-    new URL(url)
-    return true
-  } catch (e) {
-    return false
-  }
 }
