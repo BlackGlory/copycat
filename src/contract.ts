@@ -128,7 +128,6 @@ export interface IOffscreenAPI {
   convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToRootRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToCleanHTML(html: string, config: IHTMLCleanHTMLConfig): string
-  convertMarkdownToBeautifyMarkdown(markdown: string): string
   convertTextToDecodeEntitiesText(text: string): string
   convertURLToAbsoluteURL(relativeURL: string, baseURL: string): string
   convertURLToImageDataURI(url: string, format?: ImageFormat): string

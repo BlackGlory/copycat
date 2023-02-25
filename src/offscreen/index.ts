@@ -11,7 +11,6 @@ import { convertHTMLToNoAttrHTML } from '@src/utils/offscreen/convert-html-to-no
 import { convertHTMLToPlainText } from '@src/utils/offscreen/convert-html-to-plain-text.js'
 import { convertHTMLToRelativeLinkHTML } from '@src/utils/offscreen/convert-html-to-relative-link-html.js'
 import { convertHTMLToRootRelativeLinkHTML } from '@src/utils/offscreen/convert-html-to-root-relative-link-html.js'
-import { convertMarkdownToBeautifyMarkdown } from '@src/utils/offscreen/convert-markdown-to-beautify-markdown.js'
 import { convertTextToDecodeEntitiesText } from '@src/utils/offscreen/convert-text-to-decode-entities-text.js'
 import { convertURLToAbsoluteURL } from '@src/utils/offscreen/convert-url-to-absolute-url.js'
 import { convertURLToImageDataURI } from '@src/utils/offscreen/convert-url-to-image-data-uri.js'
@@ -30,7 +29,6 @@ createServer<IOffscreenAPI>({
 , convertHTMLToPlainText
 , convertHTMLToRelativeLinkHTML
 , convertHTMLToRootRelativeLinkHTML
-, convertMarkdownToBeautifyMarkdown
 , convertTextToDecodeEntitiesText
 , convertURLToAbsoluteURL
 , convertURLToImageDataURI

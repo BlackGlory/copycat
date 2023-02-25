@@ -20,6 +20,7 @@ import { createOrgModeLink } from '@utils/create-org-mode-link.js'
 import { createPlainTextLink } from '@utils/create-plain-text-link.js'
 import { convertHTMLToBBCode } from '@utils/convert-html-to-bbcode.js'
 import { formatHTML } from '@utils/format-html.js'
+import { formatMarkdown } from '@utils/format-markdown.js'
 
 export interface IInfo {
   pageUrl?: string
@@ -279,7 +280,7 @@ export const handlers: IHandlers = {
         , offscreen.sanitizeHTML
         , formatHTML
         , html => offscreen.convertHTMLToMarkdown(html, config.markdown)
-        , offscreen.convertMarkdownToBeautifyMarkdown
+        , formatMarkdown
         )
 
         return plainText(createMarkdownLink(url, text))
@@ -307,7 +308,7 @@ export const handlers: IHandlers = {
         , offscreen.sanitizeHTML
         , formatHTML
         , html => offscreen.convertHTMLToMarkdown(html, config.markdown)
-        , offscreen.convertMarkdownToBeautifyMarkdown
+        , formatMarkdown
         )
 
         return plainText(createOrgModeLink(url, title))
@@ -335,7 +336,7 @@ export const handlers: IHandlers = {
         , offscreen.sanitizeHTML
         , formatHTML
         , html => offscreen.convertHTMLToMarkdown(html, config.markdown)
-        , offscreen.convertMarkdownToBeautifyMarkdown
+        , formatMarkdown
         )
 
         return plainText(createAsciiDocLink(url, title))
@@ -409,7 +410,7 @@ export const handlers: IHandlers = {
           , html => formatURLsInHTML(html, baseURL)
           , formatHTML
           , html => offscreen.convertHTMLToMarkdown(html, config.markdown)
-          , offscreen.convertMarkdownToBeautifyMarkdown
+          , formatMarkdown
           )
         )
       }

@@ -10,9 +10,9 @@ test('formatHTML', () => {
 
   const result = formatHTML(html)
 
-  expect(result).toBe(dedent`
-    <div>
-        <p>Hello World</p>
-    </div>
-  `)
+  expect(result).toBe(
+    '<div>' + '\n'
+  + '  <p>Hello World</p>' + '\n'
+  + '</div>' + '\n'
+  )
 })
