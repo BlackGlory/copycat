@@ -449,7 +449,7 @@ export const handlers: IHandlers = {
         await pipeAsync(
           html
         , offscreen.sanitizeHTML
-        , offscreen.convertHTMLToNoAttrHTML
+        , offscreen.cleanAllHTMLAttributes
         , formatHTML
         )
       )

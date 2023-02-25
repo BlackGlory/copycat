@@ -4,8 +4,8 @@ import { dedent } from 'extra-tags'
 test('cleanHTML', () => {
   const html = dedent`
     <div>
-      <img src="../hello" />
-      <a href="../hello" target="_blank">Hello World</a>
+      <img src="../src" />
+      <a href="../href" target="_blank">text</a>
     </div>
   `
 
@@ -21,5 +21,5 @@ test('cleanHTML', () => {
     }
   )
 
-  expect(result).toBe('<a href="../hello">Hello World</a>')
+  expect(result).toBe('<a href="../href">text</a>')
 })

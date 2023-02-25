@@ -122,11 +122,11 @@ export interface IOffscreenAPI {
   sanitizeHTML(html: string): string
   convertHTMLToPlainText(html: string): string
   cleanHTML(html: string, config: IHTMLCleanHTMLConfig): string
+  convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
   convertImageURLToDataURL(url: string, format?: ImageFormat): string
+  cleanAllHTMLAttributes(html: string): string
 
   convertHTMLToAbsoluteLinkHTML(html: string, baseURL: string): string
-  convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
-  convertHTMLToNoAttrHTML(html: string): string
   convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToRootRelativeLinkHTML(html: string, baseURL: string): string
 }
