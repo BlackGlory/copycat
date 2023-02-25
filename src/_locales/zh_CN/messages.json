@@ -90,7 +90,7 @@
     "message": "选中内容 → 无属性的HTML"
   }
 , "commandSelectionAsCleanHTML": {
-    "message": "选中内容 → 干净的HTML（由用户自己定义）"
+    "message": "选中内容 → 用户定义的干净HTML"
   }
 , "commandSelectionAsBBCode": {
     "message": "选中内容 → BBCode"

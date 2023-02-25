@@ -90,7 +90,7 @@
     "message": "Selection → HTML without attributes"
   }
 , "commandSelectionAsCleanHTML": {
-    "message": "Selection → Clean HTML (defined by the user)"
+    "message": "Selection → User-defined clean HTML"
   }
 , "commandSelectionAsBBCode": {
     "message": "Selection → BBCode"

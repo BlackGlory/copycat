@@ -45,7 +45,7 @@ Copy content from web powerful than ever before.
   - [x] Markdown
   - [x] HTML
   - [x] HTML without attributes
-  - [x] Clean HTML (defined by the user)
+  - [x] User-defined clean HTML
   - [x] BBCode
 - [x] Copy an image as
   - [x] HTML
