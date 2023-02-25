@@ -1,6 +1,9 @@
 import { ImageFormat } from '@src/contract.js'
 
-export function convertURLToImageDataURI(url: string, format?: ImageFormat): Promise<string> {
+export function convertURLToImageDataURI(
+  url: string
+, format?: ImageFormat
+): Promise<string> {
   if (format) {
     return new Promise<string>((resolve, reject) => {
       const img = new Image()

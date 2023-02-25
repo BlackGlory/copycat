@@ -1,4 +1,4 @@
-import { convertURLToRelativeURL } from './convert-url-to-relative-url.js'
+import { convertURLToRelativeURL } from '@utils/convert-url-to-relative-url.js'
 import { createDOMParser } from 'extra-dom'
 
 export function convertHTMLToRelativeLinkHTML(html: string, baseUrl: string): string {

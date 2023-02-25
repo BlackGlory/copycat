@@ -11,7 +11,7 @@ test('convertHTMLToRelativeLinkHTML', () => {
   )
 
   expect(result).toBe(dedent`
-    <img src="../hello">
-    <a href="../hello">Hello World</a>
+    <img src="hello">
+    <a href="hello">Hello World</a>
   `)
 })

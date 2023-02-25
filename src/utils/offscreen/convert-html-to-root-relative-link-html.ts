@@ -1,4 +1,4 @@
-import { convertURLToRootRelativeURL } from './convert-url-to-root-relative-url.js'
+import { convertURLToRootRelativeURL } from '@utils/convert-url-to-root-relative-url.js'
 import { createDOMParser } from 'extra-dom'
 
 export function convertHTMLToRootRelativeLinkHTML(

@@ -120,18 +120,15 @@ export interface IOffscreenAPI {
   writeTextToClipboard(text: string): null
   writeHTMLToClipboard(html: string): null
   sanitizeHTML(html: string): string
+  convertHTMLToPlainText(html: string): string
 
   convertHTMLToAbsoluteLinkHTML(html: string, baseURL: string): string
   convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
   convertHTMLToNoAttrHTML(html: string): string
-  convertHTMLToPlainText(html: string): string
   convertHTMLToRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToRootRelativeLinkHTML(html: string, baseURL: string): string
   convertHTMLToCleanHTML(html: string, config: IHTMLCleanHTMLConfig): string
-  convertURLToAbsoluteURL(relativeURL: string, baseURL: string): string
   convertURLToImageDataURI(url: string, format?: ImageFormat): string
-  convertURLToRelativeURL(absoluteURL: string, baseURL: string): string
-  convertURLToRootRelativeURL(url: string, baseURL: string): string
 }
 
 export enum URLFormat {

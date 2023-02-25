@@ -1,4 +1,4 @@
-import { convertURLToAbsoluteURL } from './convert-url-to-absolute-url.js'
+import { convertURLToAbsoluteURL } from '@utils/convert-url-to-absolute-url.js'
 import { createDOMParser } from 'extra-dom'
 
 export function convertHTMLToAbsoluteLinkHTML(html: string, baseUrl: string): string {
