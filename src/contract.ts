@@ -130,7 +130,6 @@ export interface IOffscreenAPI {
   convertHTMLToCleanHTML(html: string, config: IHTMLCleanHTMLConfig): string
   convertMarkdownToBeautifyMarkdown(markdown: string): string
   convertTextToDecodeEntitiesText(text: string): string
-  convertTextToTrimmedText(text: string): string
   convertURLToAbsoluteURL(relativeURL: string, baseURL: string): string
   convertURLToImageDataURI(url: string, format?: ImageFormat): string
   convertURLToRelativeURL(absoluteURL: string, baseURL: string): string
