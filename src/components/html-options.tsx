@@ -24,8 +24,8 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
             className='w-full'
             onClick={() => setConfig(config => {
               config.html.cleanHTML.allowlist.push({
-                elements: '*'
-              , attributes: '*'
+                elements: ''
+              , attributes: ''
               })
             })}
           >
