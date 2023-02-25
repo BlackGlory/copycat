@@ -132,24 +132,11 @@ export interface IOffscreenAPI {
   convertHTMLToSanitizedHTML(html: string): string
   convertMarkdownToBeautifyMarkdown(markdown: string): string
   convertTextToDecodeEntitiesText(text: string): string
-  convertTextToRawString(text: string): string
-  convertTextToJSONString(text: string): string
   convertTextToTrimmedText(text: string): string
   convertURLToAbsoluteURL(relativeURL: string, baseURL: string): string
-  convertURLToAudioHTML(url: string): string
-  convertURLToImageBBCode(url: string): string
   convertURLToImageDataURI(url: string, format?: ImageFormat): string
-  convertURLToImageHTML(url: string): string
-  convertURLToImageMarkdown(url: string): string
-  convertURLToLinkBBCode(url: string, text?: string): string
-  convertURLToLinkHTML(url: string, text?: string): string
-  convertURLToLinkMarkdown(url: string, text?: string): string
-  convertURLToLinkPlain(url: string, text?: string): string
-  convertURLToLinkOrgMode(url: string, text?: string): string 
-  convertURLToLinkAsciiDoc(url: string, text?: string): string
   convertURLToRelativeURL(absoluteURL: string, baseURL: string): string
   convertURLToRootRelativeURL(url: string, baseURL: string): string
-  convertURLToVideoHTML(url: string): string
 }
 
 export enum URLFormat {

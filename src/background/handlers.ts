@@ -7,6 +7,17 @@ import { offscreenClient } from './offscreen-client.js'
 import { formatURLsInHTML } from './format-links-in-html.js'
 import { formatURL } from './format-url.js'
 import { getConfig } from './storage.js'
+import { createAsciiDocLink } from '@utils/create-ascii-doc-link.js'
+import { createBBCodeImage } from '@utils/create-bbcode-image.js'
+import { createBBCodeLink } from '@utils/create-bbcode-link.js'
+import { createHTMLAudio } from '@utils/create-html-audio.js'
+import { createHTMLImage } from '@utils/create-html-image.js'
+import { createHTMLLink } from '@utils/create-html-link.js'
+import { createHTMLVideo } from '@utils/create-html-video.js'
+import { createMarkdownImage } from '@utils/create-markdown-image.js'
+import { createMarkdownLink } from '@utils/create-markdown-link.js'
+import { createOrgModeLink } from '@utils/create-org-mode-link.js'
+import { createPlainTextLink } from '@utils/create-plain-text-link.js'
 
 export interface IInfo {
   pageUrl?: string
@@ -38,53 +49,39 @@ interface IHandlers {
 }
 
 export const handlers: IHandlers = {
-  async commandTabLinkAsPlainText(info, tab) {
+  commandTabLinkAsPlainText(info, tab) {
     if (tab?.url) {
-      return plainText(
-        await offscreenClient.convertURLToLinkPlain(tab.url, tab.title)
-      )
+      return plainText(createPlainTextLink(tab.url, tab.title))
     }
   }
-, async commandTabLinkAsRichText(info, tab) {
+, commandTabLinkAsRichText(info, tab) {
     if (tab?.url) {
-      return richText(
-        await offscreenClient.convertURLToLinkHTML(tab.url, tab.title)
-      )
+      return richText(createHTMLLink(tab.url, tab.title))
     }
   }
-, async commandTabLinkAsHTML(info, tab) {
+, commandTabLinkAsHTML(info, tab) {
     if (tab?.url) {
-      return plainText(
-        await offscreenClient.convertURLToLinkHTML(tab.url, tab.title)
-      )
+      return plainText(createHTMLLink(tab.url, tab.title))
     }
   }
-, async commandTabLinkAsMarkdown(info, tab) {
+, commandTabLinkAsMarkdown(info, tab) {
     if (tab?.url) {
-      return plainText(
-        await offscreenClient.convertURLToLinkMarkdown(tab.url, tab.title)
-      )
+      return plainText(createMarkdownLink(tab.url, tab.title))
     }
   }
-, async commandTabLinkAsOrgMode(info, tab) {
+, commandTabLinkAsOrgMode(info, tab) {
     if (tab?.url) {
-      return plainText(
-        await offscreenClient.convertURLToLinkOrgMode(tab.url, tab.title)
-      )
+      return plainText(createOrgModeLink(tab.url, tab.title))
     }
   }
-, async commandTabLinkAsAsciiDoc(info, tab) {
+, commandTabLinkAsAsciiDoc(info, tab) {
     if (tab?.url) {
-      return plainText(
-        await offscreenClient.convertURLToLinkAsciiDoc(tab.url, tab.title)
-      )
+      return plainText(createAsciiDocLink(tab.url, tab.title))
     }
   }
-, async commandTabLinkAsBBCode(info, tab) {
+, commandTabLinkAsBBCode(info, tab) {
     if (tab?.url) {
-      return plainText(
-        await offscreenClient.convertURLToLinkBBCode(tab.url, tab.title)
-      )
+      return plainText(createBBCodeLink(tab.url, tab.title))
     }
   }
 , async commandFrameLinkAsPlainText(info, tab) {
@@ -100,9 +97,10 @@ export const handlers: IHandlers = {
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return plainText(await offscreenClient.convertURLToLinkPlain(url, title))
+
+        return plainText(createPlainTextLink(url, title))
       } else {
-        return plainText(await offscreenClient.convertURLToLinkPlain(info.frameUrl))
+        return plainText(createPlainTextLink(info.frameUrl))
       }
     }
   }
@@ -116,9 +114,10 @@ export const handlers: IHandlers = {
 
         const url = await formatURL(info.frameUrl, tab.url)
         const title = await tabClient.getDocumentTitle()
-        return richText(await offscreenClient.convertURLToLinkHTML(url, title))
+
+        return richText(createHTMLLink(url, title))
       } else {
-        return richText(await offscreenClient.convertURLToLinkHTML(info.frameUrl))
+        return richText(createHTMLLink(info.frameUrl))
       }
     }
   }
@@ -132,9 +131,10 @@ export const handlers: IHandlers = {
 
         const url = await formatURL(info.frameUrl, tab.url)
         const title = await tabClient.getDocumentTitle()
-        return plainText(await offscreenClient.convertURLToLinkHTML(url, title))
+
+        return plainText(createHTMLLink(url, title))
       } else {
-        return plainText(await offscreenClient.convertURLToLinkHTML(info.frameUrl))
+        return plainText(createHTMLLink(info.frameUrl))
       }
     }
   }
@@ -151,9 +151,10 @@ export const handlers: IHandlers = {
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return plainText(await offscreenClient.convertURLToLinkMarkdown(url, title))
+
+        return plainText(createMarkdownLink(url, title))
       } else {
-        return plainText(await offscreenClient.convertURLToLinkMarkdown(info.frameUrl))
+        return plainText(createMarkdownLink(info.frameUrl))
       }
     }
   }
@@ -170,9 +171,10 @@ export const handlers: IHandlers = {
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return plainText(await offscreenClient.convertURLToLinkOrgMode(url, title))
+
+        return plainText(createOrgModeLink(url, title))
       } else {
-        return plainText(await offscreenClient.convertURLToLinkOrgMode(info.frameUrl))
+        return plainText(createOrgModeLink(info.frameUrl))
       }
     }
   }
@@ -189,9 +191,10 @@ export const handlers: IHandlers = {
         , tab.url
         )
         const title = await tabClient.getDocumentTitle()
-        return plainText(await offscreenClient.convertURLToLinkAsciiDoc(url, title))
+
+        return plainText(createAsciiDocLink(url, title))
       } else {
-        return plainText(await offscreenClient.convertURLToLinkAsciiDoc(info.frameUrl))
+        return plainText(createAsciiDocLink(info.frameUrl))
       }
     }
   }
@@ -208,32 +211,26 @@ export const handlers: IHandlers = {
         , tab.url
         )
         const title = await client.getDocumentTitle()
-        return plainText(await offscreenClient.convertURLToLinkBBCode(url, title))
+
+        return plainText(createBBCodeLink(url, title))
       } else {
-        return plainText(await offscreenClient.convertURLToLinkBBCode(info.frameUrl))
+        return plainText(createBBCodeLink(info.frameUrl))
       }
     }
   }
-, async commandLinkText(info, tab) {
+, commandLinkText(info, tab) {
     if (info.linkText) {
       return plainText(info.linkText)
     }
   }
-, async commandLinkAsPlainText(info, tab) {
+, commandLinkAsPlainText(info, tab) {
     if (info.linkText && info.linkUrl) {
-      return plainText(
-        await offscreenClient.convertURLToLinkPlain(
-          info.linkUrl
-        , info.linkText
-        )
-      )
+      return plainText(createPlainTextLink(info.linkUrl, info.linkText))
     }
   }
 , async commandLinkAsRichText(info, tab) {
     if (info.linkText && info.linkUrl) {
-      return richText(
-        await offscreenClient.convertURLToLinkHTML(info.linkUrl, info.linkText)
-      )
+      return richText(createHTMLLink(info.linkUrl, info.linkText))
     }
   }
 , async commandLinkAsHTML(info, tab) {
@@ -254,13 +251,10 @@ export const handlers: IHandlers = {
         , offscreenClient.convertHTMLToSanitizedHTML
         , offscreenClient.convertHTMLToBeautifyHTML
         )
-        return plainText(
-          await offscreenClient.convertURLToLinkHTML(url, title)
-        )
+
+        return plainText(createHTMLLink(url, title))
       } else {
-        return plainText(
-          await offscreenClient.convertURLToLinkHTML(info.linkUrl, info.linkText)
-        )
+        return plainText(createHTMLLink(info.linkUrl, info.linkText))
       }
     }
   }
@@ -285,13 +279,10 @@ export const handlers: IHandlers = {
         , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
-        return plainText(
-          await offscreenClient.convertURLToLinkMarkdown(url, text)
-        )
+
+        return plainText(createMarkdownLink(url, text))
       } else {
-        return plainText(
-          await offscreenClient.convertURLToLinkMarkdown(info.linkUrl, info.linkText)
-        )
+        return plainText(createMarkdownLink(info.linkUrl, info.linkText))
       }
     }
   }
@@ -316,13 +307,10 @@ export const handlers: IHandlers = {
         , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
-        return plainText(
-          await offscreenClient.convertURLToLinkOrgMode(url, title)
-        )
+
+        return plainText(createOrgModeLink(url, title))
       } else {
-        return plainText(
-          await offscreenClient.convertURLToLinkOrgMode(info.linkUrl, info.linkText)
-        )
+        return plainText(createOrgModeLink(info.linkUrl, info.linkText))
       }
     }
   }
@@ -347,14 +335,10 @@ export const handlers: IHandlers = {
         , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
         , offscreenClient.convertMarkdownToBeautifyMarkdown
         )
-        return plainText(await offscreenClient.convertURLToLinkAsciiDoc(url, title))
+
+        return plainText(createAsciiDocLink(url, title))
       } else {
-        return plainText(
-          await offscreenClient.convertURLToLinkAsciiDoc(
-            info.linkUrl
-          , info.linkText
-          )
-        )
+        return plainText(createAsciiDocLink(info.linkUrl, info.linkText))
       }
     }
   }
@@ -377,13 +361,10 @@ export const handlers: IHandlers = {
         , offscreenClient.convertHTMLToBeautifyHTML
         , offscreenClient.convertHTMLToBBCode
         )
-        return plainText(
-          await offscreenClient.convertURLToLinkBBCode(url, title)
-        )
+
+        return plainText(createBBCodeLink(url, title))
       } else {
-        return plainText(
-          await offscreenClient.convertURLToLinkBBCode(info.linkUrl, info.linkText)
-        )
+        return plainText(createBBCodeLink(info.linkUrl, info.linkText))
       }
     }
   }
@@ -405,7 +386,7 @@ export const handlers: IHandlers = {
       })
 
       const text = await tabClient.getSelectionText()
-      return plainText(await offscreenClient.convertTextToJSONString(text))
+      return plainText(JSON.stringify((text)))
     }
   }
 , async commandSelectionAsMarkdown(info, tab) {
@@ -523,9 +504,10 @@ export const handlers: IHandlers = {
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return plainText(await offscreenClient.convertURLToImageHTML(url))
+
+        return plainText(createHTMLImage(url))
       } else {
-        return plainText(await offscreenClient.convertURLToImageHTML(info.srcUrl))
+        return plainText(createHTMLImage(info.srcUrl))
       }
     }
   }
@@ -536,9 +518,10 @@ export const handlers: IHandlers = {
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return plainText(await offscreenClient.convertURLToImageMarkdown(url))
+
+        return plainText(createMarkdownImage(url))
       } else {
-        return plainText(await offscreenClient.convertURLToImageMarkdown(info.srcUrl))
+        return plainText(createMarkdownImage(info.srcUrl))
       }
     }
   }
@@ -549,9 +532,10 @@ export const handlers: IHandlers = {
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return plainText(await offscreenClient.convertURLToImageBBCode(url))
+
+        return plainText(createBBCodeImage(url))
       } else {
-        return plainText(await offscreenClient.convertURLToImageBBCode(info.srcUrl))
+        return plainText(createBBCodeImage(info.srcUrl))
       }
     }
   }
@@ -588,9 +572,10 @@ export const handlers: IHandlers = {
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return plainText(await offscreenClient.convertURLToAudioHTML(url))
+
+        return plainText(createHTMLAudio(url))
       } else {
-        return plainText(await offscreenClient.convertURLToAudioHTML(info.srcUrl))
+        return plainText(createHTMLAudio(info.srcUrl))
       }
     }
   }
@@ -601,9 +586,9 @@ export const handlers: IHandlers = {
           info.srcUrl
         , info.frameUrl ?? tab.url
         )
-        return plainText(await offscreenClient.convertURLToVideoHTML(url))
+        return plainText(createHTMLVideo(url))
       } else {
-        return plainText(await offscreenClient.convertURLToVideoHTML(info.srcUrl))
+        return plainText(createHTMLVideo(info.srcUrl))
       }
     }
   }
