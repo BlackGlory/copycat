@@ -103,13 +103,13 @@ async function initMenu(): Promise<void> {
   , {
       context: MenuContext.Image
     , items: [
-        { id: 'commandImageAsMarkdown', visible: true }
+        { id: 'commandImageAsHTML', visible: true }
+      , { id: 'commandImageAsMarkdown', visible: true }
       , { id: 'commandImageAsBBCode', visible: true }
       , { id: 'commandImageAsDataURL', visible: true }
       , { id: 'commandImageAsDataURLJPEG', visible: true }
       , { id: 'commandImageAsDataURLPNG', visible: true }
       , { id: 'commandImageAsDataURLWebP', visible: true }
-      , { id: 'commandImageAsHTML', visible: true }
       ]
     }
   , {

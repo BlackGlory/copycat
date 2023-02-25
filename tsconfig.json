@@ -15,7 +15,7 @@
   , "paths": {
       "@src/*": ["src/*"]
     , "@components/*": ["src/components/*"]
-    , "@offscreen/*": ["src/utils/offscreen/*"]
+    , "@background/*": ["src/background/*"]
     , "@hooks/*": ["src/hooks/*"]
     , "@utils/*": ["src/utils/*"]
     , "@test/*": ["__tests__/*"]

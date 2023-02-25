@@ -1,10 +1,9 @@
 import browser from 'webextension-polyfill'
 import { go } from '@blackglory/prelude'
-import { ResultType, handlers, Result } from './handlers.js'
+import { commandHandlers, handleCommandResult } from './handlers/index.js'
 import { initStorage, getMenu, getConfig, setConfig, setMenu } from './storage.js'
 import { migrate } from './migrate.js'
 import { each } from 'extra-promise'
-import { offscreen } from './offscreen-client.js'
 import { getActiveTab } from 'extra-webextension'
 import { IBackgroundAPI } from '@src/contract.js'
 import { createServer } from '@delight-rpc/webextension'
@@ -30,17 +29,17 @@ browser.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
 })
 
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
-  const result = await handlers[info.menuItemId](info, tab)
+  const result = await commandHandlers[info.menuItemId](info, tab)
   if (result) {
-    await handleResult(result)
+    await handleCommandResult(result)
   }
 })
 
 browser.commands.onCommand.addListener(async command => {
   const tab = await getActiveTab()
-  const result = await handlers[command]({}, tab)
+  const result = await commandHandlers[command]({}, tab)
   if (result) {
-    handleResult(result)
+    await handleCommandResult(result)
   }
 })
 
@@ -90,16 +89,4 @@ async function injectContentScripts(): Promise<void> {
       }
     }
   })
-}
-
-async function handleResult(result: Result): Promise<void> {
-  switch (result.type) {
-    case ResultType.PlainText: {
-      await offscreen.writeTextToClipboard(result.content)
-      break
-    }
-    case ResultType.RichText: {
-      await offscreen.writeHTMLToClipboard(result.content)
-    }
-  }
 }
