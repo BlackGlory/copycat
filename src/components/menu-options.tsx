@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { IBackgroundAPI } from '@src/contract.js'
 import { Checkbox } from '@components/checkbox.jsx'
 import { createBackgroundClient } from '@delight-rpc/webextension'
-import { convertMenuContextToBrowserContextType } from '@utils/menu-context.js'
+import { getI18nOfMenuContext } from '@utils/menu-context.js'
 import { i18n } from '@utils/i18n.js'
 import { UpButton } from './up-button.jsx'
 import { DownButton } from './down-button.jsx'
@@ -21,7 +21,7 @@ export function MenuOptions() {
           menu.map(({ context, items }, menuIndex) => (
             <li key={context} className='border-b last:border-b-0'>
               <h3 className='text-base px-4 my-2'>
-                {convertMenuContextToBrowserContextType(context)}
+                {getI18nOfMenuContext(context)}
               </h3>
 
               <ul className='my-2'>
@@ -70,7 +70,7 @@ export function MenuOptions() {
                 ))}
               </ul>
             </li>
-            ))
+          ))
         }
       </ul>
     </div>

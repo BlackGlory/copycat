@@ -194,4 +194,25 @@
 , "headingMenu": {
     "message": "Menu"
   }
+, "menuContextPage": {
+    "message": "Tab"
+  }
+, "menuContextFrame": {
+    "message": "Frame"
+  }
+, "menuContextLink": {
+    "message": "Link"
+  }
+, "menuContextSelection": {
+    "message": "Selection"
+  }
+, "menuContextImage": {
+    "message": "Image"
+  }
+, "menuContextVideo": {
+    "message": "Video"
+  }
+, "menuContextAudio": {
+    "message": "Audio"
+  }
 }

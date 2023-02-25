@@ -194,4 +194,25 @@
 , "headingMenu": {
     "message": "菜单"
   }
+, "menuContextPage": {
+    "message": "标签页"
+  }
+, "menuContextFrame": {
+    "message": "框架"
+  }
+, "menuContextLink": {
+    "message": "链接"
+  }
+, "menuContextSelection": {
+    "message": "选中内容"
+  }
+, "menuContextImage": {
+    "message": "图像"
+  }
+, "menuContextVideo": {
+    "message": "视频"
+  }
+, "menuContextAudio": {
+    "message": "音频"
+  }
 }
