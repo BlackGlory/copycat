@@ -1,5 +1,5 @@
 import { URLFormat } from '@src/contract.js'
-import { offscreenClient } from './offscreen-client.js'
+import { offscreen } from './offscreen-client.js'
 import { getConfig } from './storage.js'
 
 export async function formatURLsInHTML(
@@ -10,11 +10,11 @@ export async function formatURLsInHTML(
 
   switch (config.url.format) {
     case URLFormat.Absolute:
-      return await offscreenClient.convertHTMLToAbsoluteLinkHTML(html, baseUrl)
+      return await offscreen.convertHTMLToAbsoluteLinkHTML(html, baseUrl)
     case URLFormat.Relative:
-      return await offscreenClient.convertHTMLToRelativeLinkHTML(html, baseUrl)
+      return await offscreen.convertHTMLToRelativeLinkHTML(html, baseUrl)
     case URLFormat.RootRelative:
-      return await offscreenClient.convertHTMLToRootRelativeLinkHTML(html, baseUrl)
+      return await offscreen.convertHTMLToRootRelativeLinkHTML(html, baseUrl)
     case URLFormat.Original:
       return html
   }

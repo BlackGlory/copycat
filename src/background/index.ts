@@ -4,7 +4,7 @@ import { ResultType, handlers, Result } from './handlers.js'
 import { initStorage, getMenu, getConfig, setConfig, setMenu } from './storage.js'
 import { migrate } from './migrate.js'
 import { each } from 'extra-promise'
-import { offscreenClient } from './offscreen-client.js'
+import { offscreen } from './offscreen-client.js'
 import { getActiveTab } from 'extra-webextension'
 import { IBackgroundAPI } from '@src/contract.js'
 import { createServer } from '@delight-rpc/webextension'
@@ -95,11 +95,11 @@ async function injectContentScripts(): Promise<void> {
 async function handleResult(result: Result): Promise<void> {
   switch (result.type) {
     case ResultType.PlainText: {
-      await offscreenClient.writeTextToClipboard(result.content)
+      await offscreen.writeTextToClipboard(result.content)
       break
     }
     case ResultType.RichText: {
-      await offscreenClient.writeHTMLToClipboard(result.content)
+      await offscreen.writeHTMLToClipboard(result.content)
     }
   }
 }

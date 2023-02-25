@@ -3,7 +3,7 @@ import { createTabClient } from '@delight-rpc/webextension'
 import { IFrameAPI, ImageFormat } from '@src/contract.js'
 import { Awaitable } from '@blackglory/prelude'
 import { pipeAsync } from 'extra-utils'
-import { offscreenClient } from './offscreen-client.js'
+import { offscreen } from './offscreen-client.js'
 import { formatURLsInHTML } from './format-links-in-html.js'
 import { formatURL } from './format-url.js'
 import { getConfig } from './storage.js'
@@ -250,7 +250,7 @@ export const handlers: IHandlers = {
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.sanitizeHTML
+        , offscreen.sanitizeHTML
         , formatHTML
         )
 
@@ -276,10 +276,10 @@ export const handlers: IHandlers = {
         const html = await tabClient.getActiveElementContent()
         const text = await pipeAsync(
           html
-        , offscreenClient.sanitizeHTML
+        , offscreen.sanitizeHTML
         , formatHTML
-        , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
-        , offscreenClient.convertMarkdownToBeautifyMarkdown
+        , html => offscreen.convertHTMLToMarkdown(html, config.markdown)
+        , offscreen.convertMarkdownToBeautifyMarkdown
         )
 
         return plainText(createMarkdownLink(url, text))
@@ -304,10 +304,10 @@ export const handlers: IHandlers = {
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.sanitizeHTML
+        , offscreen.sanitizeHTML
         , formatHTML
-        , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
-        , offscreenClient.convertMarkdownToBeautifyMarkdown
+        , html => offscreen.convertHTMLToMarkdown(html, config.markdown)
+        , offscreen.convertMarkdownToBeautifyMarkdown
         )
 
         return plainText(createOrgModeLink(url, title))
@@ -332,10 +332,10 @@ export const handlers: IHandlers = {
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.sanitizeHTML
+        , offscreen.sanitizeHTML
         , formatHTML
-        , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
-        , offscreenClient.convertMarkdownToBeautifyMarkdown
+        , html => offscreen.convertHTMLToMarkdown(html, config.markdown)
+        , offscreen.convertMarkdownToBeautifyMarkdown
         )
 
         return plainText(createAsciiDocLink(url, title))
@@ -359,7 +359,7 @@ export const handlers: IHandlers = {
         const html = await tabClient.getActiveElementContent()
         const title = await pipeAsync(
           html
-        , offscreenClient.sanitizeHTML
+        , offscreen.sanitizeHTML
         , formatHTML
         , convertHTMLToBBCode
         )
@@ -405,11 +405,11 @@ export const handlers: IHandlers = {
         return plainText(
           await pipeAsync(
             html
-          , offscreenClient.sanitizeHTML
+          , offscreen.sanitizeHTML
           , html => formatURLsInHTML(html, baseURL)
           , formatHTML
-          , html => offscreenClient.convertHTMLToMarkdown(html, config.markdown)
-          , offscreenClient.convertMarkdownToBeautifyMarkdown
+          , html => offscreen.convertHTMLToMarkdown(html, config.markdown)
+          , offscreen.convertMarkdownToBeautifyMarkdown
           )
         )
       }
@@ -428,7 +428,7 @@ export const handlers: IHandlers = {
         return plainText(
           await pipeAsync(
             html
-          , offscreenClient.sanitizeHTML
+          , offscreen.sanitizeHTML
           , html => formatURLsInHTML(html, baseURL)
           , formatHTML
           )
@@ -447,8 +447,8 @@ export const handlers: IHandlers = {
       return plainText(
         await pipeAsync(
           html
-        , offscreenClient.sanitizeHTML
-        , offscreenClient.convertHTMLToNoAttrHTML
+        , offscreen.sanitizeHTML
+        , offscreen.convertHTMLToNoAttrHTML
         , formatHTML
         )
       )
@@ -468,9 +468,9 @@ export const handlers: IHandlers = {
         return plainText(
           await pipeAsync(
             html
-          , offscreenClient.sanitizeHTML
+          , offscreen.sanitizeHTML
           , html => formatURLsInHTML(html, baseURL)
-          , html => offscreenClient.convertHTMLToCleanHTML(html, config.html.cleanHTML)
+          , html => offscreen.convertHTMLToCleanHTML(html, config.html.cleanHTML)
           , formatHTML
           )
         )
@@ -490,7 +490,7 @@ export const handlers: IHandlers = {
         return plainText(
           await pipeAsync(
             html
-          , offscreenClient.sanitizeHTML
+          , offscreen.sanitizeHTML
           , html => formatURLsInHTML(html, baseURL)
           , formatHTML
           , convertHTMLToBBCode
@@ -543,27 +543,27 @@ export const handlers: IHandlers = {
   }
 , async commandImageAsDataURL({ mediaType, srcUrl }, tab) {
     if (mediaType === 'image' && srcUrl) {
-      return plainText(await offscreenClient.convertURLToImageDataURI(srcUrl))
+      return plainText(await offscreen.convertURLToImageDataURI(srcUrl))
     }
   }
 , async commandImageAsDataURLJPEG({ mediaType, srcUrl }) {
     if (mediaType === 'image' && srcUrl) {
       return plainText(
-        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.JPEG)
+        await offscreen.convertURLToImageDataURI(srcUrl, ImageFormat.JPEG)
       )
     }
   }
 , async commandImageAsDataURLPNG({ mediaType, srcUrl }) {
     if (mediaType === 'image' && srcUrl) {
       return plainText(
-        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.PNG)
+        await offscreen.convertURLToImageDataURI(srcUrl, ImageFormat.PNG)
       )
     }
   }
 , async commandImageAsDataURLWebP({ mediaType, srcUrl }) {
     if (mediaType === 'image' && srcUrl) {
       return plainText(
-        await offscreenClient.convertURLToImageDataURI(srcUrl, ImageFormat.WebP)
+        await offscreen.convertURLToImageDataURI(srcUrl, ImageFormat.WebP)
       )
     }
   }

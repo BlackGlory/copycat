@@ -1,6 +1,6 @@
 import { URLFormat, URLEncoding } from '@src/contract.js'
 import { getConfig } from './storage.js'
-import { offscreenClient } from './offscreen-client.js'
+import { offscreen } from './offscreen-client.js'
 import { encode, decode } from 'url-operator'
 
 export async function formatURL(url: string, baseURL: string): Promise<string> {
@@ -8,15 +8,15 @@ export async function formatURL(url: string, baseURL: string): Promise<string> {
 
   switch (config.url.format) {
     case URLFormat.Absolute: {
-      url = await offscreenClient.convertURLToAbsoluteURL(url, baseURL)
+      url = await offscreen.convertURLToAbsoluteURL(url, baseURL)
       break
     }
     case URLFormat.Relative: {
-      url = await offscreenClient.convertURLToRelativeURL(url, baseURL)
+      url = await offscreen.convertURLToRelativeURL(url, baseURL)
       break
     }
     case URLFormat.RootRelative: {
-      url = await offscreenClient.convertURLToRootRelativeURL(url, baseURL)
+      url = await offscreen.convertURLToRootRelativeURL(url, baseURL)
       break
     }
     case URLFormat.Original: {
