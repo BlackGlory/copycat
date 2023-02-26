@@ -41,7 +41,10 @@ async function initConfig(): Promise<void> {
     }
   , html: {
       cleanHTML: {
-        allowlist: []
+        allowlist: [
+          { elements: 'a', attributes: 'href' }
+        , { elements: 'img', attributes: 'src' }
+        ]
       }
     }
   }
