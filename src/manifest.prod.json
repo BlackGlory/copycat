@@ -38,6 +38,9 @@
   , "commandSelectionAsPlainText": {
       "description": "__MSG_commandSelectionAsPlainText__"
     }
+  , "commandSelectionAsConcatenatedPlainText": {
+      "description": "__MSG_commandSelectionAsConcatenatedPlainText__"
+    }
   , "commandSelectionAsJSON": {
       "description": "__MSG_commandSelectionAsJSON__"
     }
