@@ -14,8 +14,8 @@ export enum MenuContext {
 , Link = 'link'
 , Selection = 'selection'
 , Image = 'image'
-, Video = 'video'
 , Audio = 'audio'
+, Video = 'video'
 }
 
 export type IMenuStore = Array<{

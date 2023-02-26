@@ -11,8 +11,8 @@ export function convertMenuContextToBrowserContextType(
     case MenuContext.Link: return 'link'
     case MenuContext.Selection: return 'selection'
     case MenuContext.Image: return 'image'
-    case MenuContext.Video: return 'video'
     case MenuContext.Audio: return 'audio'
+    case MenuContext.Video: return 'video'
   }
 }
 
@@ -23,7 +23,7 @@ export function getI18nOfMenuContext(menuContext: MenuContext): string {
     case MenuContext.Link: return i18n('menuContextLink')
     case MenuContext.Selection: return i18n('menuContextSelection')
     case MenuContext.Image: return i18n('menuContextImage')
-    case MenuContext.Video: return i18n('menuContextVideo')
     case MenuContext.Audio: return i18n('menuContextAudio')
+    case MenuContext.Video: return i18n('menuContextVideo')
   }
 }

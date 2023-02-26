@@ -110,13 +110,13 @@ async function initMenu(): Promise<void> {
       ]
     }
   , {
-      context: MenuContext.Video
+      context: MenuContext.Audio
     , items: [
         { id: 'commandAudioAsHTML', visible: true }
       ]
     }
   , {
-      context: MenuContext.Audio
+      context: MenuContext.Video
     , items: [
         { id: 'commandVideoAsHTML', visible: true }
       ]
