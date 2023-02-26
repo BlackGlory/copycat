@@ -8,9 +8,6 @@ import { commandFrameLinkAsOrgMode } from './frame-link-as-org-mode.js'
 import { commandFrameLinkAsPlainText } from './frame-link-as-plain-text.js'
 import { commandFrameLinkAsRichText } from './frame-link-as-rich-text.js'
 import { commandImageAsBBCode } from './image-as-bbcode.js'
-import { commandImageAsDataURLJPEG } from './image-as-data-url-jpeg.js'
-import { commandImageAsDataURLPNG } from './image-as-data-url-png.js'
-import { commandImageAsDataURLWebP } from './image-as-data-url-webp.js'
 import { commandImageAsDataURL } from './image-as-data-url.js'
 import { commandImageAsHTML } from './image-as-html.js'
 import { commandImageAsMarkdown } from './image-as-markdown.js'
@@ -81,9 +78,6 @@ export const commandHandlers: ICommandHandlers = {
 , commandImageAsMarkdown
 , commandImageAsBBCode
 , commandImageAsDataURL
-, commandImageAsDataURLJPEG
-, commandImageAsDataURLPNG
-, commandImageAsDataURLWebP
 
 , commandAudioAsHTML
 

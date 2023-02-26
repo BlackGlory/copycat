@@ -107,15 +107,6 @@
 , "commandImageAsDataURL": {
     "message": "Image → Data URL"
   }
-, "commandImageAsDataURLJPEG": {
-    "message": "Image → Data URL (JPEG)"
-  }
-, "commandImageAsDataURLPNG": {
-    "message": "Image → Data URL (PNG)"
-  }
-, "commandImageAsDataURLWebP": {
-    "message": "Image → Data URL (WebP)"
-  }
 , "commandAudioAsHTML": {
     "message": "Audio → HTML"
   }

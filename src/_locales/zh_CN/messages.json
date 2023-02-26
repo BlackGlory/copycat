@@ -107,15 +107,6 @@
 , "commandImageAsDataURL": {
     "message": "图片 → Data URL"
   }
-, "commandImageAsDataURLJPEG": {
-    "message": "图片 → Data URL (JPEG)"
-  }
-, "commandImageAsDataURLPNG": {
-    "message": "图片 → Data URL (PNG)"
-  }
-, "commandImageAsDataURLWebP": {
-    "message": "图片 → Data URL (WebP)"
-  }
 , "commandAudioAsHTML": {
     "message": "音频 → HTML"
   }

@@ -107,9 +107,6 @@ async function initMenu(): Promise<void> {
       , { id: 'commandImageAsMarkdown', visible: true }
       , { id: 'commandImageAsBBCode', visible: true }
       , { id: 'commandImageAsDataURL', visible: true }
-      , { id: 'commandImageAsDataURLJPEG', visible: true }
-      , { id: 'commandImageAsDataURLPNG', visible: true }
-      , { id: 'commandImageAsDataURLWebP', visible: true }
       ]
     }
   , {

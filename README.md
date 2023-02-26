@@ -52,9 +52,6 @@ Copy content from web powerful than ever before.
   - [x] Markdown
   - [x] BBCode
   - [x] Data URL
-  - [x] Data URL (JPEG)
-  - [x] Data URL (PNG)
-  - [x] Data URL (WebP)
 - [x] Copy a native audio as HTML
 - [x] Copy a native video as HTML
 

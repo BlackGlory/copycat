@@ -5,7 +5,6 @@ import { writeHTMLToClipboard } from '@utils/write-html-to-clipboard.js'
 import { sanitizeHTML } from '@src/utils/sanitize-html.js'
 import { convertHTMLToPlainText } from '@utils/convert-html-to-plain-text.js'
 import { convertHTMLToMarkdown } from '@utils/convert-html-to-markdown.js'
-import { convertImageURLToDataURL } from '@utils/convert-image-url-to-data-url.js'
 import { cleanAllHTMLAttributes } from '@utils/clean-all-html-attributes.js'
 import { cleanHTML } from '@utils/clean-html.js'
 import { formatURLsInHTML } from '@utils/format-urls-in-html.js'
@@ -17,7 +16,6 @@ createServer<IOffscreenAPI>({
 , convertHTMLToPlainText
 , cleanHTML
 , convertHTMLToMarkdown
-, convertImageURLToDataURL
 , cleanAllHTMLAttributes
 , formatURLsInHTML
 }, { channel: OffscreenChannel })

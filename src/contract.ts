@@ -123,7 +123,6 @@ export interface IOffscreenAPI {
   convertHTMLToPlainText(html: string): string
   cleanHTML(html: string, config: IHTMLCleanHTMLConfig): string
   convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
-  convertImageURLToDataURL(url: string, format?: ImageFormat): string
   cleanAllHTMLAttributes(html: string): string
 , formatURLsInHTML(html: string, baseURL: string, config: IURLConfig): string
 }
@@ -139,10 +138,4 @@ export enum URLEncoding {
   Original
 , Encode
 , Decode
-}
-
-export enum ImageFormat {
-  JPEG
-, WebP
-, PNG
 }
