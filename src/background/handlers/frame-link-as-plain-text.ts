@@ -8,19 +8,19 @@ import { createPlainTextLink } from '@utils/create-plain-text-link.js'
 
 export const commandFrameLinkAsPlainText: CommandHandler = async (info, tab) => {
   if (info.frameUrl) {
+    const config = await getConfig()
+    const url = formatURL(info.frameUrl, info.frameUrl, config.url)
+
     if (tab?.id && tab.url) {
       const tabClient = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
-
-      const config = await getConfig()
-      const url = formatURL(info.frameUrl, tab.url, config.url)
       const title = await tabClient.getDocumentTitle()
 
       return plainText(createPlainTextLink(url, title))
     } else {
-      return plainText(createPlainTextLink(info.frameUrl))
+      return plainText(createPlainTextLink(url, tab?.title))
     }
   }
 }

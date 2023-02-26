@@ -8,19 +8,19 @@ import { CommandHandler } from './types.js'
 
 export const commandFrameLinkAsMarkdown: CommandHandler = async (info, tab) => {
   if (info.frameUrl) {
+    const config = await getConfig()
+    const url = formatURL(info.frameUrl, info.frameUrl, config.url)
+
     if (tab?.id && tab.url) {
       const tabClient = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
-
-      const config = await getConfig()
-      const url = formatURL(info.frameUrl, tab.url, config.url)
       const title = await tabClient.getDocumentTitle()
 
       return plainText(createMarkdownLink(url, title))
     } else {
-      return plainText(createMarkdownLink(info.frameUrl))
+      return plainText(createMarkdownLink(url, tab?.title))
     }
   }
 }

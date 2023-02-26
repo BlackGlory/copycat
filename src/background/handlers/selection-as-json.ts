@@ -9,8 +9,8 @@ export const commandSelectionAsJSON: CommandHandler = async (info, tab) => {
       tabId: tab.id
     , frameId: info.frameId
     })
-
     const text = await tabClient.getSelectionText()
+
     return plainText(JSON.stringify((text)))
   }
 }

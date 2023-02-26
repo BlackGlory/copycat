@@ -2,7 +2,7 @@ import { createServer } from '@delight-rpc/webextension'
 import { IFrameAPI } from '@src/contract.js'
 
 createServer<IFrameAPI>({
-  getActiveElementContent
+  getActiveElementTextContent
 , getDocumentTitle
 , getSelectionHTML
 , getSelectionText
@@ -25,7 +25,7 @@ function getSelectionText(): string {
   return window.getSelection()?.toString() ?? ''
 }
 
-function getActiveElementContent(): string {
+function getActiveElementTextContent(): string {
   return document.activeElement?.textContent ?? ''
 }
 

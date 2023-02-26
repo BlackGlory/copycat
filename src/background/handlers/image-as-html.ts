@@ -6,17 +6,13 @@ import { createHTMLImage } from '@utils/create-html-image.js'
 
 export const commandImageAsHTML: CommandHandler = async (info, tab) => {
   if (info.mediaType === 'image' && info.srcUrl) {
-    if (tab && tab.url) {
-      const config = await getConfig()
-      const url = formatURL(
-        info.srcUrl
-      , info.frameUrl ?? tab.url
-      , config.url
-      )
+    const config = await getConfig()
+    const url = formatURL(
+      info.srcUrl
+    , info.frameUrl ?? info.pageUrl ?? tab?.url ?? info.srcUrl
+    , config.url
+    )
 
-      return plainText(createHTMLImage(url))
-    } else {
-      return plainText(createHTMLImage(info.srcUrl))
-    }
+    return plainText(createHTMLImage(url))
   }
 }

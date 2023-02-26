@@ -8,19 +8,19 @@ import { CommandHandler } from './types.js'
 
 export const commandFrameLinkAsRichText: CommandHandler = async (info, tab) => {
   if (info.frameUrl) {
+    const config = await getConfig()
+    const url = formatURL(info.frameUrl, info.frameUrl, config.url)
+
     if (tab?.id && tab.url) {
       const tabClient = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
-
-      const config = await getConfig()
-      const url = formatURL(info.frameUrl, tab.url, config.url)
       const title = await tabClient.getDocumentTitle()
 
       return richText(createHTMLLink(url, title))
     } else {
-      return richText(createHTMLLink(info.frameUrl))
+      return richText(createHTMLLink(url, tab?.title))
     }
   }
 }

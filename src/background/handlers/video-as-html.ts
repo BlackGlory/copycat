@@ -6,16 +6,13 @@ import { createHTMLVideo } from '@utils/create-html-video.js'
 
 export const commandVideoAsHTML: CommandHandler = async (info, tab) => {
   if (info.mediaType === 'video' && info.srcUrl) {
-    if (tab?.url) {
-      const config = await getConfig()
-      const url = formatURL(
-        info.srcUrl
-      , info.frameUrl ?? tab.url
-      , config.url
-      )
-      return plainText(createHTMLVideo(url))
-    } else {
-      return plainText(createHTMLVideo(info.srcUrl))
-    }
+    const config = await getConfig()
+    const url = formatURL(
+      info.srcUrl
+    , info.frameUrl ?? info.pageUrl ?? tab?.url ?? info.srcUrl
+    , config.url
+    )
+
+    return plainText(createHTMLVideo(url))
   }
 }

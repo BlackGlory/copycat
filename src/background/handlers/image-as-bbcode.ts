@@ -6,17 +6,13 @@ import { createBBCodeImage } from '@utils/create-bbcode-image.js'
 
 export const commandImageAsBBCode: CommandHandler = async (info, tab) => {
   if (info.mediaType === 'image' && info.srcUrl) {
-    if (tab?.url) {
-      const config = await getConfig()
-      const url = formatURL(
-        info.srcUrl
-      , info.frameUrl ?? tab.url
-      , config.url
-      )
+    const config = await getConfig()
+    const url = formatURL(
+      info.srcUrl
+    , info.frameUrl ?? info.pageUrl ?? tab?.url ?? info.srcUrl
+    , config.url
+    )
 
-      return plainText(createBBCodeImage(url))
-    } else {
-      return plainText(createBBCodeImage(info.srcUrl))
-    }
+    return plainText(createBBCodeImage(url))
   }
 }

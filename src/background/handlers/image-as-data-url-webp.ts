@@ -3,10 +3,10 @@ import { CommandHandler } from './types.js'
 import { offscreen } from '@background/offscreen-client.js'
 import { ImageFormat } from '@src/contract.js'
 
-export const commandImageAsDataURLWebP: CommandHandler = async ({ mediaType, srcUrl }) => {
-  if (mediaType === 'image' && srcUrl) {
+export const commandImageAsDataURLWebP: CommandHandler = async (info, tab) => {
+  if (info.mediaType === 'image' && info.srcUrl) {
     return plainText(
-      await offscreen.convertImageURLToDataURL(srcUrl, ImageFormat.WebP)
+      await offscreen.convertImageURLToDataURL(info.srcUrl, ImageFormat.WebP)
     )
   }
 }

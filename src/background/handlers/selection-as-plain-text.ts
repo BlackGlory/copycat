@@ -9,7 +9,8 @@ export const commandSelectionAsPlainText: CommandHandler = async (info, tab) => 
       tabId: tab.id
     , frameId: info.frameId
     })
+    const text = await tabClient.getSelectionText()
 
-    return plainText(await tabClient.getSelectionText())
+    return plainText(text)
   }
 }

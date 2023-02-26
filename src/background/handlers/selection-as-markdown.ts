@@ -5,7 +5,6 @@ import { CommandHandler } from './types.js'
 import { getConfig } from '@background/storage.js'
 import { pipeAsync } from 'extra-utils'
 import { offscreen } from '@background/offscreen-client.js'
-import { formatHTML } from '@utils/format-html.js'
 import { formatMarkdown } from '@utils/format-markdown.js'
 
 export const commandSelectionAsMarkdown: CommandHandler = async (info, tab) => {
@@ -14,17 +13,17 @@ export const commandSelectionAsMarkdown: CommandHandler = async (info, tab) => {
       tabId: tab.id
     , frameId: info.frameId
     })
-
     const config = await getConfig()
-    const html = await client.getSelectionHTML()
     const baseURL = info.frameUrl ?? info.pageUrl ?? tab.url
+
     if (baseURL) {
+      const html = await client.getSelectionHTML()
+
       return plainText(
         await pipeAsync(
           html
         , offscreen.sanitizeHTML
         , html => offscreen.formatURLsInHTML(html, baseURL, config.url)
-        , formatHTML
         , html => offscreen.convertHTMLToMarkdown(html, config.markdown)
         , formatMarkdown
         )

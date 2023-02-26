@@ -9,15 +9,16 @@ import { getConfig } from '@background/storage.js'
 
 export const commandSelectionAsCleanHTML: CommandHandler = async (info, tab) => {
   if (tab?.id) {
-    const client = createTabClient<IFrameAPI>({
+    const tabClient = createTabClient<IFrameAPI>({
       tabId: tab.id
     , frameId: info.frameId
     })
     const config = await getConfig()
-
-    const html = await client.getSelectionHTML()
     const baseURL = info.frameUrl ?? info.pageUrl ?? tab.url
+
     if (baseURL) {
+      const html = await tabClient.getSelectionHTML()
+
       return plainText(
         await pipeAsync(
           html

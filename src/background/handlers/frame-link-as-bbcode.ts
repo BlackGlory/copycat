@@ -8,19 +8,19 @@ import { CommandHandler } from './types.js'
 
 export const commandFrameLinkAsBBCode: CommandHandler = async (info, tab) => {
   if (info.frameUrl) {
+    const config = await getConfig()
+    const url = formatURL(info.frameUrl, info.frameUrl, config.url)
+
     if (tab?.id && tab.url) {
-      const client = createTabClient<IFrameAPI>({
+      const tabClient = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
-
-      const config = await getConfig()
-      const url = formatURL(info.frameUrl, tab.url, config.url)
-      const title = await client.getDocumentTitle()
+      const title = await tabClient.getDocumentTitle()
 
       return plainText(createBBCodeLink(url, title))
     } else {
-      return plainText(createBBCodeLink(info.frameUrl))
+      return plainText(createBBCodeLink(url, tab?.title))
     }
   }
 }

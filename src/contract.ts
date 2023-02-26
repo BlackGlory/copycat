@@ -102,7 +102,7 @@ export interface IHTMLCleanerAllowlistItem {
 export interface IFrameAPI {
   getSelectionHTML(): string
   getSelectionText(): string
-  getActiveElementContent(): string
+  getActiveElementTextContent(): string
   getDocumentTitle(): string
 }
 

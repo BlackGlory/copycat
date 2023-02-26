@@ -8,19 +8,19 @@ import { CommandHandler } from './types.js'
 
 export const commandFrameLinkAsAsciiDoc: CommandHandler = async (info, tab) => {
   if (info.frameUrl) {
+    const config = await getConfig()
+    const url = formatURL(info.frameUrl, info.frameUrl, config.url)
+
     if (tab?.id && tab.url) {
       const tabClient = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
       })
-
-      const config = await getConfig()
-      const url = formatURL(info.frameUrl, tab.url, config.url)
       const title = await tabClient.getDocumentTitle()
 
       return plainText(createAsciiDocLink(url, title))
     } else {
-      return plainText(createAsciiDocLink(info.frameUrl))
+      return plainText(createAsciiDocLink(url, tab?.title))
     }
   }
 }

@@ -12,8 +12,8 @@ export const commandSelectionAsHTMLWithoutAttributes: CommandHandler = async (in
       tabId: tab.id
     , frameId: info.frameId
     })
-
     const html = await tabClient.getSelectionHTML()
+
     return plainText(
       await pipeAsync(
         html

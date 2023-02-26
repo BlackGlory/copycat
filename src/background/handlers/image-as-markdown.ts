@@ -6,17 +6,13 @@ import { createMarkdownImage } from '@utils/create-markdown-image.js'
 
 export const commandImageAsMarkdown: CommandHandler = async (info, tab) => {
   if (info.mediaType === 'image' && info.srcUrl) {
-    if (tab && tab.url) {
-      const config = await getConfig()
-      const url = formatURL(
-        info.srcUrl
-      , info.frameUrl ?? tab.url
-      , config.url
-      )
+    const config = await getConfig()
+    const url = formatURL(
+      info.srcUrl
+    , info.frameUrl ?? info.pageUrl ?? tab?.url ?? info.srcUrl
+    , config.url
+    )
 
-      return plainText(createMarkdownImage(url))
-    } else {
-      return plainText(createMarkdownImage(info.srcUrl))
-    }
+    return plainText(createMarkdownImage(url))
   }
 }
