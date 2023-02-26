@@ -5,7 +5,6 @@ import { CommandHandler } from './types.js'
 import { getConfig } from '@background/storage.js'
 import { pipeAsync } from 'extra-utils'
 import { offscreen } from '@background/offscreen-client.js'
-import { formatMarkdown } from '@utils/format-markdown.js'
 
 export const commandSelectionAsMarkdown: CommandHandler = async (info, tab) => {
   if (tab?.id) {
@@ -25,7 +24,6 @@ export const commandSelectionAsMarkdown: CommandHandler = async (info, tab) => {
         , offscreen.sanitizeHTML
         , html => offscreen.formatURLsInHTML(html, baseURL, config.url)
         , html => offscreen.convertHTMLToMarkdown(html, config.markdown)
-        , formatMarkdown
         )
       )
     }

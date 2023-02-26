@@ -78,7 +78,7 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
               , value: MarkdownBullet['+']
               }
             , {
-                name: '+'
+                name: '-'
               , value: MarkdownBullet['-']
               }
             ]}
