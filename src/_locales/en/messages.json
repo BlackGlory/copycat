@@ -77,6 +77,9 @@
 , "commandSelectionAsPlainText": {
     "message": "Selection → Plain text"
   }
+, "commandSelectionAsConcatenatedPlainText": {
+    "message": "Selection → Concatenated plain text"
+  }
 , "commandSelectionAsJSON": {
     "message": "Selection → JSON"
   }

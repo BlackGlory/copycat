@@ -26,6 +26,7 @@ import { commandSelectionAsHTML } from './selection-as-html.js'
 import { commandSelectionAsJSON } from './selection-as-json.js'
 import { commandSelectionAsMarkdown } from './selection-as-markdown.js'
 import { commandSelectionAsPlainText } from './selection-as-plain-text.js'
+import { commandSelectionAsConcatenatedPlainText } from './selection-as-concatenated-plain-text.js'
 import { commandTabLinkAsAsciiDoc } from './tab-link-as-ascii-doc.js'
 import { commandTabLinkAsBBCode } from './tab-link-as-bbcode.js'
 import { commandTabLinkAsHTML } from './tab-link-as-html.js'
@@ -67,6 +68,7 @@ export const commandHandlers: ICommandHandlers = {
 , commandLinkAsBBCode
 
 , commandSelectionAsPlainText
+, commandSelectionAsConcatenatedPlainText
 , commandSelectionAsJSON
 , commandSelectionAsMarkdown
 , commandSelectionAsHTML

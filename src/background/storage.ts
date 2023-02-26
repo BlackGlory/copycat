@@ -95,6 +95,7 @@ async function initMenu(): Promise<void> {
       context: MenuContext.Selection
     , items: [
         { id: 'commandSelectionAsPlainText', visible: true }
+      , { id: 'commandSelectionAsConcatenatedPlainText', visible: true }
       , { id: 'commandSelectionAsJSON', visible: true }
       , { id: 'commandSelectionAsMarkdown', visible: true }
       , { id: 'commandSelectionAsHTML', visible: true }

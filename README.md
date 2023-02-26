@@ -41,6 +41,7 @@ Copy content from web powerful than ever before.
   - [x] BBCode
 - [x] Copy selection as
   - [x] Plain text
+  - [x] Concatenated plain text
   - [x] JSON
   - [x] Markdown
   - [x] HTML

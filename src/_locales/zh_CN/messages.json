@@ -77,6 +77,9 @@
 , "commandSelectionAsPlainText": {
     "message": "选中内容 → 纯文本"
   }
+, "commandSelectionAsConcatenatedPlainText": {
+    "message": "选中内容 → 经过联结的纯文本"
+  }
 , "commandSelectionAsJSON": {
     "message": "选中内容 → JSON"
   }
