@@ -1,32 +1,12 @@
 import browser from 'webextension-polyfill'
-import { go } from '@blackglory/prelude'
 import { commandHandlers, handleCommandResult } from './handlers/index.js'
 import { initStorage, getMenu, getConfig, setConfig, setMenu } from './storage.js'
 import { migrate } from './migrate.js'
 import { each } from 'extra-promise'
-import { getActiveTab } from 'extra-webextension'
+import { getActiveTab, waitForLaunch, LaunchReason } from 'extra-webextension'
 import { IBackgroundAPI } from '@src/contract.js'
 import { createServer } from '@delight-rpc/webextension'
 import { updateMenu } from './menu.js'
-
-browser.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
-  switch (reason) {
-    case 'install': {
-      // 在安装后初始化.
-      await initStorage()
-      break
-    }
-    case 'update': {
-      // 在升级后执行迁移.
-      if (previousVersion) {
-        await migrate(previousVersion)
-      }
-      break
-    }
-  }
-
-  await injectContentScripts()
-})
 
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
   const result = await commandHandlers[info.menuItemId](info, tab)
@@ -43,7 +23,22 @@ browser.commands.onCommand.addListener(async command => {
   }
 })
 
-go(async () => {
+waitForLaunch().then(async details => {
+  switch (details.reason) {
+    case LaunchReason.Install: {
+      // 在安装后初始化.
+      await initStorage()
+      break
+    }
+    case LaunchReason.Update: {
+      // 在升级后执行迁移.
+      if (details.previousVersion) {
+        await migrate(details.previousVersion)
+      }
+      break
+    }
+  }
+
   createServer<IBackgroundAPI>({
     getConfig
   , setConfig
@@ -52,6 +47,7 @@ go(async () => {
   })
 
   await ensureOffscreenDocument()
+  await injectContentScripts()
   await updateMenu()
 })
 

@@ -76,7 +76,7 @@
     "extra-react-hooks": "^0.4.3",
     "extra-semver": "^0.2.1",
     "extra-utils": "^5.1.0",
-    "extra-webextension": "^0.2.3",
+    "extra-webextension": "^0.3.0",
     "html2bbcode": "^1.2.6",
     "immer": "^9.0.19",
     "iterable-operator": "^4.0.3",
