@@ -34,9 +34,7 @@ waitForLaunch().then(async details => {
     }
     case LaunchReason.Update: {
       // 在升级后执行迁移.
-      if (details.previousVersion) {
-        await migrate(details.previousVersion)
-      }
+      await migrate(details.previousVersion)
       break
     }
   }
