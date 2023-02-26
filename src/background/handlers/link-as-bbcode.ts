@@ -3,8 +3,7 @@ import { formatURL } from '@utils/format-url.js'
 import { getConfig } from '@background/storage.js'
 import { CommandHandler } from './types.js'
 import { createBBCodeLink } from '@utils/create-bbcode-link.js'
-import { createTabClient } from '@delight-rpc/webextension'
-import { IFrameAPI } from '@src/contract.js'
+import { getActiveElementTextContent } from './utils.js'
 
 export const commandLinkAsBBCode: CommandHandler = async (info, tab) => {
   if (info.linkUrl) {
@@ -16,14 +15,13 @@ export const commandLinkAsBBCode: CommandHandler = async (info, tab) => {
     )
 
     if (tab?.id) {
-      const tabClient = createTabClient<IFrameAPI>({
-        tabId: tab.id
-      , frameId: info.frameId
-      })
-      // 依赖`getActiveElementTextContent`是因为Chrome给的`info.linkText`基本上是空的
-      const linkText = await tabClient.getActiveElementTextContent()
-
-      return plainText(createBBCodeLink(url, linkText))
+      return plainText(
+        createBBCodeLink(
+          url
+          // Chrome普遍不提供`info.linkText`
+        , info.linkText ?? await getActiveElementTextContent(tab.id, info.frameId)
+        )
+      )
     } else {
       return plainText(createBBCodeLink(url, info.linkText))
     }
