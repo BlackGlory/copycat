@@ -1,5 +1,8 @@
+import brwoser from 'webextension-polyfill'
 import { createServer } from '@delight-rpc/webextension'
 import { IFrameAPI } from '@src/contract.js'
+
+console.info(`[${brwoser.runtime.getManifest().name}] The content script is injected`)
 
 createServer<IFrameAPI>({
   getActiveElementTextContent
