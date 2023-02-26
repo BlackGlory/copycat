@@ -24,6 +24,8 @@ browser.commands.onCommand.addListener(async command => {
 })
 
 waitForLaunch().then(async details => {
+  console.info(`Launched by ${LaunchReason[details.reason]}`)
+
   switch (details.reason) {
     case LaunchReason.Install: {
       // 在安装后初始化.
