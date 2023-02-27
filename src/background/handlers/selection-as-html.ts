@@ -8,7 +8,7 @@ import { offscreen } from '@background/offscreen-client.js'
 import { formatHTML } from '@utils/format-html.js'
 
 export const commandSelectionAsHTML: CommandHandler = async (info, tab) => {
-  if (tab?.id) {
+  if (tab.id) {
     const tabClient = createTabClient<IFrameAPI>({
       tabId: tab.id
     , frameId: info.frameId

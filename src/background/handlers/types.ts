@@ -13,7 +13,7 @@ export interface IInfo {
 
 export type CommandHandler = (
   info: IInfo
-, tab?: browser.Tabs.Tab
+, tab: browser.Tabs.Tab
 ) => Awaitable<CommandResult | undefined>
 
 export interface CommandResult {

@@ -10,11 +10,11 @@ export const commandLinkAsRichText: CommandHandler = async (info, tab) => {
     const config = await getConfig()
     const url = formatURL(
       info.linkUrl
-    , info.frameUrl ?? info.pageUrl ?? tab?.url ?? info.linkUrl
+    , info.frameUrl ?? info.pageUrl ?? tab.url ?? info.linkUrl
     , config.url
     )
 
-    if (tab?.id) {
+    if (tab.id) {
       return richText(
         createHTMLLink(
           url

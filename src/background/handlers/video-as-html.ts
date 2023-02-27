@@ -10,7 +10,7 @@ export const commandVideoAsHTML: CommandHandler = async (info, tab) => {
     const config = await getConfig()
     const url = formatURL(
       info.srcUrl
-    , info.frameUrl ?? info.pageUrl ?? tab?.url ?? info.srcUrl
+    , info.frameUrl ?? info.pageUrl ?? tab.url ?? info.srcUrl
     , config.url
     )
 

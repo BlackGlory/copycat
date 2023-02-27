@@ -9,15 +9,22 @@ import { createServer } from '@delight-rpc/webextension'
 import { updateMenu } from './menu.js'
 
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
-  const result = await commandHandlers[info.menuItemId](info, tab)
+  const result = await commandHandlers[info.menuItemId](
+    info
+  , tab ?? await getActiveTab()
+  )
+
   if (result) {
     await handleCommandResult(result)
   }
 })
 
-browser.commands.onCommand.addListener(async command => {
-  const tab = await getActiveTab()
-  const result = await commandHandlers[command]({}, tab)
+browser.commands.onCommand.addListener(async (command, tab) => {
+  const result = await commandHandlers[command](
+    {}
+  , tab ?? await getActiveTab()
+  )
+
   if (result) {
     await handleCommandResult(result)
   }

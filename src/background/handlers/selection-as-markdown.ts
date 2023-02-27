@@ -7,7 +7,7 @@ import { pipeAsync } from 'extra-utils'
 import { offscreen } from '@background/offscreen-client.js'
 
 export const commandSelectionAsMarkdown: CommandHandler = async (info, tab) => {
-  if (tab?.id) {
+  if (tab.id) {
     const client = createTabClient<IFrameAPI>({
       tabId: tab.id
     , frameId: info.frameId

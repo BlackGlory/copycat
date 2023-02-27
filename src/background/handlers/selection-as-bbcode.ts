@@ -9,7 +9,7 @@ import { getConfig } from '@background/storage.js'
 import { convertHTMLToBBCode } from '@utils/convert-html-to-bbcode.js'
 
 export const commandSelectionAsBBCode: CommandHandler = async (info, tab) => {
-  if (tab?.id) {
+  if (tab.id) {
     const tabClient = createTabClient<IFrameAPI>({
       tabId: tab.id
     , frameId: info.frameId

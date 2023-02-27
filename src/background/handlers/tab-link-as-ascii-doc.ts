@@ -5,7 +5,7 @@ import { formatURL } from '@utils/format-url.js'
 import { getConfig } from '@background/storage.js'
 
 export const commandTabLinkAsAsciiDoc: CommandHandler = async (info, tab) => {
-  if (tab?.url) {
+  if (tab.url) {
     const config = await getConfig()
     const url = formatURL(tab.url, tab.url, config.url)
 

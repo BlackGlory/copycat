@@ -11,7 +11,7 @@ export const commandFrameLinkAsPlainText: CommandHandler = async (info, tab) => 
     const config = await getConfig()
     const url = formatURL(info.frameUrl, info.frameUrl, config.url)
 
-    if (tab?.id && tab.url) {
+    if (tab.id && tab.url) {
       const tabClient = createTabClient<IFrameAPI>({
         tabId: tab.id
       , frameId: info.frameId
@@ -20,7 +20,7 @@ export const commandFrameLinkAsPlainText: CommandHandler = async (info, tab) => 
 
       return plainText(createPlainTextLink(url, title))
     } else {
-      return plainText(createPlainTextLink(url, tab?.title))
+      return plainText(createPlainTextLink(url, tab.title))
     }
   }
 }

@@ -8,7 +8,7 @@ import { formatHTML } from '@utils/format-html.js'
 import { getConfig } from '@background/storage.js'
 
 export const commandSelectionAsCleanHTML: CommandHandler = async (info, tab) => {
-  if (tab?.id) {
+  if (tab.id) {
     const tabClient = createTabClient<IFrameAPI>({
       tabId: tab.id
     , frameId: info.frameId
