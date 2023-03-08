@@ -2,7 +2,9 @@ import brwoser from 'webextension-polyfill'
 import { createServer } from '@delight-rpc/webextension'
 import { IFrameAPI } from '@src/contract.js'
 
-console.info(`[${brwoser.runtime.getManifest().name}] The content script is injected`)
+if (isDev()) {
+  console.info(`[${brwoser.runtime.getManifest().name}] The content script is injected`)
+}
 
 createServer<IFrameAPI>({
   getActiveElementTextContent
@@ -34,4 +36,8 @@ function getActiveElementTextContent(): string {
 
 function getDocumentTitle(): string {
   return document.title
+}
+
+function isDev(): boolean {
+  return process.env.NODE_ENV === 'development'
 }
