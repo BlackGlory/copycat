@@ -54,8 +54,11 @@ waitForLaunch().then(async details => {
   })
 
   await ensureOffscreenDocument()
-  await injectContentScripts()
   await updateMenu()
+
+  // 在实际运行中发现, 注入内容脚本的速度可能很慢.
+  // 且没有任何选项能够改善注入性能, 因此将该步骤放到最后.
+  await injectContentScripts()
 })
 
 async function ensureOffscreenDocument(): Promise<void> {
@@ -86,6 +89,9 @@ async function injectContentScripts(): Promise<void> {
           , allFrames: true
           }
         , files: contentScripts
+
+          // 该选项似乎不起作用, 一些标签页的内容脚本注入速度仍然很慢.
+        , injectImmediately: true
         })
       } catch (e) {
         console.warn(e)
