@@ -15,10 +15,10 @@ createServer<IFrameAPI>({
 
 function getSelectionHTML(): string {
   const userSelection = window.getSelection()
-  if (userSelection) {
-    const range = userSelection?.getRangeAt(0)
+  if (userSelection && userSelection.rangeCount) {
+    const range = userSelection.getRangeAt(0)
     const clonedSelection = range.cloneContents()
-    const div = document.createElement ('div')
+    const div = document.createElement('div')
     div.appendChild(clonedSelection)
     return div.innerHTML
   } else {
