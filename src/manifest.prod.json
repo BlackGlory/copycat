@@ -65,7 +65,7 @@
   , "match_about_blank": true
   , "all_frames": true
   , "js": ["copycat.js"]
-  , "run_at": "document_end"
+  , "run_at": "document_start"
   }]
 , "background": {
     "service_worker": "background.js"
