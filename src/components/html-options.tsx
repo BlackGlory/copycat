@@ -3,6 +3,7 @@ import { Updater } from 'use-immer'
 import { TextInput } from '@components/text-input.jsx'
 import { Button } from '@components/button.jsx'
 import { RemoveButton } from '@components/remove-button.jsx'
+import { Checkbox } from '@components/checkbox.jsx'
 import { i18n } from '@utils/i18n.js'
 
 interface IHTMLOptionsProps {
@@ -11,70 +12,83 @@ interface IHTMLOptionsProps {
 }
 
 export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
-  const allowlist = config.html.cleanHTML.allowlist
+  const { cleanHTML, formatHTML } = config.html
 
   return (
     <div className='mb-2'>
       <h3 className='text-base px-4 py-2'>{i18n('headingHTMLConfig')}</h3>
-      <div className='py-2'>
-        <h4 className='px-4 text-sm'>{i18n('headingCleanHTMLAllowlist')}</h4>
-
-        <nav className='px-4'>
-          <Button
-            className='w-full'
-            onClick={() => setConfig(config => {
-              config.html.cleanHTML.allowlist.push({
-                elements: ''
-              , attributes: ''
-              })
+      <div className='py-2 space-y-2'>
+        <div className='px-4'>
+          <Checkbox
+            value={formatHTML}
+            onClick={value => setConfig(config => {
+              config.html.formatHTML = value
             })}
           >
-            {i18n('buttonCreateItem')}
-          </Button>
-        </nav>
+            {i18n('labelFormatHTML')}
+          </Checkbox>
+        </div>
 
-        <ul className='mt-1'>
-          {allowlist.map((item, i) => (
-            <li
-              key={i}
-              className='py-2.5 px-4 flex justify-between hover:bg-gray-300'
+        <div>
+          <h4 className='px-4 text-sm'>{i18n('headingCleanHTMLAllowlist')}</h4>
+
+          <nav className='px-4'>
+            <Button
+              className='w-full'
+              onClick={() => setConfig(config => {
+                config.html.cleanHTML.allowlist.push({
+                  elements: ''
+                , attributes: ''
+                })
+              })}
             >
-              <div>
-                <section>
-                  <label>
-                    <span>{i18n('labelElements')}</span>
-                    <TextInput
-                      value={item.elements}
-                      onChange={e => setConfig(config => {
-                        config.html.cleanHTML.allowlist[i].elements = e.target.value
-                      })}
-                    />
-                  </label>
-                </section>
+              {i18n('buttonCreateItem')}
+            </Button>
+          </nav>
 
-                <section>
-                  <label>
-                    <span>{i18n('labelAttributes')}</span>
-                    <TextInput
-                      value={item.attributes}
-                      onChange={e => setConfig(config => {
-                        config.html.cleanHTML.allowlist[i].attributes = e.target.value
-                      })}
-                    />
-                  </label>
-                </section>
-              </div>
+          <ul className='mt-1'>
+            {cleanHTML.allowlist.map((item, i) => (
+              <li
+                key={i}
+                className='py-2.5 px-4 flex justify-between hover:bg-gray-300'
+              >
+                <div>
+                  <section>
+                    <label>
+                      <span>{i18n('labelElements')}</span>
+                      <TextInput
+                        value={item.elements}
+                        onChange={e => setConfig(config => {
+                          config.html.cleanHTML.allowlist[i].elements = e.target.value
+                        })}
+                      />
+                    </label>
+                  </section>
 
-              <aside>
-                <RemoveButton
-                  onClick={() => setConfig(config => {
-                    config.html.cleanHTML.allowlist.splice(i, 1)
-                  })}
-                />
-              </aside>
-            </li>
-          ))}
-        </ul>
+                  <section>
+                    <label>
+                      <span>{i18n('labelAttributes')}</span>
+                      <TextInput
+                        value={item.attributes}
+                        onChange={e => setConfig(config => {
+                          config.html.cleanHTML.allowlist[i].attributes = e.target.value
+                        })}
+                      />
+                    </label>
+                  </section>
+                </div>
+
+                <aside>
+                  <RemoveButton
+                    onClick={() => setConfig(config => {
+                      config.html.cleanHTML.allowlist.splice(i, 1)
+                    })}
+                  />
+                </aside>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   )

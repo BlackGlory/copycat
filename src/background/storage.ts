@@ -40,7 +40,8 @@ async function initConfig(): Promise<void> {
     , fence: MarkdownFence['`']
     }
   , html: {
-      cleanHTML: {
+      formatHTML: true
+    , cleanHTML: {
         allowlist: [
           { elements: 'a', attributes: 'href' }
         , { elements: 'img', attributes: 'src' }

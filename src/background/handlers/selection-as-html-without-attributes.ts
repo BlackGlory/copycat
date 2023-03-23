@@ -5,6 +5,7 @@ import { CommandHandler } from './types.js'
 import { pipeAsync } from 'extra-utils'
 import { offscreen } from '@background/offscreen-client.js'
 import { formatHTML } from '@utils/format-html.js'
+import { getConfig } from '@background/storage.js'
 
 export const commandSelectionAsHTMLWithoutAttributes: CommandHandler = async (info, tab) => {
   if (tab.id) {
@@ -12,6 +13,7 @@ export const commandSelectionAsHTMLWithoutAttributes: CommandHandler = async (in
       tabId: tab.id
     , frameId: info.frameId
     })
+    const config = await getConfig()
     const html = await tabClient.getSelectionHTML()
 
     return plainText(
@@ -19,7 +21,7 @@ export const commandSelectionAsHTMLWithoutAttributes: CommandHandler = async (in
         html
       , offscreen.sanitizeHTML
       , offscreen.cleanAllHTMLAttributes
-      , formatHTML
+      , html => config.html.formatHTML ? formatHTML(html) : html
       )
     )
   }

@@ -173,6 +173,9 @@
 , "headingHTMLConfig": {
     "message": "HTML配置"
   }
+, "labelFormatHTML": {
+    "message": "格式化HTML"
+  }
 , "headingCleanHTMLAllowlist": {
     "message": "定义干净HTML的白名单"
   }

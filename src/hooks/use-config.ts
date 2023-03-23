@@ -25,7 +25,8 @@ export function useConfig(client: DelightRPC.ClientProxy<IBackgroundAPI>): [
     , strong: MarkdownStrong['*']
     }
   , html: {
-      cleanHTML: {
+      formatHTML: true
+    , cleanHTML: {
         allowlist: []
       }
     }

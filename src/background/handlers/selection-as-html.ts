@@ -24,7 +24,7 @@ export const commandSelectionAsHTML: CommandHandler = async (info, tab) => {
           html
         , offscreen.sanitizeHTML
         , html => offscreen.formatURLsInHTML(html, baseURL, config.url)
-        , formatHTML
+        , html => config.html.formatHTML ? formatHTML(html) : html
         )
       )
     }

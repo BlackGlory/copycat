@@ -3,6 +3,16 @@ export enum StorageItemKey {
 , Config = 'config'
 }
 
+export interface IStorage {
+  [StorageItemKey.Menu]: IMenuStore
+  [StorageItemKey.Config]: IConfigStore
+}
+
+export type IMenuStore = Array<{
+  context: MenuContext
+, items: IMenuItem[]
+}>
+
 export interface IMenuItem {
   id: string
   visible: boolean
@@ -18,16 +28,6 @@ export enum MenuContext {
 , Video = 'video'
 }
 
-export type IMenuStore = Array<{
-  context: MenuContext
-, items: IMenuItem[]
-}>
-
-export interface IStorage {
-  [StorageItemKey.Menu]: IMenuStore
-  [StorageItemKey.Config]: IConfigStore
-}
-
 export interface IConfigStore {
   url: IURLConfig
   html: IHTMLConfig
@@ -37,6 +37,19 @@ export interface IConfigStore {
 export interface IURLConfig {
   format: URLFormat
   encoding: URLEncoding
+}
+
+export enum URLFormat {
+  Original
+, Absolute
+, Relative
+, RootRelative
+}
+
+export enum URLEncoding {
+  Original
+, Encode
+, Decode
 }
 
 export interface IMarkdownConfig {
@@ -87,6 +100,7 @@ export enum MarkdownStrong {
 }
 
 export interface IHTMLConfig {
+  formatHTML: boolean
   cleanHTML: IHTMLCleanHTMLConfig
 }
 
@@ -125,17 +139,4 @@ export interface IOffscreenAPI {
   convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
   cleanAllHTMLAttributes(html: string): string
 , formatURLsInHTML(html: string, baseURL: string, config: IURLConfig): string
-}
-
-export enum URLFormat {
-  Original
-, Absolute
-, Relative
-, RootRelative
-}
-
-export enum URLEncoding {
-  Original
-, Encode
-, Decode
 }

@@ -1,6 +1,7 @@
 import { pipeAsync } from 'extra-utils'
 import { createMigration } from 'extra-semver'
 import { LocalStorage } from 'extra-webextension'
+import { produce } from 'immer'
 
 export async function migrate(previousVersion: string): Promise<void> {
   await pipeAsync(
@@ -230,6 +231,129 @@ export async function migrate(previousVersion: string): Promise<void> {
 
         await storage.setItem(StorageItemKey.Menu, menu)
       }
+    })
+  , createMigration('>=3.0.0 <=3.0.1', '3.0.2', async () => {
+      enum StorageItemKey {
+        Menu = 'menu'
+      , Config = 'config'
+      }
+
+      interface IStorage {
+        [StorageItemKey.Menu]: IMenuStore
+        [StorageItemKey.Config]: IConfigStore
+      }
+
+      type IMenuStore = Array<{
+        context: MenuContext
+      , items: IMenuItem[]
+      }>
+
+      interface IMenuItem {
+        id: string
+        visible: boolean
+      }
+
+      enum MenuContext {
+        Page = 'page'
+      , Frame = 'frame'
+      , Link = 'link'
+      , Selection = 'selection'
+      , Image = 'image'
+      , Audio = 'audio'
+      , Video = 'video'
+      }
+
+      interface IConfigStore {
+        url: IURLConfig
+        html: IHTMLConfig
+        markdown: IMarkdownConfig
+      }
+
+      interface IURLConfig {
+        format: URLFormat
+        encoding: URLEncoding
+      }
+
+      enum URLFormat {
+        Original
+      , Absolute
+      , Relative
+      , RootRelative
+      }
+
+      enum URLEncoding {
+        Original
+      , Encode
+      , Decode
+      }
+
+      interface IMarkdownConfig {
+        emphasis: MarkdownEmphasis
+        strong: MarkdownStrong
+        bulletUnordered: MarkdownBullet
+        bulletOrdered: MarkdownBulletOrdered
+        listItemIndent: MarkdownListItemIndent
+        thematicBreak: MarkdownThematicBreak
+        fence: MarkdownFence
+      }
+
+      enum MarkdownBullet {
+        '-'
+      , '*'
+      , '+'
+      }
+
+      enum MarkdownBulletOrdered {
+        '.'
+      , ')'
+      }
+
+      enum MarkdownEmphasis {
+        '*'
+      , '_'
+      }
+
+      enum MarkdownFence {
+        '`'
+      , '~'
+      }
+
+      enum MarkdownListItemIndent {
+        Space
+      , Tab
+      }
+
+      enum MarkdownThematicBreak {
+        '*'
+      , '-'
+      , '_'
+      }
+
+      enum MarkdownStrong {
+        '*'
+      , '_'
+      }
+
+      interface IHTMLConfig {
+        formatHTML: boolean
+        cleanHTML: IHTMLCleanHTMLConfig
+      }
+
+      interface IHTMLCleanHTMLConfig {
+        allowlist: IHTMLCleanerAllowlistItem[]
+      }
+
+      interface IHTMLCleanerAllowlistItem {
+        elements: string
+        attributes: string
+      }
+
+      const storage = new LocalStorage<IStorage>()
+      const oldConfig = await storage.getItem(StorageItemKey.Config)
+      const newConfig = produce(oldConfig, config => {
+        config.html.formatHTML = true
+      })
+      await storage.setItem(StorageItemKey.Config, newConfig)
     })
   )
 }
