@@ -94,4 +94,10 @@
 , "host_permissions": [
     "<all_urls>"
   ]
+, "web_accessible_resources": [
+    {
+      "resources": [ "*.js.map"]
+    , "matches": ["<all_urls>"]
+    }
+  ]
 }
