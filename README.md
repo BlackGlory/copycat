@@ -15,6 +15,7 @@ Copy content from web powerful than ever before.
 [Edge]: https://microsoftedge.microsoft.com/addons/detail/afnfdembabcfmjgjdklllnenkkldfdin
 
 ## Features
+- [x] Copy a tab title
 - [x] Copy a tab link as
   - [x] Plain text
   - [x] Rich text
@@ -23,6 +24,7 @@ Copy content from web powerful than ever before.
   - [x] Org-Mode
   - [x] AsciiDoc
   - [x] BBCode
+- [x] Copy a frame title
 - [x] Copy a frame link as
   - [x] Plain text
   - [x] Rich text

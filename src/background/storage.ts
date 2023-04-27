@@ -58,7 +58,8 @@ async function initMenu(): Promise<void> {
     {
       context: MenuContext.Page
     , items: [
-        { id: 'commandTabLinkAsPlainText', visible: true }
+        { id: 'commandTabTitle', visible: true }
+      , { id: 'commandTabLinkAsPlainText', visible: true }
       , { id: 'commandTabLinkAsRichText', visible: true }
       , { id: 'commandTabLinkAsHTML', visible: true }
       , { id: 'commandTabLinkAsMarkdown', visible: true }
@@ -70,7 +71,8 @@ async function initMenu(): Promise<void> {
   , {
       context: MenuContext.Frame
     , items: [
-        { id: 'commandFrameLinkAsPlainText', visible: true }
+        { id: 'commandFrameTitle', visible: true }
+      , { id: 'commandFrameLinkAsPlainText', visible: true }
       , { id: 'commandFrameLinkAsRichText', visible: true }
       , { id: 'commandFrameLinkAsHTML', visible: true }
       , { id: 'commandFrameLinkAsMarkdown', visible: true }

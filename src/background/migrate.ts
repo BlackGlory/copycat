@@ -232,7 +232,7 @@ export async function migrate(previousVersion: string): Promise<void> {
         await storage.setItem(StorageItemKey.Menu, menu)
       }
     })
-  , createMigration('>=3.0.0 <=3.0.1', '3.0.2', async () => {
+  , createMigration('>=3.0.0 <3.0.2', '3.0.2', async () => {
       enum StorageItemKey {
         Menu = 'menu'
       , Config = 'config'
@@ -354,6 +354,133 @@ export async function migrate(previousVersion: string): Promise<void> {
         config.html.formatHTML = true
       })
       await storage.setItem(StorageItemKey.Config, newConfig)
+    })
+  , createMigration('>=3.0.2 <3.1.0', '3.1.0', async () => {
+      enum StorageItemKey {
+        Menu = 'menu'
+      , Config = 'config'
+      }
+
+      interface IStorage {
+        [StorageItemKey.Menu]: IMenuStore
+        [StorageItemKey.Config]: IConfigStore
+      }
+
+      type IMenuStore = Array<{
+        context: MenuContext
+      , items: IMenuItem[]
+      }>
+
+      interface IMenuItem {
+        id: string
+        visible: boolean
+      }
+
+      enum MenuContext {
+        Page = 'page'
+      , Frame = 'frame'
+      , Link = 'link'
+      , Selection = 'selection'
+      , Image = 'image'
+      , Audio = 'audio'
+      , Video = 'video'
+      }
+
+      interface IConfigStore {
+        url: IURLConfig
+        html: IHTMLConfig
+        markdown: IMarkdownConfig
+      }
+
+      interface IURLConfig {
+        format: URLFormat
+        encoding: URLEncoding
+      }
+
+      enum URLFormat {
+        Original
+      , Absolute
+      , Relative
+      , RootRelative
+      }
+
+      enum URLEncoding {
+        Original
+      , Encode
+      , Decode
+      }
+
+      interface IMarkdownConfig {
+        emphasis: MarkdownEmphasis
+        strong: MarkdownStrong
+        bulletUnordered: MarkdownBullet
+        bulletOrdered: MarkdownBulletOrdered
+        listItemIndent: MarkdownListItemIndent
+        thematicBreak: MarkdownThematicBreak
+        fence: MarkdownFence
+      }
+
+      enum MarkdownBullet {
+        '-'
+      , '*'
+      , '+'
+      }
+
+      enum MarkdownBulletOrdered {
+        '.'
+      , ')'
+      }
+
+      enum MarkdownEmphasis {
+        '*'
+      , '_'
+      }
+
+      enum MarkdownFence {
+        '`'
+      , '~'
+      }
+
+      enum MarkdownListItemIndent {
+        Space
+      , Tab
+      }
+
+      enum MarkdownThematicBreak {
+        '*'
+      , '-'
+      , '_'
+      }
+
+      enum MarkdownStrong {
+        '*'
+      , '_'
+      }
+
+      interface IHTMLConfig {
+        formatHTML: boolean
+        cleanHTML: IHTMLCleanHTMLConfig
+      }
+
+      interface IHTMLCleanHTMLConfig {
+        allowlist: IHTMLCleanerAllowlistItem[]
+      }
+
+      interface IHTMLCleanerAllowlistItem {
+        elements: string
+        attributes: string
+      }
+
+      const storage = new LocalStorage<IStorage>()
+      const oldMenu = await storage.getItem(StorageItemKey.Menu)
+      const newMenu = produce(oldMenu, menu => {
+        const page = menu.find(x => x.context === MenuContext.Page)
+        page?.items.unshift({ id: 'commandTabTitle', visible: true })
+
+        const frame = menu.find(x => x.context === MenuContext.Frame)
+        frame?.items.unshift({ id: 'commandFrameTitle', visible: true })
+      })
+      await storage.setItem(StorageItemKey.Menu, newMenu)
     })
   )
 }

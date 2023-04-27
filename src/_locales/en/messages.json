@@ -8,6 +8,9 @@
 , "extensionActionTitle": {
     "message": "Copycat Options"
   }
+, "commandTabTitle": {
+    "message": "Tab title"
+  }
 , "commandTabLinkAsPlainText": {
     "message": "Tab link → Plain text"
   }
@@ -28,6 +31,9 @@
   }
 , "commandTabLinkAsBBCode": {
     "message": "Tab link → BBCode"
+  }
+, "commandFrameTitle": {
+    "message": "Frame title"
   }
 , "commandFrameLinkAsPlainText": {
     "message": "Frame link → Plain text"

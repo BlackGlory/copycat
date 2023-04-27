@@ -1,5 +1,6 @@
 import { offscreen } from '@background/offscreen-client.js'
 import { commandAudioAsHTML } from './audio-as-html.js'
+import { commandFrameTitle } from './frame-title.js'
 import { commandFrameLinkAsAsciiDoc } from './frame-link-as-ascii-doc.js'
 import { commandFrameLinkAsBBCode } from './frame-link-as-bbcode.js'
 import { commandFrameLinkAsHTML } from './frame-link-as-html.js'
@@ -27,6 +28,7 @@ import { commandSelectionAsJSON } from './selection-as-json.js'
 import { commandSelectionAsMarkdown } from './selection-as-markdown.js'
 import { commandSelectionAsPlainText } from './selection-as-plain-text.js'
 import { commandSelectionAsConcatenatedPlainText } from './selection-as-concatenated-plain-text.js'
+import { commandTabTitle } from './tab-title.js'
 import { commandTabLinkAsAsciiDoc } from './tab-link-as-ascii-doc.js'
 import { commandTabLinkAsBBCode } from './tab-link-as-bbcode.js'
 import { commandTabLinkAsHTML } from './tab-link-as-html.js'
@@ -42,7 +44,8 @@ interface ICommandHandlers {
 }
 
 export const commandHandlers: ICommandHandlers = {
-  commandTabLinkAsPlainText
+  commandTabTitle
+, commandTabLinkAsPlainText
 , commandTabLinkAsRichText
 , commandTabLinkAsHTML
 , commandTabLinkAsMarkdown
@@ -50,6 +53,7 @@ export const commandHandlers: ICommandHandlers = {
 , commandTabLinkAsAsciiDoc
 , commandTabLinkAsBBCode
 
+, commandFrameTitle
 , commandFrameLinkAsPlainText
 , commandFrameLinkAsRichText
 , commandFrameLinkAsHTML

@@ -8,6 +8,9 @@
 , "extensionActionTitle": {
     "message": "Copycat选项"
   }
+, "commandTabTitle": {
+    "message": "标签页标题"
+  }
 , "commandTabLinkAsPlainText": {
     "message": "标签页链接 → 纯文本"
   }
@@ -28,6 +31,9 @@
   }
 , "commandTabLinkAsBBCode": {
     "message": "标签页链接 → BBCode"
+  }
+, "commandFrameTitle": {
+    "message": "框架标题"
   }
 , "commandFrameLinkAsPlainText": {
     "message": "框架链接 → 纯文本"
