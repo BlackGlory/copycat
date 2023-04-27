@@ -14,7 +14,10 @@
   , "128": "assets/images/icon-128.png"
   }
 , "commands": {
-    "commandTabLinkAsPlainText": {
+    "commandTabTitle": {
+      "description": "__MSG_commandTabTitle__"
+    }
+  , "commandTabLinkAsPlainText": {
       "description": "__MSG_commandTabLinkAsPlainText__"
     }
   , "commandTabLinkAsRichText": {
