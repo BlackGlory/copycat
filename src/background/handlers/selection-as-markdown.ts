@@ -8,14 +8,14 @@ import { offscreen } from '@background/offscreen-client.js'
 
 export const commandSelectionAsMarkdown: CommandHandler = async (info, tab) => {
   if (tab.id) {
-    const client = createTabClient<IFrameAPI>({
-      tabId: tab.id
-    , frameId: info.frameId
-    })
-    const config = await getConfig()
     const baseURL = info.frameUrl ?? info.pageUrl ?? tab.url
 
     if (baseURL) {
+      const config = await getConfig()
+      const client = createTabClient<IFrameAPI>({
+        tabId: tab.id
+      , frameId: info.frameId
+      })
       const html = await client.getSelectionHTML()
 
       return plainText(
