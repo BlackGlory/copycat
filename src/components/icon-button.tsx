@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-export function IconButton(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+export function IconButton(props: React.ComponentPropsWithoutRef<'button'>) {
   return (
     <button
       {...props}

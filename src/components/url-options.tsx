@@ -48,7 +48,7 @@ export function URLOptions({ config, setConfig }: IURLOptionsProps) {
   )
 }
 
-function Section(props: React.InputHTMLAttributes<HTMLSelectElement>) {
+function Section(props: React.ComponentPropsWithoutRef<'section'>) {
   return (
     <section {...props} />
   )

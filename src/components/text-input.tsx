@@ -1,6 +1,11 @@
 import classNames from 'classnames'
 
-export function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
+export function TextInput(
+  props: Omit<
+    React.ComponentPropsWithoutRef<'input'>
+  , 'type'
+  >
+) {
   return (
     <input
       {...props}

@@ -31,11 +31,16 @@ export function ConfigOptions() {
   )
 }
 
-function Section(props: React.InputHTMLAttributes<HTMLSelectElement>) {
+function Section(
+  props: Omit<
+    React.ComponentPropsWithoutRef<'section'>
+  , 'className'
+  >
+) {
   return (
     <section
-      className='border-b last:border-b-0'
       {...props}
+      className='border-b last:border-b-0'
     />
   )
 }

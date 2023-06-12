@@ -176,7 +176,7 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
   )
 }
 
-function Section(props: React.InputHTMLAttributes<HTMLSelectElement>) {
+function Section(props: React.ComponentPropsWithoutRef<'section'>) {
   return (
     <section {...props} />
   )
