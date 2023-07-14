@@ -76,11 +76,12 @@
     "extra-dom": "^0.6.0",
     "extra-promise": "^6.0.6",
     "extra-react-hooks": "^0.5.2",
+    "extra-react-store": "^0.1.0",
     "extra-semver": "^0.2.1",
     "extra-utils": "^5.2.0",
     "extra-webextension": "^0.3.1",
     "html2bbcode": "^1.2.6",
-    "immer": "^9.0.19",
+    "immer": "^10.0.2",
     "iterable-operator": "^4.0.6",
     "prettier": "^2.8.6",
     "react": "^18.2.0",
@@ -93,7 +94,6 @@
     "unified": "^10.1.2",
     "urijs": "^1.19.11",
     "url-operator": "^0.3.0",
-    "use-immer": "^0.8.1",
     "webextension-polyfill": "^0.10.0"
   }
 }

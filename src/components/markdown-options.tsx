@@ -1,6 +1,5 @@
 import {
-  IConfigStore
-, MarkdownBullet
+  MarkdownBullet
 , MarkdownBulletOrdered
 , MarkdownEmphasis
 , MarkdownFence
@@ -9,16 +8,13 @@ import {
 , MarkdownStrong
 } from '@src/contract.js'
 import { Select } from '@components/select.jsx'
-import { Updater } from 'use-immer'
 import { i18n } from '@utils/i18n.js'
+import { ConfigStoreContext } from '@utils/config-store.js'
+import { useSelector, useUpdater } from 'extra-react-store'
 
-interface IMarkdownOptionsProps {
-  config: IConfigStore
-  setConfig: Updater<IConfigStore>
-}
-
-export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
-  const { markdown } = config
+export function MarkdownOptions() {
+  const markdown = useSelector(ConfigStoreContext, config => config.markdown)
+  const updateConfig = useUpdater(ConfigStoreContext)
 
   return (
     <div className='mb-2'>
@@ -38,7 +34,7 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
               , value: MarkdownEmphasis._
               }
             ]}
-            onChange={value => setConfig(config => {
+            onChange={value => updateConfig(config => {
               config.markdown.emphasis = value
             })}
           />
@@ -58,7 +54,7 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
               , value: MarkdownStrong['_']
               }
             ]}
-            onChange={value => setConfig(config => {
+            onChange={value => updateConfig(config => {
               config.markdown.strong = value
             })}
           />
@@ -82,7 +78,7 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
               , value: MarkdownBullet['-']
               }
             ]}
-            onChange={value => setConfig(config => {
+            onChange={value => updateConfig(config => {
               config.markdown.bulletUnordered = value
             })}
           />
@@ -102,7 +98,7 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
               , value: MarkdownBulletOrdered['.']
               }
             ]}
-            onChange={value => setConfig(config => {
+            onChange={value => updateConfig(config => {
               config.markdown.bulletOrdered = value
             })}
           />
@@ -122,7 +118,7 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
               , value: MarkdownListItemIndent.Tab
               }
             ]}
-            onChange={value => setConfig(config => {
+            onChange={value => updateConfig(config => {
               config.markdown.listItemIndent = value
             })}
           />
@@ -146,7 +142,7 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
               , value: MarkdownThematicBreak['_']
               }
             ]}
-            onChange={value => setConfig(config => {
+            onChange={value => updateConfig(config => {
               config.markdown.thematicBreak = value
             })}
           />
@@ -166,7 +162,7 @@ export function MarkdownOptions({ config, setConfig }: IMarkdownOptionsProps) {
               , value: MarkdownFence['~']
               }
             ]}
-            onChange={value => setConfig(config => {
+            onChange={value => updateConfig(config => {
               config.markdown.fence = value
             })}
           />

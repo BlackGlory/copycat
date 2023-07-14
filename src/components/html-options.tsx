@@ -1,18 +1,14 @@
-import { IConfigStore } from '@src/contract.js'
-import { Updater } from 'use-immer'
 import { TextInput } from '@components/text-input.jsx'
 import { Button } from '@components/button.jsx'
 import { RemoveButton } from '@components/remove-button.jsx'
 import { Checkbox } from '@components/checkbox.jsx'
 import { i18n } from '@utils/i18n.js'
+import { ConfigStoreContext } from '@utils/config-store.js'
+import { useSelector, useUpdater } from 'extra-react-store'
 
-interface IHTMLOptionsProps {
-  config: IConfigStore
-  setConfig: Updater<IConfigStore>
-}
-
-export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
-  const { cleanHTML, formatHTML } = config.html
+export function HTMLOptions() {
+  const html = useSelector(ConfigStoreContext, config => config.html)
+  const updateConfig = useUpdater(ConfigStoreContext)
 
   return (
     <div className='mb-2'>
@@ -20,8 +16,8 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
       <div className='py-2 space-y-2'>
         <div className='px-4'>
           <Checkbox
-            value={formatHTML}
-            onClick={value => setConfig(config => {
+            value={html.formatHTML}
+            onClick={value => updateConfig(config => {
               config.html.formatHTML = value
             })}
           >
@@ -35,7 +31,7 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
           <nav className='px-4'>
             <Button
               className='w-full'
-              onClick={() => setConfig(config => {
+              onClick={() => updateConfig(config => {
                 config.html.cleanHTML.allowlist.push({
                   elements: ''
                 , attributes: ''
@@ -47,7 +43,7 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
           </nav>
 
           <ul className='mt-1'>
-            {cleanHTML.allowlist.map((item, i) => (
+            {html.cleanHTML.allowlist.map((item, i) => (
               <li
                 key={i}
                 className='py-2.5 px-4 flex justify-between hover:bg-gray-300'
@@ -58,7 +54,7 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
                       <span>{i18n('labelElements')}</span>
                       <TextInput
                         value={item.elements}
-                        onChange={e => setConfig(config => {
+                        onChange={e => updateConfig(config => {
                           config.html.cleanHTML.allowlist[i].elements = e.target.value
                         })}
                       />
@@ -70,7 +66,7 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
                       <span>{i18n('labelAttributes')}</span>
                       <TextInput
                         value={item.attributes}
-                        onChange={e => setConfig(config => {
+                        onChange={e => updateConfig(config => {
                           config.html.cleanHTML.allowlist[i].attributes = e.target.value
                         })}
                       />
@@ -80,7 +76,7 @@ export function HTMLOptions({ config, setConfig }: IHTMLOptionsProps) {
 
                 <aside>
                   <RemoveButton
-                    onClick={() => setConfig(config => {
+                    onClick={() => updateConfig(config => {
                       config.html.cleanHTML.allowlist.splice(i, 1)
                     })}
                   />

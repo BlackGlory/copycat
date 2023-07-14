@@ -1,17 +1,15 @@
-import { useMemo } from 'react'
-import { IBackgroundAPI } from '@src/contract.js'
 import { Checkbox } from '@components/checkbox.jsx'
-import { createBackgroundClient } from '@delight-rpc/webextension'
 import { getI18nOfMenuContext } from '@utils/menu-context.js'
 import { i18n } from '@utils/i18n.js'
 import { UpButton } from './up-button.jsx'
 import { DownButton } from './down-button.jsx'
-import { useMenu } from '@hooks/use-menu.js'
 import classNames from 'classnames'
+import { MenuStoreContext } from '@utils/menu-store.js'
+import { useSelector, useUpdater } from 'extra-react-store'
 
 export function MenuOptions() {
-  const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
-  const [menu, setMenu] = useMenu(client)
+  const menu = useSelector(MenuStoreContext, menu => menu)
+  const updateMenu = useUpdater(MenuStoreContext)
 
   return (
     <div>
@@ -36,7 +34,7 @@ export function MenuOptions() {
                     <div className='flex-1 h-full'>
                       <Checkbox
                         value={item.visible}
-                        onClick={value => setMenu(menu => {
+                        onClick={value => updateMenu(menu => {
                           menu[menuIndex].items[itemIndex].visible = value
                         })}
                       >
@@ -46,7 +44,7 @@ export function MenuOptions() {
 
                     <div className='space-x-1'>
                       <UpButton
-                        onClick={() => setMenu(menu => {
+                        onClick={() => updateMenu(menu => {
                           const { items } = menu[menuIndex]
                           const previousItem = items[itemIndex - 1]
                           if (previousItem) {
@@ -56,7 +54,7 @@ export function MenuOptions() {
                         })}
                       />
                       <DownButton
-                        onClick={() => setMenu(menu => {
+                        onClick={() => updateMenu(menu => {
                           const { items } = menu[menuIndex]
                           const nextItem = items[itemIndex + 1]
                           if (nextItem) {
