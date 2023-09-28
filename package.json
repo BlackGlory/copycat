@@ -6,7 +6,6 @@
     "lint": "tslint -t codeFrame 'src/**/*.ts'",
     "build": "webpack --config webpack.prod.js",
     "start:firefox": "web-ext run --source-dir ./dist",
-    "sign:firefox": "web-ext build --source-dir ./dist --artifacts-dir ./dist",
     "dev": "webpack -w --config webpack.dev.js",
     "test": "jest --no-cache --coverage --config jest.config.json"
   },
