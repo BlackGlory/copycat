@@ -5,6 +5,8 @@
     "precommit": "yarn lint && yarn test",
     "lint": "tslint -t codeFrame 'src/**/*.ts'",
     "build": "webpack --config webpack.prod.js",
+    "start:firefox": "web-ext run --source-dir ./dist",
+    "sign:firefox": "web-ext build --source-dir ./dist --artifacts-dir ./dist",
     "dev": "webpack -w --config webpack.dev.js",
     "test": "jest --no-cache --coverage --config jest.config.json"
   },
@@ -41,6 +43,7 @@
     "tslint": "^5.11.0",
     "typescript": "^3.0.1",
     "uglifyjs-webpack-plugin": "^1.3.0",
+    "web-ext": "^7.8.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
     "webpack-merge": "^4.1.4"
