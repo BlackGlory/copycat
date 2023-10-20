@@ -2705,6 +2705,14 @@ extra-promise@^6.0.8:
     lodash-es "^4.17.21"
     return-style "^3.0.1"
 
+extra-proxy@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/extra-proxy/-/extra-proxy-0.4.1.tgz#387f712aa96f39067e62d83701c3fe64bdcbf46f"
+  integrity sha512-Ngy4rUYzWIaC8Wl+31+kRxuGLyRmkZ+dSSc0lU+i9FhaBbwBfy/QryT10PfXjjp2x3q6seuNhpLghY3LzdCDTQ==
+  dependencies:
+    "@blackglory/prelude" "^0.3.1"
+    hotypes "^0.6.1"
+
 extra-rand@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/extra-rand/-/extra-rand-0.1.1.tgz#e75e71ec96eb2f9b47d2a3c6513b3fb042f05a45"

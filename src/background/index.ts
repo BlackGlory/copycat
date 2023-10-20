@@ -2,9 +2,11 @@ import browser from 'webextension-polyfill'
 import { commandHandlers, handleCommandResult } from './handlers/index.js'
 import { initStorage, getMenu, getConfig, setConfig, setMenu } from './storage.js'
 import { migrate } from './migrate.js'
-import { each } from 'extra-promise'
+import { each, Deferred } from 'extra-promise'
+import { applyPropertyDecorators } from 'extra-proxy'
 import { getActiveTab, waitForLaunch, LaunchReason } from 'extra-webextension'
 import { IBackgroundAPI } from '@src/contract.js'
+import { ImplementationOf } from 'delight-rpc'
 import { createServer } from '@delight-rpc/webextension'
 import { updateMenu } from './menu.js'
 
@@ -30,6 +32,31 @@ browser.commands.onCommand.addListener(async (command, tab) => {
   }
 })
 
+const launched = new Deferred<void>()
+
+const api: ImplementationOf<IBackgroundAPI> = {
+  getConfig
+, setConfig
+, getMenu
+, setMenu
+}
+
+// 确保尽早启动服务器, 以免拒绝来自客户端的连接, 造成功能失效.
+createServer<IBackgroundAPI>(
+  applyPropertyDecorators(
+    api
+  , Object.keys(api) as Array<keyof IBackgroundAPI>
+  , (fn: (...args: unknown[]) => unknown) => {
+      return async function (...args: unknown[]): Promise<unknown> {
+        // 等待初始化/迁移执行完毕
+        await launched
+
+        return await fn(...args)
+      }
+    }
+  ) as ImplementationOf<IBackgroundAPI>
+)
+
 waitForLaunch().then(async details => {
   console.info(`Launched by ${LaunchReason[details.reason]}`)
 
@@ -46,15 +73,10 @@ waitForLaunch().then(async details => {
     }
   }
 
-  createServer<IBackgroundAPI>({
-    getConfig
-  , setConfig
-  , getMenu
-  , setMenu
-  })
-
   await ensureOffscreenDocument()
   await updateMenu()
+
+  launched.resolve()
 
   // 在实际运行中发现, 注入内容脚本的速度可能很慢.
   // 且没有任何选项能够改善注入性能, 因此将该步骤放到最后.

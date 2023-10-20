@@ -75,6 +75,7 @@
     "extra-blob": "^0.1.1",
     "extra-dom": "^0.6.1",
     "extra-promise": "^6.0.8",
+    "extra-proxy": "^0.4.1",
     "extra-react-hooks": "^0.6.3",
     "extra-react-store": "^0.1.6",
     "extra-semver": "^0.2.2",
