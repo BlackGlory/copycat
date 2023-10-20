@@ -1,13 +1,8 @@
 const path = require('path')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   target: 'web'
-, node: {
-    fs: 'empty'
-  , module: 'empty'
-  }
 , entry: {
     'background': './src/background/index.ts'
   , 'copycat': './src/content-script/index.ts'
@@ -19,6 +14,9 @@ module.exports = {
   }
 , resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json']
+  , fallback: {
+      path: 'path-browserify'
+    }
   }
 , module: {
     rules: [
@@ -30,14 +28,18 @@ module.exports = {
     ]
   }
 , plugins: [
-    new CleanWebpackPlugin(['dist'])
-  , new CopyWebpackPlugin(
-      [
-        { from: './src', ignore: ['*.ts', '*.tsx', '*.html'] }
+    new CopyPlugin({
+      patterns: [
+        {
+          from: './src'
+        , globOptions: {
+            ignore: ['**/*.ts', '**/*.tsx', '**/*.html']
+          }
+        }
       , { from: './src/options/index.html', to: 'options.html' }
       , { from: './node_modules/webextension-polyfill/dist/browser-polyfill.min.js' }
       , { from: './node_modules/webextension-polyfill/dist/browser-polyfill.min.js.map' }
       ]
-    )
+    })
   ]
 }
