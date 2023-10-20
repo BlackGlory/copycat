@@ -4,6 +4,14 @@
 
 Copy content from web powerful than ever before.
 
+## Build
+Node.js v18:
+```ts
+yarn install
+yarn clean
+yarn build
+```
+
 ## Support browsers
 
 - [x] [Chrome](https://chrome.google.com/webstore/detail/copycat/jdjbiojkklnaeoanimopafmnmhldejbg)
