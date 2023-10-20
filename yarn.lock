@@ -47,10 +47,26 @@
     "@blackglory/pass" "^1.1.0"
     extra-utils "^5.1.1"
 
+"@blackglory/errors@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@blackglory/errors/-/errors-3.0.3.tgz#a03e7cc2bc71a94a23e2bb64dcd48da863c575ac"
+  integrity sha512-wVflMlDn0opIApeNNOANGoG71AOmi+CKIln7KUexAhrwo/MN/txUECLacTZNhRiEJKroDM3MkOIINRG4F06PZg==
+  dependencies:
+    "@blackglory/pass" "^1.1.0"
+    extra-utils "^5.1.1"
+
 "@blackglory/go@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@blackglory/go/-/go-1.1.2.tgz#bb76676dc5938d2ef28daea82f198e7fee4bcc92"
   integrity sha512-kkd9yrftU3ODT84hVOg9U91cyH53/Mw1cbG4EEJ7d7Nb3k4DRu15BeBgyYUi/AttII6c8o88fnTTou+8wrMYzQ==
+  dependencies:
+    extra-timers "^0.2.5"
+    justypes "^2.0.0"
+
+"@blackglory/go@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@blackglory/go/-/go-1.1.3.tgz#50ebf5c3001b1113959221a08045de8a6f27d80a"
+  integrity sha512-BbxKpUxf/mtBzPYrC18YxpRicp8cL85PGJQndO6suS+hgf3NZ69VN7mciv7BQdjVNHW8tbM5+E4OZv100yVHCA==
   dependencies:
     extra-timers "^0.2.5"
     justypes "^2.0.0"
@@ -90,6 +106,11 @@
   resolved "https://registry.yarnpkg.com/@blackglory/pass/-/pass-1.1.0.tgz#f281b7647bf542f98ede594338742ab406f97afc"
   integrity sha512-J8epu3YVtfzP+VHJE5RR42bI0tAGBZ4nK8+0zAOfY8amw58ykWb2tUJD+N4l6SCpGZ/fQ5S6tQDl+qyNoOIhzg==
 
+"@blackglory/pass@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@blackglory/pass/-/pass-1.1.1.tgz#91e1cf9988cb14e58c7252a20b6b410fd3b6b9bc"
+  integrity sha512-amK123up/MF1ico/Zuvm8aGWU9iWj8D64IOaq5Mn1fAP/hHZ/8JM7ypkE88Nr8UXhpfDA+9Gdh9TXzXjYA6z9A==
+
 "@blackglory/prelude@^0.2.0", "@blackglory/prelude@^0.2.2", "@blackglory/prelude@^0.2.4":
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/@blackglory/prelude/-/prelude-0.2.4.tgz#c938cf04f0e10e19b5a429fd8e9c67d8ed668271"
@@ -120,10 +141,25 @@
     iterable-operator "^4.0.3"
     justypes "^4.1.0"
 
-"@blackglory/prelude@^0.3.2", "@blackglory/prelude@^0.3.3":
+"@blackglory/prelude@^0.3.3":
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@blackglory/prelude/-/prelude-0.3.3.tgz#bbf838c253a4371485a89fb0ee7047e61dc7fa9b"
   integrity sha512-6UVwqcMhiP+p5meIMhM15WikY0hSVfdR31989boB2ShX6goWi2juCEallxpbTBc+J3k8eakeSQ5qUjcLeq6NqA==
+  dependencies:
+    "@blackglory/errors" "^3.0.2"
+    "@blackglory/go" "^1.1.2"
+    "@blackglory/log" "^2.0.1"
+    "@blackglory/pass" "^1.1.0"
+    extra-lazy "^2.0.1"
+    extra-promise "^6.0.6"
+    extra-utils "^5.2.0"
+    iterable-operator "^4.0.6"
+    justypes "^4.2.0"
+
+"@blackglory/prelude@^0.3.4":
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@blackglory/prelude/-/prelude-0.3.4.tgz#04388565aac2d83595d9fea0ada6b7e328d2bcc6"
+  integrity sha512-HS43oWnQegs8n0jzPT+CAj6dKCdQ7lYpUJSaTzCMErAfGt6x7oFGJg1nGJKzS+C0aO3iROpIgHWD2bcL/jAhvw==
   dependencies:
     "@blackglory/errors" "^3.0.2"
     "@blackglory/go" "^1.1.2"
@@ -375,10 +411,10 @@
     "@blackglory/errors" "^3.0.0"
     "@blackglory/prelude" "^0.3.1"
 
-"@delight-rpc/webextension@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@delight-rpc/webextension/-/webextension-0.2.0.tgz#1cd3163030bb7dc1a8f7ec12f5be0251624f5727"
-  integrity sha512-atMst+0ENSxupyynMlzF2JRuit750be0HDPwRwcxZh/I9BDr/MwfbpZYU2FfRnDz+gERN4d+nMGTw8DHYa4ciQ==
+"@delight-rpc/webextension@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@delight-rpc/webextension/-/webextension-0.2.1.tgz#4ddd436c0e02e67dac7b7c68516e79a3ef07bdf8"
+  integrity sha512-gVtxnzw87tLHQkO6hgKgtqTUffqky9QyJKFaWqas2hsPcG+LfcoJpPpkIOIttGBK8P64KMkGPL6DQJCpGxb4dQ==
   dependencies:
     "@blackglory/prelude" "^0.3.1"
     "@delight-rpc/protocol" "^4.0.0"
@@ -2435,10 +2471,19 @@ extra-abort@^0.3.5, extra-abort@^0.3.6:
     iterable-operator "^4.0.5"
     justypes "^4.2.0"
 
-extra-blob@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/extra-blob/-/extra-blob-0.1.0.tgz#5cc9b08805f4155f13efed7c042df2eb6992b7d8"
-  integrity sha512-69BKIP9ANV21fxtl1JxdFmg66oAhOLy2npbztka31b7+WiB//63MEfBLU0G/TTbeX1TfBen0SuihDoQGtzL1fw==
+extra-abort@^0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/extra-abort/-/extra-abort-0.3.7.tgz#1925a4df84b6ed1b9ac57ed38e035f4746029eee"
+  integrity sha512-1w1DdOhl7t2leugSf1SO77SWuA4bRdEWmdd0c4J2JZLUrb8tnN4pLUtfc0PhV9X69m490N/Eo/hR7cMtAYjRPQ==
+  dependencies:
+    "@blackglory/errors" "^3.0.0"
+    iterable-operator "^4.0.5"
+    justypes "^4.2.0"
+
+extra-blob@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/extra-blob/-/extra-blob-0.1.1.tgz#0edc2ade68d5ea09c85ff2fc211538ad7561bf0b"
+  integrity sha512-s4svFoA8+JHLyQpFR5jdvKykGHgdlgAgK8znfOoGLGeTIrvoIT+o4tqBQJPEe8s6lBJT5fRjlxDJuz0ngiA+PQ==
 
 extra-compatible@^0.1.8:
   version "0.1.8"
@@ -2456,10 +2501,10 @@ extra-compatible@^0.2.0:
     "@blackglory/prelude" "^0.3.0"
     iterable-operator "^4.0.2"
 
-extra-dom@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/extra-dom/-/extra-dom-0.6.0.tgz#9cf20d9d4a21395546180d2b38a41e7f917f9ec9"
-  integrity sha512-bQCydXYsRdht2OEXUNcX6Rrds6ascArDbf45+o/9YYaHyVFRBROyyap9qMBa1YjghoQ+0KTutLpVCqBPH9MP/Q==
+extra-dom@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/extra-dom/-/extra-dom-0.6.1.tgz#3ad3cddd591f42e90cb976c8417babb9523b8614"
+  integrity sha512-MQBwF8WbIeNslChByZiOH7rr/TXcSAk4nN9/h8yDg/LqVprEzbf10JpCRfv3rBDhtYdKKFaPcbxlIr+sX/uE2w==
   dependencies:
     "@blackglory/errors" "^3.0.0"
     "@blackglory/types" "^1.4.0"
@@ -2480,6 +2525,15 @@ extra-fsm@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/extra-fsm/-/extra-fsm-0.2.0.tgz#dac797c6bc244a96f33750b89fe9f747fafbae9b"
   integrity sha512-hVETFJ10NnjmgqMnVVr9CcPlCm0HtC0mXAUqjubfyBl1hx0fc/+GA+E+6f3YWxMS8K5eEPA6P0RBjCUknWh2+A==
+  dependencies:
+    "@blackglory/errors" "^3.0.2"
+    extra-utils "^5.1.1"
+    rxjs "^7.8.0"
+
+extra-fsm@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/extra-fsm/-/extra-fsm-0.2.1.tgz#32695ca81d3d5d572db4a06c48e3da0a4f1b9d9b"
+  integrity sha512-EySB4HJpKA/m6oZS5l63CMKG64oHkgnOu3K/68MoMdx0qd4iW92ymCuSs0cTnDeDX5/x0NgusD8mTqAPeuPWOw==
   dependencies:
     "@blackglory/errors" "^3.0.2"
     extra-utils "^5.1.1"
@@ -2509,10 +2563,26 @@ extra-generator@^0.4.0:
     "@blackglory/prelude" "^0.3.1"
     return-style "^3.0.0"
 
+extra-generator@^0.5.1:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/extra-generator/-/extra-generator-0.5.3.tgz#7e744cee642fe4df34c3bfcdd920b9b41e6fb5a7"
+  integrity sha512-9+luivbRklfAv2tOUsDuSFR0nr+dnHj5OTOuVjF4827DQvWA+aXsJ7RIp4n1D5cLmFVHoSm2v1qusEC5T1ovJw==
+  dependencies:
+    "@blackglory/prelude" "^0.3.1"
+    justypes "^4.2.1"
+    return-style "^3.0.0"
+
 extra-json-stable-stringify@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/extra-json-stable-stringify/-/extra-json-stable-stringify-0.1.1.tgz#88cd14e18bcf5f27b91124efe1e7765a1363e539"
   integrity sha512-uA7Ic7wtPkF8M1YpNFWg5tyAQyQzNPqHWM6hrqInthucrcwBnYJSRZn1esuqMsFav/oSdvFKFSBVJCu3YWT1Kw==
+  dependencies:
+    fast-stable-stringify "^1.0.0"
+
+extra-json-stable-stringify@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/extra-json-stable-stringify/-/extra-json-stable-stringify-0.1.2.tgz#5eb6c28954507eaa675feff447c41ddd7db71322"
+  integrity sha512-BkM1PbHmeKWo16G729htt+ayuT8BnKR+Fv1bIwuDR4bZ5q0Z4NPaGLI3IEpMYGsGKKwMdFgFGrXn/DzM+EnF9w==
   dependencies:
     fast-stable-stringify "^1.0.0"
 
@@ -2615,34 +2685,54 @@ extra-promise@^6.0.5:
     lodash-es "^4.17.21"
     return-style "^3.0.0"
 
+extra-promise@^6.0.8:
+  version "6.0.8"
+  resolved "https://registry.yarnpkg.com/extra-promise/-/extra-promise-6.0.8.tgz#ab1580e0233a5857a6ed76ca7408dd96d2ab5aec"
+  integrity sha512-MGIP2BCe9kw62G9z6LVaZJsmVCv9gSDF+nsnsx6Q8piDGjl1VIR6p5x0qoelMWxQUuodthEktdOhU/DnyiWVdQ==
+  dependencies:
+    "@blackglory/errors" "^3.0.3"
+    "@blackglory/go" "^1.1.3"
+    "@blackglory/pass" "^1.1.1"
+    "@blackglory/structures" "^0.13.4"
+    extra-fsm "^0.2.1"
+    extra-generator "^0.5.1"
+    extra-json-stable-stringify "^0.1.2"
+    extra-timers "^0.2.6"
+    extra-utils "^5.4.0"
+    hotypes "^0.6.3"
+    iterable-operator "^4.0.6"
+    justypes "^4.2.1"
+    lodash-es "^4.17.21"
+    return-style "^3.0.1"
+
 extra-rand@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/extra-rand/-/extra-rand-0.1.1.tgz#e75e71ec96eb2f9b47d2a3c6513b3fb042f05a45"
   integrity sha512-sDpJWzuKa1bTrVVG3dkCiNMt93NanphQIWhW4tUS9PDiA0KTZ+fzyS4Idw+7/lH5ZzxtOiHEJEnBWSN4gi8gyA==
 
-extra-react-hooks@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/extra-react-hooks/-/extra-react-hooks-0.5.2.tgz#68c10817e6333bf4387aaa4ba2c3a5c679962b49"
-  integrity sha512-Ik+58YyjiiK0wuW2KBalwlvP88INz1WOJrQXqi4wYUq0G8KnL2vhZslmSi9bW0FobaeWstmmAZEBTdIPw3F5Wg==
+extra-react-hooks@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/extra-react-hooks/-/extra-react-hooks-0.6.3.tgz#2dd3b4841310ee1e844207ff1b69cd0701633e70"
+  integrity sha512-pT8UKd/4ldzM2oxOzU9bDksTVMoZTx3wwu5faRx0REmPPsaEnbyCRk2urApmVTB5sSK7oRoSPPhWm1VthaLbLQ==
   dependencies:
-    "@blackglory/prelude" "^0.3.2"
-    extra-abort "^0.3.6"
-    extra-fsm "^0.2.0"
-    rxjs "^7.8.0"
+    "@blackglory/prelude" "^0.3.3"
+    extra-abort "^0.3.7"
+    extra-fsm "^0.2.1"
+    rxjs "^7.8.1"
 
-extra-react-store@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/extra-react-store/-/extra-react-store-0.1.0.tgz#c1b2e4c218568ccdb40268728f4d0ef1944be0b6"
-  integrity sha512-58NPIzjB5a8qJLu96ne0UpXJ75wlh9CVMeWEltYjWXY+vRVHysbmu4xdGaoXHcgBBGkysAJtWqos9OzHxnVWaw==
+extra-react-store@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/extra-react-store/-/extra-react-store-0.1.6.tgz#5d49d946cabd716694c112c3074baee413283c6d"
+  integrity sha512-8SxSOdhs/G2OQF5VUOfKK0VodQGnAz6CkSNG7TEwHoixiaOFux8/ma37R1WDPn7C2XZKeWcy6Ovcly9fd08AeQ==
   dependencies:
     "@blackglory/prelude" "^0.3.3"
     "@blackglory/structures" "^0.13.4"
-    use-immer "^0.9.0"
+    extra-utils "^5.4.0"
 
-extra-semver@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/extra-semver/-/extra-semver-0.2.1.tgz#1ebf92d51fae04323180c6cda54533b229c9d5cf"
-  integrity sha512-MUoe5ouy4qy3MTDCvahLanFZQ8ykKGb01ftT7vjLdDgEAopf2cfHCJUIDQe407f8p8kpNt6TYze9FNmpo4YonQ==
+extra-semver@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/extra-semver/-/extra-semver-0.2.2.tgz#0b0165a908d60b40d55a7f74782fb668b9781cf2"
+  integrity sha512-KO+5E5xPMBdz+TC11NFpu6/2fBinN3cRxuu7QOvWGCxkSdL9PIoibHRTOZg7RWmhn/QAUrypcIm+VEilMvDIEg==
   dependencies:
     "@blackglory/errors" "^2.3.0"
     semver "^7.3.8"
@@ -2659,6 +2749,13 @@ extra-timers@^0.2.5:
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/extra-timers/-/extra-timers-0.2.5.tgz#5b0bac06b111cfa1afbc1b991e1362dfe2db4617"
   integrity sha512-KkXmB6Xc2fV6Not5p6L5FbdOSPadafxaGxDNnoBHbckNdhEzfrcin9K4/VdlBTDN8Rne/wA68aK8gjNynM83hg==
+  dependencies:
+    extra-rand "^0.1.1"
+
+extra-timers@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/extra-timers/-/extra-timers-0.2.6.tgz#a82d0f90c9090963eed42da63a547d381be2e77f"
+  integrity sha512-7HpyFSCzUSH1spEJbBCrPr18P6+wNuhOa1+kdkzg+TX2Kr8Sc5mj4Pv9OcDKwjktoRtms5q+vl/MHDwvD5moaA==
   dependencies:
     extra-rand "^0.1.1"
 
@@ -2694,10 +2791,18 @@ extra-utils@^5.1.1, extra-utils@^5.2.0:
     justypes "^4.2.0"
     lodash-es "^4.17.21"
 
-extra-webextension@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/extra-webextension/-/extra-webextension-0.3.1.tgz#95f34ed876ad1f9f2d8e992038ee28ee2ecafc41"
-  integrity sha512-Drnp+lUIrXdHD+c7gLewv03oKNMgaJbfNvgwiRS4YtOUecOlLWaq8g0/Y7g1R1bAlklBoVspFl7M3yd4OpZcHA==
+extra-utils@^5.4.0, extra-utils@^5.5.1:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/extra-utils/-/extra-utils-5.5.1.tgz#c373fc47594ff2c51d159a87ae9739f36a6620f1"
+  integrity sha512-bjgte4bVSVjcj4GMAcMKTX9sX+1LQ+xe4AAFfaj8Vc3d7l2gtWJAJlVfHfe7jWCxLfxtMMtf8V9kQaYjQrblQw==
+  dependencies:
+    justypes "^4.2.0"
+    lodash-es "^4.17.21"
+
+extra-webextension@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/extra-webextension/-/extra-webextension-0.3.2.tgz#70fc5e9988f4ad6800530a985ef273992761313a"
+  integrity sha512-Z5RcFrV3l8ch9ncClHc+0zEukJR3KbeYaIylqQQcJncJzz6P0uLS2ik4k+JC+JNUnNx9MQWLNKe7v5otapzgcw==
   dependencies:
     "@blackglory/prelude" "^0.3.1"
     extra-promise "^6.0.6"
@@ -3213,6 +3318,11 @@ hotypes@^0.6.0, hotypes@^0.6.1:
   resolved "https://registry.yarnpkg.com/hotypes/-/hotypes-0.6.1.tgz#20a1fab1c667f53d00830bcfff6851b78cf62977"
   integrity sha512-UetYka7U9j6ZveBtdFpHY9aWT3ykD6R5ySHVP1Y7rb8O7CAqXieylKJBnfDU8hx590UT5gAptKOwWCQhkLPtUA==
 
+hotypes@^0.6.3:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/hotypes/-/hotypes-0.6.4.tgz#4a3d3b5619552f5f4d2993174cf85648967a4c36"
+  integrity sha512-FFv4hJi/Ix7ugUe4uFT4v+3o22aGPvlrSbtLuto7UJrT7/1HhfYd7YdMePj+ABiR5redgFgq/UypVZI8i4ynsQ==
+
 html-encoding-sniffer@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/html-encoding-sniffer/-/html-encoding-sniffer-3.0.0.tgz#2cb1a8cf0db52414776e5b2a7a04d5dd98158de9"
@@ -3280,10 +3390,10 @@ ignore@^5.2.0:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.4.tgz#a291c0c6178ff1b960befe47fcdec301674a6324"
   integrity sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==
 
-immer@^10.0.2:
-  version "10.0.2"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-10.0.2.tgz#11636c5b77acf529e059582d76faf338beb56141"
-  integrity sha512-Rx3CqeqQ19sxUtYV9CU911Vhy8/721wRFnJv3REVGWUmoAcIwzifTsdmJte/MV+0/XpM35LZdQMBGkRIoLPwQA==
+immer@^10.0.3:
+  version "10.0.3"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-10.0.3.tgz#a8de42065e964aa3edf6afc282dfc7f7f34ae3c9"
+  integrity sha512-pwupu3eWfouuaowscykeckFmVTpqbzW+rXFCX8rQLkZzM9ftBmU/++Ra+o+L27mz03zJTlyV4UUr+fdKNffo4A==
 
 import-fresh@^3.0.0, import-fresh@^3.2.1:
   version "3.3.0"
@@ -3738,6 +3848,11 @@ justypes@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/justypes/-/justypes-4.2.0.tgz#4bd01e72c16ef91264f5d25a1649c462d4c046d0"
   integrity sha512-7YjBlMdH7MBknvUk8n4gMPWITaIYqL4Q0dpqH7pN57vGLpUFS41RUiAkx2yfZNhylQX6bGw0UNKFSfdpBgwHWw==
+
+justypes@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/justypes/-/justypes-4.2.1.tgz#d2e68474f8156701538db8df4fe8767cad1d34f8"
+  integrity sha512-Z3+3pDBIobbrbKSSmjDOb5m1PF9Ksku7cTHSGHy0ah89D7CHFv08gEx6+b2KpA2huyzYyrhdZQX+Be9MeEfe1A==
 
 kind-of@^6.0.2, kind-of@^6.0.3:
   version "6.0.3"
@@ -5270,6 +5385,13 @@ return-style@^3.0.0:
   dependencies:
     "@blackglory/prelude" "^0.3.1"
 
+return-style@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/return-style/-/return-style-3.0.1.tgz#603c26f78220e2966c553952438c363b0c0ed805"
+  integrity sha512-PzP0aIcomRkdzrw+MGwHI4O+aCDpOgPBOUjGfr6fWi6vl2tu6/fC6egI6h+y7Tq54Aw8t3nza8jTDj2s6UNYOA==
+  dependencies:
+    "@blackglory/prelude" "^0.3.1"
+
 reusify@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"
@@ -5314,6 +5436,13 @@ rxjs@^7.5.5, rxjs@^7.8.0:
   version "7.8.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.0.tgz#90a938862a82888ff4c7359811a595e14e1e09a4"
   integrity sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==
+  dependencies:
+    tslib "^2.1.0"
+
+rxjs@^7.8.1:
+  version "7.8.1"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.1.tgz#6f6f3d99ea8044291efd92e7c7fcf562c4057543"
+  integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==
   dependencies:
     tslib "^2.1.0"
 
@@ -6088,10 +6217,10 @@ urijs@^1.19.11:
   resolved "https://registry.yarnpkg.com/urijs/-/urijs-1.19.11.tgz#204b0d6b605ae80bea54bea39280cdb7c9f923cc"
   integrity sha512-HXgFDgDommxn5/bIv0cnQZsPhHDA90NPHD6+c/v21U5+Sx5hoP8+dP9IZXBU1gIfvdRfhG8cel9QNPeionfcCQ==
 
-url-operator@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/url-operator/-/url-operator-0.3.0.tgz#9711d065b529b230740bb7813aade1d663d17807"
-  integrity sha512-Gl0UX/17xyVms7grwwb5ZXAttjhV9122hqgYGiodiiJk5o2UQQtaMY9sZ9xkQa7Jf59+6aDWPTL4tWYsXyB3Ew==
+url-operator@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/url-operator/-/url-operator-0.3.1.tgz#5e7f36529edbad2e11f9e0975e377233c15d855d"
+  integrity sha512-Tyeu8JCmkE8YPKTuu9cP+dkphoMZcM0jJY8TOXx8dkOre6JLBdYKR6bn8xylSSbeHOGt7gX9trmDpIiqSazirA==
   dependencies:
     "@blackglory/prelude" "^0.3.1"
 
@@ -6110,11 +6239,6 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
-
-use-immer@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/use-immer/-/use-immer-0.9.0.tgz#66e4e8f7ab75df45e96dfd5c56337f9fd49db9fd"
-  integrity sha512-/L+enLi0nvuZ6j4WlyK0US9/ECUtV5v9RUbtxnn5+WbtaXYUaOBoKHDNL9I5AETdurQ4rIFIj/s+Z5X80ATyKw==
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2:
   version "1.0.2"
