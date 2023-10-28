@@ -10,28 +10,6 @@ import { ImplementationOf } from 'delight-rpc'
 import { createServer } from '@delight-rpc/webextension'
 import { updateMenu } from './menu.js'
 
-browser.contextMenus.onClicked.addListener(async (info, tab) => {
-  const result = await commandHandlers[info.menuItemId](
-    info
-  , tab ?? await getActiveTab()
-  )
-
-  if (result) {
-    await handleCommandResult(result)
-  }
-})
-
-browser.commands.onCommand.addListener(async (command, tab) => {
-  const result = await commandHandlers[command](
-    {}
-  , tab ?? await getActiveTab()
-  )
-
-  if (result) {
-    await handleCommandResult(result)
-  }
-})
-
 const launched = new Deferred<void>()
 
 const api: ImplementationOf<IBackgroundAPI> = {
@@ -81,6 +59,28 @@ waitForLaunch().then(async details => {
   // 在实际运行中发现, 注入内容脚本的速度可能很慢.
   // 且没有任何选项能够改善注入性能, 因此将该步骤放到最后.
   await injectContentScripts()
+})
+
+browser.contextMenus.onClicked.addListener(async (info, tab) => {
+  const result = await commandHandlers[info.menuItemId](
+    info
+  , tab ?? await getActiveTab()
+  )
+
+  if (result) {
+    await handleCommandResult(result)
+  }
+})
+
+browser.commands.onCommand.addListener(async (command, tab) => {
+  const result = await commandHandlers[command](
+    {}
+  , tab ?? await getActiveTab()
+  )
+
+  if (result) {
+    await handleCommandResult(result)
+  }
 })
 
 async function ensureOffscreenDocument(): Promise<void> {
