@@ -10,7 +10,7 @@ export interface IStorage {
 
 export type IMenuStore = Array<{
   context: MenuContext
-, items: IMenuItem[]
+  items: IMenuItem[]
 }>
 
 export interface IMenuItem {
@@ -138,5 +138,5 @@ export interface IOffscreenAPI {
   cleanHTML(html: string, config: IHTMLCleanHTMLConfig): string
   convertHTMLToMarkdown(html: string, config: IMarkdownConfig): string
   cleanAllHTMLAttributes(html: string): string
-, formatURLsInHTML(html: string, baseURL: string, config: IURLConfig): string
+  formatURLsInHTML(html: string, baseURL: string, config: IURLConfig): string
 }
