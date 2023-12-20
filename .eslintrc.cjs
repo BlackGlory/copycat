@@ -17,6 +17,7 @@ module.exports = {
     'no-async-promise-executor': 'off'
   , '@typescript-eslint/ban-ts-comment': 'off'
   , '@typescript-eslint/no-inferrable-types': 'off'
+  , '@typescript-eslint/no-unused-vars': 'off'
   }
 , settings: {
     react: {
