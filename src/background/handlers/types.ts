@@ -1,4 +1,3 @@
-import browser from 'webextension-polyfill'
 import { Awaitable } from '@blackglory/prelude'
 
 export interface IInfo {
@@ -13,7 +12,7 @@ export interface IInfo {
 
 export type CommandHandler = (
   info: IInfo
-, tab: browser.Tabs.Tab
+, tab: chrome.tabs.Tab
 ) => Awaitable<CommandResult | undefined>
 
 export interface CommandResult {

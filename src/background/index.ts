@@ -1,4 +1,3 @@
-import browser from 'webextension-polyfill'
 import { commandHandlers, handleCommandResult } from './handlers/index.js'
 import { initStorage, getMenu, getConfig, setConfig, setMenu } from './storage.js'
 import { migrate } from './migrate.js'
@@ -61,7 +60,7 @@ waitForLaunch().then(async details => {
   await injectContentScripts()
 })
 
-browser.contextMenus.onClicked.addListener(async (info, tab) => {
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   const result = await commandHandlers[info.menuItemId](
     info
   , tab ?? await getActiveTab()
@@ -72,7 +71,7 @@ browser.contextMenus.onClicked.addListener(async (info, tab) => {
   }
 })
 
-browser.commands.onCommand.addListener(async (command, tab) => {
+chrome.commands.onCommand.addListener(async (command, tab) => {
   const result = await commandHandlers[command](
     {}
   , tab ?? await getActiveTab()
@@ -100,12 +99,12 @@ async function ensureOffscreenDocument(): Promise<void> {
  * 将内容脚本尽可能注入到打开的标签页里.
  */
 async function injectContentScripts(): Promise<void> {
-  const manifest = browser.runtime.getManifest()
+  const manifest = chrome.runtime.getManifest()
   const contentScripts = manifest.content_scripts?.[0].js ?? []
-  await each(await browser.tabs.query({}), async ({ id }) => {
+  await each(await chrome.tabs.query({}), async ({ id }) => {
     if (id) {
       try {
-        await browser.scripting.executeScript({
+        await chrome.scripting.executeScript({
           target: {
             tabId: id
           , allFrames: true

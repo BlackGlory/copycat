@@ -1,10 +1,9 @@
-import browser from 'webextension-polyfill'
 import { MenuContext } from '@src/contract.js'
 import { i18n } from '@utils/i18n.js'
 
 export function convertMenuContextToBrowserContextType(
   menuContext: MenuContext
-): browser.Menus.ContextType {
+): chrome.contextMenus.ContextType {
   switch (menuContext) {
     case MenuContext.Page: return 'page'
     case MenuContext.Frame: return 'frame'

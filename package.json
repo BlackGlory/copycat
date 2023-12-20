@@ -32,7 +32,6 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/urijs": "^1.19.19",
-    "@types/webextension-polyfill": "^0.10.0",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "autoprefixer": "^10.4.16",
@@ -94,7 +93,6 @@
     "remark-stringify": "^10.0.2",
     "unified": "^10.1.2",
     "urijs": "^1.19.11",
-    "url-operator": "^0.3.1",
-    "webextension-polyfill": "^0.10.0"
+    "url-operator": "^0.3.1"
   }
 }
