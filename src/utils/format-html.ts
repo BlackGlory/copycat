@@ -1,5 +1,5 @@
 import prettier from 'prettier'
-import parserHTML from 'prettier/parser-html.js'
+import * as parserHTML from 'prettier/plugins/html.js'
 
 export async function formatHTML(html: string): Promise<string> {
   return await prettier.format(html, {
