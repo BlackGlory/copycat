@@ -34,7 +34,7 @@ export function MenuOptions() {
                     <div className='flex-1 h-full'>
                       <Checkbox
                         value={item.visible}
-                        onClick={value => updateMenu(menu => {
+                        onChange={value => updateMenu(menu => {
                           menu[menuIndex].items[itemIndex].visible = value
                         })}
                       >

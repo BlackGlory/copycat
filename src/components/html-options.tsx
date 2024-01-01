@@ -17,7 +17,7 @@ export function HTMLOptions() {
         <div className='px-4'>
           <Checkbox
             value={html.formatHTML}
-            onClick={value => updateConfig(config => {
+            onChange={value => updateConfig(config => {
               config.html.formatHTML = value
             })}
           >
