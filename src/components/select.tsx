@@ -6,13 +6,13 @@ interface IItem<T> {
   value: T
 }
 
-interface IFontSelectProps<T> {
+interface ISelectProps<T> {
   items: Array<IItem<T>>
   value?: T
   onChange(value: T): void
 }
 
-export function Select<T>({ value, items, onChange }: IFontSelectProps<T>) {
+export function Select<T>({ value, items, onChange }: ISelectProps<T>) {
   const item = items.find(x => x.value === value)
 
   return (
