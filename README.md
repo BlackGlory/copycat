@@ -7,12 +7,13 @@ Copy content from web powerful than ever before.
 
 ## Supported browsers and platforms
 - [x] [Chrome]
-- [x] [Firefox]
 - [x] [Edge]
+- [x] [Firefox] (old version [#42])
 
 [Chrome]: https://chrome.google.com/webstore/detail/jdjbiojkklnaeoanimopafmnmhldejbg
 [Firefox]: https://addons.mozilla.org/firefox/addon/extension-copycat/
 [Edge]: https://microsoftedge.microsoft.com/addons/detail/afnfdembabcfmjgjdklllnenkkldfdin
+[#42]: https://github.com/BlackGlory/copycat/issues/42
 
 ## Features
 - [x] Copy a tab title
