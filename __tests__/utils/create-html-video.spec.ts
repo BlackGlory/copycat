@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { createHTMLVideo } from '@utils/create-html-video.js'
 
 test('createHTMLVideo', () => {

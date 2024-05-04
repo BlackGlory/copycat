@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { convertURLToRootRelativeURL } from '@utils/convert-url-to-root-relative-url.js'
 
 describe('convertURLToRootRelativeURL', () => {

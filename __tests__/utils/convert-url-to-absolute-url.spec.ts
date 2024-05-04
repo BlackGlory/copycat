@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { convertURLToAbsoluteURL } from '@utils/convert-url-to-absolute-url.js'
 
 describe('convertURLToAbsoluteURL', () => {

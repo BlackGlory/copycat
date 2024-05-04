@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { createHTMLAudio } from '@utils/create-html-audio.js'
 
 test('createHTMLAudio', () => {

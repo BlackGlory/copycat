@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { concatPlainText } from '@utils/concat-plain-text.js'
 
 describe('concatPlainText', () => {

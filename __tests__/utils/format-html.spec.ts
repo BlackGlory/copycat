@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { formatHTML } from '@utils/format-html.js'
 import { dedent } from 'extra-tags'
 

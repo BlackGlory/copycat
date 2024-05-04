@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { sanitizeHTML } from '@utils/sanitize-html.js'
 
 test('sanitizeHTML', () => {

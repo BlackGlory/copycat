@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { createPlainTextLink } from '@utils/create-plain-text-link.js'
 
 describe('createPlainTextLink', () => {

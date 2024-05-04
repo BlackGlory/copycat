@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { convertHTMLToBBCode } from '@utils/convert-html-to-bbcode.js'
 
 describe('convertHTMLToBBCode', () => {

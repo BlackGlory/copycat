@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { formatURL } from '@utils/format-url.js'
 import { URLFormat, URLEncoding } from '@src/contract.js'
 

@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { createMarkdownLink } from '@utils/create-markdown-link.js'
 
 describe('createMarkdownLink', () => {

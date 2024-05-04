@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { createAsciiDocLink } from '@utils/create-ascii-doc-link.js'
 
 describe('createAsciiDocLink', () => {

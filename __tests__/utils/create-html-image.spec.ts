@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { createHTMLImage } from '@utils/create-html-image.js'
 
 test('createHTMLImage', () => {

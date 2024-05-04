@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { createBBCodeImage } from '@utils/create-bbcode-image.js'
 
 test('createBBCodeImage', () => {

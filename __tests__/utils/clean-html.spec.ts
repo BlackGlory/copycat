@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { cleanHTML } from '@utils/clean-html.js'
 import { dedent } from 'extra-tags'
 

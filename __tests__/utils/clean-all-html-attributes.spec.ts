@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { cleanAllHTMLAttributes } from '@utils/clean-all-html-attributes.js'
 
 test('cleanAllHTMLAttributes', () => {

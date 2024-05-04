@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { createBBCodeLink } from '@utils/create-bbcode-link.js'
 
 describe('createBBCodeLink', () => {

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2020"
+    "target": "ES2021"
   , "module": "NodeNext"
   , "moduleResolution": "NodeNext"
   , "jsx": "react-jsx"
@@ -24,7 +24,6 @@
       { "transform": "typescript-transform-paths" }
     , { "transform": "typescript-transform-paths", "afterDeclarations": true }
     ]
-  , "types": ["@types/chrome", "vitest/globals"]
   }
 , "include": [
     "src"

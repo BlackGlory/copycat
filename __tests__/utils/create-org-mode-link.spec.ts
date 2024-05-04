@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { createOrgModeLink } from '@utils/create-org-mode-link.js'
 
 describe('createOrgModeLink', () => {

@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { createMarkdownImage } from '@utils/create-markdown-image.js'
 
 test('createMarkdownImage', () => {
