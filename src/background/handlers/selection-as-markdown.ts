@@ -5,6 +5,7 @@ import { CommandHandler } from './types.js'
 import { getConfig } from '@background/storage.js'
 import { pipeAsync } from 'extra-utils'
 import { offscreen } from '@background/offscreen-client.js'
+import { assert, isntNull } from '@blackglory/prelude'
 
 export const commandSelectionAsMarkdown: CommandHandler = async (info, tab) => {
   if (tab.id) {
@@ -16,7 +17,9 @@ export const commandSelectionAsMarkdown: CommandHandler = async (info, tab) => {
         tabId: tab.id
       , frameId: info.frameId
       })
+
       const html = await client.getSelectionHTML()
+      assert(isntNull(html))
 
       return plainText(
         await pipeAsync(

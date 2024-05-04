@@ -8,6 +8,8 @@ import { IBackgroundAPI } from '@src/contract.js'
 import { ImplementationOf } from 'delight-rpc'
 import { createServer } from '@delight-rpc/webextension'
 import { updateMenu } from './menu.js'
+import { isDev } from '@utils/is-dev.js'
+import { assert, isntUndefined } from '@blackglory/prelude'
 
 const launched = new Deferred<void>()
 
@@ -72,14 +74,29 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 })
 
 chrome.commands.onCommand.addListener(async (command, tab) => {
-  const result = await commandHandlers[command](
-    {}
-  , tab ?? await getActiveTab()
+  tab = tab ?? await getActiveTab()
+
+  const tabId = tab.id
+  assert(isntUndefined(tabId))
+
+  const frames = await chrome.webNavigation.getAllFrames({ tabId }) ?? []
+
+  const result = await Promise.any(
+    frames.map(async frame => {
+      const result = await commandHandlers[command](
+        {
+          frameUrl: frame.url
+        , frameId: frame.frameId
+        }
+      , tab
+      )
+      assert(isntUndefined(result))
+
+      return result
+    })
   )
 
-  if (result) {
-    await handleCommandResult(result)
-  }
+  await handleCommandResult(result)
 })
 
 async function ensureOffscreenDocument(): Promise<void> {
