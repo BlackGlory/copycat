@@ -4,12 +4,26 @@ import { migrate } from './migrate.js'
 import { each, Deferred } from 'extra-promise'
 import { applyPropertyDecorators } from 'extra-proxy'
 import { getActiveTab, waitForLaunch, LaunchReason } from 'extra-webextension'
-import { IBackgroundAPI } from '@src/contract.js'
+import { IBackgroundAPI, SpecialMessage } from '@src/contract.js'
 import { ImplementationOf } from 'delight-rpc'
 import { createServer } from '@delight-rpc/webextension'
 import { updateMenu } from './menu.js'
-import { isDev } from '@utils/is-dev.js'
-import { assert, isntUndefined } from '@blackglory/prelude'
+import { isntUndefined } from '@blackglory/prelude'
+
+let activeFrameId = 0
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (sender.id === chrome.runtime.id) {
+    switch (message) {
+      case SpecialMessage.UpdateActiveFrameId: {
+        if (isntUndefined(sender.frameId)) {
+          activeFrameId = sender.frameId
+          sendResponse()
+        }
+        break
+      }
+    }
+  }
+})
 
 const launched = new Deferred<void>()
 
@@ -76,27 +90,14 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 chrome.commands.onCommand.addListener(async (command, tab) => {
   tab = tab ?? await getActiveTab()
 
-  const tabId = tab.id
-  assert(isntUndefined(tabId))
-
-  const frames = await chrome.webNavigation.getAllFrames({ tabId }) ?? []
-
-  const result = await Promise.any(
-    frames.map(async frame => {
-      const result = await commandHandlers[command](
-        {
-          frameUrl: frame.url
-        , frameId: frame.frameId
-        }
-      , tab
-      )
-      assert(isntUndefined(result))
-
-      return result
-    })
+  const result = await commandHandlers[command](
+    { frameId: activeFrameId }
+  , tab
   )
 
-  await handleCommandResult(result)
+  if (result) {
+    await handleCommandResult(result)
+  }
 })
 
 async function ensureOffscreenDocument(): Promise<void> {

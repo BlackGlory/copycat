@@ -1,10 +1,20 @@
 import { createServer } from '@delight-rpc/webextension'
-import { IFrameAPI } from '@src/contract.js'
+import { IFrameAPI, SpecialMessage } from '@src/contract.js'
 import { isDev } from '@utils/is-dev.js'
 
 if (isDev()) {
   console.info(`[${chrome.runtime.getManifest().name}] The content script is injected`)
 }
+
+window.addEventListener('focus', async () => {
+  try {
+    await chrome.runtime.sendMessage(SpecialMessage.UpdateActiveFrameId)
+  } catch (e) {
+    if (isDev()) {
+      console.error(e)
+    }
+  }
+})
 
 createServer<IFrameAPI>({
   getActiveElementTextContent

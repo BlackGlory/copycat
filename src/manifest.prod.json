@@ -93,7 +93,6 @@
   , "clipboardWrite"
   , "offscreen"
   , "storage"
-  , "webNavigation"
   ]
 , "host_permissions": [
     "<all_urls>"

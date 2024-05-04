@@ -1,3 +1,7 @@
+export enum SpecialMessage {
+  UpdateActiveFrameId = 'UpdateActiveFrameId'
+}
+
 export enum StorageItemKey {
   Menu = 'menu'
 , Config = 'config'
