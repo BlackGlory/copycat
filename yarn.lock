@@ -2820,13 +2820,25 @@ extra-react-hooks@^0.6.5:
     extra-fsm "^0.2.1"
     rxjs "^7.8.1"
 
-extra-react-store@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/extra-react-store/-/extra-react-store-0.1.6.tgz#5d49d946cabd716694c112c3074baee413283c6d"
-  integrity sha512-8SxSOdhs/G2OQF5VUOfKK0VodQGnAz6CkSNG7TEwHoixiaOFux8/ma37R1WDPn7C2XZKeWcy6Ovcly9fd08AeQ==
+extra-react-hooks@^0.6.9:
+  version "0.6.9"
+  resolved "https://registry.yarnpkg.com/extra-react-hooks/-/extra-react-hooks-0.6.9.tgz#5f6cd4f5e25523c32516832a02b9bc3849fd0694"
+  integrity sha512-lS9U7YK1KLrlI0IRtQwu9EiPgMQNEO1TiiW+r5B2nwRqmfpi9o7Bh8SCZ+wDaaAR50aMmsZCufMGuWBqGHqPvQ==
+  dependencies:
+    "@blackglory/errors" "^3.0.3"
+    "@blackglory/prelude" "^0.3.3"
+    extra-abort "^0.3.7"
+    extra-fsm "^0.2.1"
+    rxjs "^7.8.1"
+
+extra-react-store@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/extra-react-store/-/extra-react-store-0.1.9.tgz#17bec41b9f5bc3cb3aa7bbe293bd893cbb3ea330"
+  integrity sha512-FVKfTLX1LbQmd2ejoYFcnDa8nVidvNc53A//wYlhmspzbLcgdJrnfxI/CrG7Yhy68mZwFGQnH/pevKtQtMWDlA==
   dependencies:
     "@blackglory/prelude" "^0.3.3"
     "@blackglory/structures" "^0.13.4"
+    extra-react-hooks "^0.6.9"
     extra-utils "^5.4.0"
 
 extra-semver@^0.2.2:
