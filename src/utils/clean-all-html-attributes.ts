@@ -1,13 +1,13 @@
-import { getDOMParser } from '@utils/get-dom-parser.js'
+import { parseFragment, stringifyFragment } from 'extra-dom'
 
 export function cleanAllHTMLAttributes(html: string): string {
-  const document = getDOMParser().parseFromString(html, 'text/html')
-
-  for (const element of document.querySelectorAll('*')) {
+  const fragment = parseFragment(html)
+  
+  for (const element of fragment.querySelectorAll('*')) {
     for (const attr of element.attributes) {
       element.removeAttribute(attr.name)
     }
   }
 
-  return document.body.innerHTML
+  return stringifyFragment(fragment)
 }

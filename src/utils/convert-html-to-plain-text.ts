@@ -1,7 +1,7 @@
-import { getDOMParser } from '@utils/get-dom-parser.js'
+import { parseFragment } from 'extra-dom'
 
 export function convertHTMLToPlainText(html: string): string {
-  const document = getDOMParser().parseFromString(html, 'text/html')
+  const fragment = parseFragment(html)
 
-  return document.body.textContent ?? ''
+  return fragment.textContent ?? ''
 }
