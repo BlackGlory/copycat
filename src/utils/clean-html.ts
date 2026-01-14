@@ -1,7 +1,7 @@
-import { flatMap, stringifyNodes, parseNodes, isElement } from 'extra-dom'
+import { flatMap as flatMapNode, stringifyNodes, parseNodes, isElement } from 'extra-dom'
 import { IHTMLCleanHTMLConfig } from '@src/contract.js'
 import { pipe } from 'extra-utils'
-import * as Iter from 'iterable-operator'
+import { toArray } from '@blackglory/prelude'
 
 export function cleanHTML(html: string, config: IHTMLCleanHTMLConfig): string {
   const allowlist = config.allowlist
@@ -18,30 +18,29 @@ export function cleanHTML(html: string, config: IHTMLCleanHTMLConfig): string {
 
   return pipe(
     parseNodes(html)
-  , nodes => nodes.flatMap(node => flatMap(node, function fn(node: Node): Node[] {
-      if (isElement(node)) {
-        for (const { elements, attributes } of allowlist) {
-          if (elements.includes(node.nodeName.toLowerCase())) {
-            for (const attribute of node.getAttributeNames()) {
-              if (!attributes.includes(attribute.toLowerCase())) {
-                node.removeAttribute(attribute)
-              }
-            }
-
-            return [node]
-          }
-        }
-
-        return pipe(
-          node.childNodes
-        , nodes => Iter.flatMap(nodes, fn)
-        , Iter.toArray
-        )
-      } else {
-        return [node]
-      }
-    }))
+  , nodes => nodes.flatMap(node => flatMapNode(node, flatMapper))
   , stringifyNodes
   , text => text.trim()
   )
+
+  function flatMapper(node: Node): Node[] {
+    if (isElement(node)) {
+      for (const { elements, attributes } of allowlist) {
+        if (elements.includes(node.nodeName.toLowerCase())) {
+          for (const attribute of node.getAttributeNames()) {
+            if (!attributes.includes(attribute.toLowerCase())) {
+              node.removeAttribute(attribute)
+            }
+          }
+
+          return [node]
+        }
+      }
+
+      const childNodes = toArray(node.childNodes)
+      return childNodes.flatMap(flatMapper)
+    } else {
+      return [node]
+    }
+  }
 }
