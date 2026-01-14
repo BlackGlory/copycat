@@ -1,14 +1,13 @@
-import { createDOMParser } from 'extra-dom'
 import { IURLConfig } from '@src/contract.js'
 import { formatURL } from '@utils/format-url.js'
+import { getDOMParser } from '@utils/get-dom-parser.js'
 
 export function formatURLsInHTML(
   html: string
 , baseUrl: string
 , config: IURLConfig
 ): string {
-  const parser = createDOMParser()
-  const document = parser.parseFromString(html, 'text/html')
+  const document = getDOMParser().parseFromString(html, 'text/html')
 
   for (const element of document.querySelectorAll('[href]')) {
     const url = element.getAttribute('href')
