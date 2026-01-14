@@ -21,7 +21,9 @@ export const commandSelectionAsHTMLWithoutAttributes: CommandHandler = async (in
         html
       , offscreen.sanitizeHTML
       , offscreen.cleanAllHTMLAttributes
-      , html => config.html.formatHTML ? formatHTML(html) : html
+      , html => config.html.formatHTML
+              ? formatHTML(html)
+              : html
       )
     )
   }
