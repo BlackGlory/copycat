@@ -1,4 +1,4 @@
-import { flatMap, stringify, parse, isElement } from 'extra-dom'
+import { flatMap, stringifyNodes, parseNodes, isElement } from 'extra-dom'
 import { IHTMLCleanHTMLConfig } from '@src/contract.js'
 import { pipe } from 'extra-utils'
 import * as Iter from 'iterable-operator'
@@ -17,7 +17,7 @@ export function cleanHTML(html: string, config: IHTMLCleanHTMLConfig): string {
     }))
 
   return pipe(
-    parse(html)
+    parseNodes(html)
   , nodes => nodes.flatMap(node => flatMap(node, function fn(node: Node): Node[] {
       if (isElement(node)) {
         for (const { elements, attributes } of allowlist) {
@@ -41,7 +41,7 @@ export function cleanHTML(html: string, config: IHTMLCleanHTMLConfig): string {
         return [node]
       }
     }))
-  , stringify
+  , stringifyNodes
   , text => text.trim()
   )
 }
