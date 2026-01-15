@@ -1,4 +1,4 @@
-import { flatMap as flatMapNode, stringifyNodes, parseNodes, isElement } from 'extra-dom'
+import { flatMap as flatMapNode, stringifyNodes, parseNodes, isElement, removeAttributes } from 'extra-dom'
 import { IHTMLCleanHTMLConfig } from '@src/contract.js'
 import { pipe } from 'extra-utils'
 import { toArray } from '@blackglory/prelude'
@@ -27,11 +27,9 @@ export function cleanHTML(html: string, config: IHTMLCleanHTMLConfig): string {
     if (isElement(node)) {
       for (const { elements, attributes } of allowlist) {
         if (elements.includes(node.nodeName.toLowerCase())) {
-          for (const attribute of node.getAttributeNames()) {
-            if (!attributes.includes(attribute.toLowerCase())) {
-              node.removeAttribute(attribute)
-            }
-          }
+          removeAttributes(node, attributeName => {
+            return !attributes.includes(attributeName.toLowerCase())
+          })
 
           return [node]
         }

@@ -68,7 +68,7 @@
     "delight-rpc": "^6.1.2",
     "dompurify": "^3.0.6",
     "extra-blob": "^0.1.2",
-    "extra-dom": "^0.7.0",
+    "extra-dom": "^0.7.1",
     "extra-promise": "^6.0.8",
     "extra-proxy": "^0.4.1",
     "extra-react-hooks": "^0.6.5",

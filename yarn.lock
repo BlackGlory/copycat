@@ -2665,10 +2665,10 @@ extra-compatible@^0.2.0:
     "@blackglory/prelude" "^0.3.0"
     iterable-operator "^4.0.2"
 
-extra-dom@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/extra-dom/-/extra-dom-0.7.0.tgz#ee61a3580e992fbf845681af814e599d7d96d052"
-  integrity sha512-C2Wj6NVOvgSg4ZQkkv+t5sgsDT5ZjamPm0LyFOF4W5jCsCjouy/e34R1JRPgRF9dQX30ApMahtgEu0pxKdLx/w==
+extra-dom@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/extra-dom/-/extra-dom-0.7.1.tgz#80e42c1b74c50032d4779ef6d5700cdd8bd8f327"
+  integrity sha512-OuGzUKx829iFkt7nXJ49yEH6mzqRy0S5mVG2TOgN5noth0Jvovc5MXHmz9kxxS0g2wXh1nSNT4X7uvewUH72dQ==
   dependencies:
     "@blackglory/prelude" "^0.4.0"
     iterable-operator "^5.1.0"
